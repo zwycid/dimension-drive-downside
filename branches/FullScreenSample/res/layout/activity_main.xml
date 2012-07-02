@@ -13,27 +13,24 @@
         tools:context=".MainActivity" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/sensorXLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:text="TextView" />
+        android:layout_alignParentTop="true" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/sensorYLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView1"
-        android:text="TextView" />
+        android:layout_below="@id/sensorXLabel" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/sensorZLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView2"
-        android:text="TextView" />
+        android:layout_below="@id/sensorYLabel" />
 
 </RelativeLayout>
