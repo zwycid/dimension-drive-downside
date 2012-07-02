@@ -1,0 +1,7 @@
+<resources>
+
+    <string name="app_name">FullScreenSample</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_main">풀스크린 샘플</string>
+
+</resources>
