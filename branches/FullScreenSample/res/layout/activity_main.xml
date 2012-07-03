@@ -12,4 +12,25 @@
         android:text="@string/hello_world"
         tools:context=".MainActivity" />
 
+    <TextView
+        android:id="@+id/sensorXLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" />
+
+    <TextView
+        android:id="@+id/sensorYLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/sensorXLabel" />
+
+    <TextView
+        android:id="@+id/sensorZLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/sensorYLabel" />
+
 </RelativeLayout>
