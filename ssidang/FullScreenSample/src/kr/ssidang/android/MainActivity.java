@@ -1,26 +1,42 @@
 package kr.ssidang.android;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
 import android.view.Window;
 import android.view.WindowManager.LayoutParams;
 import android.widget.TextView;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements
+		Runnable,
+		SurfaceHolder.Callback {
 	private SensorManager sensorManager;
 	private Sensor oriSensor;
 	private SensorEventListener sensorEvent;
 	
-//	private WakeLock wakeLock;
-        
 	private TextView sensorXLabel;
 	private TextView sensorYLabel;
 	private TextView sensorZLabel;
+	private SurfaceView surface;
+	private SurfaceHolder holder;
+	
+	private boolean quitFlags;
+	private int tick;
 
+	private Thread renderThread;
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,32 +62,69 @@ public class MainActivity extends Activity {
         sensorXLabel = (TextView) findViewById(R.id.sensorXLabel);
         sensorYLabel = (TextView) findViewById(R.id.sensorYLabel);
         sensorZLabel = (TextView) findViewById(R.id.sensorZLabel);
-        
+        surface = (SurfaceView) findViewById(R.id.SurfaceView1);
+        surface.getHolder().addCallback(this);
         
         // ¹æÇâ ¼¾¼­ °¡Á®¿È
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         oriSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
         sensorEvent = new OrientationListener();
+        
+        // ·»´õ·¯ ½º·¹µå: surfaceCreated() Âü°í
     }
     
 	@Override
+	protected void onDestroy() {
+		Log.d("ssidang", "onDestroy()");
+		super.onDestroy();
+	}
+
+	@Override
 	protected void onResume() {
-//		wakeLock.acquire();
+		Log.d("ssidang", "onResume()");
         sensorManager.registerListener(sensorEvent, oriSensor,
         		SensorManager.SENSOR_DELAY_NORMAL);
 		super.onResume();
 	}
 	
-    @Override
+	@Override
 	protected void onPause() {
-//		wakeLock.release();
+		Log.d("ssidang", "onPause()");
 		sensorManager.unregisterListener(sensorEvent, oriSensor);
 		super.onPause();
 	}
 
+    @Override
+	protected void onRestart() {
+		Log.d("ssidang", "onRestart()");
+		super.onRestart();
+	}
+
+	@Override
+	protected void onStop() {
+		Log.d("ssidang", "onStop()");
+		super.onStop();
+	}
+
+	@Override
+	public void onBackPressed() {
+		new AlertDialog.Builder(this)
+			.setIcon(android.R.drawable.ic_dialog_alert)
+			.setTitle("²ø±î¿ä?")
+			.setMessage("ÁøÂ¥ ²ø±î¿ä?")
+			.setPositiveButton(android.R.string.yes, new OnClickListener() {
+				public void onClick(DialogInterface dialog, int which) {
+//					finish(); // ²û
+					MainActivity.super.onBackPressed();
+				}
+			})
+			.setNegativeButton(android.R.string.no, null)
+			.show();
+//		super.onBackPressed();
+	}
+
 	private class OrientationListener implements SensorEventListener {
-		public void onAccuracyChanged(Sensor arg0, int arg1) {
-			
+		public void onAccuracyChanged(Sensor sensor, int accuracy) {
 		}
 
 		public void onSensorChanged(SensorEvent event) {
@@ -89,5 +142,51 @@ public class MainActivity extends Activity {
 		}
     }
 
-    
+	public void run() {
+		Paint textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+		textPaint.setColor(Color.BLACK);
+		textPaint.setTextSize(30);
+		
+		while (! quitFlags) {
+			Canvas canvas = holder.lockCanvas();
+			try {
+				tick++;
+				canvas.drawColor(Color.GREEN);
+				canvas.drawText(String.valueOf(tick), 0, -textPaint.ascent(), textPaint);
+			}
+			finally {
+				holder.unlockCanvasAndPost(canvas);
+			}
+		}
+	}
+	
+	public void surfaceChanged(SurfaceHolder holder, int format, int width,
+			int height) {
+		Log.d("ssidang", "surfaceChanged()");
+	}
+
+	public void surfaceCreated(SurfaceHolder holder) {
+		Log.d("ssidang", "surfaceCreated()");
+		
+		// »õ ·»´õ¸µ ½º·¹µå¸¦ ¸¸µì´Ï´Ù.
+		this.holder = holder;
+        quitFlags = false;
+        renderThread = new Thread(this);
+        renderThread.start();
+	}
+
+	public void surfaceDestroyed(SurfaceHolder holder) {
+		Log.d("ssidang", "surfaceDestroyed()");
+		
+		// ·»´õ¸µ ½º·¹µå¸¦ Á×ÀÔ´Ï´Ù.
+		try {
+			quitFlags = true;
+			renderThread.join();
+		}
+		catch (InterruptedException e) {
+		}
+		this.renderThread = null;
+		this.holder = null;
+	}
+
 }
