@@ -1,6 +1,9 @@
 package kr.ssidang.android;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -108,19 +111,19 @@ public class MainActivity extends Activity implements
 	@Override
 	public void onBackPressed() {
 		// Å×½ºÆ® ÇÒ ¶§ ±ÍÂú¾Æ¼­ Àá½Ã ¾ø¾Ú
-//		new AlertDialog.Builder(this)
-//			.setIcon(android.R.drawable.ic_dialog_alert)
-//			.setTitle("²ø±î¿ä?")
-//			.setMessage("ÁøÂ¥ ²ø±î¿ä?")
-//			.setPositiveButton(android.R.string.yes, new OnClickListener() {
-//				public void onClick(DialogInterface dialog, int which) {
-////					finish(); // ²û
-//					MainActivity.super.onBackPressed();
-//				}
-//			})
-//			.setNegativeButton(android.R.string.no, null)
-//			.show();
-		super.onBackPressed();
+		new AlertDialog.Builder(this)
+			.setIcon(android.R.drawable.ic_dialog_alert)
+			.setTitle("²ø±î¿ä?")
+			.setMessage("ÁøÂ¥ ²ø±î¿ä?")
+			.setPositiveButton(android.R.string.yes, new OnClickListener() {
+				public void onClick(DialogInterface dialog, int which) {
+//					finish(); // ²û
+					MainActivity.super.onBackPressed();
+				}
+			})
+			.setNegativeButton(android.R.string.no, null)
+			.show();
+//		super.onBackPressed();
 	}
 
 	private class OrientationListener implements SensorEventListener {
