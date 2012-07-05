@@ -3,34 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <TextView
-        android:id="@+id/sensorXLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:text="X" />
-
-    <TextView
-        android:id="@+id/sensorYLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@id/sensorXLabel"
-        android:text="Y" />
-
-    <TextView
-        android:id="@+id/sensorZLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@id/sensorYLabel"
-        android:text="Z" />
-
     <SurfaceView
         android:id="@+id/SurfaceView1"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_centerInParent="true"
         android:padding="@dimen/padding_medium"
         tools:context=".MainActivity" />

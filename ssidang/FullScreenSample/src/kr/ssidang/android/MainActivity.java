@@ -1,9 +1,6 @@
 package kr.ssidang.android;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -17,25 +14,28 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.Window;
 import android.view.WindowManager.LayoutParams;
-import android.widget.TextView;
 
 public class MainActivity extends Activity implements
-		Runnable,
+		RenderThread.Renderable,
 		SurfaceHolder.Callback {
 	private SensorManager sensorManager;
 	private Sensor oriSensor;
 	private SensorEventListener sensorEvent;
 	
-	private TextView sensorXLabel;
-	private TextView sensorYLabel;
-	private TextView sensorZLabel;
 	private SurfaceView surface;
-	private SurfaceHolder holder;
+	private float width;
+	private float height;
 	
-	private boolean quitFlags;
 	private int tick;
+	private Paint textPaint;
+	private Paint linePaint;
+	private Paint rectPaint;
+	
+	private float azimuth;
+	private float pitch;
+	private float roll;
 
-	private Thread renderThread;
+	private RenderThread renderThread;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,19 +49,18 @@ public class MainActivity extends Activity implements
         getWindow().setFlags(LayoutParams.FLAG_FULLSCREEN | LayoutParams.FLAG_KEEP_SCREEN_ON,
         		LayoutParams.FLAG_FULLSCREEN | LayoutParams.FLAG_KEEP_SCREEN_ON);
         
-        // 화면 고정:
-        // android:screenOrientation="portrait"
-        // 를 참고. (activity에 있음)
-        
-        // 화면 안 꺼지게 함
-        // FLAG_KEEP_SCREEN_ON으로 대체; WAKE_LOCK 퍼미션 필요 없음
-//        PowerManager powerMan = (PowerManager) getSystemService(POWER_SERVICE);
-//        wakeLock = powerMan.newWakeLock(PowerManager.FULL_WAKE_LOCK, "kr.ssidang.android");
+        /*
+	        화면 고정:
+	        android:screenOrientation="portrait"
+	        를 참고. (activity에 있음)
+	        
+	        // 화면 안 꺼지게 함
+	        // FLAG_KEEP_SCREEN_ON으로 대체; WAKE_LOCK 퍼미션 필요 없음
+	        PowerManager powerMan = (PowerManager) getSystemService(POWER_SERVICE);
+	        wakeLock = powerMan.newWakeLock(PowerManager.FULL_WAKE_LOCK, "kr.ssidang.android");
+        */
         
         setContentView(R.layout.activity_main);
-        sensorXLabel = (TextView) findViewById(R.id.sensorXLabel);
-        sensorYLabel = (TextView) findViewById(R.id.sensorYLabel);
-        sensorZLabel = (TextView) findViewById(R.id.sensorZLabel);
         surface = (SurfaceView) findViewById(R.id.SurfaceView1);
         surface.getHolder().addCallback(this);
         
@@ -108,19 +107,20 @@ public class MainActivity extends Activity implements
 
 	@Override
 	public void onBackPressed() {
-		new AlertDialog.Builder(this)
-			.setIcon(android.R.drawable.ic_dialog_alert)
-			.setTitle("끌까요?")
-			.setMessage("진짜 끌까요?")
-			.setPositiveButton(android.R.string.yes, new OnClickListener() {
-				public void onClick(DialogInterface dialog, int which) {
-//					finish(); // 끔
-					MainActivity.super.onBackPressed();
-				}
-			})
-			.setNegativeButton(android.R.string.no, null)
-			.show();
-//		super.onBackPressed();
+		// 테스트 할 때 귀찮아서 잠시 없앰
+//		new AlertDialog.Builder(this)
+//			.setIcon(android.R.drawable.ic_dialog_alert)
+//			.setTitle("끌까요?")
+//			.setMessage("진짜 끌까요?")
+//			.setPositiveButton(android.R.string.yes, new OnClickListener() {
+//				public void onClick(DialogInterface dialog, int which) {
+////					finish(); // 끔
+//					MainActivity.super.onBackPressed();
+//				}
+//			})
+//			.setNegativeButton(android.R.string.no, null)
+//			.show();
+		super.onBackPressed();
 	}
 
 	private class OrientationListener implements SensorEventListener {
@@ -136,42 +136,76 @@ public class MainActivity extends Activity implements
 			// Azimuth = 북쪽과 Y축 사이의 각도. Z축 주변 (0 ~ 359), 0=북, 90=동, 180=남, 270=서
 			// Pitch = X축 회전 (-180 ~ 180), 누웠을 때 0, 세우면 -90, 뒤집으면 180, 뒤집어 세우면 90
 			// Roll = Y축 회전 (-90 ~ 90), 세우면 0, 왼쪽 90, 오른쪽 -90, 뒤집으면 0
-			sensorXLabel.setText("Azimuth = " + event.values[0]);
-			sensorYLabel.setText("Pitch = " + event.values[1]);
-			sensorZLabel.setText("Roll = " + event.values[2]);
+			azimuth = event.values[0];
+			pitch = event.values[1];
+			roll = event.values[2];
 		}
     }
 
-	public void run() {
-		Paint textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-		textPaint.setColor(Color.BLACK);
-		textPaint.setTextSize(30);
+	public void onRenderBegin() {
+		textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+		textPaint.setColor(Color.WHITE);
+		textPaint.setTextSize(8);
 		
-		while (! quitFlags) {
-			Canvas canvas = holder.lockCanvas();
-			try {
-				tick++;
-				canvas.drawColor(Color.GREEN);
-				canvas.drawText(String.valueOf(tick), 0, -textPaint.ascent(), textPaint);
-			}
-			finally {
-				holder.unlockCanvasAndPost(canvas);
-			}
-		}
+		linePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+//		linePaint = new Paint();
+		linePaint.setColor(Color.RED);
+		linePaint.setStrokeWidth(3);
+		
+		rectPaint = new Paint();
+		rectPaint.setColor(0xff108810);
 	}
-	
-	public void surfaceChanged(SurfaceHolder holder, int format, int width,
-			int height) {
-		Log.d("ssidang", "surfaceChanged()");
+
+	public void onRender(Canvas canvas) {
+		float lineTop = -textPaint.ascent();
+		float lineHeight = (-textPaint.ascent() + textPaint.descent()) * 1.1f;
+		
+		tick++;
+		canvas.drawColor(Color.BLACK);
+		
+		canvas.drawText("Tick: " + tick, 0, lineTop, textPaint);
+		canvas.drawText("Screen = (" + width + ", " + height + ")", 0, lineTop + lineHeight * 1, textPaint);
+		canvas.drawText("Azimuth = " + azimuth, 0, lineTop + lineHeight * 2, textPaint);
+		canvas.drawText("Pitch = " + pitch, 0, lineTop + lineHeight * 3, textPaint);
+		canvas.drawText("Roll = " + roll, 0, lineTop + lineHeight * 4, textPaint);
+		
+//		canvas.drawLine(0, 0, 80, 80, linePaint);
+		float centerX = width / 2;
+		float centerY = height / 2;
+		float length = 50;
+		double rad = Math.toRadians(pitch);
+		float offsetX = (float) (Math.cos(rad) * length);
+		float offsetY = (float) (Math.sin(rad) * length);
+		canvas.drawLine(centerX, centerY, centerX + offsetX, centerY - offsetY, linePaint);
+		
+		canvas.drawRect(80, 133, 120, 266.7f, rectPaint);
+	}
+
+	public void onRenderEnd() {
+		textPaint = null;
+		linePaint = null;
 	}
 
 	public void surfaceCreated(SurfaceHolder holder) {
 		Log.d("ssidang", "surfaceCreated()");
 		
 		// 새 렌더링 스레드를 만듭니다.
-		this.holder = holder;
-        quitFlags = false;
-        renderThread = new Thread(this);
+        renderThread = new RenderThread(holder, this);
+	}
+
+	public void surfaceChanged(SurfaceHolder holder, int format, int width,
+			int height) {
+		Log.d("ssidang", "surfaceChanged(" + width + ", " + height + ")");
+		
+		// 160 좌표계로 스케일합니다.
+		// 화면의 짧은 축을 160으로 합니다.
+		// 렌더링 시작.
+		int length = Math.min(width, height);
+		float factor = length / 160.f;
+		this.width = width / factor;
+		this.height = height / factor;
+		
+		renderThread.setScaleFactor(factor);
         renderThread.start();
 	}
 
@@ -179,14 +213,8 @@ public class MainActivity extends Activity implements
 		Log.d("ssidang", "surfaceDestroyed()");
 		
 		// 렌더링 스레드를 죽입니다.
-		try {
-			quitFlags = true;
-			renderThread.join();
-		}
-		catch (InterruptedException e) {
-		}
+		renderThread.shutdown();
 		this.renderThread = null;
-		this.holder = null;
 	}
 
 }
