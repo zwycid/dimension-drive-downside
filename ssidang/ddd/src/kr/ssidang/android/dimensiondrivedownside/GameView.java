@@ -21,6 +21,7 @@ public class GameView extends SurfaceView implements
 	private float height;
 	
 	private RenderThread renderer;
+	private WorldManager world;
 	
 	// 그리기 데이터
 	private int tick;
@@ -61,6 +62,9 @@ public class GameView extends SurfaceView implements
 	private void init() {
 		G = new GameParams();
 		getHolder().addCallback(this);
+		
+		world = new WorldManager();
+		world.randomizeWorld();
 	}
 	
 	public GameParams getGameParams() {
@@ -125,16 +129,8 @@ public class GameView extends SurfaceView implements
 		tick++;
 		canvas.drawColor(Color.BLACK);
 		
-		if (debug_) {
-			canvas.drawText("Tick: " + tick, 0, lineTop, textPaint);
-			canvas.drawText("Screen = (" + width + ", " + height + ")", 0, lineTop + lineHeight * 1, textPaint);
-			canvas.drawText("Azimuth = " + G.azimuth, 0, lineTop + lineHeight * 2, textPaint);
-			canvas.drawText("Pitch = " + G.pitch, 0, lineTop + lineHeight * 3, textPaint);
-			canvas.drawText("Roll = " + G.roll, 0, lineTop + lineHeight * 4, textPaint);
-		}
-		
 		// 사각형 그려보기
-		canvas.drawRect(80, 133, 120, 266.7f, rectPaint);
+//		canvas.drawRect(80, 133, 120, 266.7f, rectPaint);
 		
 		// 선 그려보기
 		float centerX = width / 2;
@@ -144,6 +140,19 @@ public class GameView extends SurfaceView implements
 		float offsetX = (float) (Math.cos(rad) * length);
 		float offsetY = (float) (Math.sin(rad) * length);
 		canvas.drawLine(centerX, centerY, centerX + offsetX, centerY - offsetY, linePaint);
+		
+		world.draw(canvas);
+		
+		if (debug_) {
+			// TODO 아아 디버깅
+			canvas.setMatrix(null);
+			canvas.scale(renderer.getScaleFactor(), renderer.getScaleFactor());
+			canvas.drawText("Tick: " + tick, 0, lineTop, textPaint);
+			canvas.drawText("Screen = (" + width + ", " + height + ")", 0, lineTop + lineHeight * 1, textPaint);
+			canvas.drawText("Azimuth = " + G.azimuth, 0, lineTop + lineHeight * 2, textPaint);
+			canvas.drawText("Pitch = " + G.pitch, 0, lineTop + lineHeight * 3, textPaint);
+			canvas.drawText("Roll = " + G.roll, 0, lineTop + lineHeight * 4, textPaint);
+		}
 	}
 
 	public void onRenderEnd() {
