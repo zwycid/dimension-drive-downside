@@ -14,7 +14,6 @@ public class RenderThread extends Thread {
 	
 	private SurfaceHolder holder;
 	private Renderable renderer;
-	private float scaleFactor = 1.f;
 	
 	/**
 	 * 지정한 SurfaceHolder를 통해 그려주는 스레드를 만듭니다.
@@ -50,18 +49,6 @@ public class RenderThread extends Thread {
 		this.running = running;
 	}
 
-	public float getScaleFactor() {
-		return scaleFactor;
-	}
-
-	/**
-	 * 화면 크기를 조절해줍니다.
-	 * @param scaleFactor
-	 */
-	public void setScaleFactor(float scaleFactor) {
-		this.scaleFactor = scaleFactor;
-	}
-
 	/**
 	 * 렌더링을 수행합니다.
 	 */
@@ -73,7 +60,6 @@ public class RenderThread extends Thread {
 			// canvas가 null 나올 때가 있으므로 처리함
 			if ((canvas = holder.lockCanvas()) != null) {
 				try {
-					canvas.scale(scaleFactor, scaleFactor);
 					renderer.onRender(canvas);
 				}
 				finally {

@@ -32,19 +32,18 @@ public class WorldManager {
 	 * 테스트 메서드; 아무 블럭이나 추가함
 	 */
 	public void randomizeWorld() {
-		// 5배 너비로 합시다.
-		width = 160 * 5;
-		height = 160 * 5;
+		// 10배 너비로 합시다.
+		width = 160 * 10;
+		height = 160 * 10;
 		
 		// 한 50개 정도는 만들어야 하지 않겠어요.
 		Random r = new Random();
 		obstacles.clear();
 		for (int i = 0; i < 50; ++i) {
-			int area = r.nextInt(3000);
-			int width = 30 + r.nextInt(70);
+			int width = 30 + r.nextInt(170);
 			int x = r.nextInt((int) this.width);
 			int y = r.nextInt((int) this.height);
-			obstacles.add(new ObstacleObject(x, y, x + width, y + (area / width)));
+			obstacles.add(new ObstacleObject(x, y, x + width, y + (6000 / width)));
 		}
 		
 		player = new BallObject(r.nextInt((int) width), r.nextInt((int) height), 30);
@@ -56,7 +55,7 @@ public class WorldManager {
 	 * @param canvas
 	 */
 	public void draw(Canvas canvas) {
-		float s = 3.f / 5.01f;
+		float s = 3.f / 10.001f;
 		canvas.setMatrix(null);
 		canvas.scale(s, s);
 		

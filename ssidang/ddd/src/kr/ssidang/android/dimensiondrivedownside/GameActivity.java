@@ -40,7 +40,7 @@ public class GameActivity extends Activity implements
 
 		// 방향 센서
 		sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-		orientSensor= sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
+		orientSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
 	}
 	
 	@Override
