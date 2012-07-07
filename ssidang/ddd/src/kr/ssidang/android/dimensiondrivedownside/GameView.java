@@ -1,6 +1,7 @@
 package kr.ssidang.android.dimensiondrivedownside;
 
 import android.content.Context;
+import android.graphics.Camera;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -19,6 +20,7 @@ public class GameView extends SurfaceView implements
 	
 	private float width;
 	private float height;
+	private float scaleFactor;
 	
 	private RenderThread renderer;
 	private WorldManager world;
@@ -71,6 +73,11 @@ public class GameView extends SurfaceView implements
 		return G;
 	}
 	
+	private void resetView(Canvas canvas) {
+		canvas.setMatrix(null);
+		canvas.scale(scaleFactor, scaleFactor);
+	}
+	
 	///////////////////////////////////////////////////////////////////////////
 	// SurfaceHolder
 	///////////////////////////////////////////////////////////////////////////
@@ -87,12 +94,11 @@ public class GameView extends SurfaceView implements
 
 		// 좌표계를 맞춥니다.
 		int length = Math.min(width, height);
-		float factor = length / SCALE_UNIT;
-		this.width = width / factor;
-		this.height = height / factor;
+		scaleFactor = length / SCALE_UNIT;
+		this.width = width / scaleFactor;
+		this.height = height / scaleFactor;
 
 		// 렌더링 시작.
-		renderer.setScaleFactor(factor);
 		renderer.start();
 		Log.d("ddd", "Renderer started.");
 	}
@@ -127,6 +133,7 @@ public class GameView extends SurfaceView implements
 		float lineHeight = (-textPaint.ascent() + textPaint.descent()) * 1.1f;
 		
 		tick++;
+		resetView(canvas);
 		canvas.drawColor(Color.BLACK);
 		
 		// 사각형 그려보기
@@ -145,8 +152,7 @@ public class GameView extends SurfaceView implements
 		
 		if (debug_) {
 			// TODO 아아 디버깅
-			canvas.setMatrix(null);
-			canvas.scale(renderer.getScaleFactor(), renderer.getScaleFactor());
+			resetView(canvas);
 			canvas.drawText("Tick: " + tick, 0, lineTop, textPaint);
 			canvas.drawText("Screen = (" + width + ", " + height + ")", 0, lineTop + lineHeight * 1, textPaint);
 			canvas.drawText("Azimuth = " + G.azimuth, 0, lineTop + lineHeight * 2, textPaint);

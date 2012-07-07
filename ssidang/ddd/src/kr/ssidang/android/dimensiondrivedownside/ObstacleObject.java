@@ -2,13 +2,15 @@ package kr.ssidang.android.dimensiondrivedownside;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Paint.Style;
 import android.graphics.RectF;
 
 public class ObstacleObject extends WorldObject {
 	private RectF bounds;
 	
 	// 그리기 데이터
-	private Paint obstaclePaint;
+	private Paint fillPaint;
+	private Paint borderPaint;
 	
 	public ObstacleObject() {
 		this.setBounds(new RectF());
@@ -21,8 +23,14 @@ public class ObstacleObject extends WorldObject {
 	}
 	
 	private void init() {
-		obstaclePaint = new Paint();
-		obstaclePaint.setColor(0xff108810);
+		fillPaint = new Paint();
+		fillPaint.setStyle(Style.FILL);
+		fillPaint.setColor(0xff0e8b78);
+		
+		borderPaint = new Paint();
+		borderPaint.setStyle(Style.STROKE);
+		borderPaint.setColor(0xff0e6074);
+		borderPaint.setStrokeWidth(3);
 	}
 
 	public RectF getBounds() {
@@ -38,6 +46,7 @@ public class ObstacleObject extends WorldObject {
 	}
 	
 	public void draw(Canvas canvas) {
-		canvas.drawRect(bounds, obstaclePaint);
+		canvas.drawRect(bounds, fillPaint);
+		canvas.drawRect(bounds, borderPaint);
 	}
 }
