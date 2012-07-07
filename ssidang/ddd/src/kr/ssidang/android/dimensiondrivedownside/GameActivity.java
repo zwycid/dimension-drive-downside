@@ -18,7 +18,7 @@ public class GameActivity extends Activity implements
 	private Sensor orientSensor;
 	
 	private GameView gameView;
-	private GameView.GameParams params;
+	private WorldManager.GameParams params;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Activity
@@ -50,6 +50,8 @@ public class GameActivity extends Activity implements
 		Log.d("ddd", "Sensor acquired.");
         sensorManager.registerListener(this, orientSensor,
         		SensorManager.SENSOR_DELAY_NORMAL);
+//        sensorManager.registerListener(this, orientSensor,
+//        		SensorManager.SENSOR_DELAY_GAME);
 	}
 
 	@Override

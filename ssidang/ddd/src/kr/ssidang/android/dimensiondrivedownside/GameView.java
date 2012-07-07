@@ -1,11 +1,11 @@
 package kr.ssidang.android.dimensiondrivedownside;
 
 import android.content.Context;
-import android.graphics.Camera;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.util.FloatMath;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -15,32 +15,24 @@ public class GameView extends SurfaceView implements
 		RenderThread.Renderable {
 	
 	public static final float SCALE_UNIT = 160.f;
+	public static final float TIME_UNIT = 30.f;
 	
 	public boolean debug_;
 	
 	private float width;
 	private float height;
 	private float scaleFactor;
+	private long timestamp;
 	
 	private RenderThread renderer;
 	private WorldManager world;
+	private WorldManager.GameParams G;
 	
 	// 그리기 데이터
 	private int tick;
 	private Paint textPaint;
 	private Paint linePaint;
 	private Paint rectPaint;
-	
-	private GameParams G;
-
-	///////////////////////////////////////////////////////////////////////////
-	// GameData
-	///////////////////////////////////////////////////////////////////////////
-	class GameParams {
-		float azimuth;
-		float pitch;
-		float roll;
-	}
 	
 	///////////////////////////////////////////////////////////////////////////
 	// 생성자
@@ -62,14 +54,14 @@ public class GameView extends SurfaceView implements
 	}
 	
 	private void init() {
-		G = new GameParams();
 		getHolder().addCallback(this);
 		
 		world = new WorldManager();
+		G = world.getGameParams();
 		world.randomizeWorld();
 	}
 	
-	public GameParams getGameParams() {
+	public WorldManager.GameParams getGameParams() {
 		return G;
 	}
 	
@@ -125,12 +117,13 @@ public class GameView extends SurfaceView implements
 		
 		rectPaint = new Paint();
 		rectPaint.setColor(0xff108810);
+		
+		timestamp = System.currentTimeMillis();
 	}
 
 	public void onRender(Canvas canvas) {
-
-		float lineTop = -textPaint.ascent();
-		float lineHeight = (-textPaint.ascent() + textPaint.descent()) * 1.1f;
+		long now = System.currentTimeMillis();
+		G.delta = (now - timestamp) / TIME_UNIT;
 		
 		tick++;
 		resetView(canvas);
@@ -139,26 +132,37 @@ public class GameView extends SurfaceView implements
 		// 사각형 그려보기
 //		canvas.drawRect(80, 133, 120, 266.7f, rectPaint);
 		
-		// 선 그려보기
+		// 아래 방향
 		float centerX = width / 2;
 		float centerY = height / 2;
 		float length = 50;
-		double rad = Math.toRadians(G.pitch);
-		float offsetX = (float) (Math.cos(rad) * length);
-		float offsetY = (float) (Math.sin(rad) * length);
-		canvas.drawLine(centerX, centerY, centerX + offsetX, centerY - offsetY, linePaint);
+		float sign = (G.pitch >= 0 ? -1.f : 1.f);
+		float rad = (float) Math.toRadians((-90 - G.roll) * sign);
+		float offsetX = FloatMath.cos(rad) * length;
+		float offsetY = FloatMath.sin(rad) * length;
 		
+		G.gravityDirection = (float) rad;
 		world.draw(canvas);
 		
 		if (debug_) {
-			// TODO 아아 디버깅
+			// TODO Debug
 			resetView(canvas);
-			canvas.drawText("Tick: " + tick, 0, lineTop, textPaint);
-			canvas.drawText("Screen = (" + width + ", " + height + ")", 0, lineTop + lineHeight * 1, textPaint);
-			canvas.drawText("Azimuth = " + G.azimuth, 0, lineTop + lineHeight * 2, textPaint);
-			canvas.drawText("Pitch = " + G.pitch, 0, lineTop + lineHeight * 3, textPaint);
-			canvas.drawText("Roll = " + G.roll, 0, lineTop + lineHeight * 4, textPaint);
+			
+			// 각도 텍스트
+			DrawUtil.drawTextMultiline(canvas,
+					"Tick: " + tick + " (delta: " + G.delta + ")"
+					+ "\nScreen = (" + width + ", " + height + ")"
+					+ "\nAzimuth = " + G.azimuth
+					+ "\nPitch = " + G.pitch
+					+ "\nRoll = " + G.roll
+					, 0, 0, textPaint);
+			
+			DrawUtil.drawArrow(canvas, centerX, centerY,
+					centerX + offsetX, centerY - offsetY, linePaint);
+			
 		}
+		
+		timestamp = now;
 	}
 
 	public void onRenderEnd() {
