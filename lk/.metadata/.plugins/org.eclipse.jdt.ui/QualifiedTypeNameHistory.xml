@@ -1,11 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="android.R"/>
-<fullyQualifiedTypeName name="android.widget.ImageView"/>
 <fullyQualifiedTypeName name="android.view.Window"/>
-<fullyQualifiedTypeName name="android.util.Log"/>
-<fullyQualifiedTypeName name="android.view.View.OnClickListener"/>
 <fullyQualifiedTypeName name="android.R.drawable"/>
 <fullyQualifiedTypeName name="lk.summer.project.MainMenuView"/>
+<fullyQualifiedTypeName name="java.lang.Integer"/>
+<fullyQualifiedTypeName name="android.graphics.BlurMaskFilter"/>
+<fullyQualifiedTypeName name="android.graphics.BlurMaskFilter.Blur"/>
+<fullyQualifiedTypeName name="lk.summer.project.MainActivity.ListenerForButton"/>
+<fullyQualifiedTypeName name="android.widget.ImageView"/>
+<fullyQualifiedTypeName name="lk.summer.project.gameuidesign.R.drawable"/>
+<fullyQualifiedTypeName name="android.graphics.Color"/>
+<fullyQualifiedTypeName name="android.graphics.Bitmap"/>
+<fullyQualifiedTypeName name="android.graphics.Bitmap.Config"/>
+<fullyQualifiedTypeName name="android.graphics.BitmapFactory"/>
+<fullyQualifiedTypeName name="android.graphics.Canvas"/>
+<fullyQualifiedTypeName name="android.graphics.Paint"/>
+<fullyQualifiedTypeName name="android.view.View.OnClickListener"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="java.lang.String"/>
+<fullyQualifiedTypeName name="android.util.Log"/>
+<fullyQualifiedTypeName name="android.graphics.Paint.Style"/>
+<fullyQualifiedTypeName name="android.content.Context"/>
+<fullyQualifiedTypeName name="android.util.AttributeSet"/>
+<fullyQualifiedTypeName name="lk.summer.project.BlurTextView"/>
+<fullyQualifiedTypeName name="android.widget.TextView"/>
+<fullyQualifiedTypeName name="android.widget.Toast"/>
+<fullyQualifiedTypeName name="lk.summer.project.gameuidesign.R.id"/>
+<fullyQualifiedTypeName name="lk.summer.project.MainActivity"/>
+<fullyQualifiedTypeName name="lk.summer.project.gameuidesign.R.style"/>
 <fullyQualifiedTypeName name="lk.summer.project.gameuidesign.R"/>
 </qualifiedTypeNameHistroy>

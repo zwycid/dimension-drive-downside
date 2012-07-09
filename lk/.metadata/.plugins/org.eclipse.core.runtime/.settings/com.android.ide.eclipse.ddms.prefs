@@ -21,6 +21,7 @@ logcat.view.colsize.TID=58
 logcat.view.colsize.Tag=112
 logcat.view.colsize.Text=692
 logcat.view.colsize.Time=150
+logcat.view.filters.list=name\: 'transparent', tag\: 'transparent', text\: '', pid\: '', app\: '', level\: 'verbose', name\: 'wtf', tag\: 'wtf', text\: '', pid\: '', app\: '', level\: 'verbose', 
 threadPanel.Col0=35
 threadPanel.Col1=49
 threadPanel.Col2=72

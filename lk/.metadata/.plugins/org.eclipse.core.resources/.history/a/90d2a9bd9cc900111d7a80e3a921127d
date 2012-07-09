@@ -1,0 +1,197 @@
+package lk.summer.project;
+
+import javax.microedition.khronos.opengles.GL;
+
+import lk.summer.project.gameuidesign.R;
+import android.app.Activity;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.BlurMaskFilter;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Paint.Style;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.Window;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class MainActivity extends Activity {
+
+	/** Called when the activity is first created. */
+	private ListenerForButton listenerForButton;
+
+	private Bitmap ivTitleBitmap;
+	private Bitmap ivStartGameBitmap;
+	private Bitmap ivRankingBitmap;
+	private Bitmap ivOptionBitmap;
+
+	private ImageView ivTitle;
+	private ImageView ivStartgame;
+	private ImageView ivRanking;
+	private ImageView ivOption;
+	
+	private TextView tvTest;
+	
+	private int blurRadiousValue = 20;
+
+	MainMenuView mainMenuView;
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+		setContentView(R.layout.activity_main);
+		this.initiateForeground();
+	}
+
+	private void initiateForeground(){
+
+		setListenerForButton(new ListenerForButton());
+
+		setIvTitle((ImageView)this.findViewById(R.id.imageViewTitle));
+		setIvStartgame((ImageView) this.findViewById(R.id.imageViewStartgame));
+		setIvRanking((ImageView) this.findViewById(R.id.imageViewRanking));
+		setIvOption((ImageView) this.findViewById(R.id.imageViewOptions));
+		
+		setTvTest((TextView) this.findViewById(R.id.textViewText));
+		getTvTest().setText("test");
+		Canvas canvas	= new Canvas();
+		getTvTest().getPaint().setStyle(Style.STROKE);  
+		getTvTest().getPaint().setStrokeWidth(0.5f);  
+		getTvTest().setTextColor(Color.WHITE);    
+		
+
+		setIvTitleBitmap(getBitmapWithBlur(this.getResources(), R.drawable.title));
+//		setIvStartGameBitmap(getBitmapWithBlur(this.getResources(), R.drawable.startgame));
+		setIvStartGameBitmap(getBitmapWithBlur(this.getResources(), R.drawable.startgame_black));
+		setIvRankingBitmap(getBitmapWithBlur(this.getResources(), R.drawable.ranking));
+		setIvOptionBitmap(getBitmapWithBlur(this.getResources(), R.drawable.option));
+		
+		getIvTitle().setImageBitmap(getIvTitleBitmap());
+		getIvStartgame().setImageBitmap(getIvStartGameBitmap());
+		getIvRanking().setImageBitmap(getIvRankingBitmap());
+		getIvOption().setImageBitmap(getIvOptionBitmap());
+
+		ivStartgame.setOnClickListener(listenerForButton);
+		ivRanking.setOnClickListener(listenerForButton);
+		ivOption.setOnClickListener(listenerForButton);
+	}
+
+	public TextView getTvTest() {
+		return tvTest;
+	}
+
+	public void setTvTest(TextView tvTest) {
+		this.tvTest = tvTest;
+	}
+
+	public ListenerForButton getListenerForButton() {		return listenerForButton;	}
+	public void setListenerForButton(ListenerForButton listenerForButton) {	this.listenerForButton = listenerForButton;	}
+	public Bitmap getIvTitleBitmap() {		return ivTitleBitmap;	}
+	public void setIvTitleBitmap(Bitmap ivTitleBitmap) {		this.ivTitleBitmap = ivTitleBitmap;	}
+	public Bitmap getIvStartGameBitmap() {		return ivStartGameBitmap;	}
+	public void setIvStartGameBitmap(Bitmap ivStartGameBitmap) {		this.ivStartGameBitmap = ivStartGameBitmap;	}
+	public Bitmap getIvRankingBitmap() {		return ivRankingBitmap;	}
+	public void setIvRankingBitmap(Bitmap ivRankingBitmap) {		this.ivRankingBitmap = ivRankingBitmap;	}
+	public Bitmap getIvOptionBitmap() {		return ivOptionBitmap;	}
+	public void setIvOptionBitmap(Bitmap ivOptionBitmap) {		this.ivOptionBitmap = ivOptionBitmap;	}
+	public ImageView getIvTitle() {		return ivTitle;	}
+	public void setIvTitle(ImageView ivTitle) {		this.ivTitle = ivTitle;	}
+	public ImageView getIvStartgame() {		return ivStartgame;	}
+	public void setIvStartgame(ImageView ivStartgame) {		this.ivStartgame = ivStartgame;	}
+	public ImageView getIvRanking() {		return ivRanking;	}
+	public void setIvRanking(ImageView ivRanking) {		this.ivRanking = ivRanking;	}
+	public ImageView getIvOption() {		return ivOption;	}
+	public void setIvOption(ImageView ivOption) {		this.ivOption = ivOption;	}
+	public int getBlurRadiousValue() {		return blurRadiousValue;	}
+	public void setBlurRadiousValue(int blurRadiousValue) {		this.blurRadiousValue = blurRadiousValue;	}
+
+	private Bitmap getBitmapWithBlur(Resources res, int id){
+		Bitmap bitmapImage	= BitmapFactory.decodeResource(res, id);
+		bitmapImage	= transparentBitmap(bitmapImage);
+		bitmapImage	= processingBitmap_Blur(bitmapImage);
+		
+		return bitmapImage;
+	}
+
+	private Bitmap processingBitmap_Blur(Bitmap bitmap_src){
+		int width = bitmap_src.getWidth();
+		int height = bitmap_src.getHeight();
+
+		BlurMaskFilter blurMaskFilter;
+		Paint paintBlur 	= new Paint();
+
+		Bitmap dest = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+		Canvas canvas = new Canvas(dest); 
+		
+		//Create background in White
+		Bitmap alpha = bitmap_src.extractAlpha();
+		paintBlur.setColor(0xff66ffff);
+		canvas.drawBitmap(alpha, 0, 0, paintBlur);
+		
+		//create background storke in same color
+		Paint paintStroke	= new Paint();
+		paintStroke.setStyle(Style.STROKE);
+		paintStroke.setStrokeWidth(10.0f);
+		paintStroke.setColor(0xff66ffff);
+		paintStroke.setAntiAlias(true);
+		canvas.drawBitmap(bitmap_src, 0, 0, paintStroke);
+		
+
+		//Create outer blur, in White
+		blurMaskFilter = new BlurMaskFilter(blurRadiousValue, BlurMaskFilter.Blur.OUTER);
+		paintBlur.setMaskFilter(blurMaskFilter);
+		canvas.drawBitmap(alpha, 0, 0, paintBlur);
+
+		//Create inner blur
+		blurMaskFilter = new BlurMaskFilter(blurRadiousValue, BlurMaskFilter.Blur.INNER);
+		paintBlur.setMaskFilter(blurMaskFilter);
+		canvas.drawBitmap(bitmap_src, 0, 0, paintBlur);
+
+		return dest;
+	}
+	private Bitmap marginWithColor(Bitmap resBitmap){
+		return resBitmap;
+	}
+	
+	private class ListenerForButton implements OnClickListener	{
+
+		public void onClick(View event) {
+			// TODO Auto-generated method stub
+			if(event.getId() == R.id.imageViewStartgame){
+				Toast.makeText(MainActivity.this, "start game!", Toast.LENGTH_SHORT).show();
+			}if(event.getId() == R.id.imageViewRanking){
+				Toast.makeText(MainActivity.this, "see Ranking", Toast.LENGTH_SHORT).show();
+			}if(event.getId() == R.id.imageViewOptions){
+				Toast.makeText(MainActivity.this, "choose option", Toast.LENGTH_SHORT).show();
+			}
+		}
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.activity_main, menu);
+		return true;
+	}
+	
+	private Bitmap transparentBitmap(Bitmap bitmap){
+		int[] pixels	= new int[bitmap.getWidth() * bitmap.getHeight()];
+		bitmap.getPixels(pixels, 0, bitmap.getWidth(), 0, 0, bitmap.getWidth(), bitmap.getHeight());
+		
+		for(int i = 0 ; i != pixels.length ; i++){
+			if(pixels[i] == Color.BLACK){
+				pixels[i]	= Color.TRANSPARENT;
+			}
+		}
+		
+		return Bitmap.createBitmap(pixels, 0, bitmap.getWidth(), bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+	}
+
+}

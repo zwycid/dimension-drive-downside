@@ -27,9 +27,9 @@ public class MainMenuView extends SurfaceView implements SurfaceHolder.Callback,
 	private ArrayList<Integer> textWidth;
 	private ArrayList<Integer> textHeight;
 
-	int[] buttonImageId	= {R.drawable.button_startgame_black, 
-			R.drawable.button_ranking_black, 
-			R.drawable.button_options_black};
+	int[] buttonImageId	= {R.drawable.startgame, 
+			R.drawable.ranking, 
+			R.drawable.option};
 
 
 	public MainMenuView(Context context) {
@@ -68,18 +68,11 @@ public class MainMenuView extends SurfaceView implements SurfaceHolder.Callback,
 				textHeight.add(Integer.valueOf(bitmap.getHeight()));
 
 				textImages[i]	= allocateBitmap(bitmap, textWidth.get(i), textHeight.get(i));
-			} catch (IllegalArgumentException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SecurityException e) {
-				// TODO Auto-genera lted catch block
-				e.printStackTrace();
+			} catch (IllegalArgumentException e) {				e.printStackTrace();
+			} catch (SecurityException e) {				e.printStackTrace();
 			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
-			} catch (NoSuchFieldException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			} catch (NoSuchFieldException e) {				e.printStackTrace();
 			}
 		}
 
@@ -166,5 +159,4 @@ public class MainMenuView extends SurfaceView implements SurfaceHolder.Callback,
 
 		return Bitmap.createBitmap(pixels, 0, width, width, height, Bitmap.Config.ARGB_8888);
 	}
-
 }
