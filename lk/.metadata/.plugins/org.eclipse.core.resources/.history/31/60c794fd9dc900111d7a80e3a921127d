@@ -1,0 +1,81 @@
+package lk.summer.project;
+
+import javax.microedition.khronos.opengles.GL;
+
+import lk.summer.project.gameuidesign.R;
+import android.app.Activity;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.BlurMaskFilter;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Paint.Style;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.Window;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class MainActivity extends Activity {
+
+	/** Called when the activity is first created. */
+	private ListenerForButton listenerForButton;
+
+	private TextView ivTitle;
+	private TextView ivStartgame;
+	private TextView ivRanking;
+	private TextView ivOption;
+	
+	MainMenuView mainMenuView;
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+		setContentView(R.layout.activity_main);
+		this.initiateForeground();
+	}
+
+	private void initiateForeground(){
+
+		setListenerForButton(new ListenerForButton());
+		
+		Canvas canvas	= new Canvas();
+		Paint paintStroke	= new Paint();
+		
+		paintStroke.setStyle(Style.STROKE);  
+		paintStroke.setStrokeWidth(0.5f);  
+		paintStroke.setColor(Color.WHITE);   
+		
+		canvas.drawText("test", 0, 0, paintStroke);
+
+		ivStartgame.setOnClickListener(listenerForButton);
+		ivRanking.setOnClickListener(listenerForButton);
+		ivOption.setOnClickListener(listenerForButton);
+	}
+	
+	public ListenerForButton getListenerForButton() {		return listenerForButton;	}
+	public void setListenerForButton(ListenerForButton listenerForButton) {		this.listenerForButton = listenerForButton;	}
+	public TextView getIvTitle() {		return ivTitle;	}
+	public void setIvTitle(TextView ivTitle) {		this.ivTitle = ivTitle;	}
+	public TextView getIvStartgame() {		return ivStartgame;	}
+	public void setIvStartgame(TextView ivStartgame) {		this.ivStartgame = ivStartgame;	}
+	public TextView getIvRanking() {		return ivRanking;	}
+	public void setIvRanking(TextView ivRanking) {		this.ivRanking = ivRanking;	}
+	public TextView getIvOption() {		return ivOption;	}
+	public void setIvOption(TextView ivOption) {		this.ivOption = ivOption;	}
+
+	private class ListenerForButton implements OnClickListener{
+
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			
+		}
+	}
+}

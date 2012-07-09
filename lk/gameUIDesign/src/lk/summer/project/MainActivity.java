@@ -4,11 +4,10 @@ import lk.summer.project.gameuidesign.R;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
-import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
@@ -16,61 +15,67 @@ public class MainActivity extends Activity {
 	/** Called when the activity is first created. */
 	private ListenerForButton listenerForButton;
 
-	private ImageView imageTitle;
-	private ImageView ibStartgame;
-	private ImageView ibRanking;
-	private ImageView ibOption;
-
+	private TextView tvTitle;
+	private TextView tvStartgame;
+	private TextView tvRanking;
+	private TextView tvOption;
+	
+	private static final String[] mainText = {"Start Game","Ranking","Option"};
+	
 	MainMenuView mainMenuView;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		//        Window window	= this.getWindow(); 
-
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
 		setContentView(R.layout.activity_main);
-		this.initiateForeground();
-		//     window.setFormat(PixelFormat.TRANSLUCENT);//화면의 픽셀을 투명으로 설정
-//		moveImageView	= new CopyOfMoveImageView(this);
+		this.initiateTextButton();
+	}
+
+	private void initiateTextButton(){
+
+		setListenerForButton(new ListenerForButton());
+		Log.i("wtf", "wtf");
+		
+		setTvTitle((TextView) this.findViewById(R.id.textViewTitle));
+		getTvTitle().setText("sailing text");
+		
+		getTvTitle().setText("sailing text");
+		
+		setTvStartgame((TextView) this.findViewById(R.id.textViewStartgame));
+		getTvStartgame().setText(mainText[0]);
+		setTvRanking((TextView) this.findViewById(R.id.textViewRanking));
+		getTvRanking().setText(mainText[1]);
+		setTvOption((TextView) this.findViewById(R.id.textViewOption));
+		getTvOption().setText(mainText[2]);
+		
+		tvStartgame.setOnClickListener(listenerForButton);
+		tvRanking.setOnClickListener(listenerForButton);
+		tvOption.setOnClickListener(listenerForButton);
 	}
 	
-	private void initiateForeground(){
+	public ListenerForButton getListenerForButton() {		return listenerForButton;	}
+	public void setListenerForButton(ListenerForButton listenerForButton) {		this.listenerForButton = listenerForButton;	}
 
-		listenerForButton	= new ListenerForButton();
+	public TextView getTvTitle() {		return tvTitle;	}
+	public void setTvTitle(TextView tvTitle) {		this.tvTitle = tvTitle;	}	public TextView getTvStartgame() {		return tvStartgame;	}
+	public void setTvStartgame(TextView tvStartgame) {		this.tvStartgame = tvStartgame;	}
+	public TextView getTvRanking() {		return tvRanking;	}
+	public void setTvRanking(TextView tvRanking) {		this.tvRanking = tvRanking;	}
+	public TextView getTvOption() {		return tvOption;	}
+	public void setTvOption(TextView tvOption) {		this.tvOption = tvOption;	}
 
-		imageTitle	= (ImageView) this.findViewById(R.id.imageViewTitle);
-		Log.i("logcat", imageTitle.toString());
-		
-		ibStartgame	= (ImageView) this.findViewById(R.id.imageViewStartgame);
-		ibRanking	= (ImageView) this.findViewById(R.id.imageViewRanking);
-		ibOption	= (ImageView) this.findViewById(R.id.imageViewOptions);
-		
-		ibStartgame.setOnClickListener(listenerForButton);
-		ibRanking.setOnClickListener(listenerForButton);
-		ibOption.setOnClickListener(listenerForButton);
-	}
+	private class ListenerForButton implements OnClickListener{
 
-	private class ListenerForButton implements OnClickListener	{
-
-		public void onClick(View event) {
+		public void onClick(View clickedView) {
 			// TODO Auto-generated method stub
-			if(event.getId() == R.id.imageViewStartgame){
-				Toast.makeText(MainActivity.this, "start game!", Toast.LENGTH_SHORT).show();
-			}if(event.getId() == R.id.imageViewRanking){
-				Toast.makeText(MainActivity.this, "see Ranking", Toast.LENGTH_SHORT).show();
-			}if(event.getId() == R.id.imageViewOptions){
-				Toast.makeText(MainActivity.this, "choose option", Toast.LENGTH_SHORT).show();
-			}
+			if(clickedView.getId() == R.id.textViewStartgame)
+				Toast.makeText(MainActivity.this, "start game", Toast.LENGTH_SHORT).show();
+			else if(clickedView.getId() == R.id.textViewRanking)
+				Toast.makeText(MainActivity.this, "ranking", Toast.LENGTH_SHORT).show();
+			else if(clickedView.getId() == R.id.textViewOption)
+				Toast.makeText(MainActivity.this, "option", Toast.LENGTH_SHORT).show();
 		}
 	}
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_main, menu);
-        return true;
-    }
-
-    
 }

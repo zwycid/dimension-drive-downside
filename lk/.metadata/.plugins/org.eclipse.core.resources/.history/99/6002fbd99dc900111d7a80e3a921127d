@@ -1,0 +1,92 @@
+package lk.summer.project;
+
+import javax.microedition.khronos.opengles.GL;
+
+import lk.summer.project.gameuidesign.R;
+import android.app.Activity;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.BlurMaskFilter;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Paint.Style;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.Window;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class MainActivity extends Activity {
+
+	/** Called when the activity is first created. */
+	private ListenerForButton listenerForButton;
+
+	private TextView ivTitle;
+	private TextView ivStartgame;
+	private TextView ivRanking;
+	private TextView ivOption;
+	
+	private int blurRadiousValue = 20;
+
+	MainMenuView mainMenuView;
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+		setContentView(R.layout.activity_main);
+		this.initiateForeground();
+	}
+
+	private void initiateForeground(){
+
+		setListenerForButton(new ListenerForButton());
+
+		setIvTitle((TextView)this.findViewById(R.id.textViewTitleViewTitle));
+		setIvStartgame((TextView) this.findViewById(R.id.textViewStartgame));
+		setIvRanking((TextView) this.findViewById(R.id.textViewRanking));
+		setIvOption((TextView) this.findViewById(R.id.textViewOptions));
+		
+
+		Canvas canvas	= new Canvas();
+		Paint paintStroke	= new Paint();
+		
+		paintStroke.setStyle(Style.STROKE);  
+		paintStroke.setStrokeWidth(0.5f);  
+		paintStroke.setColor(Color.WHITE);   
+		
+		canvas.drawText("test", 0, 0, paintStroke);
+		
+
+		setIvTitleBitmap(getBitmapWithBlur(this.getResources(), R.drawable.title));
+//		setIvStartGameBitmap(getBitmapWithBlur(this.getResources(), R.drawable.startgame));
+		setIvStartGameBitmap(getBitmapWithBlur(this.getResources(), R.drawable.startgame_black));
+		setIvRankingBitmap(getBitmapWithBlur(this.getResources(), R.drawable.ranking));
+		setIvOptionBitmap(getBitmapWithBlur(this.getResources(), R.drawable.option));
+		
+		getIvTitle().setImageBitmap(getIvTitleBitmap());
+		getIvStartgame().setImageBitmap(getIvStartGameBitmap());
+		getIvRanking().setImageBitmap(getIvRankingBitmap());
+		getIvOption().setImageBitmap(getIvOptionBitmap());
+
+		ivStartgame.setOnClickListener(listenerForButton);
+		ivRanking.setOnClickListener(listenerForButton);
+		ivOption.setOnClickListener(listenerForButton);
+	}
+	
+	private class ListenerForButton implements OnClickListener{
+
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+	}
+
+}

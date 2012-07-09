@@ -1,0 +1,22 @@
+<resources>
+
+    <style name="AppTheme" parent="android:Theme.Light" />
+
+    <style name="padded_Small">
+        <item name="android:padding">20px</item>
+        <item name="android:textSize">30px</item>
+        <item name="android:textColor">#66ffff</item>
+    </style>
+
+    <style name="padded_Lagar">
+        <item name="android:padding">4px</item>
+        <item name="android:textSize">16px</item>
+    </style>
+
+    <style name="glow" parent="padded_Small">
+        <item name="android:shadowColor">#66ffff</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">10</item>
+    </style>
+</resources>
