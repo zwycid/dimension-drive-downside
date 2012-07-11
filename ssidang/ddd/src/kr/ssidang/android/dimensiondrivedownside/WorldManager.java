@@ -24,7 +24,7 @@ public class WorldManager {
 	
 	// 시점(view)에 관련된 사항
 	private PointF lookAt;
-	private float rotation;
+//	private float rotation;
 
 	private GameParams G;
 	

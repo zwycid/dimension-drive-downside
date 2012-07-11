@@ -133,8 +133,6 @@ public class GameView extends SurfaceView implements
 //		canvas.drawRect(80, 133, 120, 266.7f, rectPaint);
 		
 		// 아래 방향
-		float centerX = width / 2;
-		float centerY = height / 2;
 		float length = 50;
 		float sign = (G.pitch >= 0 ? -1.f : 1.f);
 		float rad = (float) Math.toRadians((-90 - G.roll) * sign);
@@ -148,15 +146,17 @@ public class GameView extends SurfaceView implements
 			// TODO Debug
 			resetView(canvas);
 			
-			// 각도 텍스트
+			float fps = 1000.f / (G.delta * TIME_UNIT);
 			DrawUtil.drawTextMultiline(canvas,
-					"Tick: " + tick + " (delta: " + G.delta + ")"
+					"Tick: " + tick + " (fps: " + fps + ")"
 					+ "\nScreen = (" + width + ", " + height + ")"
 					+ "\nAzimuth = " + G.azimuth
 					+ "\nPitch = " + G.pitch
 					+ "\nRoll = " + G.roll
 					, 0, 0, textPaint);
 			
+			float centerX = width / 2;
+			float centerY = height / 2;
 			DrawUtil.drawArrow(canvas, centerX, centerY,
 					centerX + offsetX, centerY - offsetY, linePaint);
 			
