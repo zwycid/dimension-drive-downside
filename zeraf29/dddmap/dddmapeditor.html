@@ -1,0 +1,126 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>DDD MapEditor</title>
+    <style type="text/css">
+        #pan
+        {
+            margin-top: 50px;
+            margin-left: 100px;
+            width: 800px;
+            height: 600px;
+            border: 3px solid Black;
+        }
+        .btnFrom
+        {
+            margin-left: 100px;
+            width: 800px;
+            height: auto;
+            margin-top: 30px;
+            border: 3px solid Red;
+        }
+    </style>
+    <script type="text/ecmascript" src="jquery-1.7.2.min.js"></script>
+    <script type="text/ecmascript">
+        $(document).ready(function () {
+
+        });
+
+        var figure = 0;
+
+        function clickRect() {
+            figure = 0;
+        }
+        function clickCircle(circletype) {
+            figure = circletype;
+        }
+
+        //마우스가 눌렸는지 안눌렷는지 알아야한다.
+        var mflag = false; //처음은 안눌린 상태.
+
+        //캔버스 안에서의 좌표가 필요하다.
+        //시작
+        var cbeginX;
+        var cbeginY;
+        //끝
+        var cendX;
+        var cendY;
+        //마우스 다운했을때 시작점만 알아준다.
+        function onDown(event) {
+            if (mflag == false) {
+                cbeginX = event.pageX - 110;
+                cbeginY = event.pageY - 53;
+                mflag = true;
+            }
+        }
+
+        //타입에 따라서 마우스를 땐순간 그려준다.
+        function onUp(event) {
+
+            cendX = event.pageX - 110;
+            cendY = event.pageY - 53;
+
+            //alert("begin : " + beginX + "," + endX + "\nend : " + endX + "," + endY);
+            switch (figure) {
+                case 0: DrawRect(); break;
+                case 1: DrawCircle(1); break;
+                case 2: DrawCircle(2); break;
+            }
+            mflag = false;
+        }
+
+        function onMove(event) {
+        }
+
+       
+       
+        function DrawRect() {
+            var c1 = document.getElementById("c");
+            var c1_context = c1.getContext("2d");
+            c1_context.beginPath();
+            c1_context.rect(cbeginX, cbeginY, cendX - cbeginX, cendY - cbeginY);
+            c1_context.fillStyle = "Red";
+            c1_context.fill();
+            c1_context.stroke();
+
+        }
+        function DrawCircle(circletype) {
+            var c1 = document.getElementById("c");
+            var c1_context = c1.getContext("2d");
+            c1_context.beginPath();
+            var centerX = (cendX + cbeginX) / 2;
+            var centerY = (cendY + cbeginY) / 2;
+            var len =  10;
+            c1_context.arc(centerX, centerY, len, 0, 2 * Math.PI, false);
+            circlecolor = "";
+            switch(circletype){
+                case 1:
+                    circlecolor = "Blue";
+                    break;
+                case 2:
+                    circlecolor = "Yellow"
+                    break;
+            }
+            c1_context.fillStyle = circlecolor;
+            c1_context.fill();
+            c1_context.stroke();
+        }
+
+        
+ 
+    </script>
+</head>
+<body>
+    <div id="pan" onmousedown="onDown(event)" onmouseup="onUp(event)" onmousemove="onMove(event)">
+        <canvas id="c" width="800" height="600">
+        </canvas>
+    </div>
+    <form action="" class="btnFrom">
+    <center>
+    <input type="button" value="Block" onclick="clickRect()"/>
+    <input type="button" value="S-point" onclick="clickCircle(1)"/>
+    <input type="button" value="F-point" onclick="clickCircle(2)"/>
+    </center>
+    </form>
+</body>
+</html>
