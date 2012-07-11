@@ -3,7 +3,6 @@ package kr.ssidang.android.dimensiondrivedownside;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
-import android.util.Log;
 
 public class BallObject extends WorldObject {
 	public PointF pos;
