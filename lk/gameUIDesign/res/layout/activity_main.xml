@@ -22,7 +22,7 @@
             android:background="#00000000"
             android:orientation="vertical" >
 
-            <View
+            <TextView
                 android:id="@+id/blankView0"
                 style="@style/blankView" />
 
@@ -31,7 +31,7 @@
                 style="@style/TitleText"
                 android:text="@string/gameTitle" />
 
-            <View
+            <TextView
                 android:id="@+id/blankView1"
                 style="@style/blankView" />
 
@@ -40,7 +40,7 @@
                 style="@style/ButtonText"
                 android:text="@string/Startgame" />
 
-            <View
+            <TextView
                 android:id="@+id/blankView2"
                 style="@style/blankView" />
 
@@ -49,7 +49,7 @@
                 style="@style/ButtonText"
                 android:text="@string/Ranking" />
 
-            <View
+            <TextView
                 android:id="@+id/blankView3"
                 style="@style/blankView" />
 
@@ -67,7 +67,7 @@
             android:orientation="vertical" >
 
             <TextView
-                android:id="@+id/blankView1"
+                android:id="@+id/blankViewRanking0"
                 style="@style/blankView"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true" />
@@ -75,12 +75,12 @@
             <TextView
                 android:id="@+id/textViewTitleRanking"
                 style="@style/TitleText"
-                android:layout_below="@+id/blankView1"
+                android:layout_below="@+id/blankViewRanking0"
                 android:layout_centerHorizontal="true"
                 android:text="@string/Ranking" />
 
             <TextView
-                android:id="@+id/blankView2"
+                android:id="@+id/blankViewRanking1"
                 style="@style/blankView"
                 android:layout_alignLeft="@+id/textViewTitleRanking"
                 android:layout_below="@+id/textViewTitleRanking" />
@@ -90,20 +90,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_below="@+id/blankView2"
+                android:layout_below="@+id/blankViewRanking1"
                 android:prompt="@string/STAGE" />
 
             <TextView
                 android:id="@+id/textViewButtonSwap"
                 style="@style/ButtonText"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:text="@string/Ranking" />
+                android:layout_above="@+id/blankView5"
+                android:layout_alignParentLeft="true" />
 
             <TextView
                 android:id="@+id/textViewButtonReset"
                 style="@style/ButtonText"
-                android:layout_alignParentBottom="true"
+                android:layout_above="@+id/blankView4"
                 android:layout_alignParentRight="true"
                 android:text="@string/reset" />
 
@@ -126,6 +125,20 @@
                     android:layout_height="wrap_content" >
                 </ListView>
             </ViewFlipper>
+
+            <TextView
+                android:id="@+id/blankView4"
+                style="@style/blankView"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:text="@string/blank" />
+
+            <TextView
+                android:id="@+id/blankView5"
+                style="@style/blankView"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:text="@string/blank" />
         </RelativeLayout>
 
         <LinearLayout
