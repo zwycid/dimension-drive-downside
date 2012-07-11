@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="54" version="2.0">
+<workbench progressCount="42" version="2.0">
 <workbenchAdvisor/>
 <window height="768" maximized="true" width="1024" x="0" y="0">
 <fastViewData fastViewLocation="1024">
@@ -23,7 +23,7 @@
 <coolItem id="org.eclipse.wst.server.ui.internal.webbrowser.actionSet" itemType="typeToolBarContribution" x="38" y="22"/>
 <coolItem id="org.eclipse.wst.ws.explorer.explorer" itemType="typeToolBarContribution" x="38" y="22"/>
 <coolItem id="org.eclipse.wst.xml.ui.perspective.NewFileToolBar" itemType="typeToolBarContribution" x="-1" y="-1"/>
-<coolItem id="org.eclipse.wst.xml.ui.design.DesignToolBar" itemType="typeToolBarContribution" x="61" y="22"/>
+<coolItem id="org.eclipse.wst.xml.ui.design.DesignToolBar" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="group.nav" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.navigate" itemType="typeToolBarContribution" x="190" y="22"/>
 <coolItem id="group.editor" itemType="typeGroupMarker"/>
@@ -46,7 +46,7 @@
 </editorArea>
 <editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MainActivity.java" partName="MainActivity.java" path="D:/itproject/dimension-drive-downside/lk/gameUIDesign/src/lk/summer/project/MainActivity.java" title="MainActivity.java" tooltip="gameUIDesign/src/lk/summer/project/MainActivity.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/gameUIDesign/src/lk/summer/project/MainActivity.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1167" selectionTopPixel="444"/>
+<editorState selectionHorizontalPixel="128" selectionLength="0" selectionOffset="3633" selectionTopPixel="1402"/>
 </editor>
 </editors>
 <views>
@@ -55,6 +55,9 @@
 </view>
 <view id="com.android.ide.eclipse.ddms.views.ThreadView" partName="Threads">
 <viewState/>
+</view>
+<view id="org.eclipse.pde.runtime.LogView" partName="Error Log">
+<viewState activate="true" allSessions="true" column2="346" column3="155" column4="150" error="true" groupBy="0" info="true" limit="50" ok="true" orderType="2" orderValue="-1" show_filter_text="true" useLimit="true" warning="true"/>
 </view>
 <view id="org.eclipse.ui.views.ContentOutline" partName="Outline">
 <viewState/>
@@ -86,14 +89,8 @@
 <viewState/>
 </view>
 <view id="com.android.ide.eclipse.ddms.views.NetworkStatsView" partName="Network Statistics"/>
-<view id="org.eclipse.datatools.connectivity.DataSourceExplorerNavigator" partName="Data Source Explorer"/>
 <view id="org.eclipse.ui.views.ProblemView" partName="Problems">
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
-<expanded>
-<category IMemento.internal.id="Warnings (14 items)"/>
-<category IMemento.internal.id="Errors"/>
-<category IMemento.internal.id="Warnings"/>
-</expanded>
 <columnWidths org.eclipse.ui.ide.locationField="90" org.eclipse.ui.ide.markerType="90" org.eclipse.ui.ide.pathField="120" org.eclipse.ui.ide.resourceField="90" org.eclipse.ui.ide.severityAndDescriptionField="300"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.severityAndDescriptionField"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.resourceField"/>
@@ -102,6 +99,7 @@
 <visible IMemento.internal.id="org.eclipse.ui.ide.markerType"/>
 </viewState>
 </view>
+<view id="org.eclipse.datatools.connectivity.DataSourceExplorerNavigator" partName="Data Source Explorer"/>
 <view id="org.eclipse.ui.console.ConsoleView" partName="Console">
 <viewState/>
 </view>
@@ -342,13 +340,14 @@
 <perspective_action id="org.eclipse.wst.jsdt.ui.JavaPerspective"/>
 <hide_toolbar_item_id id="org.eclipse.jdt.ui.actions.OpenProjectWizard"/>
 <hide_toolbar_item_id id="org.eclipse.ui.edit.text.toggleShowSelectedElementOnly"/>
+<view id="org.eclipse.pde.runtime.LogView"/>
 <view id="org.eclipse.jdt.ui.SourceView"/>
 <view id="org.eclipse.ui.console.ConsoleView"/>
 <view id="com.android.ide.eclipse.ddms.views.LogCatView"/>
 <view id="org.eclipse.ui.views.PropertySheet"/>
+<view id="org.eclipse.ui.views.ContentOutline"/>
 <view id="org.eclipse.jdt.ui.PackageExplorer"/>
 <view id="org.eclipse.mylyn.tasks.ui.views.tasks"/>
-<view id="org.eclipse.ui.views.ContentOutline"/>
 <fastViews>
 <view id="org.eclipse.ui.views.ProblemView" ratio="0.3"/>
 </fastViews>
@@ -378,6 +377,7 @@
 <info part="org.eclipse.ui.editorss" ratio="0.2496318" ratioLeft="339" ratioRight="1019" relationship="2" relative="left"/>
 <info folder="true" part="bottom" ratio="0.7378788" ratioLeft="487" ratioRight="173" relationship="4" relative="org.eclipse.ui.editorss">
 <folder activePageID="com.android.ide.eclipse.ddms.views.LogCatView" appearance="2" expanded="2">
+<page content="org.eclipse.pde.runtime.LogView" label="Error Log"/>
 <page content="org.eclipse.jdt.ui.SourceView" label="Declaration"/>
 <page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
 <page content="com.android.ide.eclipse.ddms.views.LogCatView" label="LogCat"/>
@@ -392,6 +392,7 @@
 <part id="1"/>
 <part id="2"/>
 <part id="3"/>
+<part id="4"/>
 </presentation>
 </folder>
 </info>
@@ -504,125 +505,121 @@
 <workingSets/>
 <navigationHistory>
 <editors>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" path="/gameUIDesign/res/layout/activity_main.xml"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/gameUIDesign/src/lk/summer/project/BlurTextView.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/gameUIDesign/gen/lk/summer/project/gameuidesign/R.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/gameUIDesign/gen/lk/summer/project/gameuidesign/BuildConfig.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" path="/gameUIDesign/res/layout/activity_main.out.xml"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" path="/gameUIDesign/res/layout/activity_main.out.out.xml"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/gameUIDesign/src/lk/summer/project/MainActivity.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" path="/gameUIDesign/res/layout/activity_main.xml"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" path="/gameUIDesign/res/layout/ranking.xml"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" path="/gameUIDesign/res/values/styles.xml"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" path="/gameUIDesign/res/values/strings.xml"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="" path="/gameUIDesign/res/layout/ranking.xml"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/gameUIDesign/src/lk/summer/project/GameTestView.java"/>
 </editors>
-<item historyLabel="BlurTextView.java" index="1">
-<position info="not_deleted" x="1676" y="0"/>
+<item historyLabel="MainActivity.java" index="0">
+<position info="not_deleted" x="3607" y="0"/>
 </item>
-<item historyLabel="BuildConfig.java" index="3">
+<item historyLabel="activity_main.xml" index="1"/>
+<item historyLabel="MainActivity.java" index="0">
+<position info="not_deleted" x="3607" y="0"/>
+</item>
+<item historyLabel="ranking.xml" index="2"/>
+<item historyLabel="styles.xml" index="3"/>
+<item historyLabel="ranking.xml" index="2"/>
+<item historyLabel="MainActivity.java" index="0">
+<position info="not_deleted" x="3607" y="0"/>
+</item>
+<item historyLabel="ranking.xml" index="2"/>
+<item historyLabel="strings.xml" index="4"/>
+<item historyLabel="ranking.xml" index="2"/>
+<item historyLabel="strings.xml" index="4"/>
+<item historyLabel="ranking.xml" index="2">
+<position/>
+</item>
+<item historyLabel="ranking.xml" index="5">
+<position info="not_deleted" x="40" y="0"/>
+</item>
+<item historyLabel="MainActivity.java" index="0">
+<position info="not_deleted" x="3607" y="0"/>
+</item>
+<item historyLabel="ranking.xml" index="2"/>
+<item historyLabel="MainActivity.java" index="0">
+<position info="not_deleted" x="3607" y="0"/>
+</item>
+<item historyLabel="ranking.xml" index="2"/>
+<item historyLabel="styles.xml" index="3"/>
+<item historyLabel="ranking.xml" index="2">
+<position/>
+</item>
+<item historyLabel="ranking.xml" index="5">
+<position info="not_deleted" x="1580" y="0"/>
+</item>
+<item historyLabel="MainActivity.java" index="0">
+<position info="not_deleted" x="3391" y="0"/>
+</item>
+<item historyLabel="ranking.xml" index="2"/>
+<item historyLabel="activity_main.xml" index="1"/>
+<item historyLabel="ranking.xml" index="2"/>
+<item historyLabel="GameTestView.java" index="6">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="BlurTextView.java" index="1">
-<position info="not_deleted" x="1676" y="0"/>
+<item historyLabel="MainActivity.java" index="0">
+<position info="not_deleted" x="3391" y="0"/>
 </item>
-<item historyLabel="R.java" index="2">
+<item historyLabel="MainActivity.java" index="0">
+<position info="not_deleted" x="2754" y="0"/>
+</item>
+<item historyLabel="MainActivity.java" index="0">
+<position info="not_deleted" x="3015" y="0"/>
+</item>
+<item historyLabel="MainActivity.java" index="0">
+<position info="not_deleted" x="3076" y="0"/>
+</item>
+<item historyLabel="MainActivity.java" index="0">
+<position info="not_deleted" x="3666" y="0"/>
+</item>
+<item historyLabel="MainActivity.java" index="0">
 <position/>
 </item>
-<item historyLabel="activity_main.xml" index="0"/>
-<item historyLabel="R.java" index="2">
+<item historyLabel="MainActivity.java" index="0">
 <position/>
 </item>
-<item historyLabel="activity_main.xml" index="0"/>
-<item historyLabel="R.java" index="2">
+<item historyLabel="MainActivity.java" index="0">
 <position/>
 </item>
-<item historyLabel="activity_main.xml" index="0"/>
-<item historyLabel="activity_main.out.xml" index="4"/>
-<item historyLabel="activity_main.xml" index="0"/>
-<item historyLabel="activity_main.out.out.xml" index="5"/>
-<item historyLabel="activity_main.xml" index="0"/>
-<item historyLabel="BlurTextView.java" index="1">
-<position info="not_deleted" x="968" y="0"/>
+<item historyLabel="MainActivity.java" index="0">
+<position/>
 </item>
-<item historyLabel="R.java" index="2">
-<position info="not_deleted" x="4761" y="28"/>
+<item historyLabel="MainActivity.java" index="0">
+<position/>
 </item>
-<item historyLabel="activity_main.xml" index="0"/>
-<item historyLabel="R.java" index="2">
-<position info="not_deleted" x="4898" y="28"/>
+<item historyLabel="MainActivity.java" index="0">
+<position info="not_deleted" x="2583" y="0"/>
 </item>
-<item historyLabel="activity_main.xml" index="0"/>
-<item historyLabel="R.java" index="2">
-<position info="not_deleted" x="4898" y="28"/>
+<item historyLabel="ranking.xml" index="2"/>
+<item historyLabel="GameTestView.java" index="6">
+<position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="BlurTextView.java" index="1">
-<position info="not_deleted" x="968" y="0"/>
+<item historyLabel="ranking.xml" index="2"/>
+<item historyLabel="activity_main.xml" index="1"/>
+<item historyLabel="ranking.xml" index="2"/>
+<item historyLabel="MainActivity.java" index="0">
+<position info="not_deleted" x="2583" y="0"/>
 </item>
-<item historyLabel="activity_main.xml" index="0"/>
-<item historyLabel="BlurTextView.java" index="1">
-<position info="not_deleted" x="968" y="0"/>
+<item historyLabel="MainActivity.java" index="0">
+<position info="not_deleted" x="3874" y="0"/>
 </item>
-<item historyLabel="BlurTextView.java" index="1">
-<position info="not_deleted" x="1594" y="0"/>
+<item historyLabel="ranking.xml" index="2"/>
+<item historyLabel="MainActivity.java" index="0">
+<position info="not_deleted" x="3874" y="0"/>
 </item>
-<item historyLabel="activity_main.xml" index="0"/>
-<item historyLabel="BlurTextView.java" index="1">
-<position info="not_deleted" x="1594" y="0"/>
+<item historyLabel="activity_main.xml" index="1"/>
+<item historyLabel="MainActivity.java" index="0">
+<position info="not_deleted" x="3933" y="0"/>
 </item>
-<item historyLabel="MainActivity.java" index="6">
-<position info="not_deleted" x="942" y="0"/>
+<item historyLabel="activity_main.xml" index="1"/>
+<item historyLabel="MainActivity.java" index="0">
+<position info="not_deleted" x="3933" y="0"/>
 </item>
-<item historyLabel="activity_main.xml" index="0"/>
-<item historyLabel="MainActivity.java" index="6">
-<position info="not_deleted" x="305" y="0"/>
-</item>
-<item historyLabel="BlurTextView.java" index="1">
-<position info="not_deleted" x="1519" y="90"/>
-</item>
-<item historyLabel="BlurTextView.java" index="1">
-<position info="not_deleted" x="699" y="0"/>
-</item>
-<item historyLabel="BlurTextView.java" index="1">
-<position info="not_deleted" x="709" y="30"/>
-</item>
-<item historyLabel="BlurTextView.java" index="1">
-<position info="not_deleted" x="1592" y="0"/>
-</item>
-<item historyLabel="MainActivity.java" index="6">
-<position info="not_deleted" x="674" y="0"/>
-</item>
-<item historyLabel="activity_main.xml" index="0"/>
-<item historyLabel="MainActivity.java" index="6">
-<position info="not_deleted" x="2351" y="0"/>
-</item>
-<item historyLabel="BlurTextView.java" index="1">
-<position info="not_deleted" x="1617" y="0"/>
-</item>
-<item historyLabel="activity_main.xml" index="0"/>
-<item historyLabel="BlurTextView.java" index="1">
-<position info="not_deleted" x="1575" y="0"/>
-</item>
-<item historyLabel="activity_main.xml" index="0"/>
-<item historyLabel="BlurTextView.java" index="1">
-<position info="not_deleted" x="858" y="0"/>
-</item>
-<item historyLabel="activity_main.xml" index="0"/>
-<item historyLabel="BlurTextView.java" index="1">
-<position info="not_deleted" x="1440" y="0"/>
-</item>
-<item historyLabel="MainActivity.java" index="6">
-<position info="not_deleted" x="2351" y="0"/>
-</item>
-<item historyLabel="MainActivity.java" index="6">
-<position info="not_deleted" x="1164" y="0"/>
-</item>
-<item historyLabel="activity_main.xml" index="0"/>
-<item historyLabel="MainActivity.java" index="6">
-<position info="not_deleted" x="1164" y="0"/>
-</item>
-<item historyLabel="activity_main.xml" index="0"/>
-<item historyLabel="MainActivity.java" index="6">
-<position info="not_deleted" x="1164" y="0"/>
-</item>
-<item historyLabel="activity_main.xml" index="0"/>
-<item active="true" historyLabel="MainActivity.java" index="6">
-<position info="not_deleted" x="1164" y="0"/>
+<item active="true" historyLabel="MainActivity.java" index="0">
+<position/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -630,14 +627,6 @@
 <workbenchWindowAdvisor/>
 <actionBarAdvisor/>
 <trimLayout>
-<trimArea IMemento.internal.id="16384">
-<trimItem IMemento.internal.id="left"/>
-</trimArea>
-<trimArea IMemento.internal.id="131072">
-<trimItem IMemento.internal.id="org.eclipse.ui.editorss"/>
-<trimItem IMemento.internal.id="right"/>
-<trimItem IMemento.internal.id="org.eclipse.ui.internal.ViewStack@138e491c"/>
-</trimArea>
 <trimArea IMemento.internal.id="128">
 <trimItem IMemento.internal.id="org.eclipse.ui.internal.WorkbenchWindow.topBar"/>
 <trimItem IMemento.internal.id="org.eclipse.mylyn.tasks.ui.trim.container"/>
@@ -653,47 +642,41 @@
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="activity_main.xml" tooltip="gameUIDesign/res/layout/activity_main.xml">
 <persistable path="/gameUIDesign/res/layout/activity_main.xml"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="R.java" tooltip="gameUIDesign/gen/lk/summer/project/gameuidesign/R.java">
-<persistable path="/gameUIDesign/gen/lk/summer/project/gameuidesign/R.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="ranking.xml" tooltip="gameUIDesign/res/layout/ranking.xml">
+<persistable path="/gameUIDesign/res/layout/ranking.xml"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="activity_main.out.out.xml" tooltip="gameUIDesign/res/layout/activity_main.out.out.xml">
-<persistable path="/gameUIDesign/res/layout/activity_main.out.out.xml"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="activity_main.out.xml" tooltip="gameUIDesign/res/layout/activity_main.out.xml">
-<persistable path="/gameUIDesign/res/layout/activity_main.out.xml"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="BuildConfig.java" tooltip="gameUIDesign/gen/lk/summer/project/gameuidesign/BuildConfig.java">
-<persistable path="/gameUIDesign/gen/lk/summer/project/gameuidesign/BuildConfig.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="attrs.xml" tooltip="gameUIDesign/res/values/attrs.xml">
-<persistable path="/gameUIDesign/res/values/attrs.xml"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.manifest.ManifestEditor" name="AndroidManifest.xml" tooltip="gameUIDesign/AndroidManifest.xml">
-<persistable path="/gameUIDesign/AndroidManifest.xml"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GameTestView.java" tooltip="gameUIDesign/src/lk/summer/project/GameTestView.java">
+<persistable path="/gameUIDesign/src/lk/summer/project/GameTestView.java"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="styles.xml" tooltip="gameUIDesign/res/values/styles.xml">
 <persistable path="/gameUIDesign/res/values/styles.xml"/>
 </file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="strings.xml" tooltip="gameUIDesign/res/values/strings.xml">
+<persistable path="/gameUIDesign/res/values/strings.xml"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MainActivity.java" tooltip="gameUIDesign/src/lk/summer/project/MainActivity.java">
+<persistable path="/gameUIDesign/src/lk/summer/project/MainActivity.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="RankingView.java" tooltip="gameUIDesign/src/lk/summer/project/RankingView.java">
+<persistable path="/gameUIDesign/src/lk/summer/project/RankingView.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Constants.java" tooltip="gameUIDesign/src/lk/summer/project/Constants.java">
+<persistable path="/gameUIDesign/src/lk/summer/project/Constants.java"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MainMenuView.java" tooltip="gameUIDesign/src/lk/summer/project/MainMenuView.java">
 <persistable path="/gameUIDesign/src/lk/summer/project/MainMenuView.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="BlurTextView.java" tooltip="gameUIDesign/src/lk/summer/project/BlurTextView.java">
-<persistable path="/gameUIDesign/src/lk/summer/project/BlurTextView.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="scoreview.xml" tooltip="TestDB/res/layout/scoreview.xml">
+<persistable path="/TestDB/res/layout/scoreview.xml"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.systemExternalEditor" name="startgame_black.png" tooltip="gameUIDesign/res/drawable/startgame_black.png">
-<persistable path="/gameUIDesign/res/drawable/startgame_black.png"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="scoreview.out.xml" tooltip="TestDB/res/layout/scoreview.out.xml">
+<persistable path="/TestDB/res/layout/scoreview.out.xml"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.systemExternalEditor" name="title.png" tooltip="gameUIDesign/res/drawable/title.png">
-<persistable path="/gameUIDesign/res/drawable/title.png"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="activity_test_db.xml" tooltip="TestDB/res/layout/activity_test_db.xml">
+<persistable path="/TestDB/res/layout/activity_test_db.xml"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" name="button_startgame_black.png" tooltip="gameUIDesign/res/drawable/button_startgame_black.png">
-<persistable path="/gameUIDesign/res/drawable/button_startgame_black.png"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="CopyOfImageView.java" tooltip="gameUIDesign/src/CopyOfImageView.java">
-<persistable path="/gameUIDesign/src/CopyOfImageView.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MainActivity.java" tooltip="gameUIDesign/src/lk/summer/project/gameuidesign/MainActivity.java">
-<persistable path="/gameUIDesign/src/lk/summer/project/gameuidesign/MainActivity.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="R.java" tooltip="TestDB/gen/com/hanback/testdb/R.java">
+<persistable path="/TestDB/gen/com/hanback/testdb/R.java"/>
 </file>
 </mruList>
 </workbench>

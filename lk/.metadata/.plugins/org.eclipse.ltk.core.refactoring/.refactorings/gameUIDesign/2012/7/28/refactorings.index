@@ -28,3 +28,23 @@
 1341830309080	Delete elements
 1341831354673	Delete element
 1341831358707	Delete element
+1341831665255	Delete elements
+1341882602102	Rename local variable 'bitmap'
+1341882634623	Rename resource 'bg2.png'
+1341882639834	Rename resource 'blackimage'
+1341902841943	Rename field 'textViewButtons'
+1341902848056	Rename field 'textViewButtonsAList'
+1341908372619	Rename type 'MainMenuView'
+1341909345514	Delete element
+1341911303873	Rename field 'windowHeight'
+1341911321591	Rename local variable 'windowHeight'
+1341914111021	Rename type 'MainMenuSurfaceView'
+1341914211472	Rename method 'allocateBitmap'
+1341914954813	Rename field 'mainMenuView'
+1341925714746	Delete element
+1341926500566	Rename type 'MainmenuViewGroup'
+1341929929384	Delete element
+1341929933505	Delete element
+1341930026302	Delete element
+1341930993234	Delete element
+1341930998272	Delete element
