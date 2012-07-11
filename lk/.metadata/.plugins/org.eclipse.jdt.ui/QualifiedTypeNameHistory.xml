@@ -51,10 +51,10 @@
 <fullyQualifiedTypeName name="lk.summer.project.MainActivity.ListenerForButton"/>
 <fullyQualifiedTypeName name="lk.summer.project.gameuidesign.R.layout"/>
 <fullyQualifiedTypeName name="android.widget.LinearLayout"/>
-<fullyQualifiedTypeName name="android.widget.TextView"/>
 <fullyQualifiedTypeName name="android.widget.Toast"/>
 <fullyQualifiedTypeName name="lk.summer.project.MainActivity"/>
 <fullyQualifiedTypeName name="android.widget.ViewFlipper"/>
 <fullyQualifiedTypeName name="lk.summer.project.gameuidesign.R.id"/>
 <fullyQualifiedTypeName name="android.util.Log"/>
+<fullyQualifiedTypeName name="android.widget.TextView"/>
 </qualifiedTypeNameHistroy>
