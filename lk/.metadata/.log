@@ -403,3 +403,424 @@
 
 !ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 01:06:22.014
 !MESSAGE activity_main.xml: Paint.setShadowLayer is not supported.
+!SESSION 2012-07-11 01:59:28.177 -----------------------------------------------
+eclipse.buildId=M20120208-0800
+java.version=1.7.0_05
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ko_KR
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY org.eclipse.jpt.jpa.ui 4 0 2012-07-11 02:15:37.031
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Exception in org.eclipse.jpt.jpa.ui.JptJpaUiPlugin.stop() of bundle org.eclipse.jpt.jpa.ui.
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl.stop(BundleContextImpl.java:791)
+	at org.eclipse.osgi.framework.internal.core.BundleHost.stopWorker(BundleHost.java:510)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.suspend(AbstractBundle.java:565)
+	at org.eclipse.osgi.framework.internal.core.Framework.suspendBundle(Framework.java:1161)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.decFWSL(StartLevelManager.java:595)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.doSetStartLevel(StartLevelManager.java:257)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.shutdown(StartLevelManager.java:215)
+	at org.eclipse.osgi.framework.internal.core.InternalSystemBundle.suspend(InternalSystemBundle.java:284)
+	at org.eclipse.osgi.framework.internal.core.Framework.shutdown(Framework.java:691)
+	at org.eclipse.osgi.framework.internal.core.Framework.close(Framework.java:598)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.shutdown(EclipseStarter.java:390)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:198)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:622)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:577)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1410)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1386)
+Caused by: org.eclipse.swt.SWTException: Invalid thread access
+	at org.eclipse.swt.SWT.error(SWT.java:4282)
+	at org.eclipse.swt.SWT.error(SWT.java:4197)
+	at org.eclipse.swt.SWT.error(SWT.java:4168)
+	at org.eclipse.swt.widgets.Display.error(Display.java:1258)
+	at org.eclipse.swt.widgets.Display.checkDevice(Display.java:764)
+	at org.eclipse.swt.widgets.Display.removeFilter(Display.java:4058)
+	at org.eclipse.jpt.jpa.ui.JptJpaUiPlugin.stop(JptJpaUiPlugin.java:257)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl$2.run(BundleContextImpl.java:771)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl.stop(BundleContextImpl.java:764)
+	... 19 more
+Root exception:
+org.eclipse.swt.SWTException: Invalid thread access
+	at org.eclipse.swt.SWT.error(SWT.java:4282)
+	at org.eclipse.swt.SWT.error(SWT.java:4197)
+	at org.eclipse.swt.SWT.error(SWT.java:4168)
+	at org.eclipse.swt.widgets.Display.error(Display.java:1258)
+	at org.eclipse.swt.widgets.Display.checkDevice(Display.java:764)
+	at org.eclipse.swt.widgets.Display.removeFilter(Display.java:4058)
+	at org.eclipse.jpt.jpa.ui.JptJpaUiPlugin.stop(JptJpaUiPlugin.java:257)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl$2.run(BundleContextImpl.java:771)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl.stop(BundleContextImpl.java:764)
+	at org.eclipse.osgi.framework.internal.core.BundleHost.stopWorker(BundleHost.java:510)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.suspend(AbstractBundle.java:565)
+	at org.eclipse.osgi.framework.internal.core.Framework.suspendBundle(Framework.java:1161)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.decFWSL(StartLevelManager.java:595)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.doSetStartLevel(StartLevelManager.java:257)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.shutdown(StartLevelManager.java:215)
+	at org.eclipse.osgi.framework.internal.core.InternalSystemBundle.suspend(InternalSystemBundle.java:284)
+	at org.eclipse.osgi.framework.internal.core.Framework.shutdown(Framework.java:691)
+	at org.eclipse.osgi.framework.internal.core.Framework.close(Framework.java:598)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.shutdown(EclipseStarter.java:390)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:198)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:622)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:577)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1410)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1386)
+!SESSION 2012-07-11 13:22:07.969 -----------------------------------------------
+eclipse.buildId=M20120208-0800
+java.version=1.7.0_05
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ko_KR
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:27:57.278
+!MESSAGE ranking.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:27:57.294
+!MESSAGE ranking.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:27:57.309
+!MESSAGE ranking.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:28:08.479
+!MESSAGE ranking.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:28:08.495
+!MESSAGE ranking.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:28:08.495
+!MESSAGE ranking.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:28:12.176
+!MESSAGE ranking.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:28:12.192
+!MESSAGE ranking.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:28:12.192
+!MESSAGE ranking.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:28:12.566
+!MESSAGE ranking.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:28:12.582
+!MESSAGE ranking.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:28:12.582
+!MESSAGE ranking.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:28:12.972
+!MESSAGE ranking.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:28:12.987
+!MESSAGE ranking.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:28:12.987
+!MESSAGE ranking.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:28:18.479
+!MESSAGE ranking.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:28:18.479
+!MESSAGE ranking.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:28:18.479
+!MESSAGE ranking.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:28:20.694
+!MESSAGE ranking.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:28:20.709
+!MESSAGE ranking.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:28:20.709
+!MESSAGE ranking.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:28:20.834
+!MESSAGE ranking.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:28:20.834
+!MESSAGE ranking.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:28:20.850
+!MESSAGE ranking.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:28:22.581
+!MESSAGE ranking.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:28:22.581
+!MESSAGE ranking.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:28:22.597
+!MESSAGE ranking.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:28:23.595
+!MESSAGE ranking.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:28:23.611
+!MESSAGE ranking.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:28:23.611
+!MESSAGE ranking.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:28:23.720
+!MESSAGE ranking.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:28:23.720
+!MESSAGE ranking.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:28:23.736
+!MESSAGE ranking.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:28:25.748
+!MESSAGE ranking.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:28:25.764
+!MESSAGE ranking.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:28:25.764
+!MESSAGE ranking.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:28:27.495
+!MESSAGE ranking.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:28:27.511
+!MESSAGE ranking.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:28:27.511
+!MESSAGE ranking.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:28:27.605
+!MESSAGE ranking.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:28:27.620
+!MESSAGE ranking.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:28:27.620
+!MESSAGE ranking.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:44:37.989
+!MESSAGE activity_main.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:44:37.989
+!MESSAGE activity_main.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:44:38.004
+!MESSAGE activity_main.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:44:38.004
+!MESSAGE activity_main.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:44:38.004
+!MESSAGE activity_main.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:44:38.004
+!MESSAGE activity_main.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:44:38.004
+!MESSAGE activity_main.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:44:38.020
+!MESSAGE activity_main.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:45:02.481
+!MESSAGE ranking.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:45:02.481
+!MESSAGE ranking.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:45:02.496
+!MESSAGE ranking.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:45:08.128
+!MESSAGE ranking.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:45:08.144
+!MESSAGE ranking.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:45:08.159
+!MESSAGE ranking.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:45:08.331
+!MESSAGE ranking.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:45:08.346
+!MESSAGE ranking.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:45:08.346
+!MESSAGE ranking.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:48:06.896
+!MESSAGE ranking.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:48:06.903
+!MESSAGE ranking.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:48:06.908
+!MESSAGE ranking.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:48:19.728
+!MESSAGE ranking.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:48:19.733
+!MESSAGE ranking.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:48:19.738
+!MESSAGE ranking.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:51:14.345
+!MESSAGE activity_main.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:51:14.351
+!MESSAGE activity_main.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:51:14.355
+!MESSAGE activity_main.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:51:14.360
+!MESSAGE activity_main.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:51:14.366
+!MESSAGE activity_main.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:51:14.379
+!MESSAGE activity_main.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:51:14.384
+!MESSAGE activity_main.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:51:14.407
+!MESSAGE activity_main.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:51:16.813
+!MESSAGE activity_main.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:51:16.818
+!MESSAGE activity_main.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:51:16.823
+!MESSAGE activity_main.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:51:16.875
+!MESSAGE activity_main.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:51:16.875
+!MESSAGE activity_main.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:51:16.895
+!MESSAGE activity_main.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:51:16.895
+!MESSAGE activity_main.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:51:16.915
+!MESSAGE activity_main.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:51:19.937
+!MESSAGE activity_main.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:51:19.943
+!MESSAGE activity_main.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:51:19.947
+!MESSAGE activity_main.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:51:19.953
+!MESSAGE activity_main.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:51:19.958
+!MESSAGE activity_main.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:51:19.963
+!MESSAGE activity_main.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:51:19.973
+!MESSAGE activity_main.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:51:19.993
+!MESSAGE activity_main.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:51:21.568
+!MESSAGE activity_main.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:51:21.573
+!MESSAGE activity_main.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:51:21.578
+!MESSAGE activity_main.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:51:21.583
+!MESSAGE activity_main.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:51:21.588
+!MESSAGE activity_main.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:51:21.600
+!MESSAGE activity_main.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:51:21.605
+!MESSAGE activity_main.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:51:21.628
+!MESSAGE activity_main.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:51:22.126
+!MESSAGE activity_main.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:51:22.126
+!MESSAGE activity_main.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:51:22.126
+!MESSAGE activity_main.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:51:22.136
+!MESSAGE activity_main.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:51:22.136
+!MESSAGE activity_main.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:51:22.146
+!MESSAGE activity_main.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:51:22.156
+!MESSAGE activity_main.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:51:22.176
+!MESSAGE activity_main.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:52:23.542
+!MESSAGE activity_main.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:52:23.547
+!MESSAGE activity_main.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:52:23.551
+!MESSAGE activity_main.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:52:23.554
+!MESSAGE activity_main.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:52:23.560
+!MESSAGE activity_main.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:52:23.570
+!MESSAGE activity_main.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:52:23.574
+!MESSAGE activity_main.xml: Paint.setShadowLayer is not supported.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-07-11 13:52:23.593
+!MESSAGE activity_main.xml: Paint.setShadowLayer is not supported.

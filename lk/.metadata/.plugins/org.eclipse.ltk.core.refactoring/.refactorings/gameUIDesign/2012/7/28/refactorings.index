@@ -48,3 +48,7 @@
 1341930026302	Delete element
 1341930993234	Delete element
 1341930998272	Delete element
+1341939640047	Rename method 'initiateTextButton'
+1341940179814	Rename field 'prefer_to_window_text_size_large'
+1341940183743	Rename field 'prefer_to_window_text_size_small'
+1341982716915	Rename field 'blankView'
