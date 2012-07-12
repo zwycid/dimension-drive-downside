@@ -25,7 +25,7 @@
         $(document).ready(function () {
 
         });
-
+        var tString="";
         var figure = 0;
 
         function clickRect() {
@@ -82,7 +82,7 @@
             c1_context.fillStyle = "Red";
             c1_context.fill();
             c1_context.stroke();
-
+            tString += cbeginX+","+cbeginY+","+cendX+","+cendY+","+"//";
         }
         function DrawCircle(circletype) {
             var c1 = document.getElementById("c");
@@ -96,11 +96,14 @@
             switch(circletype){
                 case 1:
                     circlecolor = "Blue";
+                    tString += "[s]";
                     break;
                 case 2:
                     circlecolor = "Yellow"
+                    tString += "[f]";
                     break;
             }
+            tString += ","+centerX+","+centerY+"//";
             c1_context.fillStyle = circlecolor;
             c1_context.fill();
             c1_context.stroke();
@@ -120,7 +123,10 @@
     <input type="button" value="Block" onclick="clickRect()"/>
     <input type="button" value="S-point" onclick="clickCircle(1)"/>
     <input type="button" value="F-point" onclick="clickCircle(2)"/>
+    <input type="button" value="출력" onclick="document.getElementById('tStringDiv').innerHTML=tString;"/>
     </center>
     </form>
+    <div id="tStringDiv">
+    </div>
 </body>
 </html>
