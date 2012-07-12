@@ -66,7 +66,7 @@ public class GameActivity extends Activity implements
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_MENU) {
 			// TODO 디버깅 데이터
-			gameView.debug_ = !gameView.debug_;
+			gameView.getGameParams().debug_ = !gameView.getGameParams().debug_;
 		}
 		return super.onKeyDown(keyCode, event);
 	}

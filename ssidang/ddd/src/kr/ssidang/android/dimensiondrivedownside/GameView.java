@@ -17,8 +17,6 @@ public class GameView extends SurfaceView implements
 	public static final float SCALE_UNIT = 160.f;
 	public static final float TIME_UNIT = 30.f;
 	
-	public boolean debug_;
-	
 	private float width;
 	private float height;
 	private float scaleFactor;
@@ -58,7 +56,7 @@ public class GameView extends SurfaceView implements
 		
 		world = new WorldManager();
 		G = world.getGameParams();
-		world.randomizeWorld();
+		world.makeMockWorld();
 	}
 	
 	public WorldManager.GameParams getGameParams() {
@@ -142,22 +140,22 @@ public class GameView extends SurfaceView implements
 		G.gravityDirection = (float) rad;
 		world.draw(canvas);
 		
-		if (debug_) {
+		if (G.debug_) {
 			// TODO Debug
 			resetView(canvas);
 			
 			float fps = 1000.f / (G.delta * TIME_UNIT);
-			DrawUtil.drawTextMultiline(canvas,
+			GameUtil.drawTextMultiline(canvas,
 					"Tick: " + tick + " (fps: " + fps + ")"
 					+ "\nScreen = (" + width + ", " + height + ")"
-					+ "\nAzimuth = " + G.azimuth
-					+ "\nPitch = " + G.pitch
-					+ "\nRoll = " + G.roll
+//					+ "\nAzimuth = " + G.azimuth
+//					+ "\nPitch = " + G.pitch
+//					+ "\nRoll = " + G.roll
 					, 0, 0, textPaint);
 			
 			float centerX = width / 2;
 			float centerY = height / 2;
-			DrawUtil.drawArrow(canvas, centerX, centerY,
+			GameUtil.drawArrow(canvas, centerX, centerY,
 					centerX + offsetX, centerY - offsetY, linePaint);
 			
 		}
