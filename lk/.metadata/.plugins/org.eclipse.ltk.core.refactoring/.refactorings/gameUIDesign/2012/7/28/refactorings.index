@@ -48,3 +48,65 @@
 1341930026302	Delete element
 1341930993234	Delete element
 1341930998272	Delete element
+1341939640047	Rename method 'initiateTextButton'
+1341940179814	Rename field 'prefer_to_window_text_size_large'
+1341940183743	Rename field 'prefer_to_window_text_size_small'
+1341982716915	Rename field 'blankView'
+1341991283153	Rename method 'initiateMainmenuTextButton'
+1341991290311	Rename method 'initRankingTextButtons'
+1342001337911	Delete element
+1342001450849	Rename local variable 'dest'
+1342001462553	Rename local variable 'src'
+1342001817186	Rename local variable 'fallingText'
+1342017283828	Rename field 'TEXT_NUMBER'
+1342017355195	Rename field 'BACKGROUND_FALLING_TEXT_NUMBER'
+1342017369481	Rename field 'MAX_SPEED'
+1342017374964	Rename field 'THE_NUMBER_OF_FALLING_TEXT_ON_BACKGROUND'
+1342017383651	Rename field 'MIN_SPEED'
+1342017790691	Rename local variable 'indx'
+1342019746703	Delete element
+1342019883071	Delete element
+1342025120540	Delete element
+1342025490269	Move compilation units
+1342025516149	Rename package 'lk.summer.project.layout'
+1342025543738	Move compilation unit
+1342025559273	Delete element
+1342025573763	Delete element
+1342029747963	Rename method 'getID_in_R_by_FieldName'
+1342037350611	Move compilation units
+1342037381285	Move compilation units
+1342037868559	Rename field 'textImages'
+1342037874565	Rename field 'textWidth'
+1342037877630	Rename field 'textHeight'
+1342037934111	Rename method 'getTextImage'
+1342037953871	Rename method 'getTextWidth'
+1342037963050	Rename method 'setTextWidth'
+1342039011075	Rename type 'MainActivity'
+1342039028192	Rename field 'mainActivity'
+1342039044593	Rename method 'getMainActivity'
+1342039049924	Rename method 'setMainActivity'
+1342039090989	Rename type 'BackgroundSurfaceiew'
+1342039342537	Rename field 'backgroundSurfaceView'
+1342039362948	Rename method 'getBackgroundSurfaceiew'
+1342039370365	Rename method 'setBackgroundSurfaceiew'
+1342039379148	Rename local variable 'backgroundSurfaceView'
+1342039720509	Rename field 'text_speed_x'
+1342039723596	Rename field 'text_speed_y'
+1342039728163	Rename field 'text_pt'
+1342040944364	Delete element
+1342040967501	Move compilation unit
+1342040989227	Delete element
+1342041050587	Delete element
+1342041266002	Delete element
+1342041300914	Move compilation unit
+1342041304496	Delete element
+1342044604510	Rename field 'textImageArray'
+1342045005390	Rename field 'TEXT'
+1342045329115	Delete element
+1342046671748	Rename local variable 'text_speed_y'
+1342046826574	Rename field 'text_speed_x'
+1342046837367	Rename field 'text_position_y'
+1342046842485	Rename field 'textPosotionYArry'
+1342046897568	Rename local variable 'textSpeedXArray'
+1342046935794	Rename field 'text_pt'
+1342046967825	Rename local variable 'indx'

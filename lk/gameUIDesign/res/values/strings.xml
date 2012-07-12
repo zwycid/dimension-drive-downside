@@ -10,5 +10,7 @@
     <string name="TotalRanking">Total Ranking</string>
     <string name="StageRanking">Stage Ranking</string>
     <string name="reset">RESET</string>
+    <string name="STAGE">STAGE</string>
+    <string name="blank">blank</string>
 
 </resources>

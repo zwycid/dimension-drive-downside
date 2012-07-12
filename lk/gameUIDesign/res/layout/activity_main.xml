@@ -22,8 +22,8 @@
             android:background="#00000000"
             android:orientation="vertical" >
 
-            <View
-                android:id="@+id/view1"
+            <TextView
+                android:id="@+id/blankView0"
                 style="@style/blankView" />
 
             <TextView
@@ -31,8 +31,8 @@
                 style="@style/TitleText"
                 android:text="@string/gameTitle" />
 
-            <View
-                android:id="@+id/view2"
+            <TextView
+                android:id="@+id/blankView1"
                 style="@style/blankView" />
 
             <TextView
@@ -40,8 +40,8 @@
                 style="@style/ButtonText"
                 android:text="@string/Startgame" />
 
-            <View
-                android:id="@+id/view3"
+            <TextView
+                android:id="@+id/blankView2"
                 style="@style/blankView" />
 
             <TextView
@@ -49,8 +49,8 @@
                 style="@style/ButtonText"
                 android:text="@string/Ranking" />
 
-            <View
-                android:id="@+id/view4"
+            <TextView
+                android:id="@+id/blankView3"
                 style="@style/blankView" />
 
             <TextView
@@ -67,7 +67,7 @@
             android:orientation="vertical" >
 
             <TextView
-                android:id="@+id/blankView1"
+                android:id="@+id/blankViewRanking0"
                 style="@style/blankView"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true" />
@@ -75,35 +75,42 @@
             <TextView
                 android:id="@+id/textViewTitleRanking"
                 style="@style/TitleText"
-                android:layout_below="@+id/blankView1"
-                android:layout_centerHorizontal="true" 
+                android:layout_below="@+id/blankViewRanking0"
+                android:layout_centerHorizontal="true"
                 android:text="@string/Ranking" />
 
             <TextView
-                android:id="@+id/blankView2"
+                android:id="@+id/blankViewRanking1"
                 style="@style/blankView"
                 android:layout_alignLeft="@+id/textViewTitleRanking"
                 android:layout_below="@+id/textViewTitleRanking" />
 
+            <Spinner
+                android:id="@+id/spinnerStage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/blankViewRanking1"
+                android:prompt="@string/STAGE" />
+
             <TextView
                 android:id="@+id/textViewButtonSwap"
                 style="@style/ButtonText"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@+id/blankView2"
-                android:text="@string/Ranking" />
+                android:layout_above="@+id/blankView5"
+                android:layout_alignParentLeft="true" />
 
             <TextView
                 android:id="@+id/textViewButtonReset"
                 style="@style/ButtonText"
+                android:layout_above="@+id/blankView4"
                 android:layout_alignParentRight="true"
-                android:layout_below="@+id/blankView2"
                 android:text="@string/reset" />
 
             <ViewFlipper
                 android:id="@+id/viewFlipperForListView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/textViewButtonSwap"
+                android:layout_below="@+id/spinnerStage"
                 android:layout_centerHorizontal="true" >
 
                 <ListView
@@ -118,6 +125,20 @@
                     android:layout_height="wrap_content" >
                 </ListView>
             </ViewFlipper>
+
+            <TextView
+                android:id="@+id/blankView4"
+                style="@style/blankView"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:text="@string/blank" />
+
+            <TextView
+                android:id="@+id/blankView5"
+                style="@style/blankView"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:text="@string/blank" />
         </RelativeLayout>
 
         <LinearLayout

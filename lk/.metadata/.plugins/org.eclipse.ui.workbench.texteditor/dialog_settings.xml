@@ -13,22 +13,29 @@
 		<item value="false" key="isRegEx"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="RANK" key="selection"/>
+		<item value="backgroundSurfaceView" key="selection"/>
 		<list key="findhistory">
+			<item value="this.backgroundSurfaceView"/>
+			<item value="setTextImage("/>
+			<item value="setTextImage"/>
+			<item value="&lt;View"/>
 			<item value="RANK"/>
 			<item value="rank"/>
 			<item value="@style/GlowingText"/>
 			<item value="total"/>
-			<item value="@+id/totalScoreView"/>
-			<item value="image"/>
-			<item value="imageTitleBitmapOrigin"/>
 		</list>
 		<list key="replacehistory">
+			<item value="backgroundSurfaceView"/>
+			<item value="&lt;TextView"/>
 			<item value="@style/GlowingTextView"/>
 			<item value="user"/>
 			<item value="@+id/total_id"/>
 			<item value="text"/>
 			<item value="imageTitleBitmap"/>
 		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.GotoLineAction$GotoLineDialog_dialogBounds">
+		<item value="268" key="DIALOG_Y_ORIGIN"/>
+		<item value="421" key="DIALOG_X_ORIGIN"/>
 	</section>
 </section>
