@@ -25,7 +25,7 @@
         $(document).ready(function () {
 
         });
-
+        var tString="";
         var figure = 0;
 
         function clickRect() {
@@ -65,6 +65,8 @@
                 case 0: DrawRect(); break;
                 case 1: DrawCircle(1); break;
                 case 2: DrawCircle(2); break;
+                case 3: DrawCircle(3); break;
+                case 4: DrawCircle(4); break;
             }
             mflag = false;
         }
@@ -82,7 +84,7 @@
             c1_context.fillStyle = "Red";
             c1_context.fill();
             c1_context.stroke();
-
+            tString += cbeginX+","+cbeginY+","+cendX+","+cendY+"//";
         }
         function DrawCircle(circletype) {
             var c1 = document.getElementById("c");
@@ -96,31 +98,58 @@
             switch(circletype){
                 case 1:
                     circlecolor = "Blue";
+                    tString += "[s]";
                     break;
                 case 2:
                     circlecolor = "Yellow"
+                    tString += "[f]";
+                    break;
+                case 3:
+                    circlecolor = "Green"
+                    tString += "[a]";
+                    break;
+                case 4:
+                    circlecolor = "Black"
+                    tString += "[c]";
                     break;
             }
+            tString += ","+centerX+","+centerY+"//";
             c1_context.fillStyle = circlecolor;
             c1_context.fill();
             c1_context.stroke();
         }
-
+        function changeMapSize(){
+            tString = "";
+            $("#tStringDiv").html("");
+            var c1 = document.getElementById("c");
+            c1.setAttribute("width",$("#canvas_width").val());
+            c1.setAttribute("height",$("#canvas_height").val());
+            //$("#c").width($("#canvas_width").val());
+            //$("#c").height($("#canvas_height").val());
+            $("#pan").width($("#canvas_width").val());
+            $("#pan").height($("#canvas_height").val());
+        }
         
  
     </script>
 </head>
 <body>
+
     <div id="pan" onmousedown="onDown(event)" onmouseup="onUp(event)" onmousemove="onMove(event)">
         <canvas id="c" width="800" height="600">
         </canvas>
     </div>
     <form action="" class="btnFrom">
-    <center>
+    <center> <div><input type="text" id="canvas_width" size=10><input type="text" id="canvas_height" size=10><input type="button" value="맵크기적용" onclick="changeMapSize()"></div>
     <input type="button" value="Block" onclick="clickRect()"/>
     <input type="button" value="S-point" onclick="clickCircle(1)"/>
     <input type="button" value="F-point" onclick="clickCircle(2)"/>
+    <input type="button" value="Attractor" onclick="clickCircle(3)"/>
+    <input type="button" value="Crack" onclick="clickCircle(4)"/>
+    <input type="button" value="출력" onclick="document.getElementById('tStringDiv').innerHTML=tString;"/>
     </center>
     </form>
+    <div id="tStringDiv">
+    </div>
 </body>
 </html>
