@@ -82,7 +82,7 @@
             c1_context.fillStyle = "Red";
             c1_context.fill();
             c1_context.stroke();
-            tString += cbeginX+","+cbeginY+","+cendX+","+cendY+","+"//";
+            tString += cbeginX+","+cbeginY+","+cendX+","+cendY+"//";
         }
         function DrawCircle(circletype) {
             var c1 = document.getElementById("c");
@@ -108,18 +108,29 @@
             c1_context.fill();
             c1_context.stroke();
         }
-
+        function changeMapSize(){
+            tString = "";
+            $("#tStringDiv").html("");
+            var c1 = document.getElementById("c");
+            c1.setAttribute("width",$("#canvas_width").val());
+            c1.setAttribute("height",$("#canvas_height").val());
+            //$("#c").width($("#canvas_width").val());
+            //$("#c").height($("#canvas_height").val());
+            $("#pan").width($("#canvas_width").val());
+            $("#pan").height($("#canvas_height").val());
+        }
         
  
     </script>
 </head>
 <body>
+
     <div id="pan" onmousedown="onDown(event)" onmouseup="onUp(event)" onmousemove="onMove(event)">
         <canvas id="c" width="800" height="600">
         </canvas>
     </div>
     <form action="" class="btnFrom">
-    <center>
+    <center> <div><input type="text" id="canvas_width" size=10><input type="text" id="canvas_height" size=10><input type="button" value="맵크기적용" onclick="changeMapSize()"></div>
     <input type="button" value="Block" onclick="clickRect()"/>
     <input type="button" value="S-point" onclick="clickCircle(1)"/>
     <input type="button" value="F-point" onclick="clickCircle(2)"/>
