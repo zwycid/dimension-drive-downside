@@ -65,6 +65,8 @@
                 case 0: DrawRect(); break;
                 case 1: DrawCircle(1); break;
                 case 2: DrawCircle(2); break;
+                case 3: DrawCircle(3); break;
+                case 4: DrawCircle(4); break;
             }
             mflag = false;
         }
@@ -102,6 +104,14 @@
                     circlecolor = "Yellow"
                     tString += "[f]";
                     break;
+                case 3:
+                    circlecolor = "Green"
+                    tString += "[a]";
+                    break;
+                case 4:
+                    circlecolor = "Black"
+                    tString += "[c]";
+                    break;
             }
             tString += ","+centerX+","+centerY+"//";
             c1_context.fillStyle = circlecolor;
@@ -134,6 +144,8 @@
     <input type="button" value="Block" onclick="clickRect()"/>
     <input type="button" value="S-point" onclick="clickCircle(1)"/>
     <input type="button" value="F-point" onclick="clickCircle(2)"/>
+    <input type="button" value="Attractor" onclick="clickCircle(3)"/>
+    <input type="button" value="Crack" onclick="clickCircle(4)"/>
     <input type="button" value="출력" onclick="document.getElementById('tStringDiv').innerHTML=tString;"/>
     </center>
     </form>
