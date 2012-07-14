@@ -22,10 +22,15 @@ public class WorldManager {
 	private float height;
 	
 	// 시점(view)에 관련된 사항
-	private PointF lookAt;
+//	private PointF lookAt;
 //	private float rotation;
 
 	private GameParams G;
+	
+	// 디버깅용...........
+	Canvas debugCanvas;
+	Paint debugBlue;
+	Paint debugOrange;
 	
 	///////////////////////////////////////////////////////////////////////////
 	// GameData
@@ -44,6 +49,16 @@ public class WorldManager {
 	public WorldManager() {
 		this.obstacles = new ArrayList<ObstacleObject>();
 		this.G = new GameParams();
+		
+
+		// TODO 디버그 코드
+		debugBlue = new Paint();
+		debugBlue.setColor(Color.BLUE);
+		debugBlue.setStrokeWidth(10);
+		
+		debugOrange = new Paint();
+		debugOrange.setColor(0xffff8030);
+		debugOrange.setStrokeWidth(10);
 	}
 	
 	public GameParams getGameParams() {
@@ -91,6 +106,8 @@ public class WorldManager {
 	 * @param canvas
 	 */
 	public void draw(Canvas canvas) {
+		debugCanvas = canvas;
+		
 		float s = 3.f / 10.001f;
 		canvas.setMatrix(null);
 		canvas.scale(s, s);
@@ -101,196 +118,121 @@ public class WorldManager {
 		p.setColor(Color.WHITE);
 		canvas.drawRect(new RectF(0, 0, width, height), p);
 		
-		// 프레임 처리
-		ball.acc.x = FloatMath.cos(G.gravityDirection) * 1.f;
-		ball.acc.y = -FloatMath.sin(G.gravityDirection) * 1.f;
-		
 		for (ObstacleObject ob : obstacles) {
 			ob.draw(canvas);
 		}
 		ball.draw(canvas);
-		
-		moveObjects(canvas, G.delta);
 	}
 
-	private void moveObjects(Canvas canvas, float delta) {
-		// TODO moving
-		GameUtil.vec2AddScaled(ball.velo, ball.velo, ball.acc, delta);
+	public void moveObjects(Canvas canvas, float delta) {
+		// 중력
+		ball.acc.x = FloatMath.cos(G.gravityDirection) * 1.5f;
+		ball.acc.y = -FloatMath.sin(G.gravityDirection) * 1.5f;
 		
-		// 천천히
-//		if (G.debug_) {
-//			GameUtil.vec2Scale(ball.velo, .8f);
-//		}
+		// TODO 공기 저항 대충 처리
+		float airFrictionCoeffi = .1f;
+		ball.acc.add(ball.velo, -airFrictionCoeffi);
+
+		// 공 속도 구하기
+		ball.velo.add(ball.acc, delta);
+		
+		// 이번에 이동할 위치를 계산합니다.
+		Vector2D beforePos = new Vector2D(ball.pos);
+		Vector2D afterPos = Vector2D.add(beforePos, ball.velo, delta);
 		
 		// 신나는 충돌처리
-		float coeffi = .7f;
+		Vector2D edge1 = new Vector2D();
+		Vector2D edge2 = new Vector2D();
+		Vector2D normal = new Vector2D();
 		
-		// 이동 벡터를 구합니다
-		PointF pos = GameUtil.clonePointF(ball.pos);
-		PointF dest = GameUtil.vec2AddScaled(new PointF(), pos, ball.velo, delta);
 		
-		// 방향 벡터와 방향에 수직인 벡터를 구합니다.
-		PointF dir = GameUtil.vec2Sub(dest, pos);
-		PointF dirCross = GameUtil.vec2Rotation(GameUtil.clonePointF(dir),
-				(float) (Math.PI / 2));
-		GameUtil.vec2SetLength(dirCross, ball.radius);
+		// TODO 벽 반사 처리..........
+		// left
+		edge1.set(ball.radius, 0);
+		edge2.set(ball.radius, height);
+		normal.set(1, 0);
+		collisionBallWithEdge(beforePos, afterPos, edge1, edge2, ball.velo, normal);
+
+		// top
+		edge1.set(0, ball.radius);
+		edge2.set(width, ball.radius);
+		normal.set(0, 1);
+		collisionBallWithEdge(beforePos, afterPos, edge1, edge2, ball.velo, normal);
 		
-		// 공 길이만큼 이동을 연장함
-		float length = GameUtil.vec2Length(dir) + ball.radius;
-		PointF dirScaled = new PointF(dir.x, dir.y);
-		GameUtil.vec2SetLength(dirScaled, length);
+		// right
+		edge1.set(width - ball.radius, 0);
+		edge2.set(width - ball.radius, height);
+		normal.set(-1, 0);
+		collisionBallWithEdge(beforePos, afterPos, edge1, edge2, ball.velo, normal);
 		
-		// 양쪽 충돌용 선분 구하기
-		PointF pos1 = new PointF(pos.x + dirCross.x, pos.y - dirCross.y);
-		PointF pos2 = new PointF(pos.x - dirCross.x, pos.y + dirCross.y);
-		PointF dest1 = new PointF(pos1.x + dirScaled.x, pos1.y + dirScaled.y);
-		PointF dest2 = new PointF(pos2.x + dirScaled.x, pos2.y + dirScaled.y);
+		// bottom
+		edge1.set(0, height - ball.radius);
+		edge2.set(width, height - ball.radius);
+		normal.set(0, -1);
+		collisionBallWithEdge(beforePos, afterPos, edge1, edge2, ball.velo, normal);
 		
-		// 선 충돌 처리....................
-		PointF edge1 = new PointF();
-		PointF edge2 = new PointF();
-		PointF normal = new PointF();
-		PointF interPt = new PointF();
-		PointF reflect = new PointF();
-		List<PointF> collisionList = new ArrayList<PointF>();
 		
+		// TODO 장애물 반사 처리.........
 		for (ObstacleObject ob : obstacles) {
 			RectF bound = ob.getBounds();
 			
 			// left
-			edge1.x = bound.left;
-			edge1.y = bound.top;
-			edge2.x = bound.left;
-			edge2.y = bound.bottom;
-			normal.x = -1;
-			normal.y = 0;
-			if (GameUtil.findLineIntersection(pos1, dest1, edge1, edge2, interPt)) {
-				collisionList.add(GameUtil.clonePointF(interPt));
-				
-				reflect.x = interPt.x;
-				reflect.y = interPt.y;
-				GameUtil.vec2Sub(reflect, dest1, interPt);
-				GameUtil.vec2Mirror(reflect, normal);
-				GameUtil.vec2Add(dest, interPt, reflect);
-				
-				ball.velo.x = -ball.velo.x * coeffi;
-			}
-			if (GameUtil.findLineIntersection(pos2, dest2, edge1, edge2, interPt)) {
-				collisionList.add(GameUtil.clonePointF(interPt));
-				
-				reflect.x = interPt.x;
-				reflect.y = interPt.y;
-				GameUtil.vec2Sub(reflect, dest1, interPt);
-				GameUtil.vec2Mirror(reflect, normal);
-				GameUtil.vec2Add(dest, interPt, reflect);
-				
-				ball.velo.x = -ball.velo.x * coeffi;
-			}
-			
+			edge1.set(bound.left - ball.radius, bound.top);
+			edge2.set(bound.left - ball.radius, bound.bottom);
+			normal.set(-1, 0);
+			collisionBallWithEdge(beforePos, afterPos, edge1, edge2, ball.velo, normal);
+
 			// top
-			edge1.x = bound.left;
-			edge1.y = bound.top;
-			edge2.x = bound.right;
-			edge2.y = bound.top;
-			normal.x = 0;
-			normal.y = -1;
-			if (GameUtil.findLineIntersection(pos1, dest1, edge1, edge2, interPt)) {
-				ball.velo.y = -ball.velo.y * coeffi;
-				dest.y = bound.top - ball.radius;
-				collisionList.add(GameUtil.clonePointF(interPt));
-			}
-			if (GameUtil.findLineIntersection(pos2, dest2, edge1, edge2, interPt)) {
-				ball.velo.y = -ball.velo.y * coeffi;
-				dest.y = bound.top - ball.radius;
-				collisionList.add(GameUtil.clonePointF(interPt));
-			}
+			edge1.set(bound.left, bound.top - ball.radius);
+			edge2.set(bound.right, bound.top - ball.radius);
+			normal.set(0, -1);
+			collisionBallWithEdge(beforePos, afterPos, edge1, edge2, ball.velo, normal);
 			
 			// right
-			edge1.x = bound.right;
-			edge1.y = bound.top;
-			edge2.x = bound.right;
-			edge2.y = bound.bottom;
-			normal.x = 1;
-			normal.y = 0;
-			if (GameUtil.findLineIntersection(pos1, dest1, edge1, edge2, interPt)) {
-				ball.velo.x = -ball.velo.x * coeffi;
-				dest.x = bound.right + ball.radius;
-				collisionList.add(GameUtil.clonePointF(interPt));
-			}
-			if (GameUtil.findLineIntersection(pos2, dest2, edge1, edge2, interPt)) {
-				ball.velo.x = -ball.velo.x * coeffi;
-				dest.x = bound.right + ball.radius;
-				collisionList.add(GameUtil.clonePointF(interPt));
-			}
-			
+			edge1.set(bound.right + ball.radius, bound.top);
+			edge2.set(bound.right + ball.radius, bound.bottom);
+			normal.set(1, 0);
+			collisionBallWithEdge(beforePos, afterPos, edge1, edge2, ball.velo, normal);
+
 			// bottom
-			edge1.x = bound.left;
-			edge1.y = bound.bottom;
-			edge2.x = bound.right;
-			edge2.y = bound.bottom;
-			normal.x = 0;
-			normal.y = 1;
-			if (GameUtil.findLineIntersection(pos1, dest1, edge1, edge2, interPt)) {
-				ball.velo.y = -ball.velo.y * coeffi;
-				dest.y = bound.bottom + ball.radius;
-				collisionList.add(GameUtil.clonePointF(interPt));
-			}
-			if (GameUtil.findLineIntersection(pos2, dest2, edge1, edge2, interPt)) {
-				ball.velo.y = -ball.velo.y * coeffi;
-				dest.y = bound.bottom + ball.radius;
-				collisionList.add(GameUtil.clonePointF(interPt));
-			}
+			edge1.set(bound.left, bound.bottom + ball.radius);
+			edge2.set(bound.right, bound.bottom + ball.radius);
+			normal.set(0, 1);
+			collisionBallWithEdge(beforePos, afterPos, edge1, edge2, ball.velo, normal);
 		}
 		
 		if (G.debug_) {
-			Paint p = new Paint();
-			p.setColor(Color.BLUE);
-			p.setStrokeWidth(10);
-			
-			Paint pp = new Paint();
-			pp.setColor(0xffff8030);
-			pp.setStrokeWidth(10);
-			
-			// 충돌라인
-//			canvas.drawLine(pos1.x, pos1.y, pos1.x + dirScaled.x, pos1.y + dirScaled.y, p);
-//			canvas.drawLine(pos2.x, pos2.y, pos2.x + dirScaled.x, pos2.y + dirScaled.y, p);
-			
-			// 충돌점 그리기
-			for (PointF pt : collisionList) {
-				canvas.drawCircle(pt.x, pt.y, 10, pp);
-			}
-			
 			// 공 방향 표시
-			GameUtil.vec2SetLength(dir, 100);
-			GameUtil.drawArrow(canvas, ball.pos.x, ball.pos.y,
-					ball.pos.x + dir.x, ball.pos.y + dir.y, p);
+			Vector2D dir = Vector2D.subtract(afterPos, beforePos).setLength(100);
+			GameUtil.drawArrow(canvas, beforePos.x, beforePos.y,
+					beforePos.x + dir.x, beforePos.y + dir.y, debugBlue);
 		}
+		
+		// 공의 새 위치를 확정합니다.
+		ball.pos.set(afterPos);
+	}
 
-		ball.pos = dest;
-//		player.pos.x += (player.velo.x * delta);
-//		player.pos.y += (player.velo.y * delta);
+	private void collisionBallWithEdge(Vector2D beforePos, Vector2D afterPos,
+			Vector2D edgeStart, Vector2D edgeStop, Vector2D velocity,
+			Vector2D normal) {
+		float coeffi = .8f;	// TODO 공 종류에 따라 달라짐
+		Vector2D interPt = new Vector2D();
 		
-		// TODO 반사 처리..........
-		if (ball.pos.x < 0) {
-			ball.pos.x = 0;
-			ball.velo.x = -ball.velo.x * coeffi;
+		// 우선 충돌 지점을 찾아내고...
+		if (Vector2D.findLineIntersection(beforePos, afterPos, edgeStart, edgeStop, interPt)) {
+			if (G.debug_)
+				debugCanvas.drawCircle(interPt.x, interPt.y, 10, debugOrange);
+			
+			// penetration depth를 구합니다.
+			beforePos.set(interPt);
+			afterPos.subtract(interPt).mirror(normal);
+			
+			// 충돌 후 속도를 구합니다.
+			float speed = velocity.length() * coeffi;
+			velocity.set(afterPos, speed);
+			
+			// 교정된 위치를 구합니다.
+			afterPos.add(beforePos);
 		}
-		if (ball.pos.x > width) {
-			ball.pos.x = width;
-			ball.velo.x = -ball.velo.x * coeffi;
-		}
-		if (ball.pos.y < 0) {
-			ball.pos.y = 0;
-			ball.velo.y = -ball.velo.y * coeffi;
-		}
-		if (ball.pos.y > height) {
-			ball.pos.y = height;
-			ball.velo.y = -ball.velo.y * coeffi;
-		}
-		
-		// TODO air friction
-		float friction = .1f;
-		ball.acc.x += (-ball.velo.x * friction);
-		ball.acc.y += (-ball.velo.y * friction);
 	}
 }
