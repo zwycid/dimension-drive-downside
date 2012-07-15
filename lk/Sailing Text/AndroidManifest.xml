@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="mju.summer2012.itproject.team3.lk.sailing.text"
+    package="mju.summer2012.itproject.team3.lk.sailingtext"
     android:versionCode="1"
     android:versionName="1.0" >
 

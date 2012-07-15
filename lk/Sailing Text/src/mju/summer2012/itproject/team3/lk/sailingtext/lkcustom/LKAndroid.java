@@ -1,6 +1,6 @@
 package mju.summer2012.itproject.team3.lk.sailingtext.lkcustom;
 
-import mju.summer2012.itproject.team3.lk.sailing.text.R;
+import mju.summer2012.itproject.team3.lk.sailingtext.R;
 import android.widget.TextView;
 
 public class LKAndroid {
@@ -47,8 +47,6 @@ public class LKAndroid {
 		}
 		return id;
 	}
-	/**
-	 */
 	public static void initTextViewShadow(TextView textView, int textSize){
 		textView.setShadowLayer((0.0f+textSize)/5, 0.0f, 0.0f, DEFAULT_COLOR);
 	}

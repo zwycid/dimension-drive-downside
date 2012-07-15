@@ -1,38 +1,52 @@
 package mju.summer2012.itproject.team3.lk.sailingtext;
 
-import mju.summer2012.itproject.team3.lk.sailing.text.R;
-import mju.summer2012.itproject.team3.lk.sailingtext.mainmenu.MainMenuPage;
-import mju.summer2012.itproject.team3.lk.sailingtext.ranking.RankingPage;
-import mju.summer2012.itproject.team3.lk.sailingtext.startgame.StartGamePage;
+import mju.summer2012.itproject.team3.lk.sailingtext.R;
+import mju.summer2012.itproject.team3.lk.sailingtext.mainmenu.MainPage;
+import mju.summer2012.itproject.team3.lk.sailingtext.mainmenu.MainTextViewListener;
+import mju.summer2012.itproject.team3.lk.sailingtext.ranking.RankingRelativeLayout;
+import mju.summer2012.itproject.team3.lk.sailingtext.startgame.StartGameLinearLayout;
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Window;
 import android.widget.ViewFlipper;
 
 public class MainActivity extends Activity {
 
-	public static final int LARGE	= 12;
-	public static final int SMALL	= 17;
+	public static final int LARGE	= 11;
+	public static final int SMALL	= 15;
 	public static final int PLAIN	= 25;
 	public static final int BLANK	= 0;
 	public static final int TEXT	= 1;
 
-	private LKTextViewListener textViewListener;
-	private MainMenuPage mainMenuPage;
-	private RankingPage rankingPage;
-	private StartGamePage startGamePage;
+	private MainTextViewListener textViewListener;
+	private MainPage mainMenuPage;
+	private StartGameLinearLayout startGameLinearLayout;
+	private RankingRelativeLayout rankingRelativeLayout;
+	private ViewFlipper viewFlipper;
 
-	public LKTextViewListener getListenerForButton() {		return textViewListener;	}
-	public void setListenerForButton(LKTextViewListener textViewListener) {		this.textViewListener = textViewListener;	}
-	public LKTextViewListener getTextViewListener() {		return textViewListener;	}
-	public void setTextViewListener(LKTextViewListener textViewListener) {		this.textViewListener = textViewListener;	}
-	public MainMenuPage getMainMenuPage() {		return mainMenuPage;	}
-	public void setMainMenuPage(MainMenuPage mainMenuPage) {		this.mainMenuPage = mainMenuPage;	}
-	public RankingPage getRankingPage() {		return rankingPage;	}
-	public void setRankingPage(RankingPage rankingPage) {		this.rankingPage = rankingPage;	}
-	public StartGamePage getStartGamePage() {		return startGamePage;	}
-	public void setStartGamePage(StartGamePage startGamePage) {		this.startGamePage = startGamePage;	}
-
+	public MainTextViewListener getTextViewListener() {		return textViewListener;	}
+	public void setTextViewListener(MainTextViewListener textViewListener) {		this.textViewListener = textViewListener;	}
+	public MainPage getMainMenuPage() {		return mainMenuPage;	}
+	public void setMainMenuPage(MainPage mainMenuPage) {		this.mainMenuPage = mainMenuPage;	}
+	public ViewFlipper getViewFlipper() {
+		return viewFlipper;
+	}
+	public void setViewFlipper(ViewFlipper viewFlipper) {
+		this.viewFlipper = viewFlipper;
+	}
+	public StartGameLinearLayout getStartGameLinearLayout() {
+		return startGameLinearLayout;
+	}
+	public void setStartGameLinearLayout(StartGameLinearLayout startGameLinearLayout) {
+		this.startGameLinearLayout = startGameLinearLayout;
+	}
+	public RankingRelativeLayout getRankingRelativeLayout() {
+		return rankingRelativeLayout;
+	}
+	public void setRankingRelativeLayout(RankingRelativeLayout rankingRelativeLayout) {
+		this.rankingRelativeLayout = rankingRelativeLayout;
+	}
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -40,16 +54,16 @@ public class MainActivity extends Activity {
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
 		setContentView(R.layout.activity_main);
-		setListenerForButton(new LKTextViewListener(this));
-		this.setMainMenuPage(new MainMenuPage(this));
+		setTextViewListener(new MainTextViewListener(this));
+		this.setMainMenuPage(new MainPage(this));
 		this.getMainMenuPage().initiateMainmenuPage();
-		this.setStartGamePage(new StartGamePage(this));
-		this.setRankingPage(new RankingPage(this));
+		this.setStartGameLinearLayout((StartGameLinearLayout) this.findViewById(R.id.StartgameLinearLayout));
+		this.setRankingRelativeLayout((RankingRelativeLayout) this.findViewById(R.id.RankingRelativeLayout));
 	}
 
 	@Override
 	public void onBackPressed() {
-
+		Log.i("wtf", "getCurrentView : " + getTextViewListener().getViewFlipper().getCurrentView().getId());
 		if((getTextViewListener().getViewFlipper().getCurrentView().getId() == R.id.listViewTotalRanking) || 
 				(getTextViewListener().getViewFlipper().getCurrentView().getId() == R.id.listViewStageRanking)){
 			//return to main menu page
@@ -61,6 +75,9 @@ public class MainActivity extends Activity {
 			getTextViewListener().getViewFlipper().showPrevious();
 			getTextViewListener().getViewFlipper().showPrevious();
 		}else if(getTextViewListener().getViewFlipper().getCurrentView().getId() == R.id.StartgameLinearLayout){
+			getTextViewListener().getViewFlipper().showPrevious();
+		}else if(getTextViewListener().getViewFlipper().getCurrentView().getId() == R.id.RankingRelativeLayout){
+			getTextViewListener().getViewFlipper().showPrevious();
 			getTextViewListener().getViewFlipper().showPrevious();
 		}
 		else
@@ -80,9 +97,9 @@ public class MainActivity extends Activity {
 	public int getPreferTextSizeForWindow(int textType, int textSize) {
 		if(textType == BLANK){
 			if(textSize == LARGE){
-				return this.getWindow().getWindowManager().getDefaultDisplay().getHeight() / (LARGE);
-			}else if(textSize == SMALL){
-				return this.getWindow().getWindowManager().getDefaultDisplay().getHeight() / (SMALL);
+				return (int) ((this.getWindow().getWindowManager().getDefaultDisplay().getHeight() / LARGE)*1.5);
+			}else if(textSize == SMALL){	
+				return (int) ((this.getWindow().getWindowManager().getDefaultDisplay().getHeight() / SMALL)*1.5);
 			}
 		}else if(textType == TEXT){
 			if(textSize == LARGE){
