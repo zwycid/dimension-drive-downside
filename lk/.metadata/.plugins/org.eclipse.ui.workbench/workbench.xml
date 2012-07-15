@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <workbench progressCount="41" version="2.0">
 <workbenchAdvisor/>
-<window height="768" maximized="true" width="1024" x="0" y="0">
+<window height="768" maximized="true" width="1024" x="62" y="0">
 <fastViewData fastViewLocation="1024">
 <orientation position="512" view="org.eclipse.ui.views.ProblemView"/>
 </fastViewData>
@@ -23,10 +23,11 @@
 <coolItem id="org.eclipse.wst.server.ui.internal.webbrowser.actionSet" itemType="typeToolBarContribution" x="38" y="22"/>
 <coolItem id="org.eclipse.wst.ws.explorer.explorer" itemType="typeToolBarContribution" x="38" y="22"/>
 <coolItem id="org.eclipse.wst.xml.ui.perspective.NewFileToolBar" itemType="typeToolBarContribution" x="-1" y="-1"/>
-<coolItem id="org.eclipse.wst.xml.ui.design.DesignToolBar" itemType="typeToolBarContribution" x="-1" y="-1"/>
+<coolItem id="org.eclipse.wst.xml.ui.design.DesignToolBar" itemType="typeToolBarContribution" x="61" y="22"/>
 <coolItem id="group.nav" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.navigate" itemType="typeToolBarContribution" x="190" y="22"/>
 <coolItem id="group.editor" itemType="typeGroupMarker"/>
+<coolItem id="org.eclipse.jdt.ui.PropertiesFileEditor" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="org.eclipse.ui.DefaultTextEditor" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="org.eclipse.jdt.ui.CompilationUnitEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="com.android.ide.eclipse.editors.CommonXmlEditor" itemType="typePlaceholder" x="-1" y="-1"/>
@@ -41,22 +42,17 @@
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
 <part id="0"/>
 <part id="1"/>
-<part id="2"/>
 </presentation>
 </folder>
 </info>
 </editorArea>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="BackgroundSurfaceView.java" partName="BackgroundSurfaceView.java" path="D:/itproject/dimension-drive-downside/lk/gameUIDesign/src/lk/summer/project/BackgroundSurfaceView.java" title="BackgroundSurfaceView.java" tooltip="gameUIDesign/src/lk/summer/project/BackgroundSurfaceView.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/gameUIDesign/src/lk/summer/project/BackgroundSurfaceView.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="241" selectionOffset="3275" selectionTopPixel="1140"/>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MainMenuPage.java" partName="MainMenuPage.java" path="D:/itproject/dimension-drive-downside/lk/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/mainmenu/MainMenuPage.java" title="MainMenuPage.java" tooltip="Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/mainmenu/MainMenuPage.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/mainmenu/MainMenuPage.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2323" selectionTopPixel="407"/>
 </editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MainActivity.java" partName="MainActivity.java" path="D:/itproject/dimension-drive-downside/lk/gameUIDesign/src/lk/summer/project/MainActivity.java" title="MainActivity.java" tooltip="gameUIDesign/src/lk/summer/project/MainActivity.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/gameUIDesign/src/lk/summer/project/MainActivity.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="5133" selectionTopPixel="72"/>
-</editor>
-<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="FallingTextSurfaceView.java" partName="FallingTextSurfaceView.java" path="D:/itproject/dimension-drive-downside/lk/gameUIDesign/src/lk/summer/project/FallingTextSurfaceView.java" title="FallingTextSurfaceView.java" tooltip="gameUIDesign/src/lk/summer/project/FallingTextSurfaceView.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/gameUIDesign/src/lk/summer/project/FallingTextSurfaceView.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="3101" selectionTopPixel="1127"/>
+<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="StartGamePage.java" partName="StartGamePage.java" path="D:/itproject/dimension-drive-downside/lk/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/startgame/StartGamePage.java" title="StartGamePage.java" tooltip="Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/startgame/StartGamePage.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/startgame/StartGamePage.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2280" selectionTopPixel="540"/>
 </editor>
 </editors>
 <views>
@@ -67,7 +63,7 @@
 <viewState/>
 </view>
 <view id="org.eclipse.pde.runtime.LogView" partName="Error Log">
-<viewState activate="true" allSessions="true" column2="482" column3="155" column4="150" error="true" groupBy="0" info="true" limit="50" ok="true" orderType="2" orderValue="-1" show_filter_text="true" useLimit="true" warning="true"/>
+<viewState activate="true" allSessions="true" column2="638" column3="155" column4="150" error="true" groupBy="0" info="true" limit="50" ok="true" orderType="2" orderValue="-1" show_filter_text="true" useLimit="true" warning="true"/>
 </view>
 <view id="org.eclipse.ui.views.ContentOutline" partName="Outline">
 <viewState/>
@@ -102,8 +98,8 @@
 <view id="org.eclipse.ui.views.ProblemView" partName="Problems">
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
 <expanded>
-<category IMemento.internal.id="Warnings"/>
 <category IMemento.internal.id="Errors"/>
+<category IMemento.internal.id="Warnings (24 items)"/>
 </expanded>
 <columnWidths org.eclipse.ui.ide.locationField="90" org.eclipse.ui.ide.markerType="90" org.eclipse.ui.ide.pathField="120" org.eclipse.ui.ide.resourceField="90" org.eclipse.ui.ide.severityAndDescriptionField="300"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.severityAndDescriptionField"/>
@@ -114,9 +110,6 @@
 </viewState>
 </view>
 <view id="org.eclipse.datatools.connectivity.DataSourceExplorerNavigator" partName="Data Source Explorer"/>
-<view id="org.eclipse.ui.console.ConsoleView" partName="Console">
-<viewState/>
-</view>
 <view id="org.eclipse.jdt.ui.PackageExplorer" partName="Package Explorer">
 <viewState group_libraries="1" layout="1" linkWithEditor="1" rootMode="1" workingSetName="">
 <customFilters userDefinedPatternsEnabled="false">
@@ -148,6 +141,9 @@
 </xmlDefinedFilters>
 </customFilters>
 </viewState>
+</view>
+<view id="org.eclipse.ui.console.ConsoleView" partName="Console">
+<viewState/>
 </view>
 <view id="org.eclipse.mylyn.tasks.ui.views.tasks" partName="Task List">
 <viewState linkWithEditor="true" presentation="org.eclipse.mylyn.tasks.ui.categorized">
@@ -356,16 +352,25 @@
 <hide_toolbar_item_id id="org.eclipse.ui.edit.text.toggleShowSelectedElementOnly"/>
 <view id="org.eclipse.pde.runtime.LogView"/>
 <view id="org.eclipse.jdt.ui.SourceView"/>
-<view id="org.eclipse.ui.console.ConsoleView"/>
 <view id="org.eclipse.ui.views.PropertySheet"/>
+<view id="org.eclipse.ui.console.ConsoleView"/>
 <view id="com.android.ide.eclipse.ddms.views.LogCatView"/>
-<view id="org.eclipse.ui.views.ContentOutline"/>
 <view id="org.eclipse.jdt.ui.PackageExplorer"/>
-<view id="org.eclipse.mylyn.tasks.ui.views.tasks"/>
 <fastViews>
-<view id="org.eclipse.ui.views.ProblemView" ratio="0.3"/>
+<view id="org.eclipse.ui.views.ProblemView" ratio="0.29951692"/>
 </fastViews>
-<fastViewBars/>
+<fastViewBars>
+<fastViewBar fastViewLocation="131072" id="org.eclipse.ui.internal.ViewStack@138e491c" orientation="256" selectedTabId="org.eclipse.mylyn.tasks.ui.views.tasks" style="0">
+<fastViews>
+<view id="org.eclipse.mylyn.tasks.ui.views.tasks" ratio="0.3"/>
+</fastViews>
+</fastViewBar>
+<fastViewBar fastViewLocation="131072" id="right" orientation="256" selectedTabId="org.eclipse.ui.views.ContentOutline" style="0">
+<fastViews>
+<view id="org.eclipse.ui.views.ContentOutline" ratio="0.3"/>
+</fastViews>
+</fastViewBar>
+</fastViewBars>
 <layout>
 <mainWindow>
 <info folder="true" part="left">
@@ -388,43 +393,44 @@
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
 </folder>
 </info>
-<info part="org.eclipse.ui.editorss" ratio="0.18174787" ratioLeft="235" ratioRight="1058" relationship="2" relative="left"/>
+<info part="org.eclipse.ui.editorss" ratio="0.16113745" ratioLeft="204" ratioRight="1062" relationship="2" relative="left"/>
 <info folder="true" part="bottom" ratio="0.75151515" ratioLeft="496" ratioRight="164" relationship="4" relative="org.eclipse.ui.editorss">
-<folder activePageID="org.eclipse.pde.runtime.LogView" appearance="2" expanded="2">
-<page content="org.eclipse.pde.runtime.LogView" label="Error Log"/>
-<page content="org.eclipse.jdt.ui.SourceView" label="Declaration"/>
-<page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
-<page content="org.eclipse.ui.views.PropertySheet" label="Properties"/>
-<page content="com.android.ide.eclipse.ddms.views.LogCatView" label="LogCat"/>
+<folder appearance="2" expanded="2">
 <page content="org.eclipse.ui.views.ProblemView" label="LabelNotFound"/>
 <page content="org.eclipse.jdt.ui.JavadocView" label="LabelNotFound"/>
 <page content="org.eclipse.search.ui.views.SearchView" label="LabelNotFound"/>
 <page content="org.eclipse.ui.views.BookmarkView" label="LabelNotFound"/>
 <page content="org.eclipse.ui.views.ProgressView" label="LabelNotFound"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
+</folder>
+</info>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@138e491c" ratio="0.74975467" ratioLeft="764" ratioRight="255" relationship="2" relative="org.eclipse.ui.editorss">
+<folder appearance="2" expanded="0">
+<page content="org.eclipse.mylyn.tasks.ui.views.tasks" label="LabelNotFound"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
+</folder>
+</info>
+<info folder="true" part="right" ratio="0.4990366" ratioLeft="259" ratioRight="260" relationship="4" relative="org.eclipse.ui.internal.ViewStack@138e491c">
+<folder appearance="2" expanded="0">
+<page content="org.eclipse.ui.views.ContentOutline" label="LabelNotFound"/>
+<page content="org.eclipse.ui.texteditor.TemplatesView" label="LabelNotFound"/>
+<page content="org.eclipse.ant.ui.views.AntView" label="LabelNotFound"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
+</folder>
+</info>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@436a2a52" ratio="0.74848485" ratioLeft="494" ratioRight="166" relationship="4" relative="org.eclipse.ui.editorss">
+<folder activePageID="com.android.ide.eclipse.ddms.views.LogCatView" appearance="2" expanded="2">
+<page content="org.eclipse.pde.runtime.LogView" label="Error Log"/>
+<page content="org.eclipse.jdt.ui.SourceView" label="Declaration"/>
+<page content="org.eclipse.ui.views.PropertySheet" label="Properties"/>
+<page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
+<page content="com.android.ide.eclipse.ddms.views.LogCatView" label="LogCat"/>
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
 <part id="0"/>
 <part id="1"/>
 <part id="2"/>
 <part id="3"/>
 <part id="4"/>
-</presentation>
-</folder>
-</info>
-<info folder="true" part="org.eclipse.ui.internal.ViewStack@138e491c" ratio="0.74975467" ratioLeft="764" ratioRight="255" relationship="2" relative="org.eclipse.ui.editorss">
-<folder activePageID="org.eclipse.mylyn.tasks.ui.views.tasks" appearance="2" expanded="2">
-<page content="org.eclipse.mylyn.tasks.ui.views.tasks" label="Task List"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
-<part id="0"/>
-</presentation>
-</folder>
-</info>
-<info folder="true" part="right" ratio="0.4990366" ratioLeft="259" ratioRight="260" relationship="4" relative="org.eclipse.ui.internal.ViewStack@138e491c">
-<folder activePageID="org.eclipse.ui.views.ContentOutline" appearance="2" expanded="2">
-<page content="org.eclipse.ui.views.ContentOutline" label="Outline"/>
-<page content="org.eclipse.ui.texteditor.TemplatesView" label="LabelNotFound"/>
-<page content="org.eclipse.ant.ui.views.AntView" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
-<part id="0"/>
 </presentation>
 </folder>
 </info>
@@ -519,160 +525,155 @@
 <workingSets/>
 <navigationHistory>
 <editors>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/gameUIDesign/src/lk/summer/project/BackgroundSurfaceView.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/gameUIDesign/src/lk/summer/project/FallingTextSurfaceView.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/gameUIDesign/src/lk/summer/project/FallingText.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/gameUIDesign/src/lk/summer/project/GlowingTextView.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" path="/Sailing Text/res/layout/startgamelinearlayout.xml"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/startgame/StartGamePage.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/mainmenu/MainMenuPage.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/LKTextViewListener.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/MainActivity.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/ranking/RankingPage.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/lkcustom/LKAndroid.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" path="/Sailing Text/res/layout/rankingrelaticelayout.xml"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" path="/Sailing Text/res/layout/activity_main.xml"/>
 </editors>
-<item historyLabel="FallingTextSurfaceView.java" index="1">
-<position info="not_deleted" x="3756" y="0"/>
+<item historyLabel="LKTextViewListener.java" index="3">
+<position info="not_deleted" x="1300" y="0"/>
 </item>
-<item historyLabel="FallingTextSurfaceView.java" index="1">
-<position info="not_deleted" x="3827" y="0"/>
+<item historyLabel="MainActivity.java" index="4">
+<position info="not_deleted" x="3016" y="0"/>
 </item>
-<item historyLabel="FallingTextSurfaceView.java" index="1">
+<item historyLabel="RankingPage.java" index="5">
+<position info="not_deleted" x="3130" y="0"/>
+</item>
+<item historyLabel="StartGamePage.java" index="1">
 <position/>
 </item>
-<item historyLabel="FallingTextSurfaceView.java" index="1">
-<position info="not_deleted" x="3999" y="0"/>
-</item>
-<item historyLabel="FallingTextSurfaceView.java" index="1">
+<item historyLabel="LKAndroid.java" index="6">
 <position/>
 </item>
-<item historyLabel="FallingTextSurfaceView.java" index="1">
-<position info="not_deleted" x="4102" y="0"/>
-</item>
-<item historyLabel="GlowingTextView.java" index="3">
+<item historyLabel="StartGamePage.java" index="1">
 <position/>
 </item>
-<item historyLabel="FallingTextSurfaceView.java" index="1">
-<position info="not_deleted" x="2003" y="9"/>
-</item>
-<item historyLabel="GlowingTextView.java" index="3">
-<position info="not_deleted" x="491" y="0"/>
-</item>
-<item historyLabel="FallingTextSurfaceView.java" index="1">
-<position info="not_deleted" x="2003" y="9"/>
-</item>
-<item historyLabel="FallingTextSurfaceView.java" index="1">
-<position info="not_deleted" x="3827" y="0"/>
-</item>
-<item historyLabel="GlowingTextView.java" index="3">
-<position info="not_deleted" x="560" y="0"/>
-</item>
-<item historyLabel="FallingTextSurfaceView.java" index="1">
-<position info="not_deleted" x="3827" y="0"/>
-</item>
-<item historyLabel="GlowingTextView.java" index="3">
-<position info="not_deleted" x="560" y="0"/>
-</item>
-<item historyLabel="FallingTextSurfaceView.java" index="1">
-<position info="not_deleted" x="3827" y="0"/>
-</item>
-<item historyLabel="GlowingTextView.java" index="3">
-<position info="not_deleted" x="745" y="0"/>
-</item>
-<item historyLabel="FallingTextSurfaceView.java" index="1">
-<position info="not_deleted" x="3827" y="0"/>
-</item>
-<item historyLabel="FallingTextSurfaceView.java" index="1">
+<item historyLabel="LKAndroid.java" index="6">
 <position/>
 </item>
-<item historyLabel="GlowingTextView.java" index="3">
-<position info="not_deleted" x="745" y="0"/>
+<item historyLabel="RankingPage.java" index="5">
+<position info="not_deleted" x="3130" y="0"/>
 </item>
-<item historyLabel="FallingTextSurfaceView.java" index="1">
-<position info="not_deleted" x="2561" y="0"/>
-</item>
-<item historyLabel="GlowingTextView.java" index="3">
-<position info="not_deleted" x="745" y="0"/>
-</item>
-<item historyLabel="GlowingTextView.java" index="3">
-<position info="not_deleted" x="665" y="0"/>
-</item>
-<item historyLabel="GlowingTextView.java" index="3">
-<position info="not_deleted" x="175" y="0"/>
-</item>
-<item historyLabel="FallingTextSurfaceView.java" index="1">
-<position info="not_deleted" x="3870" y="0"/>
-</item>
-<item historyLabel="GlowingTextView.java" index="3">
-<position info="not_deleted" x="175" y="0"/>
-</item>
-<item historyLabel="GlowingTextView.java" index="3">
-<position info="not_deleted" x="585" y="0"/>
-</item>
-<item historyLabel="GlowingTextView.java" index="3">
-<position info="not_deleted" x="614" y="0"/>
-</item>
-<item historyLabel="FallingTextSurfaceView.java" index="1">
-<position info="not_deleted" x="3825" y="0"/>
-</item>
-<item historyLabel="BackgroundSurfaceView.java" index="0">
-<position info="not_deleted" x="3275" y="241"/>
-</item>
-<item historyLabel="FallingTextSurfaceView.java" index="1">
-<position info="not_deleted" x="3825" y="0"/>
-</item>
-<item historyLabel="FallingTextSurfaceView.java" index="1">
-<position info="not_deleted" x="809" y="0"/>
-</item>
-<item historyLabel="FallingTextSurfaceView.java" index="1">
-<position info="not_deleted" x="401" y="0"/>
-</item>
-<item historyLabel="GlowingTextView.java" index="3">
-<position info="not_deleted" x="614" y="0"/>
-</item>
-<item historyLabel="FallingText.java" index="2">
+<item historyLabel="LKAndroid.java" index="6">
 <position/>
 </item>
-<item historyLabel="GlowingTextView.java" index="3">
-<position info="not_deleted" x="614" y="0"/>
+<item historyLabel="MainMenuPage.java" index="2">
+<position info="not_deleted" x="512" y="0"/>
 </item>
-<item historyLabel="FallingTextSurfaceView.java" index="1">
-<position info="not_deleted" x="401" y="0"/>
+<item historyLabel="LKAndroid.java" index="6">
+<position/>
 </item>
-<item historyLabel="FallingText.java" index="2">
-<position info="not_deleted" x="430" y="0"/>
+<item historyLabel="MainMenuPage.java" index="2">
+<position info="not_deleted" x="2323" y="0"/>
 </item>
-<item historyLabel="GlowingTextView.java" index="3">
-<position info="not_deleted" x="614" y="0"/>
+<item historyLabel="StartGamePage.java" index="1">
+<position/>
 </item>
-<item historyLabel="FallingText.java" index="2">
-<position info="not_deleted" x="430" y="0"/>
+<item historyLabel="LKAndroid.java" index="6">
+<position info="not_deleted" x="1894" y="0"/>
 </item>
-<item historyLabel="GlowingTextView.java" index="3">
-<position info="not_deleted" x="259" y="0"/>
+<item historyLabel="StartGamePage.java" index="1">
+<position/>
 </item>
-<item historyLabel="FallingText.java" index="2">
-<position info="not_deleted" x="430" y="0"/>
+<item historyLabel="StartGamePage.java" index="1">
+<position/>
 </item>
-<item historyLabel="GlowingTextView.java" index="3">
-<position info="not_deleted" x="259" y="0"/>
+<item historyLabel="StartGamePage.java" index="1">
+<position/>
 </item>
-<item historyLabel="FallingTextSurfaceView.java" index="1">
-<position info="not_deleted" x="401" y="0"/>
+<item historyLabel="StartGamePage.java" index="1">
+<position info="not_deleted" x="2775" y="0"/>
 </item>
-<item historyLabel="GlowingTextView.java" index="3">
-<position info="not_deleted" x="259" y="0"/>
+<item historyLabel="MainMenuPage.java" index="2">
+<position info="not_deleted" x="2323" y="0"/>
 </item>
-<item historyLabel="FallingTextSurfaceView.java" index="1">
-<position info="not_deleted" x="3979" y="0"/>
+<item historyLabel="StartGamePage.java" index="1">
+<position/>
 </item>
-<item historyLabel="FallingText.java" index="2">
-<position info="not_deleted" x="430" y="0"/>
+<item historyLabel="MainMenuPage.java" index="2">
+<position info="not_deleted" x="2323" y="0"/>
 </item>
-<item historyLabel="GlowingTextView.java" index="3">
-<position info="not_deleted" x="259" y="0"/>
+<item historyLabel="StartGamePage.java" index="1">
+<position/>
 </item>
-<item historyLabel="GlowingTextView.java" index="3">
-<position info="not_deleted" x="444" y="0"/>
+<item historyLabel="MainActivity.java" index="4">
+<position info="not_deleted" x="2841" y="0"/>
 </item>
-<item historyLabel="FallingText.java" index="2">
-<position info="not_deleted" x="430" y="0"/>
+<item historyLabel="StartGamePage.java" index="1">
+<position/>
 </item>
-<item active="true" historyLabel="FallingTextSurfaceView.java" index="1">
-<position info="not_deleted" x="3979" y="0"/>
+<item historyLabel="LKTextViewListener.java" index="3">
+<position info="not_deleted" x="1300" y="0"/>
+</item>
+<item historyLabel="StartGamePage.java" index="1">
+<position/>
+</item>
+<item historyLabel="MainMenuPage.java" index="2">
+<position info="not_deleted" x="2323" y="0"/>
+</item>
+<item historyLabel="StartGamePage.java" index="1">
+<position/>
+</item>
+<item historyLabel="StartGamePage.java" index="1">
+<position/>
+</item>
+<item historyLabel="StartGamePage.java" index="1">
+<position/>
+</item>
+<item historyLabel="StartGamePage.java" index="1">
+<position/>
+</item>
+<item historyLabel="startgamelinearlayout.xml" index="0"/>
+<item historyLabel="StartGamePage.java" index="1">
+<position/>
+</item>
+<item historyLabel="startgamelinearlayout.xml" index="0"/>
+<item historyLabel="StartGamePage.java" index="1">
+<position/>
+</item>
+<item historyLabel="rankingrelaticelayout.xml" index="7"/>
+<item historyLabel="StartGamePage.java" index="1">
+<position/>
+</item>
+<item historyLabel="startgamelinearlayout.xml" index="0"/>
+<item historyLabel="StartGamePage.java" index="1">
+<position/>
+</item>
+<item historyLabel="activity_main.xml" index="8"/>
+<item historyLabel="StartGamePage.java" index="1">
+<position/>
+</item>
+<item historyLabel="MainMenuPage.java" index="2">
+<position info="not_deleted" x="2323" y="0"/>
+</item>
+<item historyLabel="StartGamePage.java" index="1">
+<position/>
+</item>
+<item historyLabel="StartGamePage.java" index="1">
+<position info="not_deleted" x="2321" y="0"/>
+</item>
+<item historyLabel="StartGamePage.java" index="1">
+<position info="not_deleted" x="3001" y="0"/>
+</item>
+<item historyLabel="StartGamePage.java" index="1">
+<position info="not_deleted" x="2190" y="0"/>
+</item>
+<item historyLabel="StartGamePage.java" index="1">
+<position info="not_deleted" x="3467" y="0"/>
+</item>
+<item historyLabel="StartGamePage.java" index="1">
+<position info="not_deleted" x="3954" y="0"/>
+</item>
+<item historyLabel="StartGamePage.java" index="1">
+<position info="not_deleted" x="4397" y="0"/>
+</item>
+<item active="true" historyLabel="StartGamePage.java" index="1">
+<position info="not_deleted" x="2278" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -680,6 +681,14 @@
 <workbenchWindowAdvisor/>
 <actionBarAdvisor/>
 <trimLayout>
+<trimArea IMemento.internal.id="16384">
+<trimItem IMemento.internal.id="left"/>
+</trimArea>
+<trimArea IMemento.internal.id="131072">
+<trimItem IMemento.internal.id="org.eclipse.ui.editorss"/>
+<trimItem IMemento.internal.id="right"/>
+<trimItem IMemento.internal.id="org.eclipse.ui.internal.ViewStack@138e491c"/>
+</trimArea>
 <trimArea IMemento.internal.id="128">
 <trimItem IMemento.internal.id="org.eclipse.ui.internal.WorkbenchWindow.topBar"/>
 <trimItem IMemento.internal.id="org.eclipse.mylyn.tasks.ui.trim.container"/>
@@ -688,54 +697,55 @@
 <trimItem IMemento.internal.id="org.eclise.ui.internal.FastViewBar"/>
 <trimItem IMemento.internal.id="org.eclipse.jface.action.StatusLineManager"/>
 <trimItem IMemento.internal.id="org.eclipse.ui.internal.progress.ProgressRegion"/>
+<trimItem IMemento.internal.id="org.eclipse.ui.internal.ViewStack@7618f076"/>
 </trimArea>
 </trimLayout>
 </window>
 <mruList>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="FallingText.java" tooltip="gameUIDesign/src/lk/summer/project/FallingText.java">
-<persistable path="/gameUIDesign/src/lk/summer/project/FallingText.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="activity_main.xml" tooltip="Sailing Text/res/layout/activity_main.xml">
+<persistable path="/Sailing Text/res/layout/activity_main.xml"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GlowingTextView.java" tooltip="gameUIDesign/src/lk/summer/project/GlowingTextView.java">
-<persistable path="/gameUIDesign/src/lk/summer/project/GlowingTextView.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="rankingrelaticelayout.xml" tooltip="Sailing Text/res/layout/rankingrelaticelayout.xml">
+<persistable path="/Sailing Text/res/layout/rankingrelaticelayout.xml"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="FallingTextSurfaceView.java" tooltip="gameUIDesign/src/lk/summer/project/FallingTextSurfaceView.java">
-<persistable path="/gameUIDesign/src/lk/summer/project/FallingTextSurfaceView.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="startgamelinearlayout.xml" tooltip="Sailing Text/res/layout/startgamelinearlayout.xml">
+<persistable path="/Sailing Text/res/layout/startgamelinearlayout.xml"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="activity_main.xml" tooltip="gameUIDesign/res/layout/activity_main.xml">
-<persistable path="/gameUIDesign/res/layout/activity_main.xml"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="LKAndroid.java" tooltip="Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/lkcustom/LKAndroid.java">
+<persistable path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/lkcustom/LKAndroid.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.manifest.ManifestEditor" name="AndroidManifest.xml" tooltip="gameUIDesign/AndroidManifest.xml">
-<persistable path="/gameUIDesign/AndroidManifest.xml"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="StartGamePage.java" tooltip="Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/startgame/StartGamePage.java">
+<persistable path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/startgame/StartGamePage.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MainActivity.java" tooltip="gameUIDesign/src/lk/summer/project/MainActivity.java">
-<persistable path="/gameUIDesign/src/lk/summer/project/MainActivity.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="LKTextViewListener.java" tooltip="Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/LKTextViewListener.java">
+<persistable path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/LKTextViewListener.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="BackgroundSurfaceView.java" tooltip="gameUIDesign/src/lk/summer/project/BackgroundSurfaceView.java">
-<persistable path="/gameUIDesign/src/lk/summer/project/BackgroundSurfaceView.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="strings.xml" tooltip="Sailing Text/res/values/strings.xml">
+<persistable path="/Sailing Text/res/values/strings.xml"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="LKAndroid.java" tooltip="gameUIDesign/src/lk/summer/project/LKAndroid.java">
-<persistable path="/gameUIDesign/src/lk/summer/project/LKAndroid.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="RankingPage.java" tooltip="Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/ranking/RankingPage.java">
+<persistable path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/ranking/RankingPage.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="R.java" tooltip="gameUIDesign/gen/lk/summer/project/gameuidesign/R.java">
-<persistable path="/gameUIDesign/gen/lk/summer/project/gameuidesign/R.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="activity_main.out.xml" tooltip="Sailing Text/res/layout/activity_main.out.xml">
+<persistable path="/Sailing Text/res/layout/activity_main.out.xml"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="OptionLinearLayout.java" tooltip="gameUIDesign/src/lk/summer/project/option/OptionLinearLayout.java">
-<persistable path="/gameUIDesign/src/lk/summer/project/option/OptionLinearLayout.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="R.java" tooltip="Sailing Text/gen/mju/summer2012/itproject/team3/lk/sailing/text/R.java">
+<persistable path="/Sailing Text/gen/mju/summer2012/itproject/team3/lk/sailing/text/R.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="LKThreadFallingText.java" tooltip="gameUIDesign/src/lk/summer/project/LKThreadFallingText.java">
-<persistable path="/gameUIDesign/src/lk/summer/project/LKThreadFallingText.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="RankingRelativeLayout.java" tooltip="Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/ranking/RankingRelativeLayout.java">
+<persistable path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/ranking/RankingRelativeLayout.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="LKBitmap.java" tooltip="gameUIDesign/src/lk/summer/project/LKBitmap.java">
-<persistable path="/gameUIDesign/src/lk/summer/project/LKBitmap.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MainActivity.java" tooltip="Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/MainActivity.java">
+<persistable path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/MainActivity.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="styles.xml" tooltip="gameUIDesign/res/values/styles.xml">
-<persistable path="/gameUIDesign/res/values/styles.xml"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="BackgroundSurfaceView.java" tooltip="Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/BackgroundSurfaceView.java">
+<persistable path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/BackgroundSurfaceView.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="ranking.xml" tooltip="gameUIDesign/res/layout/ranking.xml">
-<persistable path="/gameUIDesign/res/layout/ranking.xml"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MainMenuPage.java" tooltip="Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/mainmenu/MainMenuPage.java">
+<persistable path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/mainmenu/MainMenuPage.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GameTestView.java" tooltip="gameUIDesign/src/lk/summer/project/GameTestView.java">
-<persistable path="/gameUIDesign/src/lk/summer/project/GameTestView.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GlowingTextView.java" tooltip="Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/GlowingTextView.java">
+<persistable path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/GlowingTextView.java"/>
 </file>
 </mruList>
 </workbench>
