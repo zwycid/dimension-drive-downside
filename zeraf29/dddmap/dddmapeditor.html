@@ -24,8 +24,9 @@
     <script type="text/ecmascript">
         $(document).ready(function () {
 
+        
         });
-        var tString="";
+        var tString="[mapsize],800,600//";
         var figure = 0;
 
         function clickRect() {
@@ -84,7 +85,7 @@
             c1_context.fillStyle = "Red";
             c1_context.fill();
             c1_context.stroke();
-            tString += cbeginX+","+cbeginY+","+cendX+","+cendY+"//";
+            tString += "[b],"+cbeginX+","+cbeginY+","+cendX+","+cendY+"//";
         }
         function DrawCircle(circletype) {
             var c1 = document.getElementById("c");
@@ -120,17 +121,22 @@
         }
         function changeMapSize(){
             tString = "";
+            tString = "[mapsize],"+$("#canvas_width").val()+","+$("#canvas_height").val()+"//";
             $("#tStringDiv").html("");
             var c1 = document.getElementById("c");
             c1.setAttribute("width",$("#canvas_width").val());
-            c1.setAttribute("height",$("#canvas_height").val());
+            c1.setAttribute("height",$("#canvas_width").val());
             //$("#c").width($("#canvas_width").val());
             //$("#c").height($("#canvas_height").val());
             $("#pan").width($("#canvas_width").val());
             $("#pan").height($("#canvas_height").val());
         }
-        
- 
+        function saveFile(){
+            var fso=new ActiveXObject('Scripting.FileSystemObject');
+            var fileObj=fso.CreateTextFile("/mapxy.txt",true);
+            fileObj.WriteLine(tString);
+            fileObj.Close();
+        }
     </script>
 </head>
 <body>
@@ -147,6 +153,7 @@
     <input type="button" value="Attractor" onclick="clickCircle(3)"/>
     <input type="button" value="Crack" onclick="clickCircle(4)"/>
     <input type="button" value="출력" onclick="document.getElementById('tStringDiv').innerHTML=tString;"/>
+    <input type="button" value="저장" onclick="saveFile();"/>
     </center>
     </form>
     <div id="tStringDiv">

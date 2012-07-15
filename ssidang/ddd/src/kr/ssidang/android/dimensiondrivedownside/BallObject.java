@@ -2,29 +2,23 @@ package kr.ssidang.android.dimensiondrivedownside;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.PointF;
 
 public class BallObject extends WorldObject {
-	public PointF pos;
-	public PointF velo;
-	public PointF acc;
+	public Vector2D pos = new Vector2D();
+	public Vector2D velo = new Vector2D();
+	public Vector2D acc = new Vector2D();
 	public float radius;
 	
 	// 그리기 데이터
 	private Paint ballPaint;
 
 	public BallObject(float radius) {
-		this.pos = new PointF();
-		this.velo = new PointF();
-		this.acc = new PointF();
 		this.radius = radius;
 		init();
 	}
 	
 	public BallObject(float x, float y, float radius) {
-		this.pos = new PointF(x, y);
-		this.velo = new PointF();
-		this.acc = new PointF();
+		this.pos = new Vector2D(x, y);
 		this.radius = radius;
 		init();
 	}

@@ -124,11 +124,9 @@ public class GameView extends SurfaceView implements
 		G.delta = (now - timestamp) / TIME_UNIT;
 		
 		tick++;
+		// 배경 지우기
 		resetView(canvas);
 		canvas.drawColor(Color.BLACK);
-		
-		// 사각형 그려보기
-//		canvas.drawRect(80, 133, 120, 266.7f, rectPaint);
 		
 		// 아래 방향
 		float length = 50;
@@ -139,6 +137,7 @@ public class GameView extends SurfaceView implements
 		
 		G.gravityDirection = (float) rad;
 		world.draw(canvas);
+		world.moveObjects(canvas, G.delta);
 		
 		if (G.debug_) {
 			// TODO Debug
