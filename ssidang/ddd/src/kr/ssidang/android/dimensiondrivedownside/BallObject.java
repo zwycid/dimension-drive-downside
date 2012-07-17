@@ -7,7 +7,10 @@ public class BallObject extends WorldObject {
 	public Vector2D pos = new Vector2D();
 	public Vector2D velo = new Vector2D();
 	public Vector2D acc = new Vector2D();
+	
+	// 공 모양과 재질
 	public float radius;
+	public float restitution;
 	
 	// 그리기 데이터
 	private Paint ballPaint;
@@ -24,6 +27,8 @@ public class BallObject extends WorldObject {
 	}
 
 	private void init() {
+		this.restitution = .8f;
+		
 		ballPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 		ballPaint.setColor(0xffa7dbf3);
 	}
