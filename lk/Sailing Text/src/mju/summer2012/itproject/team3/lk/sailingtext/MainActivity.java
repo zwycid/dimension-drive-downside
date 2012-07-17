@@ -1,14 +1,17 @@
 package mju.summer2012.itproject.team3.lk.sailingtext;
 
-import mju.summer2012.itproject.team3.lk.sailingtext.R;
 import mju.summer2012.itproject.team3.lk.sailingtext.mainmenu.MainPage;
-import mju.summer2012.itproject.team3.lk.sailingtext.mainmenu.MainTextViewListener;
+import mju.summer2012.itproject.team3.lk.sailingtext.newgame.CoverFlowExample;
 import mju.summer2012.itproject.team3.lk.sailingtext.ranking.RankingRelativeLayout;
-import mju.summer2012.itproject.team3.lk.sailingtext.startgame.StartGameLinearLayout;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.View;
 import android.view.Window;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 public class MainActivity extends Activity {
@@ -21,7 +24,6 @@ public class MainActivity extends Activity {
 
 	private MainTextViewListener textViewListener;
 	private MainPage mainMenuPage;
-	private StartGameLinearLayout startGameLinearLayout;
 	private RankingRelativeLayout rankingRelativeLayout;
 	private ViewFlipper viewFlipper;
 
@@ -29,24 +31,12 @@ public class MainActivity extends Activity {
 	public void setTextViewListener(MainTextViewListener textViewListener) {		this.textViewListener = textViewListener;	}
 	public MainPage getMainMenuPage() {		return mainMenuPage;	}
 	public void setMainMenuPage(MainPage mainMenuPage) {		this.mainMenuPage = mainMenuPage;	}
-	public ViewFlipper getViewFlipper() {
-		return viewFlipper;
-	}
-	public void setViewFlipper(ViewFlipper viewFlipper) {
-		this.viewFlipper = viewFlipper;
-	}
-	public StartGameLinearLayout getStartGameLinearLayout() {
-		return startGameLinearLayout;
-	}
-	public void setStartGameLinearLayout(StartGameLinearLayout startGameLinearLayout) {
-		this.startGameLinearLayout = startGameLinearLayout;
-	}
-	public RankingRelativeLayout getRankingRelativeLayout() {
-		return rankingRelativeLayout;
-	}
-	public void setRankingRelativeLayout(RankingRelativeLayout rankingRelativeLayout) {
-		this.rankingRelativeLayout = rankingRelativeLayout;
-	}
+	public ViewFlipper getViewFlipper() {		return viewFlipper;	}
+	public void setViewFlipper(ViewFlipper viewFlipper) {		this.viewFlipper = viewFlipper;	}
+	public RankingRelativeLayout getRankingRelativeLayout() {		return rankingRelativeLayout;	}
+	public void setRankingRelativeLayout(RankingRelativeLayout rankingRelativeLayout) {		this.rankingRelativeLayout = rankingRelativeLayout;	}
+
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -57,31 +47,24 @@ public class MainActivity extends Activity {
 		setTextViewListener(new MainTextViewListener(this));
 		this.setMainMenuPage(new MainPage(this));
 		this.getMainMenuPage().initiateMainmenuPage();
-		this.setStartGameLinearLayout((StartGameLinearLayout) this.findViewById(R.id.StartgameLinearLayout));
 		this.setRankingRelativeLayout((RankingRelativeLayout) this.findViewById(R.id.RankingRelativeLayout));
 	}
 
 	@Override
 	public void onBackPressed() {
-		Log.i("wtf", "getCurrentView : " + getTextViewListener().getViewFlipper().getCurrentView().getId());
 		if((getTextViewListener().getViewFlipper().getCurrentView().getId() == R.id.listViewTotalRanking) || 
 				(getTextViewListener().getViewFlipper().getCurrentView().getId() == R.id.listViewStageRanking)){
 			//return to main menu page
 			getTextViewListener().setViewFlipper((ViewFlipper) this.findViewById(R.id.viewFlipper));
 			getTextViewListener().getViewFlipper().showPrevious();
-			getTextViewListener().getViewFlipper().showPrevious();
 		}else if((getTextViewListener().getViewFlipper().getCurrentView().getId() == R.id.OptionLinearLayout)){
 			getTextViewListener().getViewFlipper().showPrevious();
 			getTextViewListener().getViewFlipper().showPrevious();
-			getTextViewListener().getViewFlipper().showPrevious();
-		}else if(getTextViewListener().getViewFlipper().getCurrentView().getId() == R.id.StartgameLinearLayout){
-			getTextViewListener().getViewFlipper().showPrevious();
 		}else if(getTextViewListener().getViewFlipper().getCurrentView().getId() == R.id.RankingRelativeLayout){
 			getTextViewListener().getViewFlipper().showPrevious();
-			getTextViewListener().getViewFlipper().showPrevious();
+		}else{
+			DialogBox();
 		}
-		else
-			super.onBackPressed();			
 	}
 
 	/**
@@ -112,4 +95,65 @@ public class MainActivity extends Activity {
 		}
 		return 0;
 	}
+
+	private void DialogBox(){
+		AlertDialog.Builder alertDialogBuilder	= new AlertDialog.Builder(this);
+
+		alertDialogBuilder.setMessage(
+				"Do you want to close this Application?").setCancelable(false).setPositiveButton(
+				"yes", new OnClickListener() {
+					
+					public void onClick(DialogInterface dialog, int which) {
+						MainActivity.this.finish();
+						dialog.cancel();
+					}
+				}).setNegativeButton(
+				"No" , new OnClickListener() {
+					
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.cancel();
+					}
+				});
+		
+		AlertDialog alertDialog	= alertDialogBuilder.create();
+		alertDialog.setTitle("Quit App");
+		alertDialog.setIcon(R.drawable.ic_launcher);
+		alertDialog.show();
+
+	}
+	
+	private class MainTextViewListener implements View.OnClickListener {
+		private MainActivity mainActivity;
+		private ViewFlipper viewFlipper;
+
+		public ViewFlipper getViewFlipper() {		return viewFlipper;	}
+		public void setViewFlipper(ViewFlipper viewFlipper) {		this.viewFlipper = viewFlipper;	}
+		public MainActivity getMainActivity() {
+			return mainActivity;
+		}
+		public void setMainActivity(MainActivity mainActivity) {
+			this.mainActivity = mainActivity;
+		}
+
+		public void onClick(View clickedView) {
+			if(clickedView.getId() == R.id.MainTextViewStartgame){
+				Toast.makeText(getMainActivity(), "Start Game", Toast.LENGTH_SHORT).show();
+				Intent intent	= new Intent(MainActivity.this, CoverFlowExample.class);
+				startActivityForResult(intent, 1);
+			}else if(clickedView.getId() == R.id.MainTextViewRanking){
+				//xml에 등록된 view라면 바로 그냥 shownext해도 됨.
+				getViewFlipper().showNext();
+			}else if(clickedView.getId() == R.id.MainTextViewOption){
+				//두 번 연속으로 호출하면 그냥 맨 마지막 view가 보임.
+				getViewFlipper().showNext();
+				getViewFlipper().showNext();
+			}
+		}
+
+		public MainTextViewListener(MainActivity mainActivity){
+			setMainActivity(mainActivity);
+			viewFlipper			= (ViewFlipper) getMainActivity().findViewById(R.id.viewFlipper);
+		}
+	}
+
 }

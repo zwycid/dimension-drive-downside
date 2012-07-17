@@ -60,12 +60,6 @@
                 android:text="@string/Option" />
         </LinearLayout>
 
-        <mju.summer2012.itproject.team3.lk.sailingtext.startgame.StartGameLinearLayout
-            android:id="@+id/StartgameLinearLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal" />
-
         <mju.summer2012.itproject.team3.lk.sailingtext.ranking.RankingRelativeLayout
             android:id="@+id/RankingRelativeLayout"
             android:layout_width="wrap_content"

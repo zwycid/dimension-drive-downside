@@ -3,7 +3,6 @@ package mju.summer2012.itproject.team3.lk.sailingtext.ranking;
 import mju.summer2012.itproject.team3.lk.sailingtext.R;
 import mju.summer2012.itproject.team3.lk.sailingtext.MainActivity;
 import mju.summer2012.itproject.team3.lk.sailingtext.lkcustom.LKAndroid;
-import mju.summer2012.itproject.team3.lk.sailingtext.mainmenu.MainTextViewListener;
 import android.app.Activity;
 import android.content.Context;
 import android.util.AttributeSet;
