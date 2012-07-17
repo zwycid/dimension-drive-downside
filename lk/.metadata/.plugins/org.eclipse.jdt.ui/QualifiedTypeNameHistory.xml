@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.lang.Runnable"/>
 <fullyQualifiedTypeName name="lk.summer.project.FallingText"/>
 <fullyQualifiedTypeName name="java.util.Random"/>
 <fullyQualifiedTypeName name="lk.summer.project.GlowingTextView"/>
@@ -15,7 +14,6 @@
 <fullyQualifiedTypeName name="mju.summer2012.itproject.team3.lk.sailingtext.ranking.RankingPage"/>
 <fullyQualifiedTypeName name="mju.summer2012.itproject.team3.lk.sailing.text.R"/>
 <fullyQualifiedTypeName name="mju.summer2012.itproject.team3.lk.sailingtext.startgame.StartGamePage"/>
-<fullyQualifiedTypeName name="mju.summer2012.itproject.team3.lk.sailingtext.lkcustom.LKAndroid"/>
 <fullyQualifiedTypeName name="android.content.Context"/>
 <fullyQualifiedTypeName name="mju.summer2012.itproject.team3.lk.sailing.text.R.id"/>
 <fullyQualifiedTypeName name="mju.summer2012.itproject.team3.lk.sailing.text.R.layout"/>
@@ -29,10 +27,8 @@
 <fullyQualifiedTypeName name="mju.summer2012.itproject.team3.lk.sailingtext.mainmenu.MainMenuPage"/>
 <fullyQualifiedTypeName name="android.widget.Spinner"/>
 <fullyQualifiedTypeName name="mju.summer2012.itproject.team3.lk.sailingtext.listener.RankingTextViewListener"/>
-<fullyQualifiedTypeName name="android.util.Log"/>
 <fullyQualifiedTypeName name="android.widget.LinearLayout"/>
 <fullyQualifiedTypeName name="mju.summer2012.itproject.team3.lk.sailingtext.listener.StartgameTextViewListener"/>
-<fullyQualifiedTypeName name="mju.summer2012.itproject.team3.lk.sailingtext.R.id"/>
 <fullyQualifiedTypeName name="mju.summer2012.itproject.team3.lk.sailingtext.mainmenu.MainLinearLayout"/>
 <fullyQualifiedTypeName name="mju.summer2012.itproject.team3.lk.sailingtext.mainmenu.MainTextViewListener"/>
 <fullyQualifiedTypeName name="android.widget.ViewFlipper"/>
@@ -40,7 +36,6 @@
 <fullyQualifiedTypeName name="mju.summer2012.itproject.team3.lk.sailingtext.ranking.RankingRelativeLayout"/>
 <fullyQualifiedTypeName name="com.example.coverflow2.R.drawable"/>
 <fullyQualifiedTypeName name="android.app.AlertDialog.Builder"/>
-<fullyQualifiedTypeName name="android.app.AlertDialog"/>
 <fullyQualifiedTypeName name="mju.summer2012.itproject.team3.lk.sailingtext.R.drawable"/>
 <fullyQualifiedTypeName name="mju.summer2012.itproject.team3.lk.sailingtext.MainActivity.dialogListener"/>
 <fullyQualifiedTypeName name="android.content.DialogInterface"/>
@@ -57,7 +52,12 @@
 <fullyQualifiedTypeName name="android.view.View.OnClickListener"/>
 <fullyQualifiedTypeName name="java.lang.Integer"/>
 <fullyQualifiedTypeName name="android.content.Intent"/>
-<fullyQualifiedTypeName name="android.widget.TextView"/>
 <fullyQualifiedTypeName name="mju.summer2012.itproject.team3.lk.sailingtext.GlowingTextView"/>
+<fullyQualifiedTypeName name="android.app.AlertDialog"/>
 <fullyQualifiedTypeName name="mju.summer2012.itproject.team3.lk.sailingtext.MainActivity"/>
+<fullyQualifiedTypeName name="android.widget.TextView"/>
+<fullyQualifiedTypeName name="mju.summer2012.itproject.team3.lk.sailingtext.R.id"/>
+<fullyQualifiedTypeName name="mju.summer2012.itproject.team3.lk.sailingtext.lkcustom.LKAndroid"/>
+<fullyQualifiedTypeName name="android.util.Log"/>
+<fullyQualifiedTypeName name="mju.summer2012.itproject.team3.lk.sailingtext.startgame.CoverFlowExample"/>
 </qualifiedTypeNameHistroy>

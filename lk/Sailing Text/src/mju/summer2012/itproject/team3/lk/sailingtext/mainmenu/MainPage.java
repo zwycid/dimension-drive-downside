@@ -10,21 +10,19 @@ public class MainPage {
 	private TextView textViewTitle;
 	private TextView textViewBlankTitle;
 	private TextView textViewBlank;
-	private TextView[] textViewArray;
-	private TextView[] blankViewArray;
+	private TextView textViewStargame;
+	private TextView blankView1;
 
-	private static final String[] textviewID	= {"MainTextViewStartgame","MainTextViewRanking","MainTextViewOption"};
 	private static final String blankViewID= "MainBlankView";
-	private static final int MAINMENU_BLANKVIEW_COUNT	= 3;
 
 	public MainActivity getMainActivity() {		return mainActivity;	}
 	public void setMainActivity(MainActivity mainActivity) {		this.mainActivity = mainActivity;	}
-	
+
 	public MainPage(MainActivity mainActivity){
 		setMainActivity(mainActivity);
 		initiateMainmenuPage();
 	}
-	
+
 	public void initiateMainmenuPage(){
 
 		textViewTitle		= (TextView) getMainActivity().findViewById(R.id.MainTextViewTitle);
@@ -37,19 +35,13 @@ public class MainPage {
 		LKAndroid.initBlankView(textViewBlankTitle, getMainActivity().getPreferTextSizeForWindow(MainActivity.BLANK, MainActivity.LARGE));
 		LKAndroid.initBlankView(textViewBlank, getMainActivity().getPreferTextSizeForWindow(MainActivity.BLANK, MainActivity.LARGE));
 
-		textViewArray	= new TextView[textviewID.length];
-		blankViewArray	= new TextView[MAINMENU_BLANKVIEW_COUNT];
 
-		for(int i = 0 ; i < textviewID.length ; i++){
-			textViewArray[i]	= (TextView) getMainActivity().findViewById(LKAndroid.getID("id", textviewID[i]));
-			textViewArray[i].setTextSize(getMainActivity().getPreferTextSizeForWindow(MainActivity.TEXT, MainActivity.SMALL));
-			LKAndroid.initTextViewShadow(textViewArray[i], getMainActivity().getPreferTextSizeForWindow(MainActivity.TEXT, MainActivity.SMALL));
-			textViewArray[i].setOnClickListener(getMainActivity().getTextViewListener());
-		}
+		textViewStargame	= (TextView) getMainActivity().findViewById(LKAndroid.getID("id", "MainTextViewStartgame"));
+		textViewStargame.setTextSize(getMainActivity().getPreferTextSizeForWindow(MainActivity.TEXT, MainActivity.SMALL));
+		LKAndroid.initTextViewShadow(textViewStargame, getMainActivity().getPreferTextSizeForWindow(MainActivity.TEXT, MainActivity.SMALL));
+		textViewStargame.setOnClickListener(getMainActivity().getTextViewListener());
 
-		for(int j = 1 ; j < MAINMENU_BLANKVIEW_COUNT ; j++){
-			blankViewArray[j]	= (TextView) getMainActivity().findViewById(LKAndroid.getID("id", blankViewID+j));
-			LKAndroid.initBlankView(blankViewArray[j], getMainActivity().getPreferTextSizeForWindow(MainActivity.TEXT, MainActivity.SMALL));
-		}
+		blankView1	= (TextView) getMainActivity().findViewById(LKAndroid.getID("id", blankViewID+1));
+		LKAndroid.initBlankView(blankView1, getMainActivity().getPreferTextSizeForWindow(MainActivity.TEXT, MainActivity.SMALL));
 	}
 }

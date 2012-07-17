@@ -14,5 +14,7 @@
     <string name="blank">blank</string>
     <string name="newGame">New Game</string>
     <string name="loadGame">Load game</string>
+    <string name="topScore">Top Score</string>
+    <string name="topTime">Top Time</string>
 
 </resources>

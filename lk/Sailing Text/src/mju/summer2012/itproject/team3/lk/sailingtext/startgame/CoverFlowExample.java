@@ -18,9 +18,10 @@
  * 
  * @author Neil Davies
  */
-package mju.summer2012.itproject.team3.lk.sailingtext.newgame;
+package mju.summer2012.itproject.team3.lk.sailingtext.startgame;
 
 import mju.summer2012.itproject.team3.lk.sailingtext.R;
+import mju.summer2012.itproject.team3.lk.sailingtext.lkcustom.LKAndroid;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -34,6 +35,7 @@ import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Shader.TileMode;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
@@ -68,12 +70,24 @@ public class CoverFlowExample extends Activity {
 	/** Called when the activity is first created. */
 	/** 엑티비티가 만들어질 때 호출됩니다.*/
 
+	public static final int LARGE	= 11;
+	public static final int SMALL	= 15;
+	public static final int PLAIN	= 35;
+	public static final int BLANK	= 0;
+	public static final int TEXT	= 1;
+
 	private int mSelectedPosition;//<-회면상 가장 왼쪽에 보이는 ImageView
-	private View viewAlbumText;
+	private View viewStubAlbumText;
 	private TextView textviewTitle;
 	private TextView textviewArtist;
+	private TextView textviewScore;
+	private TextView textviewTime;
+	private TextView blankView0;
+	private TextView blankView1;
+	private TextView titleView;
 	private String[] stageName	= {
-			"창세기","탈출기","레위기","민수기","신명기","오경","욥기","시편","잠언","코할렛","아가","지혜서","집회서","시서","지혜"
+			"창세기","탈출기","레위기","민수기","신명기","오경","욥기",
+			"시편","잠언","코할렛","아가","지혜서","집회서","시서","지혜"
 	};
 	
 	@Override
@@ -136,6 +150,11 @@ public class CoverFlowExample extends Activity {
 
 				textviewArtist.setText("Stage" + albumNumber);
 				textviewTitle.setText(stageName[albumNumber]);
+				
+				//TODO : 여기에 DB에서 값을 가져와 넣으면 됨!!
+				//Worning : 아래에 똩같은 내용이 있는데, 항상 같아야 합니다!!(바뀔쌔 쓰이는 메소드들)
+				textviewScore.setText("Top Score : " + "현재 스테이지 번호는 " + albumNumber);
+				textviewTime.setText("Top Time : " + "현재 스테이지는 "+stageName[albumNumber]);
 			}
 
 			public void onNothingSelected(AdapterView<?> parent){}
@@ -151,12 +170,38 @@ public class CoverFlowExample extends Activity {
 			}
 		});
 
-		viewAlbumText = ((ViewStub) findViewById(R.id.album_hidden)).inflate();
+		viewStubAlbumText = ((ViewStub) findViewById(R.id.album_hidden)).inflate();
 		textviewArtist = (TextView) findViewById(R.id.album_artist);
 		textviewTitle = (TextView) findViewById(R.id.album_title);
-		viewAlbumText.setVisibility(View.VISIBLE);
+		textviewArtist.setTextSize(getPreferTextSizeForWindow(CoverFlowExample.TEXT, CoverFlowExample.PLAIN));
+		textviewTitle.setTextSize(getPreferTextSizeForWindow(CoverFlowExample.TEXT, CoverFlowExample.PLAIN));
+		LKAndroid.initTextViewShadow(textviewTitle, (int) textviewTitle.getTextSize());
+		LKAndroid.initTextViewShadow(textviewArtist, (int) textviewArtist.getTextSize());
 		textviewArtist.setText("Stage" + albumNumber);
 		textviewTitle.setText(stageName[albumNumber]);
+		viewStubAlbumText.setVisibility(View.VISIBLE);
+
+		textviewScore= (TextView) findViewById(R.id.album_Score);
+		textviewTime = (TextView) findViewById(R.id.album_Time);
+		textviewScore.setTextSize(getPreferTextSizeForWindow(CoverFlowExample.TEXT, CoverFlowExample.PLAIN));
+		textviewTime.setTextSize(getPreferTextSizeForWindow(CoverFlowExample.TEXT, CoverFlowExample.PLAIN));
+		LKAndroid.initTextViewShadow(textviewScore, (int) textviewScore.getTextSize());
+		LKAndroid.initTextViewShadow(textviewTime, (int) textviewTime.getTextSize());
+
+		//TODO : 여기에 DB에서 값을 가져와 넣으면 됨!!
+		//Worning : 위에 똩같은 내용이 있는데, 항상 같아야 합니다!!(처음 보여줄 때 쓰는 메소드들)
+		textviewScore.setText("Top Score : " + "현재 스테이지 번호는 " + albumNumber);
+		textviewTime.setText("Top Time : " + "현재 스테이지는 "+stageName[albumNumber]);
+		
+		titleView	= (TextView) findViewById(R.id.cover_flowTitleView);
+		titleView.setTextSize(getPreferTextSizeForWindow(CoverFlowExample.TEXT, CoverFlowExample.LARGE));
+		LKAndroid.initTextViewShadow(titleView, (int) titleView.getTextSize());
+		
+		blankView0	= (TextView) findViewById(R.id.cover_flowBlankView0);
+		LKAndroid.initBlankView(blankView0, (int) (getPreferTextSizeForWindow(CoverFlowExample.BLANK, CoverFlowExample.LARGE)*1.2));
+		
+		blankView1	= (TextView) findViewById(R.id.cover_flowBlankView1);
+		LKAndroid.initBlankView(blankView1, getPreferTextSizeForWindow(CoverFlowExample.BLANK, CoverFlowExample.SMALL));
 	}
 
 	public class ImageAdapter extends BaseAdapter {
@@ -241,7 +286,7 @@ public class CoverFlowExample extends Activity {
 				imageView.setImageBitmap(bitmapWithReflection);
 
 // set size of Images
-				imageView.setLayoutParams(new CoverFlow.LayoutParams((int) (width*0.7), (int) (height*0.7))); // 내가 넣음ㅋ
+				imageView.setLayoutParams(new CoverFlow.LayoutParams((int) (width*0.4), (int) (height*0.4))); // 내가 넣음ㅋ
 //           imageView.setLayoutParams(new CoverFlow.LayoutParams(120, 180)); // original value
 //           imageView.setLayoutParams(new CoverFlow.LayoutParams(180, 180)); // custom value
 //           imageView.setScaleType(ScaleType.MATRIX); // original code (deprecated)
@@ -291,5 +336,33 @@ public class CoverFlowExample extends Activity {
 			/* Formula: 1 / (2 ^ offset) */ 
 			return Math.max(0, 1.0f / (float)Math.pow(2, Math.abs(offset))); 
 		} 
+	}
+	/**
+	 * 스마트폰 화면 크기에 비례하여 적합한 텍스트 크기를 반환합니다.
+	 * @param textType : TEXT	- textView나 drawText할 때 사용합니다. 함수는 보이는 글자를 넣는 경우로 인식합니다.
+	 * 					 BLANK	- 함수는 textView인데 Blank로 사용할 때, 즉 빈칸을 넣는 경우로 인식합니다. 
+	 * @param textSize : LARGE	- 큰 글씨(text button) / 큰 빈칸이 필요할 때 사용합니다.
+	 * 					 SMALL	- 작은 글씨(text button) / 작은 빈칸이 필요할 때 사용합니다.
+	 * 					 PLAIN	- 일반적인 글씨가 필요할 떄 사용합니다.
+	 * @see 적절한 매개변수가 아니면 0을 반환하니 주의하시기 바랍니다.
+	 * @return 윈도우 크기에 적합한 텍스트의 크기를 반환합니다.
+	 */
+	public int getPreferTextSizeForWindow(int textType, int textSize) {
+		if(textType == BLANK){
+			if(textSize == LARGE){
+				return (int) ((this.getWindow().getWindowManager().getDefaultDisplay().getHeight() / LARGE)*1.5);
+			}else if(textSize == SMALL){	
+				return (int) ((this.getWindow().getWindowManager().getDefaultDisplay().getHeight() / SMALL)*1.5);
+			}
+		}else if(textType == TEXT){
+			if(textSize == LARGE){
+				return this.getWindow().getWindowManager().getDefaultDisplay().getWidth() / LARGE;
+			}else if(textSize == SMALL){
+				return this.getWindow().getWindowManager().getDefaultDisplay().getWidth() / SMALL;
+			}else if(textSize == PLAIN){
+				return this.getWindow().getWindowManager().getDefaultDisplay().getWidth() / PLAIN;
+			}
+		}
+		return 0;
 	}
 }

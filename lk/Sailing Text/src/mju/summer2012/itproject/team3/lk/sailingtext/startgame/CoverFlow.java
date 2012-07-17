@@ -18,7 +18,7 @@
  * 
  * @author Neil Davies
  */
-package mju.summer2012.itproject.team3.lk.sailingtext.newgame;
+package mju.summer2012.itproject.team3.lk.sailingtext.startgame;
 
 
 import android.annotation.SuppressLint;

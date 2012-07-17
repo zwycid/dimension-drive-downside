@@ -1,8 +1,7 @@
 package mju.summer2012.itproject.team3.lk.sailingtext;
 
 import mju.summer2012.itproject.team3.lk.sailingtext.mainmenu.MainPage;
-import mju.summer2012.itproject.team3.lk.sailingtext.newgame.CoverFlowExample;
-import mju.summer2012.itproject.team3.lk.sailingtext.ranking.RankingRelativeLayout;
+import mju.summer2012.itproject.team3.lk.sailingtext.startgame.CoverFlowExample;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -24,7 +23,6 @@ public class MainActivity extends Activity {
 
 	private MainTextViewListener textViewListener;
 	private MainPage mainMenuPage;
-	private RankingRelativeLayout rankingRelativeLayout;
 	private ViewFlipper viewFlipper;
 
 	public MainTextViewListener getTextViewListener() {		return textViewListener;	}
@@ -33,10 +31,8 @@ public class MainActivity extends Activity {
 	public void setMainMenuPage(MainPage mainMenuPage) {		this.mainMenuPage = mainMenuPage;	}
 	public ViewFlipper getViewFlipper() {		return viewFlipper;	}
 	public void setViewFlipper(ViewFlipper viewFlipper) {		this.viewFlipper = viewFlipper;	}
-	public RankingRelativeLayout getRankingRelativeLayout() {		return rankingRelativeLayout;	}
-	public void setRankingRelativeLayout(RankingRelativeLayout rankingRelativeLayout) {		this.rankingRelativeLayout = rankingRelativeLayout;	}
 
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -44,27 +40,14 @@ public class MainActivity extends Activity {
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
 		setContentView(R.layout.activity_main);
-		setTextViewListener(new MainTextViewListener(this));
+		setTextViewListener(new MainTextViewListener());
 		this.setMainMenuPage(new MainPage(this));
 		this.getMainMenuPage().initiateMainmenuPage();
-		this.setRankingRelativeLayout((RankingRelativeLayout) this.findViewById(R.id.RankingRelativeLayout));
 	}
 
 	@Override
 	public void onBackPressed() {
-		if((getTextViewListener().getViewFlipper().getCurrentView().getId() == R.id.listViewTotalRanking) || 
-				(getTextViewListener().getViewFlipper().getCurrentView().getId() == R.id.listViewStageRanking)){
-			//return to main menu page
-			getTextViewListener().setViewFlipper((ViewFlipper) this.findViewById(R.id.viewFlipper));
-			getTextViewListener().getViewFlipper().showPrevious();
-		}else if((getTextViewListener().getViewFlipper().getCurrentView().getId() == R.id.OptionLinearLayout)){
-			getTextViewListener().getViewFlipper().showPrevious();
-			getTextViewListener().getViewFlipper().showPrevious();
-		}else if(getTextViewListener().getViewFlipper().getCurrentView().getId() == R.id.RankingRelativeLayout){
-			getTextViewListener().getViewFlipper().showPrevious();
-		}else{
-			DialogBox();
-		}
+		DialogBox();
 	}
 
 	/**
@@ -101,58 +84,34 @@ public class MainActivity extends Activity {
 
 		alertDialogBuilder.setMessage(
 				"Do you want to close this Application?").setCancelable(false).setPositiveButton(
-				"yes", new OnClickListener() {
-					
-					public void onClick(DialogInterface dialog, int which) {
-						MainActivity.this.finish();
-						dialog.cancel();
-					}
-				}).setNegativeButton(
-				"No" , new OnClickListener() {
-					
-					public void onClick(DialogInterface dialog, int which) {
-						dialog.cancel();
-					}
-				});
-		
+						"yes", new AlertDialog.OnClickListener() {
+
+							public void onClick(DialogInterface dialog, int which) {
+								MainActivity.this.finish();
+								dialog.cancel();
+							}
+						}).setNegativeButton(
+								"No" , new AlertDialog.OnClickListener() {
+
+									public void onClick(DialogInterface dialog, int which) {
+										dialog.cancel();
+									}
+								});
+
 		AlertDialog alertDialog	= alertDialogBuilder.create();
 		alertDialog.setTitle("Quit App");
 		alertDialog.setIcon(R.drawable.ic_launcher);
 		alertDialog.show();
 
 	}
-	
-	private class MainTextViewListener implements View.OnClickListener {
-		private MainActivity mainActivity;
-		private ViewFlipper viewFlipper;
 
-		public ViewFlipper getViewFlipper() {		return viewFlipper;	}
-		public void setViewFlipper(ViewFlipper viewFlipper) {		this.viewFlipper = viewFlipper;	}
-		public MainActivity getMainActivity() {
-			return mainActivity;
-		}
-		public void setMainActivity(MainActivity mainActivity) {
-			this.mainActivity = mainActivity;
-		}
+	private class MainTextViewListener implements View.OnClickListener {
 
 		public void onClick(View clickedView) {
 			if(clickedView.getId() == R.id.MainTextViewStartgame){
-				Toast.makeText(getMainActivity(), "Start Game", Toast.LENGTH_SHORT).show();
 				Intent intent	= new Intent(MainActivity.this, CoverFlowExample.class);
 				startActivityForResult(intent, 1);
-			}else if(clickedView.getId() == R.id.MainTextViewRanking){
-				//xml에 등록된 view라면 바로 그냥 shownext해도 됨.
-				getViewFlipper().showNext();
-			}else if(clickedView.getId() == R.id.MainTextViewOption){
-				//두 번 연속으로 호출하면 그냥 맨 마지막 view가 보임.
-				getViewFlipper().showNext();
-				getViewFlipper().showNext();
 			}
-		}
-
-		public MainTextViewListener(MainActivity mainActivity){
-			setMainActivity(mainActivity);
-			viewFlipper			= (ViewFlipper) getMainActivity().findViewById(R.id.viewFlipper);
 		}
 	}
 
