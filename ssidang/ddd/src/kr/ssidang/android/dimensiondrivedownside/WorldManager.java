@@ -215,7 +215,7 @@ public class WorldManager {
 	private void collisionBallWithEdge(Vector2D beforePos, Vector2D afterPos,
 			Vector2D edgeStart, Vector2D edgeStop, Vector2D velocity,
 			Vector2D normal) {
-		float coeffi = .8f;	// TODO 공 종류에 따라 달라짐
+		float coeffi = ball.restitution;
 		Vector2D interPt = new Vector2D();
 		
 		// 우선 충돌 지점을 찾아내고...
@@ -233,6 +233,12 @@ public class WorldManager {
 			
 			// 교정된 위치를 구합니다.
 			afterPos.add(beforePos);
+			
+			// 교정했는데 선에서 별로 떨어지질 않았으면...
+			float d = Vector2D.distanceSq(edgeStart, edgeStop, afterPos);
+			if (d < 1.f) {
+				
+			}
 		}
 	}
 }

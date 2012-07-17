@@ -131,6 +131,7 @@ public class GameView extends SurfaceView implements
 		// 아래 방향
 		float length = 50;
 		float sign = (G.pitch >= 0 ? -1.f : 1.f);
+//		float sign = (float) Math.cos(Math.toRadians(G.pitch));
 		float rad = (float) Math.toRadians((-90 - G.roll) * sign);
 		float offsetX = FloatMath.cos(rad) * length;
 		float offsetY = FloatMath.sin(rad) * length;
@@ -147,9 +148,9 @@ public class GameView extends SurfaceView implements
 			GameUtil.drawTextMultiline(canvas,
 					"Tick: " + tick + " (fps: " + fps + ")"
 					+ "\nScreen = (" + width + ", " + height + ")"
-//					+ "\nAzimuth = " + G.azimuth
-//					+ "\nPitch = " + G.pitch
-//					+ "\nRoll = " + G.roll
+					+ "\nAzimuth = " + G.azimuth
+					+ "\nPitch = " + G.pitch
+					+ "\nRoll = " + G.roll
 					, 0, 0, textPaint);
 			
 			float centerX = width / 2;

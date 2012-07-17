@@ -138,17 +138,6 @@ public class Vector2D extends PointF {
 	}
 	
 	/**
-	 * 벡터 길이의 제곱값을 구합니다.
-	 * (벡터 길이는 PointF.length() 이용)
-	 * 
-	 * @see super#length()
-	 * @return	벡터 길이의 제곱값
-	 */
-	public float lengthSq() {
-		return (x * x + y * y);
-	}
-
-	/**
 	 * 벡터 길이를 1로 만듭니다.
 	 * 
 	 * @return	자기 자신
@@ -193,7 +182,7 @@ public class Vector2D extends PointF {
 	 * 벡터의 내적을 구합니다.
 	 * 
 	 * @param v
-	 * @return	내적 값
+	 * @return		내적 값
 	 */
 	public float dotProd(PointF v) {
 		return dotProd(this, v);
@@ -204,10 +193,23 @@ public class Vector2D extends PointF {
 	 * 
 	 * @param v1
 	 * @param v2
-	 * @return	내적 값
+	 * @return		내적 값
 	 */
 	public static float dotProd(PointF v1, PointF v2) {
-		return v1.x * v2.x + v1.y * v2.y;
+		return dotProd(v1.x, v1.y, v2.x, v2.y);
+	}
+	
+	/**
+	 * 내적을 구합니다.
+	 * 
+	 * @param v1x
+	 * @param v1y
+	 * @param v2x
+	 * @param v2y
+	 * @return		내적 값
+	 */
+	public static float dotProd(float v1x, float v1y, float v2x, float v2y) {
+		return v1x * v2x + v1y * v2y;
 	}
 	
 	/**
@@ -287,6 +289,54 @@ public class Vector2D extends PointF {
 		out.x = p0.x + (p1.x - p0.x) * t;
 		out.y = p0.y + (p1.y - p0.y) * t;
 		return true;
+	}
+	
+	/**
+	 * 이 벡터를 proj 벡터 위로 정사영합니다.
+	 * 
+	 * @param proj	정사영 할 축
+	 * @return		자기 자신
+	 */
+	public Vector2D project(PointF proj) {
+		// this = proj_proj(this)
+		// ortho = proj_y(x) --> y * (x.y / y.y)
+		float l = dotProd(this, proj) / dotProd(proj, proj);
+		x = proj.x * l;
+		y = proj.y * l;
+		return this;
+	}
+	
+	/**
+	 * 점 p0, p1을 지나는 직선과 점 point 사이의 거리 제곱을 구합니다.
+	 * 
+	 * @param p0
+	 * @param p1
+	 * @param point
+	 * @return
+	 */
+	public static float distanceSq(PointF p0, PointF p1, PointF point) {
+		float proj_x = p1.x - p0.x;
+		float proj_y = p1.y - p0.y;
+		float p_x = point.x - p0.x;
+		float p_y = point.y - p0.y;
+		
+		// 정사영 길이의 제곱을 구합니다.
+		float dot1 = dotProd(proj_x, proj_y, p_x, p_y);
+		float dot2 = dotProd(proj_x, proj_y, proj_x, proj_y);
+		float length = dot1 * dot1 / dot2;
+		
+		// point 벡터 길이의 제곱을 구합니다.
+		float side = dotProd(p_x, p_y, p_x, p_y);
+		return side - length;
+	}
+	
+	/**
+	 * 점 p0, p1을 지나는 직선과 점 point 사이의 거리를 구합니다.
+	 *
+	 * @see #distanceSq()
+	 */
+	public static float distance(PointF p0, PointF p1, PointF point) {
+		return FloatMath.sqrt(distanceSq(p0, p1, point));
 	}
 
 }
