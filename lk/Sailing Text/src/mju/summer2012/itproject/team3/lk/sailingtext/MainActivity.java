@@ -5,12 +5,10 @@ import mju.summer2012.itproject.team3.lk.sailingtext.startgame.CoverFlowExample;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
-import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 public class MainActivity extends Activity {

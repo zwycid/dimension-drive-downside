@@ -1,0 +1,30 @@
+1341834620743	Delete element
+1341834663432	Delete elements
+1341837074260	Rename type 'TotalScoreView'
+1341837084092	Rename type 'idView'
+1341837218447	Rename local variable 'string_id'
+1341837844263	Rename type 'timeView'
+1341837937584	Rename local variable 'string_id_array'
+1341837941646	Rename local variable 'string_score_array'
+1341838124184	Rename field 'TEXTVIEW_ID'
+1341838193636	Rename method 'setIDs'
+1341839041234	Copy compilation unit
+1341839050085	Rename type 'CopyOfTestDBActivity'
+1341839061141	Rename field 'TITLE'
+1341839073687	Rename field 'Score'
+1341841768076	Rename local variable 'string_time_array'
+1341841776532	Rename local variable 'id'
+1341842070234	Rename local variable 'string_time_array'
+1341842075413	Rename local variable 'string_time'
+1341844853091	Rename local variable 'rankid'
+1341847711188	Delete elements
+1341850059418	Delete element
+1341850067150	Rename type 'OriginOfTestDBActivity'
+1341882734970	Rename type 'StageScoreView'
+1341882751915	Rename type 'StageScoreSurfaceView'
+1341884616332	Rename method 'setTextPaint'
+1341884661237	Rename method 'allocateTextPaint'
+1341884968842	Copy compilation unit
+1341885251408	Delete element
+1341887675662	Delete elements
+1341887716822	Delete element

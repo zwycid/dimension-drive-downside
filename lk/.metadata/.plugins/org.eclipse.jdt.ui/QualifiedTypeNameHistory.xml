@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="lk.summer.project.FallingText"/>
-<fullyQualifiedTypeName name="java.util.Random"/>
-<fullyQualifiedTypeName name="lk.summer.project.GlowingTextView"/>
-<fullyQualifiedTypeName name="com.example.coverflow2.R.id"/>
-<fullyQualifiedTypeName name="lk.summer.project.gameuidesign.R"/>
-<fullyQualifiedTypeName name="lk.summer.project.LKTextViewListener"/>
 <fullyQualifiedTypeName name="lk.summer.project.lkcustom.LKAndroid"/>
 <fullyQualifiedTypeName name="lk.summer.project.ranking.RankingPage"/>
 <fullyQualifiedTypeName name="lk.summer.project.MainActivity"/>
@@ -27,7 +21,6 @@
 <fullyQualifiedTypeName name="mju.summer2012.itproject.team3.lk.sailingtext.mainmenu.MainMenuPage"/>
 <fullyQualifiedTypeName name="android.widget.Spinner"/>
 <fullyQualifiedTypeName name="mju.summer2012.itproject.team3.lk.sailingtext.listener.RankingTextViewListener"/>
-<fullyQualifiedTypeName name="android.widget.LinearLayout"/>
 <fullyQualifiedTypeName name="mju.summer2012.itproject.team3.lk.sailingtext.listener.StartgameTextViewListener"/>
 <fullyQualifiedTypeName name="mju.summer2012.itproject.team3.lk.sailingtext.mainmenu.MainLinearLayout"/>
 <fullyQualifiedTypeName name="mju.summer2012.itproject.team3.lk.sailingtext.mainmenu.MainTextViewListener"/>
@@ -55,9 +48,16 @@
 <fullyQualifiedTypeName name="mju.summer2012.itproject.team3.lk.sailingtext.GlowingTextView"/>
 <fullyQualifiedTypeName name="android.app.AlertDialog"/>
 <fullyQualifiedTypeName name="mju.summer2012.itproject.team3.lk.sailingtext.MainActivity"/>
-<fullyQualifiedTypeName name="android.widget.TextView"/>
 <fullyQualifiedTypeName name="mju.summer2012.itproject.team3.lk.sailingtext.R.id"/>
-<fullyQualifiedTypeName name="mju.summer2012.itproject.team3.lk.sailingtext.lkcustom.LKAndroid"/>
-<fullyQualifiedTypeName name="android.util.Log"/>
+<fullyQualifiedTypeName name="android.widget.Gallery.LayoutParams"/>
 <fullyQualifiedTypeName name="mju.summer2012.itproject.team3.lk.sailingtext.startgame.CoverFlowExample"/>
+<fullyQualifiedTypeName name="android.widget.LinearLayout"/>
+<fullyQualifiedTypeName name="mju.summer2012.itproject.team3.lk.sailingtext.startgame.CoverFlow"/>
+<fullyQualifiedTypeName name="android.widget.TextView"/>
+<fullyQualifiedTypeName name="android.graphics.ColorFilter"/>
+<fullyQualifiedTypeName name="android.graphics.LightingColorFilter"/>
+<fullyQualifiedTypeName name="android.util.Log"/>
+<fullyQualifiedTypeName name="java.lang.Math"/>
+<fullyQualifiedTypeName name="java.util.Random"/>
+<fullyQualifiedTypeName name="mju.summer2012.itproject.team3.lk.sailingtext.lkcustom.LKAndroid"/>
 </qualifiedTypeNameHistroy>

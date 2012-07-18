@@ -1,0 +1,54 @@
+1342343152950	Move files
+1342343217235	Delete element
+1342343257852	Rename package 'mju.summer2012.itproject.team3.lk.sailing.text'
+1342347577730	Delete element
+1342348512678	Rename field 'StartgameBlankViewTitle'
+1342349159003	Rename method 'initStartGame'
+1342371806871	Delete element
+1342377362561	Delete element
+1342381860316	Move compilation unit
+1342381881394	Rename type 'LKTextViewListener'
+1342381886274	Rename type 'MainMenuLinearLayout'
+1342381890521	Rename type 'MainMenuPage'
+1342382993202	Delete element
+1342383335199	Move compilation unit
+1342383340548	Move compilation unit
+1342383346427	Move compilation unit
+1342383349940	Delete element
+1342383580085	Delete element
+1342383624613	Delete element
+1342386067357	Delete element
+1342386856668	Delete element
+1342435316234	Rename type 'dialogListener'
+1342435325682	Rename local variable 'listener'
+1342435330340	Rename local variable 'dialoglistener'
+1342450622791	Delete element
+1342506311310	Delete elements
+1342506399253	Delete elements
+1342508477552	Delete element
+1342513352350	Delete element
+1342513372505	Delete element
+1342518714803	Delete element
+1342518720813	Delete element
+1342519192853	Delete element
+1342520292969	Delete element
+1342520294684	Delete element
+1342520799323	Rename field 'textViewArray'
+1342520803010	Rename field 'blankViewArray'
+1342534330937	Rename package 'mju.summer2012.itproject.team3.lk.sailingtext.newgame'
+1342535798714	Delete element
+1342536018786	Delete element
+1342536043898	Delete element
+1342536894516	Delete element
+1342538080467	Delete element
+1342538083697	Delete element
+1342538172427	Rename field 'blankView'
+1342539251104	Rename field 'viewAlbumText'
+1342540172444	Delete element
+1342543384824	Copy file
+1342543591979	Delete element
+1342594716791	Delete element
+1342601986598	Delete elements
+1342601989618	Rename resource 'mt4_.png'
+1342601992073	Rename resource 'mt5_.png'
+1342625896612	Rename local variable 'mul'

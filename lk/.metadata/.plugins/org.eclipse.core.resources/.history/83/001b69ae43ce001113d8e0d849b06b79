@@ -1,0 +1,7 @@
+package lk.summer.project.mainmenu;
+
+import android.widget.LinearLayout;
+
+public class MainMenuLinearLayout extends LinearLayout {
+
+}

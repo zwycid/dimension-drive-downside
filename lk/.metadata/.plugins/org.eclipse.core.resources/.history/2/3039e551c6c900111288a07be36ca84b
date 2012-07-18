@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/ViewName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+		style="@style/GlowingText"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center_horizontal"
+        android:textSize="50dp" />
+
+    <TextView
+        android:id="@+id/chooseView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+		style="@style/GlowingText"
+        android:layout_gravity="bottom|left" />
+    <TextView
+        android:id="@+id/reset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+		style="@style/GlowingText"
+        android:layout_gravity="bottom|right"
+        android:text="@string/reset" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <com.hanback.testdb.IdView
+            android:id="@+id/user_id1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+		style="@style/GlowingText"
+            android:layout_gravity="center_horizontal" />
+
+        <com.hanback.testdb.IdView
+            android:id="@+id/user_id2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+		style="@style/GlowingText"
+            android:layout_gravity="center_horizontal" />
+
+        <com.hanback.testdb.IdView
+            android:id="@+id/user_id3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+		style="@style/GlowingText"
+            android:layout_gravity="center_horizontal" />
+
+        <com.hanback.testdb.IdView
+            android:id="@+id/user_id4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+		style="@style/GlowingText"
+            android:layout_gravity="center_horizontal" />
+
+        <com.hanback.testdb.IdView
+            android:id="@+id/user_id5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+		style="@style/GlowingText"
+            android:layout_gravity="center" />
+        
+        <com.hanback.testdb.TimeView
+            android:id="@+id/user_time1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+		style="@style/GlowingText"
+            android:layout_gravity="right" />
+        
+        <com.hanback.testdb.TimeView
+            android:id="@+id/user_time2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+		style="@style/GlowingText"
+            android:layout_gravity="right" />
+        
+        <com.hanback.testdb.TimeView
+            android:id="@+id/user_time3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+		style="@style/GlowingText"
+            android:layout_gravity="right" />
+        
+        <com.hanback.testdb.TimeView
+            android:id="@+id/user_time4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+		style="@style/GlowingText"
+            android:layout_gravity="right" />
+        
+        <com.hanback.testdb.TimeView
+            android:id="@+id/user_time5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+		style="@style/GlowingText"
+            android:layout_gravity="right" />
+        
+        <com.hanback.testdb.RankingView
+            android:id="@+id/user_rank1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+		style="@style/GlowingText"
+            android:layout_gravity="left" />
+        
+        <com.hanback.testdb.RankingView
+            android:id="@+id/user_rank2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+		style="@style/GlowingText"
+            android:layout_gravity="left" />
+        
+        <com.hanback.testdb.RankingView
+            android:id="@+id/user_rank3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+		style="@style/GlowingText"
+            android:layout_gravity="left" />
+        
+        <com.hanback.testdb.RankingView
+            android:id="@+id/user_rank4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+		style="@style/GlowingText"
+            android:layout_gravity="left" />
+        
+        <com.hanback.testdb.RankingView
+            android:id="@+id/user_rank5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+		style="@style/GlowingText"
+            android:layout_gravity="left" />
+
+    </LinearLayout>
+
+</FrameLayout>

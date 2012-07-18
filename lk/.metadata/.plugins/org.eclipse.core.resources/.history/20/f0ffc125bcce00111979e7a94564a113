@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/MainFrameLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#000000"
+    android:orientation="vertical" >
+
+    <mju.summer2012.itproject.team3.lk.sailingtext.BackgroundSurfaceView
+        android:id="@+id/BackgroundSurfaceView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ViewFlipper
+        android:id="@+id/viewFlipper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:id="@+id/MainLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#00000000"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/MainBlankView"
+                style="@style/blankView" />
+
+            <TextView
+                android:id="@+id/MainTextViewTitle"
+                style="@style/TitleText"
+                android:text="@string/gameTitle" />
+
+            <TextView
+                android:id="@+id/MainBlankView0"
+                style="@style/blankView" />
+
+            <TextView
+                android:id="@+id/MainTextViewStartgame"
+                style="@style/ButtonText"
+                android:text="@string/Startgame" />
+
+            <TextView
+                android:id="@+id/MainBlankView1"
+                style="@style/blankView" />
+
+            <TextView
+                android:id="@+id/MainTextViewRanking"
+                style="@style/ButtonText"
+                android:text="@string/Ranking" />
+
+            <TextView
+                android:id="@+id/MainBlankView2"
+                style="@style/blankView" />
+
+            <TextView
+                android:id="@+id/MainTextViewOption"
+                style="@style/ButtonText"
+                android:text="@string/Option" />
+        </LinearLayout>
+
+        <mju.summer2012.itproject.team3.lk.sailingtext.startgame.StartGameLinearLayout
+            android:id="@+id/StartgameLinearLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal" />
+
+        <mju.summer2012.itproject.team3.lk.sailingtext.ranking.RankingRelativeLayout
+            android:id="@+id/RankingRelativeLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:id="@+id/OptionLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#00000000"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textViewTitleOption"
+                style="@style/TitleText"
+                android:text="@string/Option" />
+        </LinearLayout>
+    </ViewFlipper>
+
+</FrameLayout>

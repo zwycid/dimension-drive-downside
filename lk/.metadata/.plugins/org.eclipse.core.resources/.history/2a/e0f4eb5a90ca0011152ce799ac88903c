@@ -1,0 +1,19 @@
+package lk.summer.project;
+
+import android.content.Context;
+import android.util.AttributeSet;
+import android.widget.LinearLayout;
+
+public class MainLinearLayout extends LinearLayout {
+
+	public MainLinearLayout(Context context, AttributeSet attrs) {
+		super(context, attrs);
+		// TODO Auto-generated constructor stub
+	}
+
+	public MainLinearLayout(Context context) {
+		super(context);
+		// TODO Auto-generated constructor stub
+	}
+
+}

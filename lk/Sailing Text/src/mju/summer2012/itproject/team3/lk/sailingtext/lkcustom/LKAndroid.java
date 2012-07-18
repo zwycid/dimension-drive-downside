@@ -1,6 +1,9 @@
 package mju.summer2012.itproject.team3.lk.sailingtext.lkcustom;
 
+import java.util.Random;
+
 import mju.summer2012.itproject.team3.lk.sailingtext.R;
+import android.util.Log;
 import android.widget.TextView;
 
 public class LKAndroid {
@@ -53,5 +56,27 @@ public class LKAndroid {
 
 	public static void initBlankView(TextView blankView, int blankSize){
 		blankView.setHeight(blankSize);
+	}
+	public static int setColorGradiantly(int seedColor){
+		int colorR	= (seedColor<<8)>>>24;
+		int colorG	= (seedColor<<16)>>>24;
+		int colorB	= (seedColor<<24)>>>24;
+		
+		Log.i("COLOR", "R : " + colorR + " G : " + colorG + " B : " + colorB);
+		
+		     if((colorR == 0x000000ff) && (colorB == 0x00000000) && (colorG >= 0x00000000) && (colorG < 0x000000ff))
+			seedColor	+= 0x00000500;
+		else if((colorG == 0x000000ff) && (colorB == 0x00000000) && (colorR <= 0x000000ff) && (colorR > 0x00000000))
+			seedColor	-= 0x00050000;
+		else if((colorR == 0x00000000) && (colorG == 0x000000ff) && (colorB >= 0x00000000) && (colorB < 0x000000ff))
+			seedColor	+= 0x00000005;
+		else if((colorR == 0x00000000) && (colorB == 0x000000ff) && (colorG <= 0x000000ff) && (colorG > 0x00000000))
+			seedColor	-= 0x00000500;
+		else if((colorG == 0x00000000) && (colorB == 0x000000ff) && (colorR >= 0x00000000) && (colorR < 0x000000ff))
+			seedColor	+= 0x00050000;
+		else if((colorR == 0x000000ff) && (colorG == 0x00000000) && (colorB <= 0x000000ff) && (colorB > 0x00000000))
+			seedColor	-= 0x00000005;
+
+		     return seedColor;
 	}
 }

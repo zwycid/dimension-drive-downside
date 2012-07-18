@@ -1,0 +1,7 @@
+package lk.summer.project;
+
+import android.view.SurfaceView;
+
+public class RankingView extends SurfaceView {
+
+}

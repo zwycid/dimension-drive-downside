@@ -1,0 +1,44 @@
+package com.hanback.testdb;
+
+import java.util.ArrayList;
+
+import android.content.Context;
+import android.util.AttributeSet;
+import android.view.View;
+import android.widget.TextView;
+
+public class TotalScoreView extends View {
+
+	private ArrayList<TextView> textViews;
+	
+	private ArrayList<Float> timeScores;
+
+	public TotalScoreView(Context context, AttributeSet attrs, int defStyle) {
+		super(context, attrs, defStyle);
+		// TODO Auto-generated constructor stub
+	}
+
+	public TotalScoreView(Context context, AttributeSet attrs) {
+		super(context, attrs);
+		// TODO Auto-generated constructor stub
+	}
+
+	public TotalScoreView(Context context) {
+		super(context);
+		// TODO Auto-generated constructor stub
+	}
+	
+	public void initView(){
+		textView	= (TextView) this.findViewById(R.id.totalScoreView1);
+		textView2	= (TextView) this.findViewById(R.id.totalScoreView2);
+		textView3	= (TextView) this.findViewById(R.id.totalScoreView3);
+		textView4	= (TextView) this.findViewById(R.id.totalScoreView4);
+		textView5	= (TextView) this.findViewById(R.id.totalScoreView5);
+	}
+	
+	public void setScores(int[] id, float[] time){
+		for(int i = 1 ; i + 1 < id.length ; i++ ){
+			
+		}
+	}
+}

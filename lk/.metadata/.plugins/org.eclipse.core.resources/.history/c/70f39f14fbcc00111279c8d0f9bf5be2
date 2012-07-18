@@ -1,0 +1,47 @@
+package lk.summer.project.mainmenu;
+
+import lk.summer.project.LKTextViewListener;
+import lk.summer.project.MainActivity;
+import lk.summer.project.gameuidesign.R;
+import lk.summer.project.lkcustom.LKAndroid;
+import android.widget.TextView;
+
+public class MainMenuPage {
+	private MainActivity mainActivity;
+	private TextView textViewTitle;
+	private TextView textViewBlankTitle;
+	private TextView[] textViewArray;
+	private TextView[] blankViewArray;;
+	
+	public MainActivity getMainActivity() {		return mainActivity;	}
+	public void setMainActivity(MainActivity mainActivity) {		this.mainActivity = mainActivity;	}
+	
+	public MainMenuPage(MainActivity mainActivity){
+		initiateMainmenuPage();	
+	}
+	
+	public void initiateMainmenuPage(){
+
+		TextView textViewTitle		= (TextView) this.findViewById(R.id.textViewTitleMainmenu);
+		TextView textViewBlankTitle	= (TextView) this.findViewById(R.id.blankView0);
+
+		LKAndroid.initTextViewShadow(textViewTitle, getPreferTextSizeForWindow(TEXT, LARGE));
+		textViewTitle.setTextSize(getPreferTextSizeForWindow(TEXT, LARGE));
+		LKAndroid.initBlankView(textViewBlankTitle, getPreferTextSizeForWindow(BLANK, LARGE));
+
+		TextView[] textViewArray	= new TextView[textviewID.length];
+		TextView[] blankViewArray	= new TextView[MAINMENU_BLANKVIEW_COUNT];
+
+		for(int i = 0 ; i < textviewID.length ; i++){
+			textViewArray[i]	= (TextView) this.findViewById(LKAndroid.getID("id", textviewID[i]));
+			textViewArray[i].setTextSize(getPreferTextSizeForWindow(TEXT, SMALL));
+			LKAndroid.initTextViewShadow(textViewArray[i], getPreferTextSizeForWindow(TEXT, SMALL));
+			textViewArray[i].setOnClickListener(textViewListener);
+		}
+
+		for(int j = 1 ; j < MAINMENU_BLANKVIEW_COUNT ; j++){
+			blankViewArray[j]	= (TextView) this.findViewById(LKAndroid.getID("id", blankViewID+j));
+			LKAndroid.initBlankView(blankViewArray[j], getPreferTextSizeForWindow(TEXT, SMALL));
+		}
+	}
+}
