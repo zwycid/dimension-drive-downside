@@ -62,8 +62,6 @@ public class LKAndroid {
 		int colorG	= (seedColor<<16)>>>24;
 		int colorB	= (seedColor<<24)>>>24;
 		
-		Log.i("COLOR", "R : " + colorR + " G : " + colorG + " B : " + colorB);
-		
 		     if((colorR == 0x000000ff) && (colorB == 0x00000000) && (colorG >= 0x00000000) && (colorG < 0x000000ff))
 			seedColor	+= 0x00000500;
 		else if((colorG == 0x000000ff) && (colorB == 0x00000000) && (colorR <= 0x000000ff) && (colorR > 0x00000000))
