@@ -53,10 +53,19 @@ public class LKAndroid {
 	public static void initTextViewShadow(TextView textView, int textSize){
 		textView.setShadowLayer((0.0f+textSize)/5, 0.0f, 0.0f, DEFAULT_COLOR);
 	}
-
+	/**
+	 * 
+	 * @param blankView : 아무것도 표시하지 않을 textView를 받습니다.
+	 * @param blankSize : textView의 높이를 디바이스에 맞춰 리턴합니다.
+	 */
 	public static void initBlankView(TextView blankView, int blankSize){
 		blankView.setHeight(blankSize);
 	}
+	/**
+	 * 
+	 * @param seedColor(int) : 현재 색상을 받습니다.
+	 * @return (int) 색상에 맞게 연산한 결과를 리턴합니다.
+	 */
 	public static int setColorGradiantly(int seedColor){
 		int colorR	= (seedColor<<8)>>>24;
 		int colorG	= (seedColor<<16)>>>24;
@@ -76,5 +85,20 @@ public class LKAndroid {
 			seedColor	-= 0x00000005;
 
 		     return seedColor;
+	}
+	/**
+	 * 아직 구현은 안 했습니다.
+	 * @param seedColor
+	 * @return
+	 */
+	public static int setColorMultipleFive(int seedColor){
+		switch (seedColor % 5) {
+		case 0: seedColor	+= 0xff00ff00;break;
+		case 1: seedColor	+= 0xff00ff04;break;
+		case 2: seedColor	+= 0xff00ff03;break;
+		case 3: seedColor	+= 0xff00ff02;break;
+		case 4: seedColor	+= 0xff00ff01;break;
+		}
+		return seedColor;
 	}
 }

@@ -13,14 +13,17 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="mju.summer2012.itproject.team3.lk.sailingtext.MainActivity"
-            android:label="@string/title_activity_main" >
+            android:label="@string/title_activity_main" 
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".startgame.CoverFlowExample"></activity>
+        <activity android:name=".startgame.CoverFlowExample" 
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".option.OptionAitivity"></activity>
     </application>
 
 </manifest>

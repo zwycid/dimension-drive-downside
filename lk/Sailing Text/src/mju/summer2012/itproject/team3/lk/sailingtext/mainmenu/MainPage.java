@@ -12,6 +12,8 @@ public class MainPage {
 	private TextView textViewBlank;
 	private TextView textViewStargame;
 	private TextView blankView1;
+	private TextView textViewOption;
+	private TextView blankView2;
 
 	private static final String blankViewID= "MainBlankView";
 
@@ -43,5 +45,13 @@ public class MainPage {
 
 		blankView1	= (TextView) getMainActivity().findViewById(LKAndroid.getID("id", blankViewID+1));
 		LKAndroid.initBlankView(blankView1, getMainActivity().getPreferTextSizeForWindow(MainActivity.TEXT, MainActivity.SMALL));
-	}
+
+		textViewOption	= (TextView) getMainActivity().findViewById(LKAndroid.getID("id", "MainTextViewOption"));
+		textViewOption.setTextSize(getMainActivity().getPreferTextSizeForWindow(MainActivity.TEXT, MainActivity.SMALL));
+		LKAndroid.initTextViewShadow(textViewOption, getMainActivity().getPreferTextSizeForWindow(MainActivity.TEXT, MainActivity.SMALL));
+		textViewOption.setOnClickListener(getMainActivity().getTextViewListener());
+
+		blankView2	= (TextView) getMainActivity().findViewById(LKAndroid.getID("id", blankViewID+1));
+		LKAndroid.initBlankView(blankView2, getMainActivity().getPreferTextSizeForWindow(MainActivity.TEXT, MainActivity.SMALL));
+}
 }

@@ -1,12 +1,14 @@
 package mju.summer2012.itproject.team3.lk.sailingtext;
 
 import mju.summer2012.itproject.team3.lk.sailingtext.mainmenu.MainPage;
+import mju.summer2012.itproject.team3.lk.sailingtext.option.OptionAitivity;
 import mju.summer2012.itproject.team3.lk.sailingtext.startgame.CoverFlowExample;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.ViewFlipper;
@@ -22,6 +24,7 @@ public class MainActivity extends Activity {
 	private MainTextViewListener textViewListener;
 	private MainPage mainMenuPage;
 	private ViewFlipper viewFlipper;
+	private final String VERSION	= "1.00";
 
 	public MainTextViewListener getTextViewListener() {		return textViewListener;	}
 	public void setTextViewListener(MainTextViewListener textViewListener) {		this.textViewListener = textViewListener;	}
@@ -40,7 +43,6 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		setTextViewListener(new MainTextViewListener());
 		this.setMainMenuPage(new MainPage(this));
-		this.getMainMenuPage().initiateMainmenuPage();
 	}
 
 	@Override
@@ -104,10 +106,13 @@ public class MainActivity extends Activity {
 	}
 
 	private class MainTextViewListener implements View.OnClickListener {
-
+		Intent intent;
 		public void onClick(View clickedView) {
 			if(clickedView.getId() == R.id.MainTextViewStartgame){
-				Intent intent	= new Intent(MainActivity.this, CoverFlowExample.class);
+				intent	= new Intent(MainActivity.this, CoverFlowExample.class);
+				startActivityForResult(intent, 1);
+			}else if(clickedView.getId() == R.id.MainTextViewOption){
+				intent	= new Intent(MainActivity.this, OptionAitivity.class);
 				startActivityForResult(intent, 1);
 			}
 		}

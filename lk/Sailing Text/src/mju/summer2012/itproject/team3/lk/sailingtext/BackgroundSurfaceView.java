@@ -55,7 +55,7 @@ public class BackgroundSurfaceView extends SurfaceView implements SurfaceHolder.
 
 	public BackgroundSurfaceView(Context context, AttributeSet attrs) {
 		super( context, attrs );
-		this.initiateBackground();
+			this.initiateBackground();
 	}
 
 	public BackgroundSurfaceView(Context context, AttributeSet attrs, int defStyle) {
@@ -74,11 +74,9 @@ public class BackgroundSurfaceView extends SurfaceView implements SurfaceHolder.
 		this.setMtArray(new int[FALLING_TEXT_LENGTH]);
 		int tempMt;
 
-		Log.i("wtf", "init-width : " + this.getWidth());
-		
 		//비트뱁 배열 초기화...일일히 다 초기화해줍니다.
 		for(int i = 0 ; i != this.getTextImageArray().length ; i++){
-////////////mt의 갯수가 훨씬 많으므로 겹치지 않게 랜덤으로 배치합니다.
+////////////배경 텍스트 번호 초기화 : 실제 출력 갯수보다 텍스트가 많으므로 겹치지 않게 랜덤으로 배치합니다.
 			tempMt	= random.nextInt(MT_LENGTH);
 			for(int j = 0 ; j < FALLING_TEXT_LENGTH ; j++){
 				if(getMt(j) == tempMt){
@@ -87,8 +85,7 @@ public class BackgroundSurfaceView extends SurfaceView implements SurfaceHolder.
 				}
 			}
 			setMt(i, tempMt);
-			Log.i("wtf", "mt의 " + i + "번째 값 : " + tempMt);
-			
+////////////배경 텍스트 번호 초기화 완료			
 			this.setTextImage(i, BitmapFactory.decodeResource(this.getResources(), LKAndroid.getID("drawable", "mt"+getMt(i))));
 
 			this.setATextWidthOfArray(i, getTextImageArray()[i].getWidth());
@@ -110,36 +107,24 @@ public class BackgroundSurfaceView extends SurfaceView implements SurfaceHolder.
 		int[] text_speed_y	= new int[textImageArray.length];
 		Point[] text_pt		= new Point[textImageArray.length];
 		//lkcustom
-		int[] colorCode		= new int[textImageArray.length];
+////////////글자색 초기화			
+		int colorCode	= 0xffff0000;
+////////////글자색 초기화 완료
 		
 		SurfaceHolder holder	= this.getHolder();
 		Canvas canvas;
 		//src는 원래 이미지의 크기, dest는 실제 그릴 그림의 크기입니다.
 
 		for(int i = 0 ; i < textImageArray.length ; i++){
-			//일단 겹침 없이 출력되는 걸로
-//			text_position_x[i]	= (this.getWidth() / THE_NUMBER_OF_FALLING_TEXT) * i;//origin code
 			text_position_x[i]	= (getWidth() / FALLING_TEXT_LENGTH) * i;
 			text_speed_y[i]	= Math.abs(random.nextInt() % FALLING_TEXT_MAX_SPEED) + FALLING_TEXT_MIN_SPEED;
+			//속도조절용
 //			text_speed_y[i]	= ((int) (Math.abs(random.nextInt() % FALLING_TEXT_MAX_SPEED) + FALLING_TEXT_MIN_SPEED));
-//			text_speed_y[i]	= ((int) (FALLING_TEXT_MAX_SPEED + FALLING_TEXT_MIN_SPEED )/10);
-			
-			colorCode[i]	= 0xffff0000;
-			
-			switch (colorCode[i] % 5) {
-			case 0: colorCode[i]	+= 0xff00ff00;break;
-			case 1: colorCode[i]	+= 0xff00ff04;break;
-			case 2: colorCode[i]	+= 0xff00ff03;break;
-			case 3: colorCode[i]	+= 0xff00ff02;break;
-			case 4: colorCode[i]	+= 0xff00ff01;break;
-			}
-			
 			text_pt[i]	= new Point(text_position_x[i], -1 * textHeightArray[i]);
 		}
 
 		Bitmap background	= BitmapFactory.decodeResource(getResources(),LKAndroid.getID("drawable", "blackimage"));
 		Rect rectangleForBGI	= new Rect(0, 0, getWidth(), getHeight());
-		
 
 		while(thread != null){
 			//double buffering
@@ -147,20 +132,21 @@ public class BackgroundSurfaceView extends SurfaceView implements SurfaceHolder.
 			canvas	= holder.lockCanvas();
 			canvas.drawBitmap(background, null, rectangleForBGI, null);
 
-			//lkcustom
-			
 			for(int i = 0 ; i < textImageArray.length ; i++)
 				canvas.drawBitmap(textImageArray[i], text_pt[i].x, text_pt[i].y, paint);
 
 			//완료된 화변 canvas를 현재 화면(holder)에 할당
 			holder.unlockCanvasAndPost(canvas);
 
+			colorCode	= LKAndroid.setColorGradiantly(colorCode);
+			
 			for(int i = 0 ; i != textImageArray.length ; i++){
 				if(text_pt[i].y > this.getHeight())
 					text_pt[i].y	= -1 * textHeightArray[i];
 				text_pt[i].y	+= text_speed_y[i];
-				colorCode[i]	= LKAndroid.setColorGradiantly(colorCode[i]);
-				paint.setColorFilter(new LightingColorFilter(colorCode[i], 0));
+				//텍스트마다 색상값을 중감시킵니다.
+				//변화된 텍스트 값을 paint에 저장합니다.
+				paint.setColorFilter(new LightingColorFilter(colorCode, 0));
 			}
 		}
 	}
