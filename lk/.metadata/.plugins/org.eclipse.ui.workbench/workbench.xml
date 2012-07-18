@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <workbench progressCount="39" version="2.0">
 <workbenchAdvisor/>
-<window height="768" maximized="true" width="1024" x="62" y="0">
+<window height="768" maximized="true" width="962" x="109" y="-928">
 <fastViewData fastViewLocation="1024">
 <orientation position="512" view="org.eclipse.ui.views.ProblemView"/>
 </fastViewData>
@@ -27,6 +27,7 @@
 <coolItem id="group.nav" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.navigate" itemType="typeToolBarContribution" x="190" y="22"/>
 <coolItem id="group.editor" itemType="typeGroupMarker"/>
+<coolItem id="org.eclipse.jdt.ui.ClassFileEditor" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="org.eclipse.jdt.ui.PropertiesFileEditor" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="org.eclipse.ui.DefaultTextEditor" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="org.eclipse.jdt.ui.CompilationUnitEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
@@ -47,17 +48,17 @@
 </folder>
 </info>
 </editorArea>
-<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MainActivity.java" partName="MainActivity.java" path="D:/itproject/dimension-drive-downside/lk/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/MainActivity.java" title="MainActivity.java" tooltip="Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/MainActivity.java" workbook="DefaultEditorWorkbook">
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MainActivity.java" partName="MainActivity.java" path="D:/itproject/dimension-drive-downside/lk/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/MainActivity.java" title="MainActivity.java" tooltip="Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/MainActivity.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/MainActivity.java"/>
-<editorState selectionHorizontalPixel="180" selectionLength="0" selectionOffset="4716" selectionTopPixel="1750"/>
-</editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MainTextViewListener.java" partName="MainTextViewListener.java" path="D:/itproject/dimension-drive-downside/lk/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/mainmenu/MainTextViewListener.java" title="MainTextViewListener.java" tooltip="Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/mainmenu/MainTextViewListener.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/mainmenu/MainTextViewListener.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="434" selectionTopPixel="114"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="3960" selectionTopPixel="1348"/>
 </editor>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MainPage.java" partName="MainPage.java" path="D:/itproject/dimension-drive-downside/lk/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/mainmenu/MainPage.java" title="MainPage.java" tooltip="Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/mainmenu/MainPage.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/mainmenu/MainPage.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1428" selectionTopPixel="559"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="786" selectionTopPixel="0"/>
+</editor>
+<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="CoverFlowExample.java" partName="CoverFlowExample.java" path="D:/itproject/dimension-drive-downside/lk/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/startgame/CoverFlowExample.java" title="CoverFlowExample.java" tooltip="Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/startgame/CoverFlowExample.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/startgame/CoverFlowExample.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="5792" selectionTopPixel="1862"/>
 </editor>
 </editors>
 <views>
@@ -103,8 +104,7 @@
 <view id="org.eclipse.ui.views.ProblemView" partName="Problems">
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
 <expanded>
-<category IMemento.internal.id="Warnings (6 items)"/>
-<category IMemento.internal.id="Warnings"/>
+<category IMemento.internal.id="Warnings (1 item)"/>
 <category IMemento.internal.id="Errors"/>
 </expanded>
 <columnWidths org.eclipse.ui.ide.locationField="90" org.eclipse.ui.ide.markerType="90" org.eclipse.ui.ide.pathField="120" org.eclipse.ui.ide.resourceField="90" org.eclipse.ui.ide.severityAndDescriptionField="300"/>
@@ -397,7 +397,7 @@
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
 </folder>
 </info>
-<info part="org.eclipse.ui.editorss" ratio="0.21563981" ratioLeft="273" ratioRight="993" relationship="2" relative="left"/>
+<info part="org.eclipse.ui.editorss" ratio="0.18760064" ratioLeft="233" ratioRight="1009" relationship="2" relative="left"/>
 <info folder="true" part="bottom" ratio="0.75151515" ratioLeft="496" ratioRight="164" relationship="4" relative="org.eclipse.ui.editorss">
 <folder appearance="2" expanded="2">
 <page content="org.eclipse.ui.views.ProblemView" label="LabelNotFound"/>
@@ -529,149 +529,113 @@
 <workingSets/>
 <navigationHistory>
 <editors>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/MainActivity.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" path="/Sailing Text/res/layout/activity_main.xml"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/mainmenu/MainTextViewListener.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/mainmenu/MainLinearLayout.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" path="/Sailing Text/res/layout/mainlinearlayout.xml"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/startgame/CoverFlowExample.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" path="/Sailing Text/res/layout/album_text.xml"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" path="/Sailing Text/res/layout/coverflow_main.xml"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/startgame/CoverFlow.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/mainmenu/MainPage.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" path="/Sailing Text/res/layout/rankingrelaticelayout.xml"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/ranking/RankingRelativeLayout.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/startgame/StartGameLinearLayout.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/BackgroundSurfaceView.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" path="/Sailing Text/res/layout/coverflow_main.xml"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" path="/Sailing Text/res/layout/kvbkbkvh.xml"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" path="/Sailing Text/res/values/styles.xml"/>
 </editors>
-<item historyLabel="MainTextViewListener.java" index="2">
-<position info="not_deleted" x="1204" y="0"/>
+<item historyLabel="coverflow_main.xml" index="2"/>
+<item historyLabel="album_text.xml" index="1"/>
+<item historyLabel="CoverFlowExample.java" index="0">
+<position info="not_deleted" x="10286" y="0"/>
 </item>
-<item historyLabel="MainLinearLayout.java" index="3">
-<position info="not_deleted" x="856" y="0"/>
-</item>
-<item historyLabel="MainTextViewListener.java" index="2">
+<item historyLabel="CoverFlow.java" index="3">
 <position/>
 </item>
-<item historyLabel="activity_main.xml" index="1"/>
-<item historyLabel="MainTextViewListener.java" index="2">
+<item historyLabel="CoverFlowExample.java" index="0">
+<position info="not_deleted" x="10286" y="0"/>
+</item>
+<item historyLabel="MainPage.java" index="4">
+<position info="not_deleted" x="786" y="0"/>
+</item>
+<item historyLabel="CoverFlowExample.java" index="0">
+<position info="not_deleted" x="10286" y="0"/>
+</item>
+<item historyLabel="CoverFlowExample.java" index="0">
+<position info="not_deleted" x="7457" y="0"/>
+</item>
+<item historyLabel="CoverFlowExample.java" index="0">
+<position info="not_deleted" x="7487" y="0"/>
+</item>
+<item historyLabel="CoverFlowExample.java" index="0">
+<position info="not_deleted" x="7488" y="0"/>
+</item>
+<item historyLabel="CoverFlowExample.java" index="0">
+<position info="not_deleted" x="7008" y="0"/>
+</item>
+<item historyLabel="CoverFlowExample.java" index="0">
 <position/>
 </item>
-<item historyLabel="MainLinearLayout.java" index="3">
+<item historyLabel="BackgroundSurfaceView.java" index="5">
+<position info="not_deleted" x="4832" y="0"/>
+</item>
+<item historyLabel="CoverFlowExample.java" index="0">
+<position info="not_deleted" x="8293" y="0"/>
+</item>
+<item historyLabel="album_text.xml" index="1"/>
+<item historyLabel="CoverFlowExample.java" index="0">
+<position info="not_deleted" x="8293" y="0"/>
+</item>
+<item historyLabel="MainPage.java" index="4">
+<position info="not_deleted" x="786" y="0"/>
+</item>
+<item historyLabel="coverflow_main.xml" index="6"/>
+<item historyLabel="album_text.xml" index="1"/>
+<item historyLabel="coverflow_main.xml" index="6"/>
+<item historyLabel="album_text.xml" index="1"/>
+<item historyLabel="MainPage.java" index="4">
+<position info="not_deleted" x="786" y="0"/>
+</item>
+<item historyLabel="CoverFlowExample.java" index="0">
+<position info="not_deleted" x="9588" y="0"/>
+</item>
+<item historyLabel="coverflow_main.xml" index="6"/>
+<item historyLabel="CoverFlowExample.java" index="0">
+<position info="not_deleted" x="9588" y="0"/>
+</item>
+<item historyLabel="CoverFlow.java" index="3">
+<position info="not_deleted" x="1783" y="0"/>
+</item>
+<item historyLabel="CoverFlowExample.java" index="0">
+<position info="not_deleted" x="9973" y="0"/>
+</item>
+<item historyLabel="kvbkbkvh.xml" index="7"/>
+<item historyLabel="album_text.xml" index="1"/>
+<item historyLabel="kvbkbkvh.xml" index="7"/>
+<item historyLabel="album_text.xml" index="1"/>
+<item historyLabel="kvbkbkvh.xml" index="7"/>
+<item historyLabel="album_text.xml" index="1"/>
+<item historyLabel="CoverFlowExample.java" index="0">
+<position info="not_deleted" x="9973" y="0"/>
+</item>
+<item historyLabel="album_text.xml" index="1"/>
+<item historyLabel="kvbkbkvh.xml" index="7"/>
+<item historyLabel="album_text.xml" index="1"/>
+<item historyLabel="kvbkbkvh.xml" index="7"/>
+<item historyLabel="album_text.xml" index="1"/>
+<item historyLabel="kvbkbkvh.xml" index="7"/>
+<item historyLabel="album_text.xml" index="1"/>
+<item historyLabel="CoverFlowExample.java" index="0">
+<position info="not_deleted" x="8535" y="0"/>
+</item>
+<item historyLabel="kvbkbkvh.xml" index="7"/>
+<item historyLabel="CoverFlowExample.java" index="0">
+<position info="not_deleted" x="8535" y="0"/>
+</item>
+<item historyLabel="album_text.xml" index="1"/>
+<item historyLabel="styles.xml" index="8"/>
+<item historyLabel="album_text.xml" index="1"/>
+<item historyLabel="styles.xml" index="8"/>
+<item historyLabel="CoverFlowExample.java" index="0">
+<position info="not_deleted" x="8535" y="0"/>
+</item>
+<item active="true" historyLabel="CoverFlowExample.java" index="0">
 <position/>
-</item>
-<item historyLabel="MainTextViewListener.java" index="2">
-<position info="not_deleted" x="1188" y="0"/>
-</item>
-<item historyLabel="MainLinearLayout.java" index="3">
-<position/>
-</item>
-<item historyLabel="MainTextViewListener.java" index="2">
-<position/>
-</item>
-<item historyLabel="MainLinearLayout.java" index="3">
-<position/>
-</item>
-<item historyLabel="MainLinearLayout.java" index="3">
-<position/>
-</item>
-<item historyLabel="MainLinearLayout.java" index="3">
-<position/>
-</item>
-<item historyLabel="MainLinearLayout.java" index="3">
-<position/>
-</item>
-<item historyLabel="MainLinearLayout.java" index="3">
-<position/>
-</item>
-<item historyLabel="MainLinearLayout.java" index="3">
-<position info="not_deleted" x="2834" y="0"/>
-</item>
-<item historyLabel="MainLinearLayout.java" index="3">
-<position info="not_deleted" x="3391" y="0"/>
-</item>
-<item historyLabel="MainTextViewListener.java" index="2">
-<position info="not_deleted" x="1104" y="0"/>
-</item>
-<item historyLabel="activity_main.xml" index="1"/>
-<item historyLabel="MainTextViewListener.java" index="2">
-<position info="not_deleted" x="1104" y="0"/>
-</item>
-<item historyLabel="MainLinearLayout.java" index="3">
-<position info="not_deleted" x="0" y="4477"/>
-</item>
-<item historyLabel="MainTextViewListener.java" index="2">
-<position info="not_deleted" x="1104" y="0"/>
-</item>
-<item historyLabel="MainTextViewListener.java" index="2">
-<position info="not_deleted" x="1469" y="0"/>
-</item>
-<item historyLabel="MainActivity.java" index="0">
-<position info="not_deleted" x="2244" y="0"/>
-</item>
-<item historyLabel="MainTextViewListener.java" index="2">
-<position info="not_deleted" x="1387" y="20"/>
-</item>
-<item historyLabel="MainActivity.java" index="0">
-<position info="not_deleted" x="2567" y="0"/>
-</item>
-<item historyLabel="MainTextViewListener.java" index="2">
-<position info="not_deleted" x="434" y="0"/>
-</item>
-<item historyLabel="MainActivity.java" index="0">
-<position info="not_deleted" x="2567" y="0"/>
-</item>
-<item historyLabel="MainActivity.java" index="0">
-<position/>
-</item>
-<item historyLabel="MainActivity.java" index="0">
-<position info="not_deleted" x="2461" y="0"/>
-</item>
-<item historyLabel="MainActivity.java" index="0">
-<position/>
-</item>
-<item historyLabel="MainActivity.java" index="0">
-<position info="not_deleted" x="2211" y="0"/>
-</item>
-<item historyLabel="activity_main.xml" index="1"/>
-<item historyLabel="mainlinearlayout.xml" index="4"/>
-<item historyLabel="activity_main.xml" index="1"/>
-<item historyLabel="MainActivity.java" index="0">
-<position info="not_deleted" x="2010" y="0"/>
-</item>
-<item historyLabel="MainPage.java" index="5">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="MainActivity.java" index="0">
-<position info="not_deleted" x="4679" y="0"/>
-</item>
-<item historyLabel="activity_main.xml" index="1"/>
-<item historyLabel="rankingrelaticelayout.xml" index="6"/>
-<item historyLabel="activity_main.xml" index="1"/>
-<item historyLabel="MainActivity.java" index="0">
-<position info="not_deleted" x="4679" y="0"/>
-</item>
-<item historyLabel="MainPage.java" index="5">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="MainPage.java" index="5">
-<position info="not_deleted" x="1610" y="0"/>
-</item>
-<item historyLabel="RankingRelativeLayout.java" index="7">
-<position info="not_deleted" x="4473" y="0"/>
-</item>
-<item historyLabel="MainPage.java" index="5">
-<position info="not_deleted" x="1610" y="0"/>
-</item>
-<item historyLabel="StartGameLinearLayout.java" index="8">
-<position info="not_deleted" x="3838" y="0"/>
-</item>
-<item historyLabel="MainPage.java" index="5">
-<position info="not_deleted" x="2691" y="0"/>
-</item>
-<item historyLabel="MainActivity.java" index="0">
-<position info="not_deleted" x="492" y="0"/>
-</item>
-<item historyLabel="MainPage.java" index="5">
-<position info="not_deleted" x="1428" y="0"/>
-</item>
-<item active="true" historyLabel="MainActivity.java" index="0">
-<position info="not_deleted" x="492" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -683,9 +647,9 @@
 <trimItem IMemento.internal.id="left"/>
 </trimArea>
 <trimArea IMemento.internal.id="131072">
-<trimItem IMemento.internal.id="org.eclipse.ui.editorss"/>
 <trimItem IMemento.internal.id="right"/>
 <trimItem IMemento.internal.id="org.eclipse.ui.internal.ViewStack@138e491c"/>
+<trimItem IMemento.internal.id="org.eclipse.ui.editorss"/>
 </trimArea>
 <trimArea IMemento.internal.id="128">
 <trimItem IMemento.internal.id="org.eclipse.ui.internal.WorkbenchWindow.topBar"/>
@@ -695,46 +659,54 @@
 <trimItem IMemento.internal.id="org.eclise.ui.internal.FastViewBar"/>
 <trimItem IMemento.internal.id="org.eclipse.jface.action.StatusLineManager"/>
 <trimItem IMemento.internal.id="org.eclipse.ui.internal.progress.ProgressRegion"/>
-<trimItem IMemento.internal.id="org.eclipse.ui.internal.ViewStack@436a2a52"/>
 </trimArea>
 </trimLayout>
 </window>
 <mruList>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="StartGameLinearLayout.java" tooltip="Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/startgame/StartGameLinearLayout.java">
-<persistable path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/startgame/StartGameLinearLayout.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="startgamelinearlayout.xml" tooltip="Sailing Text/res/layout/startgamelinearlayout.xml">
-<persistable path="/Sailing Text/res/layout/startgamelinearlayout.xml"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="rankingrelaticelayout.xml" tooltip="Sailing Text/res/layout/rankingrelaticelayout.xml">
-<persistable path="/Sailing Text/res/layout/rankingrelaticelayout.xml"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="activity_main.xml" tooltip="Sailing Text/res/layout/activity_main.xml">
-<persistable path="/Sailing Text/res/layout/activity_main.xml"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MainPage.java" tooltip="Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/mainmenu/MainPage.java">
-<persistable path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/mainmenu/MainPage.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="mainlinearlayout.xml" tooltip="Sailing Text/res/layout/mainlinearlayout.xml">
-<persistable path="/Sailing Text/res/layout/mainlinearlayout.xml"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MainTextViewListener.java" tooltip="Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/mainmenu/MainTextViewListener.java">
-<persistable path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/mainmenu/MainTextViewListener.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="RankingRelativeLayout.java" tooltip="Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/ranking/RankingRelativeLayout.java">
-<persistable path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/ranking/RankingRelativeLayout.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MainLinearLayout.java" tooltip="Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/mainmenu/MainLinearLayout.java">
-<persistable path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/mainmenu/MainLinearLayout.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="album_text.xml" tooltip="Sailing Text/res/layout/album_text.xml">
+<persistable path="/Sailing Text/res/layout/album_text.xml"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="styles.xml" tooltip="Sailing Text/res/values/styles.xml">
 <persistable path="/Sailing Text/res/values/styles.xml"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MainActivity.java" tooltip="Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/MainActivity.java">
-<persistable path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/MainActivity.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="kvbkbkvh.xml" tooltip="Sailing Text/res/layout/kvbkbkvh.xml">
+<persistable path="/Sailing Text/res/layout/kvbkbkvh.xml"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="CoverFlow.java" tooltip="Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/startgame/CoverFlow.java">
+<persistable path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/startgame/CoverFlow.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="coverflow_main.xml" tooltip="Sailing Text/res/layout/coverflow_main.xml">
+<persistable path="/Sailing Text/res/layout/coverflow_main.xml"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="CoverFlowExample.java" tooltip="Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/startgame/CoverFlowExample.java">
+<persistable path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/startgame/CoverFlowExample.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="BackgroundSurfaceView.java" tooltip="Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/BackgroundSurfaceView.java">
+<persistable path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/BackgroundSurfaceView.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="strings.xml" tooltip="Sailing Text/res/values/strings.xml">
+<persistable path="/Sailing Text/res/values/strings.xml"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="coverflow_main.out.xml" tooltip="Sailing Text/res/layout/coverflow_main.out.xml">
+<persistable path="/Sailing Text/res/layout/coverflow_main.out.xml"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="LKAndroid.java" tooltip="Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/lkcustom/LKAndroid.java">
 <persistable path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/lkcustom/LKAndroid.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="album_text.out.out.xml" tooltip="Sailing Text/res/layout/album_text.out.out.xml">
+<persistable path="/Sailing Text/res/layout/album_text.out.out.xml"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="album_text.out.xml" tooltip="Sailing Text/res/layout/album_text.out.xml">
+<persistable path="/Sailing Text/res/layout/album_text.out.xml"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="activity_main.xml" tooltip="Sailing Text/res/layout/activity_main.xml">
+<persistable path="/Sailing Text/res/layout/activity_main.xml"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="coverflow_main.out.out.out.out.xml" tooltip="Sailing Text/res/layout/coverflow_main.out.out.out.out.xml">
+<persistable path="/Sailing Text/res/layout/coverflow_main.out.out.out.out.xml"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="coverflow_main.out.out.out.xml" tooltip="Sailing Text/res/layout/coverflow_main.out.out.out.xml">
+<persistable path="/Sailing Text/res/layout/coverflow_main.out.out.out.xml"/>
 </file>
 </mruList>
 </workbench>
