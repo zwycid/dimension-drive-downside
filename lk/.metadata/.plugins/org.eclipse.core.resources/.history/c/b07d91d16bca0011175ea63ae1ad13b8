@@ -1,0 +1,30 @@
+package lk.summer.project;
+
+import android.content.Context;
+import android.util.AttributeSet;
+import android.widget.TextView;
+
+public class GlowingTextView extends TextView {
+	private static enum TEXT_TYPE {small, large};
+	private TEXT_TYPE textType;
+
+	public GlowingTextView(Context context, AttributeSet attrs, int defStyle) {
+		super(context, attrs, defStyle);
+		initTextView();
+	}
+
+	public GlowingTextView(Context context, AttributeSet attrs) {
+		super(context, attrs);
+		initTextView();
+	}
+
+	public GlowingTextView(Context context) {
+		super(context);
+		initTextView();
+	}
+	
+	public void initTextView(){
+		textType	= TEXT_TYPE.small;
+	}
+
+}

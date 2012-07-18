@@ -1,0 +1,16 @@
+package lk.summer.project;
+
+import android.content.Context;
+import android.util.AttributeSet;
+import android.widget.LinearLayout;
+
+public class MainmenuLinearLayout extends LinearLayout {
+
+	public MainmenuLinearLayout(Context context, AttributeSet attrs) {
+		super(context, attrs);
+	}
+
+	public MainmenuLinearLayout(Context context) {
+		super(context);
+	}
+}

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/blankView1"
+        style="@style/blankView"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/textViewTitleRanking"
+        style="@style/TitleText"
+        android:layout_alignRight="@+id/blankView1"
+        android:layout_below="@+id/blankView1"
+        android:text="@string/Ranking" />
+
+    <TextView
+        android:id="@+id/blankView2"
+        style="@style/blankView"
+        android:layout_alignLeft="@+id/textViewTitleRanking"
+        android:layout_below="@+id/textViewTitleRanking" />
+
+    <TextView
+        android:id="@+id/textViewButtonSwap"
+        style="@style/ButtonText"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/blankView2"
+        android:text="@string/Ranking" />
+
+    <TextView
+        android:id="@+id/textViewButtonReset"
+        style="@style/ButtonText"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/blankView2"
+        android:text="@string/reset" />
+
+</RelativeLayout>

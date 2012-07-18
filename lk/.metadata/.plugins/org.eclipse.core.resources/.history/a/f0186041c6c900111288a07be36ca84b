@@ -1,0 +1,13 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="AppTheme" parent="android:Theme.Light" />
+
+    <style name="GlowingText">
+        <item name="android:shadowColor">#66ffff</item>
+        <item name="android:shadowDx">0.0</item>
+        <item name="android:shadowDy">0.0</item>
+        <item name="android:shadowRadius">10</item>
+        <item name="android:textColor">#66ffff</item>
+    </style>
+
+</resources>

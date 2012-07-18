@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00000000"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/StartgameBlankView"
+        style="@style/blankView"
+        android:text="@string/Startgame" />
+
+    <TextView
+        android:id="@+id/StartgameTextViewTitle"
+        android:layout_gravity="center_horizontal"
+        style="@style/TitleText"
+        android:text="@string/Startgame" />
+
+    <TextView
+        android:id="@+id/StartgameBlankView0"
+        style="@style/blankView" />
+
+    <TextView
+        android:id="@+id/StartgameTextViewNewgame"
+        android:layout_gravity="center_horizontal"
+        style="@style/ButtonText"
+        android:text="@string/newGame" />
+
+    <TextView
+        android:id="@+id/StartgameBlankView1"
+        style="@style/blankView" />
+
+    <TextView
+        android:id="@+id/StartgameTextViewLoadgame"
+        android:layout_gravity="center_horizontal"
+        style="@style/ButtonText"
+        android:text="@string/loadGame" />
+
+</LinearLayout>

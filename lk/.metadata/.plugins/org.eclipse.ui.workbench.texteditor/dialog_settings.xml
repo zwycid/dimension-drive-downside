@@ -2,10 +2,10 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="261" key="DIALOG_WIDTH"/>
-		<item value="229" key="DIALOG_Y_ORIGIN"/>
+		<item value="287" key="DIALOG_Y_ORIGIN"/>
 		<item value="380" key="DIALOG_HEIGHT"/>
-		<item value="683" key="DIALOG_X_ORIGIN"/>
-		<item value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|5|0|맑은 고딕" key="DIALOG_FONT_NAME"/>
+		<item value="784" key="DIALOG_X_ORIGIN"/>
+		<item value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="true" key="wrap"/>
@@ -13,26 +13,26 @@
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="((MainActivity) getContext()).getPreferTextSizeForWindow" key="selection"/>
+		<item value="0x" key="selection"/>
 		<list key="findhistory">
-			<item value="this.getPreferTextSizeForWindow"/>
-			<item value="getMainActivity()."/>
-			<item value="startgameli"/>
-			<item value="Mainmenu"/>
-			<item value="Mainmenut"/>
-			<item value="mainmenu"/>
-			<item value="getLayoutInflater().inflate("/>
-			<item value=", this"/>
+			<item value="0xff"/>
+			<item value="gap"/>
+			<item value="scal"/>
+			<item value="adapter"/>
+			<item value="fad"/>
+			<item value="fading"/>
+			<item value="coverf"/>
+			<item value="*0.6"/>
 		</list>
 		<list key="replacehistory">
+			<item value="0x"/>
+			<item value="*0.4"/>
+			<item value="//"/>
+			<item value="thumbnail_sizeup_map"/>
 			<item value="((MainActivity) getContext()).getPreferTextSizeForWindow"/>
 			<item value="this."/>
 			<item value="this`."/>
 			<item value="Main"/>
-			<item value="MainT"/>
-			<item value="main"/>
-			<item value="this.findViewById("/>
-			<item value=""/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.GotoLineAction$GotoLineDialog_dialogBounds">

@@ -8,6 +8,8 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.ColorFilter;
+import android.graphics.LightingColorFilter;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
@@ -18,7 +20,7 @@ import android.view.SurfaceView;
 public class BackgroundSurfaceView extends SurfaceView implements SurfaceHolder.Callback, Runnable {
 
 	private static final int THE_NUMBER_OF_FALLING_TEXT	= 10;
-	private static final int FALLING_TEXT_MAX_SPEED	= 20;
+	private static final int FALLING_TEXT_MAX_SPEED	= 25;
 	private static final int FALLING_TEXT_MIN_SPEED	= 5;
 
 	private Thread thread;
@@ -77,12 +79,14 @@ public class BackgroundSurfaceView extends SurfaceView implements SurfaceHolder.
 	}
 
 	public void run() {
-		Random random			= new Random();
-		Paint paint				= new Paint();
+		Random random		= new Random();
+		Paint paint			= new Paint();
 
-		int[] text_speed_x		= new int[textImageArray.length];
-		int[] text_speed_y		= new int[textImageArray.length];
-		Point[] text_pt			= new Point[textImageArray.length];
+		int[] text_speed_x	= new int[textImageArray.length];
+		int[] text_speed_y	= new int[textImageArray.length];
+		Point[] text_pt		= new Point[textImageArray.length];
+		//lkcustom
+		int[] colorCode		= new int[textImageArray.length];
 		
 		SurfaceHolder holder	= this.getHolder();
 		Canvas canvas;
@@ -91,13 +95,26 @@ public class BackgroundSurfaceView extends SurfaceView implements SurfaceHolder.
 		for(int i = 0 ; i < textImageArray.length ; i++){
 			//일단 겹침 없이 출력되는 걸로
 			text_speed_x[i]	= (this.getWidth() / THE_NUMBER_OF_FALLING_TEXT) * i;
-			text_speed_y[i]	= Math.abs(random.nextInt() % FALLING_TEXT_MAX_SPEED) + FALLING_TEXT_MIN_SPEED;
-
+//			text_speed_y[i]	= Math.abs(random.nextInt() % FALLING_TEXT_MAX_SPEED) + FALLING_TEXT_MIN_SPEED;
+			text_speed_y[i]	= ((int) (Math.abs(random.nextInt() % FALLING_TEXT_MAX_SPEED) + FALLING_TEXT_MIN_SPEED)/5);
+//			text_speed_y[i]	= ((int) (FALLING_TEXT_MAX_SPEED + FALLING_TEXT_MIN_SPEED )/10);
+			
+			colorCode[i]	= 0xffff0000;
+			
+			switch (colorCode[i] % 5) {
+			case 0: colorCode[i]	+= 0xff00ff00;break;
+			case 1: colorCode[i]	+= 0xff00ff04;break;
+			case 2: colorCode[i]	+= 0xff00ff03;break;
+			case 3: colorCode[i]	+= 0xff00ff02;break;
+			case 4: colorCode[i]	+= 0xff00ff01;break;
+			}
+			
 			text_pt[i]	= new Point(text_speed_x[i], -1 * textHeightArray[i]);
 		}
 
 		Bitmap background	= BitmapFactory.decodeResource(getResources(),LKAndroid.getID("drawable", "blackimage"));
 		Rect rectangleForBGI	= new Rect(0, 0, getWidth(), getHeight());
+		
 
 		while(thread != null){
 			//double buffering
@@ -105,6 +122,8 @@ public class BackgroundSurfaceView extends SurfaceView implements SurfaceHolder.
 			canvas	= holder.lockCanvas();
 			canvas.drawBitmap(background, null, rectangleForBGI, null);
 
+			//lkcustom
+			
 			for(int i = 0 ; i < textImageArray.length ; i++)
 				canvas.drawBitmap(textImageArray[i], text_pt[i].x, text_pt[i].y, paint);
 
@@ -115,9 +134,11 @@ public class BackgroundSurfaceView extends SurfaceView implements SurfaceHolder.
 				if(text_pt[i].y > this.getHeight())
 					text_pt[i].y	= -1 * textHeightArray[i];
 				text_pt[i].y	+= text_speed_y[i];
+				colorCode[i]	= LKAndroid.setColorGradiantly(colorCode[i]);
+				paint.setColorFilter(new LightingColorFilter(colorCode[i], 0));
 			}
 		}
-	}	
+	}
 
 	public void surfaceCreated(SurfaceHolder holder) {
 		thread	= new Thread(this);
