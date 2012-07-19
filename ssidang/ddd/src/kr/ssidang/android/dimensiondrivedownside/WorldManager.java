@@ -54,6 +54,7 @@ public class WorldManager {
 	Paint debugOrange;
 	Paint debugText;
 	Paint debugRed;
+	Paint debugGreen;
 	
 	///////////////////////////////////////////////////////////////////////////
 	// GameData
@@ -110,6 +111,10 @@ public class WorldManager {
 			debugRed = new Paint(Paint.ANTI_ALIAS_FLAG);
 			debugRed.setColor(Color.RED);
 			debugRed.setStrokeWidth(3);
+			
+			debugGreen = new Paint(Paint.ANTI_ALIAS_FLAG);
+			debugGreen.setColor(0x4030f030);
+			debugGreen.setStrokeWidth(3);
 		}
 	}
 	
@@ -171,7 +176,8 @@ public class WorldManager {
 	}
 
 	public void makeMockWorld() {
-		stage = Stage.fromData("[mapsize],800,800/[s],100,400/[f],750,750/[b],400,300,700,500/[a],200,620/");
+		stage = Stage.fromData("[mapsize],800,800/[s],100,400/[f],750,750/[b],400,300,700,500/" +
+								"[a],200,620/[c],256,93/[c],640,142/[c],380,621/[c],684,386/");
 	}
 	
 //	/**
@@ -300,6 +306,11 @@ public class WorldManager {
 			ob.draw(canvas);
 		}
 		
+		// sentry 그리기
+		for (Sentry sen : stage.sentries) {
+			sen.draw(canvas);
+		}
+		
 		// 공 그리기
 		ball.draw(canvas);
 	}
@@ -310,7 +321,7 @@ public class WorldManager {
 		onRenderPlaying(canvas);
 		
 		resetView(canvas);
-		canvas.drawColor(0x8090a090);
+		canvas.drawColor(0x809090a0);
 		canvas.drawText("Win", G.screenWidth / 2 - 8,
 				G.screenHeight / 2 + 3, debugText);
 	}
@@ -423,11 +434,16 @@ public class WorldManager {
 //					afterPos.x, afterPos.y, debugBlue);
 		}
 		
-		// 배경 파티클 처리
-		moveParticles(ball.pos.x, ball.pos.y, afterPos.x - beforePos.x, afterPos.y - beforePos.y);
-		
 		// 공의 새 위치를 확정합니다.
 		ball.pos.set(afterPos);
+		
+		// sentry 처리
+		for (Sentry sen : stage.sentries) {
+			traceSentries(ball, sen);
+		}
+		
+		// 배경 파티클 처리
+		moveParticles(beforePos, afterPos);
 		
 		// 골에 도달했는지 검사합니다.
 		if (Vector2D.distance(ball.pos, stage.goal.pos) < ball.radius + stage.goal.radius) {
@@ -451,8 +467,10 @@ public class WorldManager {
 		G.tick++;
 	}
 
-	private void moveParticles(float lookAtX, float lookAtY, float dx, float dy) {
+	private void moveParticles(Vector2D beforePos, Vector2D afterPos) {
 		// 방향을 표시하는 파티클을 처리합니다.
+		float dx = afterPos.x - beforePos.x;
+		float dy = afterPos.y - beforePos.y;
 		float halfWidth = G.screenWidth / 2;
 		float halfHeight = G.screenHeight / 2;
 		
@@ -462,14 +480,14 @@ public class WorldManager {
 				float offsetX = random.nextFloat() * G.screenWidth - halfWidth;
 				float offsetY = random.nextFloat() * G.screenHeight - halfHeight;
 				float lifetime = random.nextFloat() * 60 + 30;
-				particles[i] = new Particle(lookAtX + offsetX, lookAtY + offsetY, lifetime);
+				particles[i] = new Particle(afterPos.x + offsetX, afterPos.y + offsetY, lifetime);
 			}
 			
 			Particle p = particles[i];
 			if (p.isDead())
 				particles[i] = null;
-			else if (!p.isInBound(lookAtX - halfWidth, lookAtY - halfHeight,
-					lookAtX + halfWidth, lookAtY + halfHeight)) {
+			else if (!p.isInBound(afterPos.x - halfWidth, afterPos.y - halfHeight,
+					afterPos.x + halfWidth, afterPos.y + halfHeight)) {
 				// 화면 벗어나면 빨리 죽인다
 				particles[i] = null;
 			}
@@ -477,6 +495,19 @@ public class WorldManager {
 				// 움직임의 반대 방향으로 꼬리 추가
 				p.age(G.delta);
 				p.addTrail(-dx * .7f, -dy * .7f);
+			}
+		}
+	}
+
+	private void traceSentries(Ball ball, Sentry sen) {
+		float r = Vector2D.distance(ball.pos, sen.pos);
+		if (r < sen.sight) {
+			Vector2D dir = Vector2D.subtract(ball.pos, sen.pos);
+			sen.dir.add(dir).setLength(Sentry.SENTRY_SPEED * r / sen.sight);
+			sen.pos.add(sen.dir);
+			
+			if (G.debug_ > 0) {
+				debugCanvas.drawCircle(sen.pos.x, sen.pos.y, sen.sight, debugGreen);
 			}
 		}
 	}

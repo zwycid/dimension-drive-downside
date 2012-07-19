@@ -252,14 +252,23 @@ public class Vector2D extends PointF {
 	}
 	
 	/**
+	 * 이 벡터에 대한 법선 방향만 구합니다.
+	 * 
+	 * @return	결과 벡터
+	 */
+	public Vector2D getNormalDir() {
+		// 단순히 x, y를 바꾸면 된다.
+		return new Vector2D(y, x);
+	}
+	
+	/**
 	 * 이 벡터에 대한 법선을 구합니다.
 	 * X축에 대한 법선은 Y축이며, 벡터를 90도 회전한 것과 같습니다.
 	 * 
 	 * @return	결과 벡터
 	 */
 	public Vector2D getNormal() {
-		// 단순히 x, y를 바꾸면 된다.
-		return new Vector2D(y, x).normalize();
+		return getNormalDir().normalize();
 	}
 	
 	/**

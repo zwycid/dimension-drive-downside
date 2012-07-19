@@ -12,6 +12,7 @@ public class Stage {
 	public Portal goal;
 	public List<Obstacle> obstacles = new ArrayList<Obstacle>();
 	public List<Attractor> attractors = new ArrayList<Attractor>();
+	public List<Sentry> sentries = new ArrayList<Sentry>();
 	
 	// 외부에서 만들어줘야만 함
 	private Stage() {}
@@ -54,11 +55,12 @@ public class Stage {
 					stage.goal = new Portal(nextFloat(tok), nextFloat(tok), 40);
 				}
 				else if (item.equals("[a]")) {
-					// TODO 끌개; attractor
+					// 끌개; attractor
 					stage.attractors.add(new Attractor(nextFloat(tok), nextFloat(tok), 150, 3000));
 				}
 				else if (item.equals("[c]")) {
-					// TODO sentry
+					// sentry
+					stage.sentries.add(new Sentry(nextFloat(tok), nextFloat(tok), 200));
 				}
 				else if (item.equals("[b]")) {
 					// 장애물
