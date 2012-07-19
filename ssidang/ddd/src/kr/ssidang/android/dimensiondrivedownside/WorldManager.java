@@ -22,9 +22,9 @@ public class WorldManager {
 	private static final int DEBUG_LEVEL = 3;
 	
 	private static final float AIR_FRICTION_COEFFICIENT = .1f;
-	private static final float GRAVITY_CONSTANT = 1.5f;
+	private static final float GRAVITY_CONSTANT = .5f;
 	private static final float BORDER_THICK = 20;
-	private static final int MAX_PARTICLE = 15;
+	private static final int MAX_PARTICLE = 30;
 	
 	private static final int STATE_READY = 0;
 	private static final int STATE_PAUSED = 1;
@@ -270,11 +270,6 @@ public class WorldManager {
 			canvas.setMatrix(null);
 			canvas.scale(s, s);
 		}
-	
-		float border = BORDER_THICK / 2;
-		canvas.drawRect(-border, -border,
-				stage.width + border, stage.height + border,
-				borderPaint);
 		
 		// 방향 표시 파티클
 		for (Particle p : particles) {
@@ -282,6 +277,11 @@ public class WorldManager {
 				p.draw(canvas);
 			}
 		}
+		
+		float border = BORDER_THICK / 2;
+		canvas.drawRect(-border, -border,
+				stage.width + border, stage.height + border,
+				borderPaint);
 		
 		// 시작점 / 골 그려주기 (임시)
 		Paint portalPaint = new Paint();
@@ -410,6 +410,9 @@ public class WorldManager {
 //					afterPos.x, afterPos.y, debugBlue);
 		}
 		
+		// 배경 파티클 처리
+		moveParticles(afterPos.x - beforePos.x, afterPos.y - beforePos.y);
+		
 		// 공의 새 위치를 확정합니다.
 		ball.pos.set(afterPos);
 		
@@ -417,9 +420,6 @@ public class WorldManager {
 		if (Vector2D.distance(ball.pos, stage.goal.pos) < ball.radius + stage.goal.radius) {
 			G.state = STATE_COMPLETED;
 		}
-		
-		// 배경 파티클 처리
-		moveParticles();
 	}
 
 	private void onFrameCompleted() {
@@ -438,24 +438,33 @@ public class WorldManager {
 		G.tick++;
 	}
 
-	private void moveParticles() {
+	private void moveParticles(float dx, float dy) {
 		// 방향을 표시하는 파티클을 처리합니다.
+		float halfWidth = G.screenWidth / 2;
+		float halfHeight = G.screenHeight / 2;
+		float x = ball.pos.x;
+		float y = ball.pos.y;
+		
 		for (int i = 0; i < particles.length; ++i) {
 			if (particles[i] == null) {
 				// 공 근방에 아무 위치에나 만들기
-				float offsetX = random.nextFloat() * G.screenWidth - G.screenWidth / 2;
-				float offsetY = random.nextFloat() * G.screenHeight - G.screenHeight / 2;
-				float lifetime = random.nextFloat() * 45 + 15;
-				particles[i] = new Particle(offsetX, offsetY, lifetime);
+				float offsetX = random.nextFloat() * G.screenWidth - halfWidth;
+				float offsetY = random.nextFloat() * G.screenHeight - halfHeight;
+				float lifetime = random.nextFloat() * 60 + 30;
+				particles[i] = new Particle(x + offsetX, y + offsetY, lifetime);
 			}
 			
 			Particle p = particles[i];
 			if (p.isDead())
 				particles[i] = null;
+			else if (! p.isInBound(x - halfWidth, y - halfHeight, x + halfWidth, y + halfHeight)) {
+				// 화면 벗어나면 빨리 죽인다
+				particles[i] = null;
+			}
 			else {
-				// 꼬리 추가
+				// 움직임의 반대 방향으로 꼬리 추가
 				p.age(G.delta);
-				p.addTrail(ball.pos.x, ball.pos.y);
+				p.addTrail(-dx * .7f, -dy * .7f);
 			}
 		}
 	}

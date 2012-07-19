@@ -49,6 +49,14 @@ public class GameView extends SurfaceView implements
 		return G;
 	}
 	
+	public void onPause() {
+		world.pause(true);
+	}
+	
+	public void onResume() {
+		// pass
+	}
+	
 	public boolean onTouchEvent(Activity parent, MotionEvent event) {
 		return (world.onTouchEvent(parent, event));
 	}

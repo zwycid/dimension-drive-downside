@@ -48,6 +48,7 @@ public class GameActivity extends Activity implements
 	protected void onResume() {
 		super.onResume();
 		
+		gameView.onResume();
 		Log.d("ddd", "Sensor acquired.");
         sensorManager.registerListener(this, orientSensor,
         		SensorManager.SENSOR_DELAY_NORMAL);
@@ -59,6 +60,7 @@ public class GameActivity extends Activity implements
 	protected void onPause() {
 		super.onPause();
 		
+		gameView.onPause();
 		Log.d("ddd", "Sensor unacquired.");
         sensorManager.unregisterListener(this, orientSensor);
 	}
