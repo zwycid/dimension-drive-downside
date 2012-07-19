@@ -15,7 +15,7 @@ public class Ball extends Unit {
 	public float radius;
 	public float restitution;
 	public float mass;
-//	public int hitpoint;
+	public int hitpoint;
 	
 	// 그리기 데이터
 	private Matrix drawMat;
@@ -39,10 +39,10 @@ public class Ball extends Unit {
 		this.drawMat = new Matrix();
 		this.restitution = .8f;
 		this.mass = 1.f;
+		this.hitpoint = 100;
 		
 		ballPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 		ballPaint.setColor(0xffa7dbf3);
-		
 	}
 
 	public void draw(Canvas canvas) {

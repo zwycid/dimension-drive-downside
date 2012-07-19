@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Paint.Cap;
 import android.graphics.Paint.Style;
 import android.graphics.RectF;
 import android.util.FloatMath;
@@ -23,8 +24,10 @@ public class WorldManager {
 	
 	private static final float AIR_FRICTION_COEFFICIENT = .1f;
 	private static final float GRAVITY_CONSTANT = .5f;
+	
 	private static final float BORDER_THICK = 20;
 	private static final int MAX_PARTICLE = 30;
+	private static final int MAX_BULLET = 100;
 	
 	private static final int STATE_READY = 0;
 	private static final int STATE_PAUSED = 1;
@@ -36,6 +39,7 @@ public class WorldManager {
 	private Stage stage;
 	private Ball ball;
 	private Particle[] particles;
+	private Bullet[] bullets;
 	private int score;
 	
 	// 시점(view)에 관련된 사항
@@ -82,7 +86,6 @@ public class WorldManager {
 	}
 	
 	public WorldManager(Context context) {
-		this.particles = new Particle[MAX_PARTICLE];
 		this.random = new Random();
 		this.G = new GameParams();
 		this.lookAt = new Vector2D();
@@ -103,18 +106,22 @@ public class WorldManager {
 			debugBlue = new Paint();
 			debugBlue.setColor(Color.BLUE);
 			debugBlue.setStrokeWidth(7);
+			debugBlue.setStrokeCap(Cap.ROUND);
 			
 			debugOrange = new Paint();
 			debugOrange.setColor(0xffff8030);
 			debugOrange.setStrokeWidth(5);
+			debugOrange.setStrokeCap(Cap.ROUND);
 			
 			debugRed = new Paint(Paint.ANTI_ALIAS_FLAG);
 			debugRed.setColor(Color.RED);
 			debugRed.setStrokeWidth(3);
+			debugRed.setStrokeCap(Cap.ROUND);
 			
 			debugGreen = new Paint(Paint.ANTI_ALIAS_FLAG);
 			debugGreen.setColor(0x4030f030);
 			debugGreen.setStrokeWidth(3);
+			debugGreen.setStrokeCap(Cap.ROUND);
 		}
 	}
 	
@@ -279,7 +286,7 @@ public class WorldManager {
 		
 		// 방향 표시 파티클
 		for (Particle p : particles) {
-			if (p != null) {
+			if (! p.isDead()) {
 				p.draw(canvas);
 			}
 		}
@@ -306,13 +313,19 @@ public class WorldManager {
 			ob.draw(canvas);
 		}
 		
+		// 공 그리기
+		ball.draw(canvas);
+		
+		// 총알 그리기
+		for (Bullet b : bullets) {
+			if (! b.isDead())
+				b.draw(canvas);
+		}
+		
 		// sentry 그리기
 		for (Sentry sen : stage.sentries) {
 			sen.draw(canvas);
 		}
-		
-		// 공 그리기
-		ball.draw(canvas);
 	}
 
 	private void onRenderCompleted(Canvas canvas) {
@@ -369,6 +382,8 @@ public class WorldManager {
 //					+ "\nRoll = " + G.roll
 					+ "\nMap = (" + stage.width + ", " + stage.height + ")"
 					+ "\nPos = (" + ball.pos.x + ", " + ball.pos.y + ")"
+					+ "\nScore = " + score
+					+ "\nHP = " + ball.hitpoint
 					, 0, 0, debugText);
 			
 			float centerX = G.screenWidth / 2;
@@ -382,9 +397,17 @@ public class WorldManager {
 	}
 
 	private void onFrameReady() {
-		ball = new Ball(ballBitmap, stage.start.pos.x, stage.start.pos.y, 20);
-		G.timestamp = System.currentTimeMillis();
+		particles = new Particle[MAX_PARTICLE];
+		bullets = new Bullet[MAX_BULLET];
 		
+		for (int i = 0; i < particles.length; ++i)
+			particles[i] = new Particle();
+		for (int i = 0; i < bullets.length; ++i)
+			bullets[i] = new Bullet();
+		
+		ball = new Ball(ballBitmap, stage.start.pos.x, stage.start.pos.y, 20);
+		
+		G.timestamp = System.currentTimeMillis();
 		G.playTime = 0;
 		G.baseTime = G.timestamp;
 		
@@ -430,8 +453,6 @@ public class WorldManager {
 			Vector2D dir = Vector2D.subtract(afterPos, beforePos).setLength(50);
 			GameUtil.drawArrow(debugCanvas, beforePos.x, beforePos.y,
 					beforePos.x + dir.x, beforePos.y + dir.y, debugBlue);
-//			GameUtil.drawArrow(debugCanvas, beforePos.x, beforePos.y,
-//					afterPos.x, afterPos.y, debugBlue);
 		}
 		
 		// 공의 새 위치를 확정합니다.
@@ -439,16 +460,25 @@ public class WorldManager {
 		
 		// sentry 처리
 		for (Sentry sen : stage.sentries) {
+			sen.chargeWeapon();
 			traceSentries(ball, sen);
 		}
+		
+		// 총알 처리
+		moveBullets(ball);
 		
 		// 배경 파티클 처리
 		moveParticles(beforePos, afterPos);
 		
 		// 골에 도달했는지 검사합니다.
-		if (Vector2D.distance(ball.pos, stage.goal.pos) < ball.radius + stage.goal.radius) {
+		if (checkGoalReached()) {
 			G.state = STATE_COMPLETED;
 		}
+	}
+
+	private boolean checkGoalReached() {
+		return Vector2D.distance(ball.pos, stage.goal.pos)
+				< ball.radius + stage.goal.radius;
 	}
 
 	private void onFrameCompleted() {
@@ -474,27 +504,41 @@ public class WorldManager {
 		float halfWidth = G.screenWidth / 2;
 		float halfHeight = G.screenHeight / 2;
 		
-		for (int i = 0; i < particles.length; ++i) {
-			if (particles[i] == null) {
+		for (Particle p : particles) {
+			if (p.isDead()) {
 				// 공 근방에 아무 위치에나 만들기
 				float offsetX = random.nextFloat() * G.screenWidth - halfWidth;
 				float offsetY = random.nextFloat() * G.screenHeight - halfHeight;
 				float lifetime = random.nextFloat() * 60 + 30;
-				particles[i] = new Particle(afterPos.x + offsetX, afterPos.y + offsetY, lifetime);
+				p.reset(afterPos.x + offsetX, afterPos.y + offsetY, lifetime);
 			}
 			
-			Particle p = particles[i];
-			if (p.isDead())
-				particles[i] = null;
-			else if (!p.isInBound(afterPos.x - halfWidth, afterPos.y - halfHeight,
+			if (!p.isInBound(afterPos.x - halfWidth, afterPos.y - halfHeight,
 					afterPos.x + halfWidth, afterPos.y + halfHeight)) {
 				// 화면 벗어나면 빨리 죽인다
-				particles[i] = null;
+				p.kill();
 			}
 			else {
 				// 움직임의 반대 방향으로 꼬리 추가
 				p.age(G.delta);
 				p.addTrail(-dx * .7f, -dy * .7f);
+			}
+		}
+	}
+	
+	private void moveBullets(Ball ball) {
+		for (Bullet b : bullets) {
+			if (! b.isDead()) {
+				b.trace();
+				
+				// 공에 맞았으면...
+				// TODO Sound: 맞는소리
+				if (b.isHit(ball)) {
+					ball.hitpoint -= 1;
+					b.kill();
+				}
+				else
+					b.age(G.delta);
 			}
 		}
 	}
@@ -504,7 +548,10 @@ public class WorldManager {
 		if (r < sen.sight) {
 			Vector2D dir = Vector2D.subtract(ball.pos, sen.pos);
 			sen.dir.add(dir).setLength(Sentry.SENTRY_SPEED * r / sen.sight);
-			sen.pos.add(sen.dir);
+			if (r > ball.radius * 2.5f)
+				sen.pos.add(sen.dir);
+			
+			sen.tryShootTarget(bullets, ball.pos);
 			
 			if (G.debug_ > 0) {
 				debugCanvas.drawCircle(sen.pos.x, sen.pos.y, sen.sight, debugGreen);

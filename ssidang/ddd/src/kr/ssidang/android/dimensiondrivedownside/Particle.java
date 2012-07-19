@@ -20,6 +20,10 @@ public class Particle {
 	// 그리기 데이터
 	private Paint linePaint;
 	
+	public Particle() {
+		init();
+	}
+	
 	public Particle(float x, float y, float lifetime) {
 		init();
 		reset(x, y, lifetime);
@@ -38,6 +42,10 @@ public class Particle {
 		this.y = y;
 		this.lifetime = lifetime;
 		this.birthday = lifetime;
+		
+		first = 0;
+		last = 0;
+		count = 0;
 	}
 	
 	public void addTrail(float dx, float dy) {
@@ -58,6 +66,13 @@ public class Particle {
 	
 	public void age(float dt) {
 		lifetime = Math.max(lifetime - dt, 0);
+	}
+	
+	public void kill() {
+		lifetime = 0;
+		first = 0;
+		last = 0;
+		count = 0;
 	}
 	
 	public boolean isDead() {
