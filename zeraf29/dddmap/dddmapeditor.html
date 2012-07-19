@@ -68,6 +68,7 @@
                 case 2: DrawCircle(2); break;
                 case 3: DrawCircle(3); break;
                 case 4: DrawCircle(4); break;
+                case 5: DrawCircle(5); break;
             }
             mflag = false;
         }
@@ -102,7 +103,7 @@
                     tString += "[s]";
                     break;
                 case 2:
-                    circlecolor = "Yellow"
+                    circlecolor = "Red"
                     tString += "[f]";
                     break;
                 case 3:
@@ -112,6 +113,10 @@
                 case 4:
                     circlecolor = "Black"
                     tString += "[c]";
+                    break;
+                case 5:
+                    circlecolor = "Yellow"
+                    tString += "[i]";
                     break;
             }
             tString += ","+centerX+","+centerY+"/";
@@ -171,6 +176,7 @@
     <input type="button" value="F-point" onclick="clickCircle(2)"/>
     <input type="button" value="Attractor" onclick="clickCircle(3)"/>
     <input type="button" value="Crack" onclick="clickCircle(4)"/>
+	<input type="button" value="Coin" onclick="clickCircle(5)"/>
     <input type="button" value="뒤로" onclick="redo();"/>
     <input type="button" value="출력" onclick="document.getElementById('tStringDiv').innerHTML=tString;"/>
     <input type="button" value="저장" onclick="saveFile();"/>
