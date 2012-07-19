@@ -13,6 +13,7 @@ public class Stage {
 	public List<Obstacle> obstacles = new ArrayList<Obstacle>();
 	public List<Attractor> attractors = new ArrayList<Attractor>();
 	public List<Sentry> sentries = new ArrayList<Sentry>();
+	public List<Coin> coins = new ArrayList<Coin>();
 	
 	/**
 	 * 직접 만들 수 없습니다.
@@ -71,6 +72,10 @@ public class Stage {
 					// 장애물
 					stage.obstacles.add(new Obstacle(nextFloat(tok),
 							nextFloat(tok), nextFloat(tok), nextFloat(tok)));
+				}
+				else if (item.equals("[i]")) {
+					// 동전
+					stage.coins.add(new Coin(nextFloat(tok), nextFloat(tok)));
 				}
 			}
 		}

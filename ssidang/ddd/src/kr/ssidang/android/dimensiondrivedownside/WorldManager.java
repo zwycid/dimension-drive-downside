@@ -52,6 +52,8 @@ public class WorldManager {
 	private Bitmap swirlBitmap;
 	private Bitmap sentryBitmap;
 	private Bitmap markerBitmap;
+	private Bitmap goalBitmap;
+	private Bitmap coinBitmap;
 
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -93,6 +95,8 @@ public class WorldManager {
 		swirlBitmap = BitmapFactory.decodeResource(res, R.drawable.swirl);
 		sentryBitmap = BitmapFactory.decodeResource(res, R.drawable.sentry);
 		markerBitmap = BitmapFactory.decodeResource(res, R.drawable.marker);
+		goalBitmap = BitmapFactory.decodeResource(res, R.drawable.goal);
+		coinBitmap = BitmapFactory.decodeResource(res, R.drawable.coin);
 	}
 	
 	public GameParams getGameParams() {
@@ -180,43 +184,26 @@ public class WorldManager {
 	}
 
 	public void makeMockWorld() {
-		stage = Stage.fromData("[mapsize],800,800/[s],100,400/[f],700,700/[b],400,300,700,500/" +
-								"[a],200,620/[c],256,93/[c],640,142/[c],380,621/[c],684,386/");
+//		stage = Stage.fromData("[mapsize],800,800/[s],100,400/[f],700,700/[b],400,300,700,500/" +
+//								"[a],200,620/[c],256,93/[c],640,142/[c],380,621/[c],684,386/");
+		stage = Stage.fromData("[mapsize],600,1200/[b],69,76,114,290/[b],184,80,229,283/[b],106,163,199,200/" +
+					"[b],101,245,219,283/[b],299,78,329,282/[b],323,156,385,178/[b],378,83,415,283/[b],136,365,385,391/" +
+					"[b],354,376,378,521/[b],233,458,271,553/[b],136,541,410,571/[b],125,638,360,662/[b],188,655,214,747/" +
+					"[b],269,657,313,741/[b],140,730,353,757/[b],399,623,423,808/[b],418,695,498,721/[f],79,1116/" +
+					"[c],86,940/[c],129,958/[c],180,996/[c],196,1026/[c],215,1068/[c],228,1100/[c],236,1124/[c],241,1147/" +
+					"[a],74,458/[a],518,245/[a],510,521/[a],519,816/[s],146,27/[i],256,77/[i],274,105/[i],273,133/" +
+					"[i],269,167/[i],265,200/[i],266,252/[i],268,298/[i],101,331/[i],161,332/[i],215,323/[i],306,325/" +
+					"[i],360,323/[i],414,311/[i],453,308/[i],150,418/[i],215,418/[i],256,418/[i],315,417/[i],309,455/" +
+					"[i],308,484/[i],168,481/[i],134,508/[i],84,535/[i],80,590/[i],133,597/[i],188,595/[i],233.5,592/" +
+					"[i],278,591/[i],313,590/[i],351,587/[i],391,590/[i],433,591/[i],444,535/[i],435,492/[i],435,441/" +
+					"[i],439,398/[i],445,370/[i],460,93/[i],460,127/[i],460,162/[i],465,201/[i],461,237/[i],456,271/" +
+					"[i],351,206/[i],354,240/[i],355,288/[i],360,125.5/[i],356,90/[i],354,48/[i],411,51/[i],443,54/" +
+					"[i],300,51/[i],146,78/[i],146,112/[i],146,137/[i],65,37/[i],39,53/[i],33,90/[i],34,123/[i],35,153/" +
+					"[i],31,188.5/[i],35.5,230/[i],40,272/[i],43,307/[i],140,679/[i],105,683/[i],79,687/[i],85,746/" +
+					"[i],94,787/[i],156,788/[i],198,789/[i],225,789/[i],264.5,794/[i],305,783/[i],355,783/[i],355,693/" +
+					"[i],383,639/[i],386,668/[i],384,706/[i],376,751/[i],448,653/[i],504,668/[i],508,731/[i],475,741/" +
+					"[i],449,749/[i],451,799/");
 	}
-	
-//	/**
-//	 * 테스트 메서드; 아무 블럭이나 추가함
-//	 */
-//	private void makeRandomWorld() {
-//		// 10배 너비로 합시다.
-//		width = 160 * 10;
-//		height = 160 * 10;
-//		
-//		Random r = new Random();
-//		obstacles.clear();
-//		// 한 30개 정도는 만들어야 하지 않겠어요.
-//		for (int i = 0; i < 30; ++i) {
-//			int width = 30 + r.nextInt(170);
-//			int x = r.nextInt((int) this.width);
-//			int y = r.nextInt((int) this.height);
-//			obstacles.add(new Obstacle(x, y, x + width, y + (6000 / width)));
-//		}
-//		
-//		ball = new Ball(ballBitmap, 0, 0, 20);
-//		startPoint = new Portal(r.nextInt((int) width), r.nextInt((int) height), 20);
-//		goal = new Portal(r.nextInt((int) width), r.nextInt((int) height), 20);
-//	}
-//	
-//	private void makeWorld1() {
-//		width = 160 * 5;
-//		height = 160 * 5;
-//		
-//		obstacles.clear();
-//		obstacles.add(new Obstacle(400, 300, 700, 500));
-//		ball = new Ball(ballBitmap, 0, 0, 30);
-//		startPoint = new Portal(100, 400, 30);
-//		goal = new Portal(750, 750, 40);
-//	}
 	
 	private void resetView(Canvas canvas) {
 		canvas.setMatrix(null);
@@ -329,6 +316,7 @@ public class WorldManager {
 			float s = G.scaleRatio / stage.width * SCALE_UNIT * 0.99f;
 			canvas.setMatrix(null);
 			canvas.scale(s, s);
+			canvas.translate(-lookAt.x * .3f, -lookAt.y * .3f);
 		}
 		
 		// 방향 표시 파티클
@@ -338,20 +326,11 @@ public class WorldManager {
 			}
 		}
 		
-		float border = BORDER_THICK / 2;
-		canvas.drawRect(-border, -border,
-				stage.width + border, stage.height + border,
-				borderPaint);
-		
-		// 시작점 / 골 그리기 (임시)
-		Paint portalPaint = new Paint();
-		portalPaint.setColor(0xfff9ae4a);
-		canvas.drawCircle(stage.start.pos.x, stage.start.pos.y, stage.start.radius, portalPaint);
-		portalPaint.setColor(0xff9afa5a);
-		canvas.drawCircle(stage.goal.pos.x, stage.goal.pos.y, stage.goal.radius, portalPaint);
+		// 골 그리기
+		stage.goal.draw(canvas, goalBitmap);
 		
 		// 끌개 그리기
-		for (Attractor att: stage.attractors) {
+		for (Attractor att : stage.attractors) {
 			att.draw(canvas, swirlBitmap);
 		}
 	
@@ -360,11 +339,23 @@ public class WorldManager {
 			ob.draw(canvas);
 		}
 		
+		// 테두리
+		float border = BORDER_THICK / 2;
+		canvas.drawRect(-border, -border,
+				stage.width + border, stage.height + border,
+				borderPaint);
+		
 		if (Vis.isEnabled()) {
 			// sentry 시야 표시
 			for (Sentry sen : stage.sentries)
 				if (sen.debug_inSight)
 					canvas.drawCircle(sen.pos.x, sen.pos.y, sen.sight, Vis.green);
+		}
+		
+		// 동전 그리기
+		for (Coin coin : stage.coins) {
+			if (! coin.isEaten())
+				coin.draw(canvas, coinBitmap);
 		}
 		
 		// 공 그리기
@@ -456,6 +447,12 @@ public class WorldManager {
 		G.playTime += (G.timestamp - G.baseTime);
 		G.baseTime = G.timestamp;
 		
+		// 공이 죽었는지 검사합니다.
+		if (ball.isDead()) {
+			G.state = STATE_DEAD;
+			return;
+		}
+		
 		// 중력 및 공기 저항
 		ball.acc.x = FloatMath.cos(G.gravityDirection) * GRAVITY_CONSTANT;
 		ball.acc.y = -FloatMath.sin(G.gravityDirection) * GRAVITY_CONSTANT;
@@ -465,6 +462,15 @@ public class WorldManager {
 		for (Attractor att : stage.attractors) {
 			att.rotate(delta);
 			attractBall(ball, att);
+		}
+		
+		// 동전 처묵
+		for (Coin coin : stage.coins) {
+			coin.rotate(delta);
+			if (! coin.isEaten() && coin.isHit(ball)) {
+				score += Coin.COIN_SCORE;
+				coin.eat();
+			}
 		}
 
 		// 공 속도 및 방향
@@ -506,13 +512,9 @@ public class WorldManager {
 		// 배경 파티클 처리
 		moveParticles(beforePos, afterPos);
 		
-		// 공이 죽었는지 검사합니다.
-		if (ball.isDead()) {
-			G.state = STATE_DEAD;
-		}
-		
 		// 골에 도달했는지 검사합니다.
-		if (stage.goal.isOverlapped(ball) < 0) {
+		stage.goal.rotate(delta);
+		if (stage.goal.isOverlapped(ball) < -stage.goal.radius * .7f) {
 			G.state = STATE_COMPLETED;
 		}
 	}
