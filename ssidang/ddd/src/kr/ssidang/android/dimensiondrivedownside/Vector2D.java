@@ -4,6 +4,8 @@ import android.graphics.PointF;
 import android.util.FloatMath;
 
 public class Vector2D extends PointF {
+	public static final float SQRT_2 = 1.414213562f;
+	
 	public Vector2D() {
 	}
 	
@@ -138,17 +140,6 @@ public class Vector2D extends PointF {
 	}
 	
 	/**
-	 * 벡터 길이의 제곱값을 구합니다.
-	 * (벡터 길이는 PointF.length() 이용)
-	 * 
-	 * @see super#length()
-	 * @return	벡터 길이의 제곱값
-	 */
-	public float lengthSq() {
-		return (x * x + y * y);
-	}
-
-	/**
 	 * 벡터 길이를 1로 만듭니다.
 	 * 
 	 * @return	자기 자신
@@ -174,6 +165,26 @@ public class Vector2D extends PointF {
 	}
 	
 	/**
+	 * 유클리드 평면 상에서 원점과 거리의 제곱을 구합니다.
+	 * 
+	 * @param x
+	 * @param y
+	 * @return
+	 */
+	public static float lengthSq(float x, float y) {
+		return (x * x + y * y);
+	}
+	
+	/**
+	 * 벡터 길이 제곱을 구합니다.
+	 * 
+	 * @return		벡터 길이의 제곱
+	 */
+	public float lengthSq() {
+		return lengthSq(x, y);
+	}
+	
+	/**
 	 * 벡터 방향과 길이를 지정하여 새 벡터를 지정합니다.
 	 * 
 	 * @see	super#set(PointF)
@@ -193,7 +204,7 @@ public class Vector2D extends PointF {
 	 * 벡터의 내적을 구합니다.
 	 * 
 	 * @param v
-	 * @return	내적 값
+	 * @return		내적 값
 	 */
 	public float dotProd(PointF v) {
 		return dotProd(this, v);
@@ -204,10 +215,23 @@ public class Vector2D extends PointF {
 	 * 
 	 * @param v1
 	 * @param v2
-	 * @return	내적 값
+	 * @return		내적 값
 	 */
 	public static float dotProd(PointF v1, PointF v2) {
-		return v1.x * v2.x + v1.y * v2.y;
+		return dotProd(v1.x, v1.y, v2.x, v2.y);
+	}
+	
+	/**
+	 * 내적을 구합니다.
+	 * 
+	 * @param v1x
+	 * @param v1y
+	 * @param v2x
+	 * @param v2y
+	 * @return		내적 값
+	 */
+	public static float dotProd(float v1x, float v1y, float v2x, float v2y) {
+		return v1x * v2x + v1y * v2y;
 	}
 	
 	/**
@@ -228,14 +252,23 @@ public class Vector2D extends PointF {
 	}
 	
 	/**
+	 * 이 벡터에 대한 법선 방향만 구합니다.
+	 * 
+	 * @return	결과 벡터
+	 */
+	public Vector2D getNormalDir() {
+		// 단순히 x, y를 바꾸면 된다.
+		return new Vector2D(y, x);
+	}
+	
+	/**
 	 * 이 벡터에 대한 법선을 구합니다.
 	 * X축에 대한 법선은 Y축이며, 벡터를 90도 회전한 것과 같습니다.
 	 * 
 	 * @return	결과 벡터
 	 */
 	public Vector2D getNormal() {
-		// 단순히 x, y를 바꾸면 된다.
-		return new Vector2D(y, x).normalize();
+		return getNormalDir().normalize();
 	}
 	
 	/**
@@ -287,6 +320,94 @@ public class Vector2D extends PointF {
 		out.x = p0.x + (p1.x - p0.x) * t;
 		out.y = p0.y + (p1.y - p0.y) * t;
 		return true;
+	}
+	
+	/**
+	 * 이 벡터를 proj 벡터 위로 정사영합니다.
+	 * 
+	 * @param proj	정사영 할 축
+	 * @return		자기 자신
+	 */
+	public Vector2D project(PointF proj) {
+		// this = proj_proj(this)
+		// ortho = proj_y(x) --> y * (x.y / y.y)
+		float l = dotProd(this, proj) / dotProd(proj, proj);
+		x = proj.x * l;
+		y = proj.y * l;
+		return this;
+	}
+	
+	/**
+	 * 점 p0, p1을 지나는 직선과 점 point 사이의 거리 제곱을 구합니다.
+	 * 
+	 * @param p0
+	 * @param p1
+	 * @param point
+	 * @return
+	 */
+	public static float distanceSq(PointF p0, PointF p1, PointF point) {
+		float proj_x = p1.x - p0.x;
+		float proj_y = p1.y - p0.y;
+		float p_x = point.x - p0.x;
+		float p_y = point.y - p0.y;
+		
+		// 정사영 길이의 제곱을 구합니다.
+		float dot1 = dotProd(proj_x, proj_y, p_x, p_y);
+		float dot2 = dotProd(proj_x, proj_y, proj_x, proj_y);
+		float length = dot1 * dot1 / dot2;
+		
+		// point 벡터 길이의 제곱을 구합니다.
+		float side = dotProd(p_x, p_y, p_x, p_y);
+		return side - length;
+	}
+	
+	/**
+	 * 점 p0, p1을 지나는 직선과 점 point 사이의 거리를 구합니다.
+	 *
+	 * @see #distanceSq()
+	 */
+	public static float distance(PointF p0, PointF p1, PointF point) {
+		return FloatMath.sqrt(distanceSq(p0, p1, point));
+	}
+	
+	/**
+	 * 평면 상에서 두 점 사이의 거리 제곱을 구합니다.
+	 * 
+	 * @param p
+	 * @param q
+	 * @return
+	 */
+	public static float distanceSq(PointF p, PointF q) {
+		return lengthSq(q.x - p.x, q.y - p.y);
+	}
+	
+	/**
+	 * 평면 상에서 두 점 사이의 거리를 구합니다.
+	 * 
+	 * @param p
+	 * @param q
+	 * @return
+	 */
+	public static float distance(PointF p, PointF q) {
+		return FloatMath.sqrt(distanceSq(p, q));
+	}
+	
+	/**
+	 * 사각 영역 안에 점이 들어있는지 확인합니다.
+	 * 
+	 * @param left
+	 * @param top
+	 * @param right
+	 * @param bottom
+	 * @return
+	 */
+	public static boolean inBounds(float x, float y, float left, float top,
+			float right, float bottom) {
+		return (x >= left && x <= right) && (y >= top && y <= bottom);
+	}
+	
+	public boolean inBounds(float left, float top, float right, float bottom) {
+		return inBounds(x, y, left, top, right, bottom);
 	}
 
 }

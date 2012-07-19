@@ -1,12 +1,12 @@
 package kr.ssidang.android.dimensiondrivedownside;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.util.AttributeSet;
-import android.util.FloatMath;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -14,23 +14,8 @@ public class GameView extends SurfaceView implements
 		SurfaceHolder.Callback,
 		RenderThread.Renderable {
 	
-	public static final float SCALE_UNIT = 160.f;
-	public static final float TIME_UNIT = 30.f;
-	
-	private float width;
-	private float height;
-	private float scaleFactor;
-	private long timestamp;
-	
 	private RenderThread renderer;
 	private WorldManager world;
-	private WorldManager.GameParams G;
-	
-	// 그리기 데이터
-	private int tick;
-	private Paint textPaint;
-	private Paint linePaint;
-	private Paint rectPaint;
 	
 	///////////////////////////////////////////////////////////////////////////
 	// 생성자
@@ -38,34 +23,49 @@ public class GameView extends SurfaceView implements
 	
 	public GameView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
-		init();
+		init(context);
 	}
 
 	public GameView(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		init();
+		init(context);
 	}
 
 	public GameView(Context context) {
 		super(context);
-		init();
+		init(context);
 	}
 	
-	private void init() {
+	private void init(Context context) {
 		getHolder().addCallback(this);
 		
-		world = new WorldManager();
-		G = world.getGameParams();
+		// TODO 여기서 스테이지 넘어온 거 받든가 해야 함
+		world = new WorldManager(context);
 		world.makeMockWorld();
 	}
 	
-	public WorldManager.GameParams getGameParams() {
-		return G;
+	void onPause() {
+		world.pause(true);
 	}
 	
-	private void resetView(Canvas canvas) {
-		canvas.setMatrix(null);
-		canvas.scale(scaleFactor, scaleFactor);
+	void onResume() {
+		// pass
+	}
+	
+	void onSensorEvent(float azimuth, float pitch, float roll) {
+		world.onSensorEvent(azimuth, pitch, roll);
+	}
+	
+	boolean onTouchEvent(Activity parent, MotionEvent event) {
+		return world.onTouchEvent(parent, event);
+	}
+	
+	boolean onKeyDown(Activity parent, int keyCode, KeyEvent event) {
+		return world.onKeyDown(parent, keyCode, event);
+	}
+	
+	void onBackPressed(Activity parent) {
+		world.onBackPressed(parent);
 	}
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -73,20 +73,14 @@ public class GameView extends SurfaceView implements
 	///////////////////////////////////////////////////////////////////////////
 	
 	public void surfaceCreated(SurfaceHolder holder) {
-		Log.d("ddd", "surfaceCreated()");
 		renderer = new RenderThread(holder, this);
-		Log.d("ddd", "Renderer created.");
+		Log.d("ddd", "surfaceCreated(), Renderer created.");
 	}
 
 	public void surfaceChanged(SurfaceHolder holder, int format, int width,
 			int height) {
 		Log.d("ddd", "surfaceChanged(" + width + ", " + height + ")");
-
-		// 좌표계를 맞춥니다.
-		int length = Math.min(width, height);
-		scaleFactor = length / SCALE_UNIT;
-		this.width = width / scaleFactor;
-		this.height = height / scaleFactor;
+		world.onScreenSize(width, height);
 
 		// 렌더링 시작.
 		renderer.start();
@@ -94,10 +88,9 @@ public class GameView extends SurfaceView implements
 	}
 
 	public void surfaceDestroyed(SurfaceHolder holder) {
-		Log.d("ddd", "surfaceDestroyed()");
 		renderer.shutdown();
 		renderer = null;
-		Log.d("ddd", "Renderer shutdowned.");
+		Log.d("ddd", "surfaceDestroyed(), Renderer shutdowned.");
 	}
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -105,67 +98,14 @@ public class GameView extends SurfaceView implements
 	///////////////////////////////////////////////////////////////////////////
 
 	public void onRenderBegin() {
-		textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-		textPaint.setColor(Color.WHITE);
-		textPaint.setTextSize(8);
-		
-		linePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-		linePaint.setColor(Color.RED);
-		linePaint.setStrokeWidth(3);
-		
-		rectPaint = new Paint();
-		rectPaint.setColor(0xff108810);
-		
-		timestamp = System.currentTimeMillis();
 	}
 
 	public void onRender(Canvas canvas) {
-		long now = System.currentTimeMillis();
-		G.delta = (now - timestamp) / TIME_UNIT;
-		
-		tick++;
-		// 배경 지우기
-		resetView(canvas);
-		canvas.drawColor(Color.BLACK);
-		
-		// 아래 방향
-		float length = 50;
-		float sign = (G.pitch >= 0 ? -1.f : 1.f);
-		float rad = (float) Math.toRadians((-90 - G.roll) * sign);
-		float offsetX = FloatMath.cos(rad) * length;
-		float offsetY = FloatMath.sin(rad) * length;
-		
-		G.gravityDirection = (float) rad;
-		world.draw(canvas);
-		world.moveObjects(canvas, G.delta);
-		
-		if (G.debug_) {
-			// TODO Debug
-			resetView(canvas);
-			
-			float fps = 1000.f / (G.delta * TIME_UNIT);
-			GameUtil.drawTextMultiline(canvas,
-					"Tick: " + tick + " (fps: " + fps + ")"
-					+ "\nScreen = (" + width + ", " + height + ")"
-//					+ "\nAzimuth = " + G.azimuth
-//					+ "\nPitch = " + G.pitch
-//					+ "\nRoll = " + G.roll
-					, 0, 0, textPaint);
-			
-			float centerX = width / 2;
-			float centerY = height / 2;
-			GameUtil.drawArrow(canvas, centerX, centerY,
-					centerX + offsetX, centerY - offsetY, linePaint);
-			
-		}
-		
-		timestamp = now;
+		world.onFrame();
+		world.onRender(canvas);
 	}
 
 	public void onRenderEnd() {
-		textPaint = null;
-		linePaint = null;
-		rectPaint = null;
 	}
 
 }

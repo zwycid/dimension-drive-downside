@@ -27,6 +27,7 @@ import java.util.Calendar;
 import mju.summer2012.itproject.team3.EventsData;
 import mju.summer2012.itproject.team3.lk.sailingtext.R;
 import mju.summer2012.itproject.team3.lk.sailingtext.lkcustom.LKAndroid;
+import mju.summer2012.itproject.team3.sound.SoundManager;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
@@ -99,10 +100,17 @@ public class CoverFlowExample extends Activity {
 	};
 	//TODO DB 객체 선
 	private EventsData events;
-	
+	//TODO sound by jh
+	SoundManager sManager;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		//TODO sound by jh
+		sManager = SoundManager.getInstance();
+		sManager.init(this);
+		sManager.addSound(0,R.raw.click);
+		
 		//TODO DB파일 생성 부분 by jh
 		events = new EventsData(this); 
 		setContentView(R.layout.coverflow_main);
@@ -415,4 +423,12 @@ public class CoverFlowExample extends Activity {
     	values.put(SCORE,score);
     	db.insertOrThrow(TABLE_NAME, null, values);
 	}
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+		sManager.play(0); //TODO sound by jh
+		super.onBackPressed();
+	}
+	
+	
 }
