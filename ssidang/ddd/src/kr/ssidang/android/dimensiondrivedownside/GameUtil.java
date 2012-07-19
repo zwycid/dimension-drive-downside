@@ -7,13 +7,21 @@ import android.graphics.Paint;
 
 public class GameUtil {
 	
-	// 그리기 관련
-	
-	public static void drawTextMultiline(Canvas canvas, String str, float x,
-			float y, Paint paint) {
+	/**
+	 * 문자열 여러 줄을 출력합니다. baseline 기준이 아닌, 좌상점을 기준으로 합니다.
+	 * 
+	 * @param canvas	그려줄 캔버스
+	 * @param str		그릴 문자열
+	 * @param x
+	 * @param y
+	 * @param paint
+	 */
+	public static void drawTextMultiline(Canvas canvas, String str,
+			float x, float y, Paint paint) {
 		float lineHeight = (-paint.ascent() + paint.descent()) * 1.1f;
 		float top = y + -paint.ascent();
 		
+		// 한 줄씩 그려줍니다.
 		StringTokenizer tok = new StringTokenizer(str, "\n");
 		while (tok.hasMoreTokens()) {
 			canvas.drawText(tok.nextToken(), x, top, paint);
@@ -21,6 +29,16 @@ public class GameUtil {
 		}
 	}
 
+	/**
+	 * 화살표를 그려줍니다.
+	 * 
+	 * @param canvas
+	 * @param startX
+	 * @param startY
+	 * @param stopX
+	 * @param stopY
+	 * @param paint
+	 */
 	public static void drawArrow(Canvas canvas, float startX, float startY,
 			float stopX, float stopY, Paint paint) {
 		// 오른쪽 날개: +90도

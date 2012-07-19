@@ -5,18 +5,23 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 public class Stage {
-	public float width;
-	public float height;
+	public float width;		// stage 너비
+	public float height;	// stage 높이
 	
-	public Portal start;
-	public Portal goal;
+	public Portal start;	// 출발점
+	public Portal goal;		// 도착점
 	public List<Obstacle> obstacles = new ArrayList<Obstacle>();
 	public List<Attractor> attractors = new ArrayList<Attractor>();
 	public List<Sentry> sentries = new ArrayList<Sentry>();
 	
-	// 외부에서 만들어줘야만 함
+	/**
+	 * 직접 만들 수 없습니다.
+	 */
 	private Stage() {}
 	
+	/**
+	 * 유틸리티 메서드
+	 */
 	private static float nextFloat(StringTokenizer tok) {
 		return Float.parseFloat(tok.nextToken());
 	}

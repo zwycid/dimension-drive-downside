@@ -11,7 +11,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Cap;
 import android.graphics.Paint.Style;
-import android.graphics.RectF;
 import android.util.FloatMath;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -53,19 +52,17 @@ public class WorldManager {
 	private Bitmap ballBitmap;
 	
 	// 디버깅용...........
-	Canvas debugCanvas;
-	Paint debugBlue;
-	Paint debugOrange;
-	Paint debugText;
-	Paint debugRed;
-	Paint debugGreen;
+	Paint debug_text;
+	Paint debug_blue;
+	Paint debug_orange;
+	Paint debug_red;
+	Paint debug_green;
 	
 	///////////////////////////////////////////////////////////////////////////
 	// GameData
 	///////////////////////////////////////////////////////////////////////////
 	class GameParams {
 		int debug_;
-		
 		int state = STATE_READY;
 		
 		float screenWidth;
@@ -99,29 +96,29 @@ public class WorldManager {
 
 		{
 			// TODO 디버그 코드
-			debugText = new Paint(Paint.ANTI_ALIAS_FLAG);
-			debugText.setColor(Color.WHITE);
-			debugText.setTextSize(8);
+			debug_text = new Paint(Paint.ANTI_ALIAS_FLAG);
+			debug_text.setColor(Color.WHITE);
+			debug_text.setTextSize(8);
 			
-			debugBlue = new Paint();
-			debugBlue.setColor(Color.BLUE);
-			debugBlue.setStrokeWidth(7);
-			debugBlue.setStrokeCap(Cap.ROUND);
+			debug_blue = new Paint();
+			debug_blue.setColor(Color.BLUE);
+			debug_blue.setStrokeWidth(7);
+			debug_blue.setStrokeCap(Cap.ROUND);
 			
-			debugOrange = new Paint();
-			debugOrange.setColor(0xffff8030);
-			debugOrange.setStrokeWidth(5);
-			debugOrange.setStrokeCap(Cap.ROUND);
+			debug_orange = new Paint();
+			debug_orange.setColor(0xffff8030);
+			debug_orange.setStrokeWidth(5);
+			debug_orange.setStrokeCap(Cap.ROUND);
 			
-			debugRed = new Paint(Paint.ANTI_ALIAS_FLAG);
-			debugRed.setColor(Color.RED);
-			debugRed.setStrokeWidth(3);
-			debugRed.setStrokeCap(Cap.ROUND);
+			debug_red = new Paint(Paint.ANTI_ALIAS_FLAG);
+			debug_red.setColor(Color.RED);
+			debug_red.setStrokeWidth(3);
+			debug_red.setStrokeCap(Cap.ROUND);
 			
-			debugGreen = new Paint(Paint.ANTI_ALIAS_FLAG);
-			debugGreen.setColor(0x4030f030);
-			debugGreen.setStrokeWidth(3);
-			debugGreen.setStrokeCap(Cap.ROUND);
+			debug_green = new Paint(Paint.ANTI_ALIAS_FLAG);
+			debug_green.setColor(0x4030f030);
+			debug_green.setStrokeWidth(3);
+			debug_green.setStrokeCap(Cap.ROUND);
 		}
 	}
 	
@@ -129,7 +126,27 @@ public class WorldManager {
 		return G;
 	}
 	
-	public boolean onTouchEvent(Activity parent, MotionEvent event) {
+	void onScreenSize(int width, int height) {
+		// 좌표계를 맞춥니다.
+		int length = Math.min(width, height);
+		
+		G.scaleFactor = length / SCALE_UNIT;
+		G.screenWidth = width / G.scaleFactor;
+		G.screenHeight = height / G.scaleFactor;
+	}
+	
+	void onSensorEvent(float azimuth, float pitch, float roll) {
+		G.azimuth = azimuth;
+		G.pitch = pitch;
+		G.roll = roll;
+		
+		// 아래 방향 찾기...
+		float sign = (pitch >= 0 ? -1.f : 1.f);
+		float rad = (float) Math.toRadians((-90 - roll) * sign);
+		G.gravityDirection = (float) rad;
+	}
+	
+	boolean onTouchEvent(Activity parent, MotionEvent event) {
 		if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
 			if (G.state == STATE_COMPLETED)
 				parent.finish();
@@ -140,7 +157,7 @@ public class WorldManager {
 		return false;
 	}
 	
-	public boolean onKeyDown(Activity parent, int keyCode, KeyEvent event) {
+	boolean onKeyDown(Activity parent, int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_MENU) {
 			// TODO 디버그 레벨 설정
 			G.debug_ = (G.debug_ + 1) % DEBUG_LEVEL;
@@ -149,7 +166,7 @@ public class WorldManager {
 		return false;
 	}
 	
-	public void onBackPressed(Activity parent) {
+	void onBackPressed(Activity parent) {
 		if (G.state == STATE_COMPLETED)
 			parent.finish();
 		else if (isPaused())
@@ -232,8 +249,6 @@ public class WorldManager {
 	 * @param canvas
 	 */
 	public void onRender(Canvas canvas) {
-		debugCanvas = canvas;
-
 		switch (G.state) {
 		case STATE_READY:
 			onRenderReady(canvas);
@@ -251,6 +266,57 @@ public class WorldManager {
 			onRenderDead(canvas);
 			break;
 		}
+		
+		if (G.debug_ > 0) {
+			resetView(canvas);
+			
+			float fps = 1000.f / (G.delta * TIME_UNIT);
+			GameUtil.drawTextMultiline(canvas,
+					"Tick: " + G.tick + " / " + (G.playTime) + "ms (fps: " + fps + ")"
+					+ "\nScreen = (" + G.screenWidth + ", " + G.screenHeight + ")"
+//					+ "\nAzimuth = " + G.azimuth
+//					+ "\nPitch = " + G.pitch
+//					+ "\nRoll = " + G.roll
+					+ "\nMap = (" + stage.width + ", " + stage.height + ")"
+					+ "\nPos = (" + ball.pos.x + ", " + ball.pos.y + ")"
+					+ "\nScore = " + score
+					+ "\nHP = " + ball.hitpoint
+					, 0, 0, debug_text);
+			
+			float centerX = G.screenWidth / 2;
+			float centerY = G.screenHeight / 2;
+			float offsetX = FloatMath.cos(G.gravityDirection) * 50;
+			float offsetY = FloatMath.sin(G.gravityDirection) * 50;
+			GameUtil.drawArrow(canvas, centerX, centerY,
+					centerX + offsetX, centerY - offsetY, debug_red);
+		}
+	}
+
+	/**
+	 * 물체들을 움직입니다.
+	 * 
+	 * @param delta
+	 */
+	public void onFrame() {
+		updateTick();
+		
+		switch (G.state) {
+		case STATE_READY:
+			onFrameReady();
+			break;
+		case STATE_PAUSED:
+			onFramePaused();
+			break;
+		case STATE_PLAYING:
+			onFramePlaying(G.delta);
+			break;
+		case STATE_COMPLETED:
+			onFrameCompleted();
+			break;
+		case STATE_DEAD:
+			onFrameDead();
+			break;
+		}
 	}
 
 	private void onRenderReady(Canvas canvas) {
@@ -265,7 +331,7 @@ public class WorldManager {
 		resetView(canvas);
 		canvas.drawColor(0xa0000000);
 		canvas.drawText("Paused", G.screenWidth / 2 - 13,
-				G.screenHeight / 2 + 3, debugText);
+				G.screenHeight / 2 + 3, debug_text);
 	}
 
 	private void onRenderPlaying(Canvas canvas) {
@@ -279,6 +345,7 @@ public class WorldManager {
 		canvas.translate(-lookAt.x, -lookAt.y);
 		
 		if (G.debug_ > 1) {
+			// 맵 전체 보기
 			float s = G.scaleFactor / stage.width * SCALE_UNIT * 0.99f;
 			canvas.setMatrix(null);
 			canvas.scale(s, s);
@@ -313,8 +380,29 @@ public class WorldManager {
 			ob.draw(canvas);
 		}
 		
+		if (G.debug_ > 0) {
+			// sentry 시야 표시
+			for (Sentry sen : stage.sentries)
+				if (sen.debug_inSight)
+					canvas.drawCircle(sen.pos.x, sen.pos.y, sen.sight, debug_green);
+		}
+		
 		// 공 그리기
 		ball.draw(canvas);
+		
+		if (G.debug_ > 0) {
+			// 공 방향 표시
+			GameUtil.drawArrow(canvas, ball.debug_pos.x, ball.debug_pos.y,
+					ball.debug_pos.x + ball.debug_dir.x,
+					ball.debug_pos.y + ball.debug_dir.y, debug_blue);
+			
+			// 끌개 힘 표시
+			for (Attractor att : stage.attractors)
+				if (att.debug_inInfluence)
+					GameUtil.drawArrow(canvas, ball.pos.x, ball.pos.y,
+							ball.pos.x + att.debug_force.x * 100,
+							ball.pos.y + att.debug_force.y * 100, debug_orange);
+		}
 		
 		// 총알 그리기
 		for (Bullet b : bullets) {
@@ -336,77 +424,26 @@ public class WorldManager {
 		resetView(canvas);
 		canvas.drawColor(0x809090a0);
 		canvas.drawText("Win", G.screenWidth / 2 - 8,
-				G.screenHeight / 2 + 3, debugText);
+				G.screenHeight / 2 + 3, debug_text);
 	}
 
 	private void onRenderDead(Canvas canvas) {
 		// TODO onRenderDead
 	}
 
-	/**
-	 * 물체들을 움직입니다.
-	 * 
-	 * @param delta
-	 */
-	public void onFrame(float delta) {
-		switch (G.state) {
-		case STATE_READY:
-			onFrameReady();
-			break;
-		case STATE_PAUSED:
-			onFramePaused();
-			break;
-		case STATE_PLAYING:
-			onFramePlaying(delta);
-			break;
-		case STATE_COMPLETED:
-			onFrameCompleted();
-			break;
-		case STATE_DEAD:
-			onFrameDead();
-			break;
-		}
-		
-		updateTick();
-		
-		// TODO Debug
-		if (G.debug_ > 0) {
-			resetView(debugCanvas);
-			
-			float fps = 1000.f / (G.delta * TIME_UNIT);
-			GameUtil.drawTextMultiline(debugCanvas,
-					"Tick: " + G.tick + " / " + (G.playTime) + "ms (fps: " + fps + ")"
-					+ "\nScreen = (" + G.screenWidth + ", " + G.screenHeight + ")"
-//					+ "\nAzimuth = " + G.azimuth
-//					+ "\nPitch = " + G.pitch
-//					+ "\nRoll = " + G.roll
-					+ "\nMap = (" + stage.width + ", " + stage.height + ")"
-					+ "\nPos = (" + ball.pos.x + ", " + ball.pos.y + ")"
-					+ "\nScore = " + score
-					+ "\nHP = " + ball.hitpoint
-					, 0, 0, debugText);
-			
-			float centerX = G.screenWidth / 2;
-			float centerY = G.screenHeight / 2;
-			float offsetX = FloatMath.cos(G.gravityDirection) * 50;
-			float offsetY = FloatMath.sin(G.gravityDirection) * 50;
-			GameUtil.drawArrow(debugCanvas, centerX, centerY,
-					centerX + offsetX, centerY - offsetY, debugRed);
-			
-		}
-	}
-
 	private void onFrameReady() {
+		// 파티클, 총알 목록을 미리 만들어둡니다.
 		particles = new Particle[MAX_PARTICLE];
 		bullets = new Bullet[MAX_BULLET];
-		
 		for (int i = 0; i < particles.length; ++i)
 			particles[i] = new Particle();
 		for (int i = 0; i < bullets.length; ++i)
 			bullets[i] = new Bullet();
 		
+		// 공을 시작점에 둡니다.
 		ball = new Ball(ballBitmap, stage.start.pos.x, stage.start.pos.y, 20);
 		
+		// 시간을 초기화합니다.
 		G.timestamp = System.currentTimeMillis();
 		G.playTime = 0;
 		G.baseTime = G.timestamp;
@@ -428,7 +465,7 @@ public class WorldManager {
 		ball.acc.y = -FloatMath.sin(G.gravityDirection) * GRAVITY_CONSTANT;
 		ball.acc.add(ball.velo, -AIR_FRICTION_COEFFICIENT);
 		
-		// 끌개 끌어당김 처리
+		// 끌개 처리
 		for (Attractor att : stage.attractors) {
 			attractBall(ball, att);
 		}
@@ -448,12 +485,10 @@ public class WorldManager {
 			collisionBallWithObstacle(ball, ob, beforePos, afterPos);
 		}
 		
-		if (G.debug_ > 0) {
-			// 공 방향 표시
-			Vector2D dir = Vector2D.subtract(afterPos, beforePos).setLength(50);
-			GameUtil.drawArrow(debugCanvas, beforePos.x, beforePos.y,
-					beforePos.x + dir.x, beforePos.y + dir.y, debugBlue);
-		}
+		// 공 방향 계산
+		ball.debug_pos.set(beforePos);
+		ball.debug_dir.set(afterPos);
+		ball.debug_dir.subtract(beforePos).setLength(50);
 		
 		// 공의 새 위치를 확정합니다.
 		ball.pos.set(afterPos);
@@ -531,7 +566,7 @@ public class WorldManager {
 			if (! b.isDead()) {
 				b.trace();
 				
-				// 공에 맞았으면...
+				// 총알이 공에 맞았으면...
 				// TODO Sound: 맞는소리
 				if (b.isHit(ball)) {
 					ball.hitpoint -= 1;
@@ -546,17 +581,11 @@ public class WorldManager {
 	private void traceSentries(Ball ball, Sentry sen) {
 		float r = Vector2D.distance(ball.pos, sen.pos);
 		if (r < sen.sight) {
-			Vector2D dir = Vector2D.subtract(ball.pos, sen.pos);
-			sen.dir.add(dir).setLength(Sentry.SENTRY_SPEED * r / sen.sight);
-			if (r > ball.radius * 2.5f)
-				sen.pos.add(sen.dir);
-			
+			sen.trace(ball, r);
 			sen.tryShootTarget(bullets, ball.pos);
-			
-			if (G.debug_ > 0) {
-				debugCanvas.drawCircle(sen.pos.x, sen.pos.y, sen.sight, debugGreen);
-			}
 		}
+
+		sen.debug_inSight = (r < sen.sight);
 	}
 
 	private void attractBall(Ball ball, Attractor att) {
@@ -568,12 +597,10 @@ public class WorldManager {
 			Vector2D force = Vector2D.subtract(att.pos, ball.pos)
 					.setLength(g);
 			ball.acc.add(force);
-			
-			if (G.debug_ > 0) {
-				GameUtil.drawArrow(debugCanvas, ball.pos.x, ball.pos.y,
-						ball.pos.x + force.x * 100, ball.pos.y + force.y * 100, debugOrange);
-			}
+			att.debug_force.set(force);
 		}
+		
+		att.debug_inInfluence = (r < att.influence);
 	}
 
 	private void collisionBallWithObstacle(Ball ball, Obstacle ob,
@@ -582,32 +609,31 @@ public class WorldManager {
 		Vector2D edge2 = new Vector2D();
 		Vector2D normal = new Vector2D();
 		
-		RectF bound = ob.getBounds();
 		float radius = ball.radius;
 		
 		// 근사적으로 코너도 처리함
 		
 		// left
-		edge1.set(bound.left - radius, bound.top - radius);
-		edge2.set(bound.left - radius, bound.bottom + radius);
+		edge1.set(ob.left - radius, ob.top - radius);
+		edge2.set(ob.left - radius, ob.bottom + radius);
 		normal.set(-1, 0);
 		collisionBallWithEdge(ball, beforePos, afterPos, edge1, edge2, ball.velo, normal);
 		
 		// top
-		edge1.set(bound.left - radius, bound.top - radius);
-		edge2.set(bound.right + radius, bound.top - radius);
+		edge1.set(ob.left - radius, ob.top - radius);
+		edge2.set(ob.right + radius, ob.top - radius);
 		normal.set(0, -1);
 		collisionBallWithEdge(ball, beforePos, afterPos, edge1, edge2, ball.velo, normal);
 		
 		// right
-		edge1.set(bound.right + radius, bound.top - radius);
-		edge2.set(bound.right + radius, bound.bottom + radius);
+		edge1.set(ob.right + radius, ob.top - radius);
+		edge2.set(ob.right + radius, ob.bottom + radius);
 		normal.set(1, 0);
 		collisionBallWithEdge(ball, beforePos, afterPos, edge1, edge2, ball.velo, normal);
 		
 		// bottom
-		edge1.set(bound.left - radius, bound.bottom + radius);
-		edge2.set(bound.right + radius, bound.bottom + radius);
+		edge1.set(ob.left - radius, ob.bottom + radius);
+		edge2.set(ob.right + radius, ob.bottom + radius);
 		normal.set(0, 1);
 		collisionBallWithEdge(ball, beforePos, afterPos, edge1, edge2, ball.velo, normal);
 	}
@@ -653,9 +679,6 @@ public class WorldManager {
 		
 		// 우선 충돌 지점을 찾아내고...
 		if (Vector2D.findLineIntersection(beforePos, afterPos, edgeStart, edgeStop, interPt)) {
-			if (G.debug_ > 0)
-				debugCanvas.drawCircle(interPt.x, interPt.y, 10, debugOrange);
-			
 			// penetration depth를 구합니다.
 			afterPos.subtract(interPt);
 

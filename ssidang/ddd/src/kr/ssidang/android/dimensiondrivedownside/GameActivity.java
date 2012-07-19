@@ -19,7 +19,6 @@ public class GameActivity extends Activity implements
 	private Sensor orientSensor;
 	
 	private GameView gameView;
-	private WorldManager.GameParams params;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Activity
@@ -37,7 +36,6 @@ public class GameActivity extends Activity implements
 
 		setContentView(R.layout.game_layout);
 		gameView = (GameView) findViewById(R.id.gameView);
-		params = gameView.getGameParams();
 
 		// 방향 센서
 		sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
@@ -47,22 +45,22 @@ public class GameActivity extends Activity implements
 	@Override
 	protected void onResume() {
 		super.onResume();
-		
 		gameView.onResume();
-		Log.d("ddd", "Sensor acquired.");
+		
         sensorManager.registerListener(this, orientSensor,
         		SensorManager.SENSOR_DELAY_NORMAL);
 //        sensorManager.registerListener(this, orientSensor,
 //        		SensorManager.SENSOR_DELAY_GAME);
+        Log.d("ddd", "Sensor acquired.");
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
-		
 		gameView.onPause();
-		Log.d("ddd", "Sensor unacquired.");
+		
         sensorManager.unregisterListener(this, orientSensor);
+        Log.d("ddd", "Sensor unacquired.");
 	}
 	
 	@Override
@@ -94,9 +92,7 @@ public class GameActivity extends Activity implements
 	}
 
 	public void onSensorChanged(SensorEvent event) {
-		params.azimuth = event.values[0];
-		params.pitch = event.values[1];
-		params.roll = event.values[2];
+		gameView.onSensorEvent(event.values[0], event.values[1], event.values[2]);
 	}
 
 }

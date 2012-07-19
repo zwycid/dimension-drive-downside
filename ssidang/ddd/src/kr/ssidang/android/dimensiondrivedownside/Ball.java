@@ -13,40 +13,38 @@ public class Ball extends Unit {
 	
 	// 공 모양과 재질
 	public float radius;
-	public float restitution;
-	public float mass;
-	public int hitpoint;
+	public float restitution	= .8f;
+	public float mass			= 1.f;
+	public int hitpoint			= 100;
 	
 	// 그리기 데이터
-	private Matrix drawMat;
+	private Matrix drawMat		= new Matrix();
 	private Bitmap ballBitmap;
-	private Paint ballPaint;
+	
+	private static final Paint ballPaint;
+	static {
+		ballPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+		ballPaint.setColor(0xffa7dbf3);
+	}
+	
+	// 디버깅용
+	Vector2D debug_pos = new Vector2D();
+	Vector2D debug_dir = new Vector2D();
+	
 
 	public Ball(Bitmap ballBitmap, float radius) {
 		this.ballBitmap = ballBitmap;
 		this.radius = radius;
-		init();
 	}
 	
 	public Ball(Bitmap ballBitmap, float x, float y, float radius) {
 		this.ballBitmap = ballBitmap;
 		this.pos = new Vector2D(x, y);
 		this.radius = radius;
-		init();
-	}
-
-	private void init() {
-		this.drawMat = new Matrix();
-		this.restitution = .8f;
-		this.mass = 1.f;
-		this.hitpoint = 100;
-		
-		ballPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-		ballPaint.setColor(0xffa7dbf3);
 	}
 
 	public void draw(Canvas canvas) {
-		float ballFactor = 2.f / ballBitmap.getWidth();
+//		float ballFactor = 2.f / ballBitmap.getWidth();
 		canvas.drawCircle(pos.x, pos.y, radius, ballPaint);
 		
 //		drawMat.setScale(radius * scaleFactor, radius * scaleFactor);

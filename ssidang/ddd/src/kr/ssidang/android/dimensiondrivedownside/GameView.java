@@ -16,7 +16,6 @@ public class GameView extends SurfaceView implements
 	
 	private RenderThread renderer;
 	private WorldManager world;
-	private WorldManager.GameParams G;
 	
 	///////////////////////////////////////////////////////////////////////////
 	// 생성자
@@ -40,32 +39,32 @@ public class GameView extends SurfaceView implements
 	private void init(Context context) {
 		getHolder().addCallback(this);
 		
+		// TODO 여기서 스테이지 넘어온 거 받든가 해야 함
 		world = new WorldManager(context);
-		G = world.getGameParams();
 		world.makeMockWorld();
 	}
 	
-	public WorldManager.GameParams getGameParams() {
-		return G;
-	}
-	
-	public void onPause() {
+	void onPause() {
 		world.pause(true);
 	}
 	
-	public void onResume() {
+	void onResume() {
 		// pass
 	}
 	
-	public boolean onTouchEvent(Activity parent, MotionEvent event) {
-		return (world.onTouchEvent(parent, event));
+	void onSensorEvent(float azimuth, float pitch, float roll) {
+		world.onSensorEvent(azimuth, pitch, roll);
 	}
 	
-	public boolean onKeyDown(Activity parent, int keyCode, KeyEvent event) {
-		return (world.onKeyDown(parent, keyCode, event));
+	boolean onTouchEvent(Activity parent, MotionEvent event) {
+		return world.onTouchEvent(parent, event);
 	}
 	
-	public void onBackPressed(Activity parent) {
+	boolean onKeyDown(Activity parent, int keyCode, KeyEvent event) {
+		return world.onKeyDown(parent, keyCode, event);
+	}
+	
+	void onBackPressed(Activity parent) {
 		world.onBackPressed(parent);
 	}
 	
@@ -74,20 +73,14 @@ public class GameView extends SurfaceView implements
 	///////////////////////////////////////////////////////////////////////////
 	
 	public void surfaceCreated(SurfaceHolder holder) {
-		Log.d("ddd", "surfaceCreated()");
 		renderer = new RenderThread(holder, this);
-		Log.d("ddd", "Renderer created.");
+		Log.d("ddd", "surfaceCreated(), Renderer created.");
 	}
 
 	public void surfaceChanged(SurfaceHolder holder, int format, int width,
 			int height) {
 		Log.d("ddd", "surfaceChanged(" + width + ", " + height + ")");
-
-		// 좌표계를 맞춥니다.
-		int length = Math.min(width, height);
-		G.scaleFactor = length / WorldManager.SCALE_UNIT;
-		G.screenWidth = width / G.scaleFactor;
-		G.screenHeight = height / G.scaleFactor;
+		world.onScreenSize(width, height);
 
 		// 렌더링 시작.
 		renderer.start();
@@ -95,10 +88,9 @@ public class GameView extends SurfaceView implements
 	}
 
 	public void surfaceDestroyed(SurfaceHolder holder) {
-		Log.d("ddd", "surfaceDestroyed()");
 		renderer.shutdown();
 		renderer = null;
-		Log.d("ddd", "Renderer shutdowned.");
+		Log.d("ddd", "surfaceDestroyed(), Renderer shutdowned.");
 	}
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -109,13 +101,8 @@ public class GameView extends SurfaceView implements
 	}
 
 	public void onRender(Canvas canvas) {
-		// 아래 방향
-		float sign = (G.pitch >= 0 ? -1.f : 1.f);
-		float rad = (float) Math.toRadians((-90 - G.roll) * sign);
-		G.gravityDirection = (float) rad;
-		
+		world.onFrame();
 		world.onRender(canvas);
-		world.onFrame(G.delta);
 	}
 
 	public void onRenderEnd() {
