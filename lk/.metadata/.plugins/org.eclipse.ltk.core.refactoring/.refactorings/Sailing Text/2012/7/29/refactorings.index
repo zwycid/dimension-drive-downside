@@ -52,3 +52,6 @@
 1342601989618	Rename resource 'mt4_.png'
 1342601992073	Rename resource 'mt5_.png'
 1342625896612	Rename local variable 'mul'
+1342643983056	Rename local variable 'text_speed_x'
+1342650031133	Rename local variable 'seedHxa'
+1342650582470	Delete element

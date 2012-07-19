@@ -13,26 +13,26 @@
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="0x" key="selection"/>
+		<item value="getOptionAitivity().getPreferTextSizeForWindow" key="selection"/>
 		<list key="findhistory">
+			<item value="getPreferTextSizeForWindow"/>
+			<item value="option"/>
+			<item value="getPreferImageLengthForWidth()"/>
 			<item value="0xff"/>
 			<item value="gap"/>
 			<item value="scal"/>
 			<item value="adapter"/>
 			<item value="fad"/>
-			<item value="fading"/>
-			<item value="coverf"/>
-			<item value="*0.6"/>
 		</list>
 		<list key="replacehistory">
+			<item value="getOptionAitivity().getPreferTextSizeForWindow"/>
+			<item value="Option"/>
+			<item value="FALLING_TEXT_LENGTH"/>
 			<item value="0x"/>
 			<item value="*0.4"/>
 			<item value="//"/>
 			<item value="thumbnail_sizeup_map"/>
 			<item value="((MainActivity) getContext()).getPreferTextSizeForWindow"/>
-			<item value="this."/>
-			<item value="this`."/>
-			<item value="Main"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.GotoLineAction$GotoLineDialog_dialogBounds">

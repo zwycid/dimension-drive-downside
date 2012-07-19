@@ -39,6 +39,15 @@
         <TextView
             android:id="@+id/MainBlankView1"
             style="@style/blankView" />
+        
+        <TextView
+            android:id="@+id/MainTextViewOption"
+            style="@style/ButtonText"
+            android:text="@string/Option" />
+
+        <TextView
+            android:id="@+id/MainBlankView2"
+            style="@style/blankView" />
     </LinearLayout>
 
 </FrameLayout>
