@@ -55,7 +55,7 @@
             }
         }
 
-        //타입에 따라서 마우스를 땐순간 그려준다.
+        
         function onUp(event) {
 
             cendX = event.pageX - 110;
@@ -85,7 +85,7 @@
             c1_context.fillStyle = "Red";
             c1_context.fill();
             c1_context.stroke();
-            tString += "[b],"+cbeginX+","+cbeginY+","+cendX+","+cendY+"//";
+            tString += "[b],"+cbeginX+","+cbeginY+","+cendX+","+cendY+"/";
         }
         function DrawCircle(circletype) {
             var c1 = document.getElementById("c");
@@ -114,14 +114,14 @@
                     tString += "[c]";
                     break;
             }
-            tString += ","+centerX+","+centerY+"//";
+            tString += ","+centerX+","+centerY+"/";
             c1_context.fillStyle = circlecolor;
             c1_context.fill();
             c1_context.stroke();
         }
         function changeMapSize(){
             tString = "";
-            tString = "[mapsize],"+$("#canvas_width").val()+","+$("#canvas_height").val()+"//";
+            tString = "[mapsize],"+$("#canvas_width").val()+","+$("#canvas_height").val()+"/";
             $("#tStringDiv").html("");
             var c1 = document.getElementById("c");
             c1.setAttribute("width",$("#canvas_width").val());
@@ -136,7 +136,26 @@
             var fileObj=fso.CreateTextFile("/mapxy.txt",true);
             fileObj.WriteLine(tString);
             fileObj.Close();
-        }
+        }/*
+        function redo(){
+            var splitArr = tString.split("//");
+            for(i=0;i<splitArr.length-1;i++){
+                secArr = splitArr.split(",");
+                switch(secArr[0]){
+                    case "[s]":
+
+                    break;
+                    case "[f]":
+                    break;
+                    case "[a]":
+                    break;
+                    case "[c]":
+                    break;
+                    case "[b]":
+                    break;
+                }
+            }
+        }*/
     </script>
 </head>
 <body>
@@ -152,6 +171,7 @@
     <input type="button" value="F-point" onclick="clickCircle(2)"/>
     <input type="button" value="Attractor" onclick="clickCircle(3)"/>
     <input type="button" value="Crack" onclick="clickCircle(4)"/>
+    <input type="button" value="뒤로" onclick="redo();"/>
     <input type="button" value="출력" onclick="document.getElementById('tStringDiv').innerHTML=tString;"/>
     <input type="button" value="저장" onclick="saveFile();"/>
     </center>
