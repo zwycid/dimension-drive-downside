@@ -133,6 +133,11 @@
             c1.setAttribute("height",$("#canvas_width").val());
             //$("#c").width($("#canvas_width").val());
             //$("#c").height($("#canvas_height").val());
+
+            /* firefox 13에서 이거 안 해주면 캔버스 영역 실제로 안 늘어남. */
+            $('#c')[0].width = $("#canvas_width").val();
+            $('#c')[0].height = $("#canvas_height").val();
+
             $("#pan").width($("#canvas_width").val());
             $("#pan").height($("#canvas_height").val());
         }
