@@ -16,10 +16,10 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 
 public class WorldManager {
-	public static final float SCALE_UNIT = 160.f;
-	public static final float TIME_UNIT = 30.f;
-	
 	private static final int DEBUG_LEVEL = 3;
+	
+	private static final float SCALE_UNIT = 160.f;
+	private static final float TIME_UNIT = 30.f;
 	
 	private static final float AIR_FRICTION_COEFFICIENT = .1f;
 	private static final float GRAVITY_CONSTANT = .5f;
@@ -67,7 +67,7 @@ public class WorldManager {
 		
 		float screenWidth;
 		float screenHeight;
-		float scaleFactor;
+		float scaleRatio;
 		
 		int tick;
 		long timestamp;
@@ -95,7 +95,7 @@ public class WorldManager {
 		ballBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.basic_ball);
 
 		{
-			// TODO 디버그 코드
+			// TODO 각종 디버그용 객체 초기화
 			debug_text = new Paint(Paint.ANTI_ALIAS_FLAG);
 			debug_text.setColor(Color.WHITE);
 			debug_text.setTextSize(8);
@@ -130,9 +130,9 @@ public class WorldManager {
 		// 좌표계를 맞춥니다.
 		int length = Math.min(width, height);
 		
-		G.scaleFactor = length / SCALE_UNIT;
-		G.screenWidth = width / G.scaleFactor;
-		G.screenHeight = height / G.scaleFactor;
+		G.scaleRatio = length / SCALE_UNIT;
+		G.screenWidth = width / G.scaleRatio;
+		G.screenHeight = height / G.scaleRatio;
 	}
 	
 	void onSensorEvent(float azimuth, float pitch, float roll) {
@@ -159,7 +159,6 @@ public class WorldManager {
 	
 	boolean onKeyDown(Activity parent, int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_MENU) {
-			// TODO 디버그 레벨 설정
 			G.debug_ = (G.debug_ + 1) % DEBUG_LEVEL;
 			return true;
 		}
@@ -167,8 +166,12 @@ public class WorldManager {
 	}
 	
 	void onBackPressed(Activity parent) {
-		if (G.state == STATE_COMPLETED)
+		if (G.state == STATE_COMPLETED) {
 			parent.finish();
+		}
+		else if (G.state == STATE_DEAD) {
+			parent.finish();
+		}
 		else if (isPaused())
 			parent.finish();
 		else {
@@ -240,7 +243,7 @@ public class WorldManager {
 	
 	private void resetView(Canvas canvas) {
 		canvas.setMatrix(null);
-		canvas.scale(G.scaleFactor, G.scaleFactor);
+		canvas.scale(G.scaleRatio, G.scaleRatio);
 	}
 	
 	/**
@@ -346,7 +349,7 @@ public class WorldManager {
 		
 		if (G.debug_ > 1) {
 			// 맵 전체 보기
-			float s = G.scaleFactor / stage.width * SCALE_UNIT * 0.99f;
+			float s = G.scaleRatio / stage.width * SCALE_UNIT * 0.99f;
 			canvas.setMatrix(null);
 			canvas.scale(s, s);
 		}
@@ -417,18 +420,21 @@ public class WorldManager {
 	}
 
 	private void onRenderCompleted(Canvas canvas) {
-		// TODO onRenderCompleted
-		// 게임 화면을 그려주고...
 		onRenderPlaying(canvas);
 		
 		resetView(canvas);
-		canvas.drawColor(0x809090a0);
+		canvas.drawColor(0xcc0909a0);
 		canvas.drawText("Win", G.screenWidth / 2 - 8,
 				G.screenHeight / 2 + 3, debug_text);
 	}
 
 	private void onRenderDead(Canvas canvas) {
-		// TODO onRenderDead
+		onRenderPlaying(canvas);
+		
+		resetView(canvas);
+		canvas.drawColor(0xcca00909);
+		canvas.drawText("Dead", G.screenWidth / 2 - 8,
+				G.screenHeight / 2 + 3, debug_text);
 	}
 
 	private void onFrameReady() {
@@ -505,15 +511,20 @@ public class WorldManager {
 		// 배경 파티클 처리
 		moveParticles(beforePos, afterPos);
 		
+		// 공이 죽었는지 검사합니다.
+		if (ball.isDead()) {
+			G.state = STATE_DEAD;
+		}
+		
 		// 골에 도달했는지 검사합니다.
-		if (checkGoalReached()) {
+		if (checkPortalReached(ball, stage.goal)) {
 			G.state = STATE_COMPLETED;
 		}
 	}
 
-	private boolean checkGoalReached() {
-		return Vector2D.distance(ball.pos, stage.goal.pos)
-				< ball.radius + stage.goal.radius;
+	private boolean checkPortalReached(Ball ball, Portal portal) {
+		return Vector2D.distance(ball.pos, portal.pos)
+				< ball.radius + portal.radius;
 	}
 
 	private void onFrameCompleted() {
@@ -566,10 +577,10 @@ public class WorldManager {
 			if (! b.isDead()) {
 				b.trace();
 				
-				// 총알이 공에 맞았으면...
-				// TODO Sound: 맞는소리
+				// 총알이 공에 맞았으면 총알 없애고 공 아프게.
 				if (b.isHit(ball)) {
-					ball.hitpoint -= 1;
+					// TODO Sound: 맞는소리
+					ball.giveDamage(1);
 					b.kill();
 				}
 				else

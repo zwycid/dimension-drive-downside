@@ -42,6 +42,14 @@ public class Ball extends Unit {
 		this.pos = new Vector2D(x, y);
 		this.radius = radius;
 	}
+	
+	public boolean isDead() {
+		return (hitpoint <= 0);
+	}
+	
+	public void giveDamage(int amount) {
+		hitpoint = Math.max(hitpoint - amount, 0);
+	}
 
 	public void draw(Canvas canvas) {
 //		float ballFactor = 2.f / ballBitmap.getWidth();
