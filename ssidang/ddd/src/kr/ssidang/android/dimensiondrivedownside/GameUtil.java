@@ -30,11 +30,11 @@ public class GameUtil {
 		
 		canvas.drawLine(startX, startY, stopX, stopY, paint);
 		canvas.drawLine(stopX, stopY,
-				(float) (stopX + Math.cos(rad + Math.PI * 0.75) * 10),
-				(float) (stopY + Math.sin(rad + Math.PI * 0.75) * 10), paint);
+				(float) (stopX + Math.cos(rad + Math.PI * 0.75) * 20),
+				(float) (stopY + Math.sin(rad + Math.PI * 0.75) * 20), paint);
 		canvas.drawLine(stopX, stopY,
-				(float) (stopX + Math.cos(rad - Math.PI * 0.75) * 10),
-				(float) (stopY + Math.sin(rad - Math.PI * 0.75) * 10), paint);
+				(float) (stopX + Math.cos(rad - Math.PI * 0.75) * 20),
+				(float) (stopY + Math.sin(rad - Math.PI * 0.75) * 20), paint);
 	}
 	
 }

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -48,8 +49,12 @@ public class GameView extends SurfaceView implements
 		return G;
 	}
 	
-	public void onTouchEvent(Activity parent, MotionEvent event) {
-		world.onTouchEvent(parent, event);
+	public boolean onTouchEvent(Activity parent, MotionEvent event) {
+		return (world.onTouchEvent(parent, event));
+	}
+	
+	public boolean onKeyDown(Activity parent, int keyCode, KeyEvent event) {
+		return (world.onKeyDown(parent, keyCode, event));
 	}
 	
 	public void onBackPressed(Activity parent) {
@@ -93,14 +98,9 @@ public class GameView extends SurfaceView implements
 	///////////////////////////////////////////////////////////////////////////
 
 	public void onRenderBegin() {
-		G.timestamp = System.currentTimeMillis();
 	}
 
 	public void onRender(Canvas canvas) {
-		long now = System.currentTimeMillis();
-		G.delta = (now - G.timestamp) / WorldManager.TIME_UNIT;
-		G.tick++;
-		
 		// 아래 방향
 		float sign = (G.pitch >= 0 ? -1.f : 1.f);
 		float rad = (float) Math.toRadians((-90 - G.roll) * sign);
@@ -108,8 +108,6 @@ public class GameView extends SurfaceView implements
 		
 		world.onRender(canvas);
 		world.onFrame(G.delta);
-		
-		G.timestamp = now;
 	}
 
 	public void onRenderEnd() {

@@ -65,17 +65,18 @@ public class GameActivity extends Activity implements
 	
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_MENU) {
-			// TODO 디버깅 데이터
-			gameView.getGameParams().debug_ = !gameView.getGameParams().debug_;
-		}
-		return super.onKeyDown(keyCode, event);
+		if (gameView.onKeyDown(this, keyCode, event))
+			return true;
+		else
+			return super.onKeyDown(keyCode, event);
 	}
 	
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
-		gameView.onTouchEvent(this, event);
-		return super.onTouchEvent(event);
+		if (gameView.onTouchEvent(this, event))
+			return true;
+		else
+			return super.onTouchEvent(event);
 	}
 
 	@Override

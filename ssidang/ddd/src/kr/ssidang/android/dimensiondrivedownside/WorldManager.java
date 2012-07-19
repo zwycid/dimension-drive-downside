@@ -1,7 +1,5 @@
 package kr.ssidang.android.dimensiondrivedownside;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 import android.app.Activity;
@@ -14,11 +12,14 @@ import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.RectF;
 import android.util.FloatMath;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 
 public class WorldManager {
 	public static final float SCALE_UNIT = 160.f;
 	public static final float TIME_UNIT = 30.f;
+	
+	private static final int DEBUG_LEVEL = 3;
 	
 	private static final float AIR_FRICTION_COEFFICIENT = .1f;
 	private static final float GRAVITY_CONSTANT = 1.5f;
@@ -32,15 +33,9 @@ public class WorldManager {
 	private static final int STATE_DEAD = 4;
 	
 	// Stage data
-	private float width;
-	private float height;
-	
-	private Portal startPoint;
-	private Portal goal;
+	private Stage stage;
 	private Ball ball;
-	private List<Obstacle> obstacles;
 	private Particle[] particles;
-	
 	private int score;
 	
 	// 시점(view)에 관련된 사항
@@ -64,7 +59,7 @@ public class WorldManager {
 	// GameData
 	///////////////////////////////////////////////////////////////////////////
 	class GameParams {
-		boolean debug_ = true;
+		int debug_;
 		
 		int state = STATE_READY;
 		
@@ -76,6 +71,9 @@ public class WorldManager {
 		long timestamp;
 		float delta;
 		
+		long playTime;
+		long baseTime;
+		
 		float gravityDirection;
 		float azimuth;
 		float pitch;
@@ -83,9 +81,7 @@ public class WorldManager {
 	}
 	
 	public WorldManager(Context context) {
-		this.obstacles = new ArrayList<Obstacle>();
 		this.particles = new Particle[MAX_PARTICLE];
-		
 		this.random = new Random();
 		this.G = new GameParams();
 		this.lookAt = new Vector2D();
@@ -97,35 +93,48 @@ public class WorldManager {
 		
 		ballBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.basic_ball);
 
-		// TODO 디버그 코드
-		debugText = new Paint(Paint.ANTI_ALIAS_FLAG);
-		debugText.setColor(Color.WHITE);
-		debugText.setTextSize(8);
-		
-		debugBlue = new Paint();
-		debugBlue.setColor(Color.BLUE);
-		debugBlue.setStrokeWidth(10);
-		
-		debugOrange = new Paint();
-		debugOrange.setColor(0xffff8030);
-		debugOrange.setStrokeWidth(10);
-		
-		debugRed = new Paint(Paint.ANTI_ALIAS_FLAG);
-		debugRed.setColor(Color.RED);
-		debugRed.setStrokeWidth(3);
+		{
+			// TODO 디버그 코드
+			debugText = new Paint(Paint.ANTI_ALIAS_FLAG);
+			debugText.setColor(Color.WHITE);
+			debugText.setTextSize(8);
+			
+			debugBlue = new Paint();
+			debugBlue.setColor(Color.BLUE);
+			debugBlue.setStrokeWidth(7);
+			
+			debugOrange = new Paint();
+			debugOrange.setColor(0xffff8030);
+			debugOrange.setStrokeWidth(5);
+			
+			debugRed = new Paint(Paint.ANTI_ALIAS_FLAG);
+			debugRed.setColor(Color.RED);
+			debugRed.setStrokeWidth(3);
+		}
 	}
 	
 	public GameParams getGameParams() {
 		return G;
 	}
 	
-	public void onTouchEvent(Activity parent, MotionEvent event) {
+	public boolean onTouchEvent(Activity parent, MotionEvent event) {
 		if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
 			if (G.state == STATE_COMPLETED)
 				parent.finish();
 			else
 				pause();
+			return true;
 		}
+		return false;
+	}
+	
+	public boolean onKeyDown(Activity parent, int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_MENU) {
+			// TODO 디버그 레벨 설정
+			G.debug_ = (G.debug_ + 1) % DEBUG_LEVEL;
+			return true;
+		}
+		return false;
 	}
 	
 	public void onBackPressed(Activity parent) {
@@ -140,16 +149,21 @@ public class WorldManager {
 	
 	public void pause() {
 		if (G.state == STATE_PLAYING)
-			G.state = STATE_PAUSED;
+			pause(true);
 		else if (G.state == STATE_PAUSED)
-			G.state = STATE_PLAYING;
+			pause(false);
 	}
 	
 	public void pause(boolean set) {
-		if (set && G.state == STATE_PLAYING)
+		if (set && G.state == STATE_PLAYING) {
+			// 일시 정지
 			G.state = STATE_PAUSED;
-		else if (! set && G.state == STATE_PAUSED)
+		}
+		else if (! set && G.state == STATE_PAUSED) {
+			// 다시 시작
+			G.baseTime = G.timestamp;
 			G.state = STATE_PLAYING;
+		}
 	}
 	
 	public boolean isPaused() {
@@ -157,43 +171,42 @@ public class WorldManager {
 	}
 
 	public void makeMockWorld() {
-//		makeRandomWorld();
-		makeWorld1();
+		stage = Stage.fromData("[mapsize],800,800/[s],100,400/[f],750,750/[b],400,300,700,500/");
 	}
 	
-	/**
-	 * 테스트 메서드; 아무 블럭이나 추가함
-	 */
-	private void makeRandomWorld() {
-		// 10배 너비로 합시다.
-		width = 160 * 10;
-		height = 160 * 10;
-		
-		Random r = new Random();
-		obstacles.clear();
-		// 한 30개 정도는 만들어야 하지 않겠어요.
-		for (int i = 0; i < 30; ++i) {
-			int width = 30 + r.nextInt(170);
-			int x = r.nextInt((int) this.width);
-			int y = r.nextInt((int) this.height);
-			obstacles.add(new Obstacle(x, y, x + width, y + (6000 / width)));
-		}
-		
-		ball = new Ball(ballBitmap, 0, 0, 20);
-		startPoint = new Portal(r.nextInt((int) width), r.nextInt((int) height), 20);
-		goal = new Portal(r.nextInt((int) width), r.nextInt((int) height), 20);
-	}
-	
-	private void makeWorld1() {
-		width = 160 * 5;
-		height = 160 * 5;
-		
-		obstacles.clear();
-		obstacles.add(new Obstacle(400, 300, 700, 500));
-		ball = new Ball(ballBitmap, 0, 0, 30);
-		startPoint = new Portal(100, 400, 30);
-		goal = new Portal(750, 750, 40);
-	}
+//	/**
+//	 * 테스트 메서드; 아무 블럭이나 추가함
+//	 */
+//	private void makeRandomWorld() {
+//		// 10배 너비로 합시다.
+//		width = 160 * 10;
+//		height = 160 * 10;
+//		
+//		Random r = new Random();
+//		obstacles.clear();
+//		// 한 30개 정도는 만들어야 하지 않겠어요.
+//		for (int i = 0; i < 30; ++i) {
+//			int width = 30 + r.nextInt(170);
+//			int x = r.nextInt((int) this.width);
+//			int y = r.nextInt((int) this.height);
+//			obstacles.add(new Obstacle(x, y, x + width, y + (6000 / width)));
+//		}
+//		
+//		ball = new Ball(ballBitmap, 0, 0, 20);
+//		startPoint = new Portal(r.nextInt((int) width), r.nextInt((int) height), 20);
+//		goal = new Portal(r.nextInt((int) width), r.nextInt((int) height), 20);
+//	}
+//	
+//	private void makeWorld1() {
+//		width = 160 * 5;
+//		height = 160 * 5;
+//		
+//		obstacles.clear();
+//		obstacles.add(new Obstacle(400, 300, 700, 500));
+//		ball = new Ball(ballBitmap, 0, 0, 30);
+//		startPoint = new Portal(100, 400, 30);
+//		goal = new Portal(750, 750, 40);
+//	}
 	
 	private void resetView(Canvas canvas) {
 		canvas.setMatrix(null);
@@ -252,14 +265,15 @@ public class WorldManager {
 				ball.pos.y - G.screenHeight / 2);
 		canvas.translate(-lookAt.x, -lookAt.y);
 		
-		if (G.debug_) {
-			float s = 3.f / 10.001f;
+		if (G.debug_ > 1) {
+			float s = G.scaleFactor / stage.width * SCALE_UNIT * 0.99f;
 			canvas.setMatrix(null);
 			canvas.scale(s, s);
 		}
 	
 		float border = BORDER_THICK / 2;
-		canvas.drawRect(-border, -border, width + border, height + border,
+		canvas.drawRect(-border, -border,
+				stage.width + border, stage.height + border,
 				borderPaint);
 		
 		// 방향 표시 파티클
@@ -269,14 +283,14 @@ public class WorldManager {
 			}
 		}
 		
-		// 시작점 / 골 그려주기
+		// 시작점 / 골 그려주기 (임시)
 		Paint portalPaint = new Paint();
 		portalPaint.setColor(0xfff9ae4a);
-		canvas.drawCircle(startPoint.pos.x, startPoint.pos.y, startPoint.radius, portalPaint);
+		canvas.drawCircle(stage.start.pos.x, stage.start.pos.y, stage.start.radius, portalPaint);
 		portalPaint.setColor(0xff9afa5a);
-		canvas.drawCircle(goal.pos.x, goal.pos.y, goal.radius, portalPaint);
+		canvas.drawCircle(stage.goal.pos.x, stage.goal.pos.y, stage.goal.radius, portalPaint);
 	
-		for (Obstacle ob : obstacles) {
+		for (Obstacle ob : stage.obstacles) {
 			ob.draw(canvas);
 		}
 		ball.draw(canvas);
@@ -321,21 +335,25 @@ public class WorldManager {
 			break;
 		}
 		
+		updateTick();
+		
 		// TODO Debug
-		if (G.debug_) {
+		if (G.debug_ > 0) {
 			resetView(debugCanvas);
 			
 			float fps = 1000.f / (G.delta * TIME_UNIT);
 			GameUtil.drawTextMultiline(debugCanvas,
-					"Tick: " + G.tick + " (fps: " + fps + ")"
-					+ "\nScreen = (" + width + ", " + height + ")"
-					+ "\nAzimuth = " + G.azimuth
-					+ "\nPitch = " + G.pitch
-					+ "\nRoll = " + G.roll
+					"Tick: " + G.tick + " / " + (G.playTime) + "ms (fps: " + fps + ")"
+					+ "\nScreen = (" + G.screenWidth + ", " + G.screenHeight + ")"
+//					+ "\nAzimuth = " + G.azimuth
+//					+ "\nPitch = " + G.pitch
+//					+ "\nRoll = " + G.roll
+					+ "\nMap = (" + stage.width + ", " + stage.height + ")"
+					+ "\nPos = (" + ball.pos.x + ", " + ball.pos.y + ")"
 					, 0, 0, debugText);
 			
-			float centerX = width / 2;
-			float centerY = height / 2;
+			float centerX = G.screenWidth / 2;
+			float centerY = G.screenHeight / 2;
 			float offsetX = FloatMath.cos(G.gravityDirection) * 50;
 			float offsetY = FloatMath.sin(G.gravityDirection) * 50;
 			GameUtil.drawArrow(debugCanvas, centerX, centerY,
@@ -345,15 +363,24 @@ public class WorldManager {
 	}
 
 	private void onFrameReady() {
-		ball.pos.set(startPoint.pos);
+		ball = new Ball(ballBitmap, stage.start.pos.x, stage.start.pos.y, 20);
+		G.timestamp = System.currentTimeMillis();
+		
+		G.playTime = 0;
+		G.baseTime = G.timestamp;
+		
 		G.state = STATE_PLAYING;
 	}
 
 	private void onFramePaused() {
-		// 아무것도 안 함
+		G.timestamp = System.currentTimeMillis();
 	}
 
 	private void onFramePlaying(float delta) {
+		// 게임 시간 업데이트
+		G.playTime += (G.timestamp - G.baseTime);
+		G.baseTime = G.timestamp;
+		
 		// 중력 및 공기 저항
 		ball.acc.x = FloatMath.cos(G.gravityDirection) * GRAVITY_CONSTANT;
 		ball.acc.y = -FloatMath.sin(G.gravityDirection) * GRAVITY_CONSTANT;
@@ -370,22 +397,24 @@ public class WorldManager {
 		checkCollisionWithBorder(beforePos, afterPos);
 		
 		// 장애물 충돌 처리
-		for (Obstacle ob : obstacles) {
+		for (Obstacle ob : stage.obstacles) {
 			checkCollisionWithObstacle(ob, beforePos, afterPos);
 		}
 		
-		if (G.debug_) {
+		if (G.debug_ > 0) {
 			// 공 방향 표시
-			Vector2D dir = Vector2D.subtract(afterPos, beforePos).setLength(100);
+			Vector2D dir = Vector2D.subtract(afterPos, beforePos).setLength(50);
 			GameUtil.drawArrow(debugCanvas, beforePos.x, beforePos.y,
 					beforePos.x + dir.x, beforePos.y + dir.y, debugBlue);
+//			GameUtil.drawArrow(debugCanvas, beforePos.x, beforePos.y,
+//					afterPos.x, afterPos.y, debugBlue);
 		}
 		
 		// 공의 새 위치를 확정합니다.
 		ball.pos.set(afterPos);
 		
 		// 골에 도달했는지 검사합니다.
-		if (Vector2D.distance(ball.pos, goal.pos) < ball.radius + goal.radius) {
+		if (Vector2D.distance(ball.pos, stage.goal.pos) < ball.radius + stage.goal.radius) {
 			G.state = STATE_COMPLETED;
 		}
 		
@@ -399,6 +428,14 @@ public class WorldManager {
 
 	private void onFrameDead() {
 		// TODO onFrameDead
+	}
+
+	private void updateTick() {
+		// 프레임 간격이 아무리 커도 0.5초 이상 넘어가지 않도록 합니다.
+		long now = System.currentTimeMillis();
+		G.delta = Math.min((now - G.timestamp) / TIME_UNIT, TIME_UNIT * 500);
+		G.timestamp = now;
+		G.tick++;
 	}
 
 	private void moveParticles() {
@@ -433,30 +470,6 @@ public class WorldManager {
 		float radius = ball.radius;
 		
 		// 근사적으로 코너도 처리함
-//		
-//		// left
-//		edge1.set(bound.left - ball.radius, bound.top);
-//		edge2.set(bound.left - ball.radius, bound.bottom);
-//		normal.set(-1, 0);
-//		collisionBallWithEdge(beforePos, afterPos, edge1, edge2, ball.velo, normal);
-//
-//		// top
-//		edge1.set(bound.left, bound.top - ball.radius);
-//		edge2.set(bound.right, bound.top - ball.radius);
-//		normal.set(0, -1);
-//		collisionBallWithEdge(beforePos, afterPos, edge1, edge2, ball.velo, normal);
-//		
-//		// right
-//		edge1.set(bound.right + ball.radius, bound.top);
-//		edge2.set(bound.right + ball.radius, bound.bottom);
-//		normal.set(1, 0);
-//		collisionBallWithEdge(beforePos, afterPos, edge1, edge2, ball.velo, normal);
-//
-//		// bottom
-//		edge1.set(bound.left, bound.bottom + ball.radius);
-//		edge2.set(bound.right, bound.bottom + ball.radius);
-//		normal.set(0, 1);
-//		collisionBallWithEdge(beforePos, afterPos, edge1, edge2, ball.velo, normal);
 		
 		// left
 		edge1.set(bound.left - radius, bound.top - radius);
@@ -487,6 +500,9 @@ public class WorldManager {
 		Vector2D edge1 = new Vector2D();
 		Vector2D edge2 = new Vector2D();
 		Vector2D normal = new Vector2D();
+		
+		float width = stage.width;
+		float height = stage.height;
 		
 		// left
 		edge1.set(ball.radius, 0);
@@ -521,7 +537,7 @@ public class WorldManager {
 		
 		// 우선 충돌 지점을 찾아내고...
 		if (Vector2D.findLineIntersection(beforePos, afterPos, edgeStart, edgeStop, interPt)) {
-			if (G.debug_)
+			if (G.debug_ > 0)
 				debugCanvas.drawCircle(interPt.x, interPt.y, 10, debugOrange);
 			
 			// penetration depth를 구합니다.
