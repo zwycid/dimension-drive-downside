@@ -1,6 +1,8 @@
 package kr.ssidang.android.dimensiondrivedownside;
 
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 
 public class Sentry extends Unit {
@@ -16,6 +18,8 @@ public class Sentry extends Unit {
 	
 	private int magazine;
 	private int shotDelay;
+	
+	private Matrix mat = new Matrix();
 	
 	private static final Paint bodyPaint;
 	private static final Paint borderPaint;
@@ -86,20 +90,26 @@ public class Sentry extends Unit {
 			pos.add(dir);
 	}
 	
-	public void draw(Canvas canvas) {
-		// 전장길이 40..
-		// 가로 30...
-		Vector2D length = new Vector2D(dir).setLength(20);
-		Vector2D front = Vector2D.add(pos, length);
-		Vector2D center = Vector2D.subtract(pos, length);
-		Vector2D side = dir.getNormalDir().setLength(15);
-		side.y = -side.y;	// 좌표계 보정
-		Vector2D left = Vector2D.add(center, side);
-		Vector2D right = Vector2D.subtract(center, side);
-		
-		canvas.drawLine(front.x, front.y, left.x, left.y, bodyPaint);
-		canvas.drawLine(front.x, front.y, right.x, right.y, bodyPaint);
-		canvas.drawLine(left.x, left.y, right.x, right.y, bodyPaint);
-		canvas.drawLine(center.x, center.y, front.x, front.y, borderPaint);
+	public void draw(Canvas canvas, Bitmap image) {
+		if (Vis.isFrameMode()) {
+			// 전장길이 40.. 가로 30...
+			Vector2D length = new Vector2D(dir).setLength(20);
+			Vector2D front = Vector2D.add(pos, length);
+			Vector2D center = Vector2D.subtract(pos, length);
+			Vector2D side = dir.getNormalDir().setLength(15);
+			side.y = -side.y;	// 좌표계 보정
+			Vector2D left = Vector2D.add(center, side);
+			Vector2D right = Vector2D.subtract(center, side);
+			
+			canvas.drawLine(front.x, front.y, left.x, left.y, bodyPaint);
+			canvas.drawLine(front.x, front.y, right.x, right.y, bodyPaint);
+			canvas.drawLine(left.x, left.y, right.x, right.y, bodyPaint);
+			canvas.drawLine(center.x, center.y, front.x, front.y, borderPaint);
+		}
+		else {
+			GameUtil.tranformImage(mat, pos.x, pos.y, 20,
+					(float) Math.toDegrees(Math.atan2(dir.y, dir.x)) + 90, image);
+			canvas.drawBitmap(image, mat, null);
+		}
 	}
 }

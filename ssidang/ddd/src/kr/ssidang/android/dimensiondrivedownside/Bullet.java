@@ -5,6 +5,8 @@ import android.graphics.Paint;
 import android.graphics.Paint.Cap;
 
 public class Bullet {
+	private static final float BULLET_SIZE = 3;
+	
 	private float x;		// 위치
 	private float y;		// 위치
 	private float vx;		// 속도
@@ -15,7 +17,7 @@ public class Bullet {
 	static {
 		pointPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 		pointPaint.setColor(0xa0ff66cc);
-		pointPaint.setStrokeWidth(3);
+		pointPaint.setStrokeWidth(BULLET_SIZE);
 		pointPaint.setStrokeCap(Cap.ROUND);
 	}
 	
@@ -70,7 +72,8 @@ public class Bullet {
 	 * 총알이 공에 맞았는지 검사합니다.
 	 */
 	public boolean isHit(Ball ball) {
-		return (Vector2D.length(ball.pos.x - x, ball.pos.y - y) < ball.radius);
+		return (Vector2D.length(ball.pos.x - x, ball.pos.y - y)
+				< ball.radius + BULLET_SIZE);
 	}
 
 	/**

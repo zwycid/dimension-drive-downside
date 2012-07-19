@@ -32,7 +32,6 @@ public class Attractor extends Unit {
 		this.pos = new Vector2D(x, y);
 		this.influence = influence;
 		this.power = power;
-		
 	}
 	
 	public void rotate(float delta) {

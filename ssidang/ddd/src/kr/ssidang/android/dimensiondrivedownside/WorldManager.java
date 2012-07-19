@@ -49,6 +49,7 @@ public class WorldManager {
 	private Paint borderPaint;
 	private Bitmap ballBitmap;
 	private Bitmap swirlBitmap;
+	private Bitmap sentryBitmap;
 
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -87,7 +88,8 @@ public class WorldManager {
 		// 리소스 로드
 		Resources res = context.getResources();
 		ballBitmap = BitmapFactory.decodeResource(res, R.drawable.basic_ball);
-		swirlBitmap= BitmapFactory.decodeResource(res, R.drawable.swirl);
+		swirlBitmap = BitmapFactory.decodeResource(res, R.drawable.swirl);
+		sentryBitmap = BitmapFactory.decodeResource(res, R.drawable.sentry);
 	}
 	
 	public GameParams getGameParams() {
@@ -387,7 +389,7 @@ public class WorldManager {
 		
 		// sentry 그리기
 		for (Sentry sen : stage.sentries) {
-			sen.draw(canvas);
+			sen.draw(canvas, sentryBitmap);
 		}
 	}
 
@@ -491,14 +493,9 @@ public class WorldManager {
 		}
 		
 		// 골에 도달했는지 검사합니다.
-		if (checkPortalReached(ball, stage.goal)) {
+		if (stage.goal.isOverlapped(ball) < 0) {
 			G.state = STATE_COMPLETED;
 		}
-	}
-
-	private boolean checkPortalReached(Ball ball, Portal portal) {
-		return Vector2D.distance(ball.pos, portal.pos)
-				< ball.radius + portal.radius;
 	}
 
 	private void onFrameCompleted() {
@@ -533,7 +530,7 @@ public class WorldManager {
 				p.reset(afterPos.x + offsetX, afterPos.y + offsetY, lifetime);
 			}
 			
-			if (!p.isInBound(afterPos.x - halfWidth, afterPos.y - halfHeight,
+			if (! p.isInBound(afterPos.x - halfWidth, afterPos.y - halfHeight,
 					afterPos.x + halfWidth, afterPos.y + halfHeight)) {
 				// 화면 벗어나면 빨리 죽인다
 				p.kill();
