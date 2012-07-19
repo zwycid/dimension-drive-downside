@@ -14,6 +14,7 @@ public class Ball extends Unit {
 	// 공 모양과 재질
 	public float radius;
 	public float restitution;
+	public float mass;
 //	public int hitpoint;
 	
 	// 그리기 데이터
@@ -37,6 +38,7 @@ public class Ball extends Unit {
 	private void init() {
 		this.drawMat = new Matrix();
 		this.restitution = .8f;
+		this.mass = 1.f;
 		
 		ballPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 		ballPaint.setColor(0xffa7dbf3);

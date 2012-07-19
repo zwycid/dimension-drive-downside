@@ -171,7 +171,7 @@ public class WorldManager {
 	}
 
 	public void makeMockWorld() {
-		stage = Stage.fromData("[mapsize],800,800/[s],100,400/[f],750,750/[b],400,300,700,500/");
+		stage = Stage.fromData("[mapsize],800,800/[s],100,400/[f],750,750/[b],400,300,700,500/[a],200,620/");
 	}
 	
 //	/**
@@ -283,16 +283,24 @@ public class WorldManager {
 				stage.width + border, stage.height + border,
 				borderPaint);
 		
-		// 시작점 / 골 그려주기 (임시)
+		// 시작점 / 골 그리기 (임시)
 		Paint portalPaint = new Paint();
 		portalPaint.setColor(0xfff9ae4a);
 		canvas.drawCircle(stage.start.pos.x, stage.start.pos.y, stage.start.radius, portalPaint);
 		portalPaint.setColor(0xff9afa5a);
 		canvas.drawCircle(stage.goal.pos.x, stage.goal.pos.y, stage.goal.radius, portalPaint);
+		
+		// 끌개 그리기
+		for (Attractor att: stage.attractors) {
+			att.draw(canvas);
+		}
 	
+		// 장애물 그리기
 		for (Obstacle ob : stage.obstacles) {
 			ob.draw(canvas);
 		}
+		
+		// 공 그리기
 		ball.draw(canvas);
 	}
 
@@ -385,6 +393,11 @@ public class WorldManager {
 		ball.acc.x = FloatMath.cos(G.gravityDirection) * GRAVITY_CONSTANT;
 		ball.acc.y = -FloatMath.sin(G.gravityDirection) * GRAVITY_CONSTANT;
 		ball.acc.add(ball.velo, -AIR_FRICTION_COEFFICIENT);
+		
+		// 끌개 끌어당김 처리
+		for (Attractor att : stage.attractors) {
+			attractBall(ball, att);
+		}
 
 		// 공 속도
 		ball.velo.add(ball.acc, delta);
@@ -394,11 +407,11 @@ public class WorldManager {
 		Vector2D afterPos = Vector2D.add(beforePos, ball.velo, delta);
 		
 		// 벽 충돌 처리
-		checkCollisionWithBorder(beforePos, afterPos);
+		collisionBallWithBorder(ball, beforePos, afterPos);
 		
 		// 장애물 충돌 처리
 		for (Obstacle ob : stage.obstacles) {
-			checkCollisionWithObstacle(ob, beforePos, afterPos);
+			collisionBallWithObstacle(ball, ob, beforePos, afterPos);
 		}
 		
 		if (G.debug_ > 0) {
@@ -411,7 +424,7 @@ public class WorldManager {
 		}
 		
 		// 배경 파티클 처리
-		moveParticles(afterPos.x - beforePos.x, afterPos.y - beforePos.y);
+		moveParticles(ball.pos.x, ball.pos.y, afterPos.x - beforePos.x, afterPos.y - beforePos.y);
 		
 		// 공의 새 위치를 확정합니다.
 		ball.pos.set(afterPos);
@@ -438,12 +451,10 @@ public class WorldManager {
 		G.tick++;
 	}
 
-	private void moveParticles(float dx, float dy) {
+	private void moveParticles(float lookAtX, float lookAtY, float dx, float dy) {
 		// 방향을 표시하는 파티클을 처리합니다.
 		float halfWidth = G.screenWidth / 2;
 		float halfHeight = G.screenHeight / 2;
-		float x = ball.pos.x;
-		float y = ball.pos.y;
 		
 		for (int i = 0; i < particles.length; ++i) {
 			if (particles[i] == null) {
@@ -451,13 +462,14 @@ public class WorldManager {
 				float offsetX = random.nextFloat() * G.screenWidth - halfWidth;
 				float offsetY = random.nextFloat() * G.screenHeight - halfHeight;
 				float lifetime = random.nextFloat() * 60 + 30;
-				particles[i] = new Particle(x + offsetX, y + offsetY, lifetime);
+				particles[i] = new Particle(lookAtX + offsetX, lookAtY + offsetY, lifetime);
 			}
 			
 			Particle p = particles[i];
 			if (p.isDead())
 				particles[i] = null;
-			else if (! p.isInBound(x - halfWidth, y - halfHeight, x + halfWidth, y + halfHeight)) {
+			else if (!p.isInBound(lookAtX - halfWidth, lookAtY - halfHeight,
+					lookAtX + halfWidth, lookAtY + halfHeight)) {
 				// 화면 벗어나면 빨리 죽인다
 				particles[i] = null;
 			}
@@ -469,13 +481,30 @@ public class WorldManager {
 		}
 	}
 
-	private void checkCollisionWithObstacle(Obstacle ob,
+	private void attractBall(Ball ball, Attractor att) {
+		float r = Vector2D.distance(ball.pos, att.pos);
+		if (r < att.influence) {
+			// F = G * (m1 * m2) / r * r
+			float r_sq = Math.max(att.power * 3, r * r);	// 이거 안 하면 무서움
+			float g = att.power / r_sq / ball.mass;
+			Vector2D force = Vector2D.subtract(att.pos, ball.pos)
+					.setLength(g);
+			ball.acc.add(force);
+			
+			if (G.debug_ > 0) {
+				GameUtil.drawArrow(debugCanvas, ball.pos.x, ball.pos.y,
+						ball.pos.x + force.x * 100, ball.pos.y + force.y * 100, debugOrange);
+			}
+		}
+	}
+
+	private void collisionBallWithObstacle(Ball ball, Obstacle ob,
 			Vector2D beforePos, Vector2D afterPos) {
 		Vector2D edge1 = new Vector2D();
 		Vector2D edge2 = new Vector2D();
 		Vector2D normal = new Vector2D();
-		RectF bound = ob.getBounds();
 		
+		RectF bound = ob.getBounds();
 		float radius = ball.radius;
 		
 		// 근사적으로 코너도 처리함
@@ -484,28 +513,28 @@ public class WorldManager {
 		edge1.set(bound.left - radius, bound.top - radius);
 		edge2.set(bound.left - radius, bound.bottom + radius);
 		normal.set(-1, 0);
-		collisionBallWithEdge(beforePos, afterPos, edge1, edge2, ball.velo, normal);
+		collisionBallWithEdge(ball, beforePos, afterPos, edge1, edge2, ball.velo, normal);
 		
 		// top
 		edge1.set(bound.left - radius, bound.top - radius);
 		edge2.set(bound.right + radius, bound.top - radius);
 		normal.set(0, -1);
-		collisionBallWithEdge(beforePos, afterPos, edge1, edge2, ball.velo, normal);
+		collisionBallWithEdge(ball, beforePos, afterPos, edge1, edge2, ball.velo, normal);
 		
 		// right
 		edge1.set(bound.right + radius, bound.top - radius);
 		edge2.set(bound.right + radius, bound.bottom + radius);
 		normal.set(1, 0);
-		collisionBallWithEdge(beforePos, afterPos, edge1, edge2, ball.velo, normal);
+		collisionBallWithEdge(ball, beforePos, afterPos, edge1, edge2, ball.velo, normal);
 		
 		// bottom
 		edge1.set(bound.left - radius, bound.bottom + radius);
 		edge2.set(bound.right + radius, bound.bottom + radius);
 		normal.set(0, 1);
-		collisionBallWithEdge(beforePos, afterPos, edge1, edge2, ball.velo, normal);
+		collisionBallWithEdge(ball, beforePos, afterPos, edge1, edge2, ball.velo, normal);
 	}
 
-	private void checkCollisionWithBorder(Vector2D beforePos, Vector2D afterPos) {
+	private void collisionBallWithBorder(Ball ball, Vector2D beforePos, Vector2D afterPos) {
 		Vector2D edge1 = new Vector2D();
 		Vector2D edge2 = new Vector2D();
 		Vector2D normal = new Vector2D();
@@ -517,30 +546,30 @@ public class WorldManager {
 		edge1.set(ball.radius, 0);
 		edge2.set(ball.radius, height);
 		normal.set(1, 0);
-		collisionBallWithEdge(beforePos, afterPos, edge1, edge2, ball.velo, normal);
+		collisionBallWithEdge(ball, beforePos, afterPos, edge1, edge2, ball.velo, normal);
 
 		// top
 		edge1.set(0, ball.radius);
 		edge2.set(width, ball.radius);
 		normal.set(0, 1);
-		collisionBallWithEdge(beforePos, afterPos, edge1, edge2, ball.velo, normal);
+		collisionBallWithEdge(ball, beforePos, afterPos, edge1, edge2, ball.velo, normal);
 		
 		// right
 		edge1.set(width - ball.radius, 0);
 		edge2.set(width - ball.radius, height + 10);
 		normal.set(-1, 0);
-		collisionBallWithEdge(beforePos, afterPos, edge1, edge2, ball.velo, normal);
+		collisionBallWithEdge(ball, beforePos, afterPos, edge1, edge2, ball.velo, normal);
 		
 		// bottom
 		edge1.set(0, height - ball.radius);
 		edge2.set(width + 10, height - ball.radius);
 		normal.set(0, -1);
-		collisionBallWithEdge(beforePos, afterPos, edge1, edge2, ball.velo, normal);
+		collisionBallWithEdge(ball, beforePos, afterPos, edge1, edge2, ball.velo, normal);
 	}
 
-	private void collisionBallWithEdge(Vector2D beforePos, Vector2D afterPos,
-			Vector2D edgeStart, Vector2D edgeStop, Vector2D velocity,
-			Vector2D normal) {
+	private void collisionBallWithEdge(Ball ball, Vector2D beforePos,
+			Vector2D afterPos, Vector2D edgeStart, Vector2D edgeStop,
+			Vector2D velocity, Vector2D normal) {
 		float coeffi = ball.restitution;
 		Vector2D interPt = new Vector2D();
 		
