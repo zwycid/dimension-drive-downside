@@ -49,17 +49,11 @@ public class GameView extends SurfaceView implements
 	}
 	
 	public void onTouchEvent(Activity parent, MotionEvent event) {
-		if (event.getActionMasked() == MotionEvent.ACTION_DOWN)
-			world.pause();
+		world.onTouchEvent(parent, event);
 	}
 	
-	public boolean onBackPressed(Activity parent) {
-		if (world.isPaused())
-			return false;
-		else {
-			world.pause(true);
-			return true;
-		}
+	public void onBackPressed(Activity parent) {
+		world.onBackPressed(parent);
 	}
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -113,7 +107,7 @@ public class GameView extends SurfaceView implements
 		G.gravityDirection = (float) rad;
 		
 		world.onRender(canvas);
-		world.onFrame(G.delta, canvas);
+		world.onFrame(G.delta);
 		
 		G.timestamp = now;
 	}

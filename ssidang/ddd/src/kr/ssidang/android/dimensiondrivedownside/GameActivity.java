@@ -80,8 +80,7 @@ public class GameActivity extends Activity implements
 
 	@Override
 	public void onBackPressed() {
-		if (! gameView.onBackPressed(this))
-			super.onBackPressed();
+		gameView.onBackPressed(this);
 	}
 
 	///////////////////////////////////////////////////////////////////////////

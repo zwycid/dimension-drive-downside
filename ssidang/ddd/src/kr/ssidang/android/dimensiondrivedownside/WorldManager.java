@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -13,6 +14,7 @@ import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.RectF;
 import android.util.FloatMath;
+import android.view.MotionEvent;
 
 public class WorldManager {
 	public static final float SCALE_UNIT = 160.f;
@@ -72,10 +74,9 @@ public class WorldManager {
 		
 		int tick;
 		long timestamp;
-		
 		float delta;
-		float gravityDirection;
 		
+		float gravityDirection;
 		float azimuth;
 		float pitch;
 		float roll;
@@ -116,6 +117,25 @@ public class WorldManager {
 	
 	public GameParams getGameParams() {
 		return G;
+	}
+	
+	public void onTouchEvent(Activity parent, MotionEvent event) {
+		if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
+			if (G.state == STATE_COMPLETED)
+				parent.finish();
+			else
+				pause();
+		}
+	}
+	
+	public void onBackPressed(Activity parent) {
+		if (G.state == STATE_COMPLETED)
+			parent.finish();
+		else if (isPaused())
+			parent.finish();
+		else {
+			pause(true);
+		}
 	}
 	
 	public void pause() {
@@ -190,7 +210,7 @@ public class WorldManager {
 
 		switch (G.state) {
 		case STATE_READY:
-			onRenderReady();
+			onRenderReady(canvas);
 			break;
 		case STATE_PAUSED:
 			onRenderPaused(canvas);
@@ -199,15 +219,15 @@ public class WorldManager {
 			onRenderPlaying(canvas);
 			break;
 		case STATE_COMPLETED:
-			onRenderCompleted();
+			onRenderCompleted(canvas);
 			break;
 		case STATE_DEAD:
-			onRenderDead();
+			onRenderDead(canvas);
 			break;
 		}
 	}
 
-	private void onRenderReady() {
+	private void onRenderReady(Canvas canvas) {
 		// 아무것도 안 함
 	}
 
@@ -215,7 +235,7 @@ public class WorldManager {
 		// 게임 화면을 그려주고...
 		onRenderPlaying(canvas);
 		
-		// 메뉴를 그려줘야 하지만 임시적으로 해둔다
+		// 메뉴를 그려줘야 함.
 		resetView(canvas);
 		canvas.drawColor(0xa0000000);
 		canvas.drawText("Paused", G.screenWidth / 2 - 13,
@@ -262,11 +282,18 @@ public class WorldManager {
 		ball.draw(canvas);
 	}
 
-	private void onRenderCompleted() {
+	private void onRenderCompleted(Canvas canvas) {
 		// TODO onRenderCompleted
+		// 게임 화면을 그려주고...
+		onRenderPlaying(canvas);
+		
+		resetView(canvas);
+		canvas.drawColor(0x8090a090);
+		canvas.drawText("Win", G.screenWidth / 2 - 8,
+				G.screenHeight / 2 + 3, debugText);
 	}
 
-	private void onRenderDead() {
+	private void onRenderDead(Canvas canvas) {
 		// TODO onRenderDead
 	}
 
@@ -274,9 +301,8 @@ public class WorldManager {
 	 * 물체들을 움직입니다.
 	 * 
 	 * @param delta
-	 * @param canvas
 	 */
-	public void onFrame(float delta, Canvas canvas) {
+	public void onFrame(float delta) {
 		switch (G.state) {
 		case STATE_READY:
 			onFrameReady();
@@ -285,7 +311,7 @@ public class WorldManager {
 			onFramePaused();
 			break;
 		case STATE_PLAYING:
-			onFramePlaying(delta, canvas);
+			onFramePlaying(delta);
 			break;
 		case STATE_COMPLETED:
 			onFrameCompleted();
@@ -297,10 +323,10 @@ public class WorldManager {
 		
 		// TODO Debug
 		if (G.debug_) {
-			resetView(canvas);
+			resetView(debugCanvas);
 			
 			float fps = 1000.f / (G.delta * TIME_UNIT);
-			GameUtil.drawTextMultiline(canvas,
+			GameUtil.drawTextMultiline(debugCanvas,
 					"Tick: " + G.tick + " (fps: " + fps + ")"
 					+ "\nScreen = (" + width + ", " + height + ")"
 					+ "\nAzimuth = " + G.azimuth
@@ -312,7 +338,7 @@ public class WorldManager {
 			float centerY = height / 2;
 			float offsetX = FloatMath.cos(G.gravityDirection) * 50;
 			float offsetY = FloatMath.sin(G.gravityDirection) * 50;
-			GameUtil.drawArrow(canvas, centerX, centerY,
+			GameUtil.drawArrow(debugCanvas, centerX, centerY,
 					centerX + offsetX, centerY - offsetY, debugRed);
 			
 		}
@@ -327,7 +353,7 @@ public class WorldManager {
 		// 아무것도 안 함
 	}
 
-	private void onFramePlaying(float delta, Canvas canvas) {
+	private void onFramePlaying(float delta) {
 		// 중력 및 공기 저항
 		ball.acc.x = FloatMath.cos(G.gravityDirection) * GRAVITY_CONSTANT;
 		ball.acc.y = -FloatMath.sin(G.gravityDirection) * GRAVITY_CONSTANT;
@@ -351,12 +377,17 @@ public class WorldManager {
 		if (G.debug_) {
 			// 공 방향 표시
 			Vector2D dir = Vector2D.subtract(afterPos, beforePos).setLength(100);
-			GameUtil.drawArrow(canvas, beforePos.x, beforePos.y,
+			GameUtil.drawArrow(debugCanvas, beforePos.x, beforePos.y,
 					beforePos.x + dir.x, beforePos.y + dir.y, debugBlue);
 		}
 		
 		// 공의 새 위치를 확정합니다.
 		ball.pos.set(afterPos);
+		
+		// 골에 도달했는지 검사합니다.
+		if (Vector2D.distance(ball.pos, goal.pos) < ball.radius + goal.radius) {
+			G.state = STATE_COMPLETED;
+		}
 		
 		// 배경 파티클 처리
 		moveParticles();

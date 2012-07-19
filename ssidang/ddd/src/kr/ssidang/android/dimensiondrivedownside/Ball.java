@@ -20,7 +20,6 @@ public class Ball extends Unit {
 	private Matrix drawMat;
 	private Bitmap ballBitmap;
 	private Paint ballPaint;
-	private float scaleFactor;
 
 	public Ball(Bitmap ballBitmap, float radius) {
 		this.ballBitmap = ballBitmap;
@@ -42,10 +41,10 @@ public class Ball extends Unit {
 		ballPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 		ballPaint.setColor(0xffa7dbf3);
 		
-		scaleFactor = 2.f / ballBitmap.getWidth();
 	}
 
 	public void draw(Canvas canvas) {
+		float ballFactor = 2.f / ballBitmap.getWidth();
 		canvas.drawCircle(pos.x, pos.y, radius, ballPaint);
 		
 //		drawMat.setScale(radius * scaleFactor, radius * scaleFactor);
