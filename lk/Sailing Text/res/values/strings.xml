@@ -16,5 +16,8 @@
     <string name="loadGame">Load game</string>
     <string name="topScore">Top Score</string>
     <string name="topTime">Top Time</string>
-
+	<string name="Story">Story</string>
+	<string name="Credit">Credit</string>
+	<string name="Sound">Sound</string>
+	<string name="Tutorial">Tutorial</string>
 </resources>

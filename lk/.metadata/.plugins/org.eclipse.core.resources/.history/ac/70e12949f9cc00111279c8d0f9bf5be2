@@ -1,0 +1,47 @@
+package lk.summer.project.lkcustom;
+
+import android.widget.TextView;
+import lk.summer.project.gameuidesign.R;
+
+public class LKAndroid {
+	public static final int DEFAULT_COLOR	= 0xff66ffff;
+	
+
+	/**
+	 * 클래스 이름과 클래스 내에 정의된 변수 이름으로 id값을 구합니다.
+	 * @param className : R 안에 있는 클래스 이름입니다.
+	 * @param fieldName : className 안에 정의된 변수 이름입니다.
+	 * @return
+	 */
+	public static int getID(String className, String fieldName){
+		int id	= 0x00000000;
+		
+		for(id = 0 ; (id < R.class.getClasses().length) && (className != R.class.getClasses()[id].getSimpleName()) ; id++);
+		
+		try {
+			id	= R.class.getClasses()[id].getField(fieldName).getInt(fieldName);
+		} catch (IllegalArgumentException e) {			e.printStackTrace();
+		} catch (SecurityException e) {			e.printStackTrace();
+		} catch (IllegalAccessException e) {			e.printStackTrace();
+		} catch (NoSuchFieldException e) {			e.printStackTrace();
+		}
+		return id;
+	}
+
+	public static void initTextViewShadow(TextView textView, int textSize){
+		textView.setShadowLayer((0.0f+textSize)/5, 0.0f, 0.0f, DEFAULT_COLOR);
+	}
+
+	public static void initBlankView(TextView blankView, int blankSize){
+		blankView.setHeight(blankSize);
+	}
+/**
+ * 스마트폰 화면 크기에 비례하여 적합한 텍스트 크기를 반환합니다.
+ * @param textType : TEXT	- textView나 drawText할 때 사용합니다. 함수는 보이는 글자를 넣는 경우로 인식합니다.
+ * 					 BLANK	- 함수는 textView인데 Blank로 사용할 때, 즉 빈칸을 넣는 경우로 인식합니다. 
+ * @param textSize : LARGE	- 큰 글씨(text button) / 큰 빈칸이 필요할 때 사용합니다.
+ * 					 SMALL	- 작은 글씨(text button) / 작은 빈칸이 필요할 때 사용합니다.
+ * 					 PLAIN	- 일반적인 글씨가 필요할 떄 사용합니다.
+ * @return
+ */
+}

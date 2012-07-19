@@ -1,0 +1,40 @@
+package mju.summer2012.itproject.team3.lk.sailingtext.mainmenu;
+
+import mju.summer2012.itproject.team3.lk.sailingtext.MainActivity;
+import mju.summer2012.itproject.team3.lk.sailingtext.R;
+import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ViewFlipper;
+
+public class MainTextViewListener implements OnClickListener {
+	private MainActivity mainActivity;
+	private ViewFlipper viewFlipper;
+
+	public MainActivity getMainActivity() {		return mainActivity;	}
+	public void setMainActivity(MainActivity mainActivity) {		this.mainActivity = mainActivity;	}
+	public ViewFlipper getViewFlipper() {		return viewFlipper;	}
+	public void setViewFlipper(ViewFlipper viewFlipper) {		this.viewFlipper = viewFlipper;	}
+
+	public void onClick(View clickedView) {
+		// TODO Auto-generated method stub
+		if(clickedView.getId() == R.id.MainTextViewStartgame){
+			getViewFlipper().showNext();
+//			getMainActivity().getStartGamePage().initStartGamePage();
+		}else if(clickedView.getId() == R.id.MainTextViewRanking){
+			//xml에 등록된 view라면 바로 그냥 shownext해도 됨.
+			getViewFlipper().showNext();
+			getViewFlipper().showNext();
+		}else if(clickedView.getId() == R.id.MainTextViewOption){
+			//두 번 연속으로 호출하면 그냥 맨 마지막 view가 보임.
+			getViewFlipper().showNext();
+			getViewFlipper().showNext();
+			getViewFlipper().showNext();
+		}
+	}
+
+	public MainTextViewListener(MainActivity mainActivity){
+		this.mainActivity	= mainActivity;
+		viewFlipper			= (ViewFlipper) mainActivity.findViewById(R.id.viewFlipper);
+	}
+}

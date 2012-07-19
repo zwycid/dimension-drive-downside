@@ -1,0 +1,76 @@
+package com.hanback.testdb;
+
+import static android.provider.BaseColumns._ID;
+import static com.hanback.testdb.Constants.TABLE_NAME;
+import static com.hanback.testdb.Constants.TIME;
+import static com.hanback.testdb.Constants.RANK;
+import android.os.Bundle;
+import android.app.Activity;
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.view.Menu;
+import android.widget.BaseAdapter;
+import android.widget.GridView;
+import android.widget.TextView;
+
+public class TestDBActivity extends Activity {
+	private static String[] FROM = { RANK,_ID,TIME};
+	private static String ORDER_BY = TIME+" DESC";
+	private static final int TOTAL_RANK = 2;
+	
+	private TextView idView;
+//	private RankingView rankingView;
+	private TextView timeView;
+	private GridView gridView;
+	
+	private EventsData events;
+	
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+     //   rankingView	= new RankingView(this);
+        idView		= new TextView(this);
+        timeView	= new TextView(this);
+        
+        setContentView(R.layout.scoreview);
+        
+        events = new EventsData(this);
+        
+        try{
+        	addEvent("Hello, Android!");
+        	Cursor cursor = getEvents();
+        	showEvents(cursor);
+        }finally{
+        	events.close();
+        }
+    }
+
+    private void addEvent(String string){
+    	SQLiteDatabase db = events.getWritableDatabase();
+    	ContentValues values = new ContentValues();
+    	values.put(TIME, System.currentTimeMillis());
+    	values.put(RANK,string);
+    	db.insertOrThrow(TABLE_NAME, null, values);
+    }
+    
+	private Cursor getEvents(){
+    	SQLiteDatabase db = events.getReadableDatabase();
+    	Cursor cursor = db.query(TABLE_NAME, null, null, null, null, null, ORDER_BY);
+    	startManagingCursor(cursor);
+    	return cursor;
+    }
+    
+    private void showEvents(Cursor cursor){
+    	for(int i = 0 ; (i < TOTAL_RANK+1 ) &&  cursor.moveToNext() ; i++){
+    	}
+    }
+    
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_test_db, menu);
+        return true;
+    }
+    
+}

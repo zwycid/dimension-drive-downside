@@ -35,7 +35,6 @@ import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Shader.TileMode;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
@@ -97,6 +96,8 @@ public class CoverFlowExample extends Activity {
 
 		CoverFlow coverFlow = (CoverFlow)findViewById(R.id.cover_flow);
 		coverFlow.setAdapter(new ImageAdapter(this));
+		coverFlow.setFadingEdgeLength(getPreferTextSizeForWindow(BLANK, LARGE));
+		coverFlow.setVerticalFadingEdgeEnabled(true);
 		ImageAdapter coverImageAdapter =  new ImageAdapter(this);
 
 		mSelectedPosition = 10;
@@ -233,7 +234,7 @@ public class CoverFlowExample extends Activity {
 		}
 		public boolean createReflectedImages() {
 			//The gap we want between the reflection and the original image
-			final int reflectionGap = 4;
+			final int reflectionGap = 60;
 
 			int index = 0;
 			for (int imageId : mImageIds) {
@@ -241,7 +242,6 @@ public class CoverFlowExample extends Activity {
 						imageId);
 				int width = originalImage.getWidth();
 				int height = originalImage.getHeight();
-
 
 //This will not scale but will flip on the Y axis
 				Matrix matrix = new Matrix();
@@ -253,19 +253,22 @@ public class CoverFlowExample extends Activity {
 
 
 //Create a new bitmap with same width but taller to fit reflection
-//              Bitmap bitmapWithReflection = Bitmap.createBitmap(width 
-//                      , (height + height/2), Config.ARGB_8888);
-				Bitmap bitmapWithReflection = Bitmap.createBitmap(width 
-						, (height), Config.ARGB_8888);
+				Bitmap bitmapWithReflection = Bitmap.createBitmap(width
+						, (height + height/2), Config.ARGB_8888);
 
 //Create a new Canvas with the bitmap that's big enough for
 //the image plus gap plus reflection
 				Canvas canvas = new Canvas(bitmapWithReflection);
-//Draw in the original image
-				canvas.drawBitmap(originalImage, 0, 0, null);
-//Draw in the gap
 				Paint deafaultPaint = new Paint();
-				canvas.drawRect(0, height, width, height + reflectionGap, deafaultPaint);
+				deafaultPaint.setColor(0x00000000);
+//Draw in the gap on top(위쪽 갭을 그립니다)
+			canvas.drawRect(0, 0, width, reflectionGap, deafaultPaint);
+//Draw in the original image(원래 비트맵 이미지를 그림미다)
+				canvas.drawBitmap(originalImage, 0, reflectionGap+10, null);
+//				canvas.drawBitmap(originalImage, 0, 0, null);//origin code
+//Draw in the gap on bottom avobe reflaction(아래쪽 갭을 그리는데, 이 아래쪽 갭은 그림자 위임미다)
+//				canvas.drawRect(0, height+reflectionGap, width, height + reflectionGap*2, deafaultPaint);
+//				canvas.drawRect(0, height, width, height + reflectionGap, deafaultPaint);//origin code
 //Draw in the reflection
 				canvas.drawBitmap(reflectionImage,0, height + reflectionGap, null);
 
@@ -279,17 +282,19 @@ public class CoverFlowExample extends Activity {
 //Set the Transfer mode to be porter duff and destination in
 				paint.setXfermode(new PorterDuffXfermode(Mode.DST_IN)); 
 //Draw a rectangle using the paint with our linear gradient
-				canvas.drawRect(0, height, width, 
+//				canvas.drawRect(0, height, width, 
+//						bitmapWithReflection.getHeight() + reflectionGap, paint); //origin code
+				canvas.drawRect(0, height+reflectionGap, width, 
 						bitmapWithReflection.getHeight() + reflectionGap, paint); 
 
 				ImageView imageView = new ImageView(mContext);
 				imageView.setImageBitmap(bitmapWithReflection);
 
-// set size of Images
-				imageView.setLayoutParams(new CoverFlow.LayoutParams((int) (width*0.4), (int) (height*0.4))); // 내가 넣음ㅋ
-//           imageView.setLayoutParams(new CoverFlow.LayoutParams(120, 180)); // original value
-//           imageView.setLayoutParams(new CoverFlow.LayoutParams(180, 180)); // custom value
-//           imageView.setScaleType(ScaleType.MATRIX); // original code (deprecated)
+				// set size of Images
+				imageView.setLayoutParams(new CoverFlow.LayoutParams((int) (width*0.7), (int) (height*0.7))); // 내가 넣음ㅋ
+//				imageView.setLayoutParams(new CoverFlow.LayoutParams(120, 180)); // original value
+//				imageView.setLayoutParams(new CoverFlow.LayoutParams(180, 180)); // custom value
+//				imageView.setScaleType(ScaleType.MATRIX); // original code (deprecated)
 
 // set aspect of Images (this setting is needed in order to use reflected images (!)
 // 이미지의 국면을 정합니다(이 설정은 반사된 이미지들을 사용하기 위해 필요합니다!)

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#000000"
+    android:orientation="vertical" >
+
+    <lk.summer.project.BackgroundSurfaceView
+        android:id="@+id/BackgroundSurfaceView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ViewFlipper
+        android:id="@+id/viewFlipper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:id="@+id/MainmenuLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#00000000"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/MainmenublankView0"
+                style="@style/blankView" />
+
+            <TextView
+                android:id="@+id/MainmenutextViewTitle"
+                style="@style/TitleText"
+                android:text="@string/gameTitle" />
+
+            <TextView
+                android:id="@+id/MainmenublankView1"
+                style="@style/blankView" />
+
+            <TextView
+                android:id="@+id/MainmenutextViewStartgame"
+                style="@style/ButtonText"
+                android:text="@string/Startgame" />
+
+            <TextView
+                android:id="@+id/MainmenublankView2"
+                style="@style/blankView" />
+
+            <TextView
+                android:id="@+id/MainmenutextViewRanking"
+                style="@style/ButtonText"
+                android:text="@string/Ranking" />
+
+            <TextView
+                android:id="@+id/bMainmenulankView3"
+                style="@style/blankView" />
+
+            <TextView
+                android:id="@+id/MainmenutextViewOption"
+                style="@style/ButtonText"
+                android:text="@string/Option" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/RankingRelativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#00000000"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/RankingBlankView0"
+                style="@style/blankView"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:id="@+id/RankingtextViewTitle"
+                style="@style/TitleText"
+                android:layout_below="@+id/RankingBlankView0"
+                android:layout_centerHorizontal="true"
+                android:text="@string/Ranking" />
+
+            <TextView
+                android:id="@+id/RankingBlankView1"
+                style="@style/blankView"
+                android:layout_alignLeft="@+id/RankingtextViewTitle"
+                android:layout_below="@+id/RankingtextViewTitle" />
+
+            <Spinner
+                android:id="@+id/spinnerStage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/RankingBlankView1"
+                android:prompt="@string/STAGE" />
+
+            <TextView
+                android:id="@+id/textViewButtonSwap"
+                style="@style/ButtonText"
+                android:layout_above="@+id/RankingBlankView3"
+                android:layout_alignParentLeft="true" />
+
+            <TextView
+                android:id="@+id/textViewButtonReset"
+                style="@style/ButtonText"
+                android:layout_above="@+id/RankingBlankView2"
+                android:layout_alignParentRight="true"
+                android:text="@string/reset" />
+
+            <ViewFlipper
+                android:id="@+id/viewFlipperForListView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spinnerStage"
+                android:layout_centerHorizontal="true" >
+
+                <ListView
+                    android:id="@+id/listViewTotalRanking"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+                </ListView>
+
+                <ListView
+                    android:id="@+id/listViewStageRanking"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+                </ListView>
+            </ViewFlipper>
+
+            <TextView
+                android:id="@+id/RankingBlankView2"
+                style="@style/blankView"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:text="@string/blank" />
+
+            <TextView
+                android:id="@+id/RankingBlankView3"
+                style="@style/blankView"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:text="@string/blank" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/OptionLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#00000000"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textViewTitleOption"
+                style="@style/TitleText"
+                android:text="@string/Option" />
+        </LinearLayout>
+    </ViewFlipper>
+
+</FrameLayout>

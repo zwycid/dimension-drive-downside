@@ -1,0 +1,19 @@
+package mju.summer2012.itproject.team3.lk.sailingtext.newgame;
+
+import android.app.Activity;
+
+public class CoverFlowActivity extends Activity {
+
+	public CoverFlowActivity() {
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

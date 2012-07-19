@@ -1,0 +1,37 @@
+package lk.summer.project;
+
+import android.content.Context;
+import android.util.AttributeSet;
+import android.view.View;
+import android.widget.TextView;
+
+public class MainmenuView extends View {
+
+	private int windowWidth;
+
+	public MainmenuView(Context context, AttributeSet attrs, int defStyle) {
+		super(context, attrs, defStyle);
+		initView();
+	}
+
+	public MainmenuView(Context context, AttributeSet attrs) {
+		super(context, attrs);
+		initView();
+		
+	}
+
+	public MainmenuView(Context context) {
+		super(context);
+		initView();
+	}
+	
+	private void initView(){
+		
+	}
+
+	public int getWindowWidth() {		return windowWidth;	}
+
+	public void setWindowWidth(int windowWidth) {		this.windowWidth = windowWidth;	}
+	
+	
+}
