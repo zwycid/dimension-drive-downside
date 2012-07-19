@@ -2,6 +2,7 @@ package mju.summer2012.itproject.team3.lk.sailingtext;
 
 import mju.summer2012.itproject.team3.lk.sailingtext.mainmenu.MainPage;
 import mju.summer2012.itproject.team3.lk.sailingtext.startgame.CoverFlowExample;
+import mju.summer2012.itproject.team3.sound.SoundManager;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -24,7 +25,10 @@ public class MainActivity extends Activity {
 	private MainTextViewListener textViewListener;
 	private MainPage mainMenuPage;
 	private ViewFlipper viewFlipper;
-
+	
+	//TODO sound by jh
+	SoundManager sManager;
+	
 	public MainTextViewListener getTextViewListener() {		return textViewListener;	}
 	public void setTextViewListener(MainTextViewListener textViewListener) {		this.textViewListener = textViewListener;	}
 	public MainPage getMainMenuPage() {		return mainMenuPage;	}
@@ -36,7 +40,11 @@ public class MainActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
+		sManager = SoundManager.getInstance();
+		sManager.init(this);
+		sManager.addSound(0,R.raw.click);
+		//TODO sound by jh
+		
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
 		setContentView(R.layout.activity_main);
@@ -45,8 +53,11 @@ public class MainActivity extends Activity {
 		this.getMainMenuPage().initiateMainmenuPage();
 	}
 
+	
 	@Override
 	public void onBackPressed() {
+		sManager.play(0); //TODO sound by jh
+		SoundManager sManager;
 		DialogBox();
 	}
 
@@ -87,13 +98,15 @@ public class MainActivity extends Activity {
 						"yes", new AlertDialog.OnClickListener() {
 
 							public void onClick(DialogInterface dialog, int which) {
+								sManager.play(0);//TODO sound by jh
 								MainActivity.this.finish();
 								dialog.cancel();
 							}
 						}).setNegativeButton(
 								"No" , new AlertDialog.OnClickListener() {
-
+									
 									public void onClick(DialogInterface dialog, int which) {
+										sManager.play(0);//TODO sound by jh
 										dialog.cancel();
 									}
 								});
@@ -109,6 +122,7 @@ public class MainActivity extends Activity {
 
 		public void onClick(View clickedView) {
 			if(clickedView.getId() == R.id.MainTextViewStartgame){
+				sManager.play(0);//TODO sound by jh
 				Intent intent	= new Intent(MainActivity.this, CoverFlowExample.class);
 				startActivityForResult(intent, 1);
 			}

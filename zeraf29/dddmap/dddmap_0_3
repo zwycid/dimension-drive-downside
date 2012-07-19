@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+  <head>
+    <script src='raphael-min.js'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js'></script>
+    <script>
+      $(function () {
+      	var W = 640,
+      		H = 480,
+      		R = Raphael("holder",W,H).
+      		
+      });
+    </script>
+  </head>
+
+  <body>
+    <div id="canvas">
+    </div>
+
+  </body>
+</html>
