@@ -38,23 +38,23 @@ public class GameView extends SurfaceView implements
 	
 	public GameView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
-		init();
+		init(context);
 	}
 
 	public GameView(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		init();
+		init(context);
 	}
 
 	public GameView(Context context) {
 		super(context);
-		init();
+		init(context);
 	}
 	
-	private void init() {
+	private void init(Context context) {
 		getHolder().addCallback(this);
 		
-		world = new WorldManager();
+		world = new WorldManager(context);
 		G = world.getGameParams();
 		world.makeMockWorld();
 	}
@@ -87,6 +87,8 @@ public class GameView extends SurfaceView implements
 		scaleFactor = length / SCALE_UNIT;
 		this.width = width / scaleFactor;
 		this.height = height / scaleFactor;
+		G.screenWidth = this.width;
+		G.screenHeight = this.height;
 
 		// 렌더링 시작.
 		renderer.start();
@@ -131,7 +133,6 @@ public class GameView extends SurfaceView implements
 		// 아래 방향
 		float length = 50;
 		float sign = (G.pitch >= 0 ? -1.f : 1.f);
-//		float sign = (float) Math.cos(Math.toRadians(G.pitch));
 		float rad = (float) Math.toRadians((-90 - G.roll) * sign);
 		float offsetX = FloatMath.cos(rad) * length;
 		float offsetY = FloatMath.sin(rad) * length;

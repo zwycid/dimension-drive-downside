@@ -163,6 +163,15 @@ public class Vector2D extends PointF {
 	}
 	
 	/**
+	 * 길이 제곱을 구합니다.
+	 * 
+	 * @return		벡터 길이의 제곱
+	 */
+	public float lengthSq() {
+		return (x * x + y * y);
+	}
+	
+	/**
 	 * 벡터 방향과 길이를 지정하여 새 벡터를 지정합니다.
 	 * 
 	 * @see	super#set(PointF)
