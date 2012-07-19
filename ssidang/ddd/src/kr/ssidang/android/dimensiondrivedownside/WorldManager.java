@@ -48,6 +48,7 @@ public class WorldManager {
 	// 게임 리소스.............
 	private Paint borderPaint;
 	private Bitmap ballBitmap;
+	private Bitmap swirlBitmap;
 
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -86,6 +87,7 @@ public class WorldManager {
 		// 리소스 로드
 		Resources res = context.getResources();
 		ballBitmap = BitmapFactory.decodeResource(res, R.drawable.basic_ball);
+		swirlBitmap= BitmapFactory.decodeResource(res, R.drawable.swirl);
 	}
 	
 	public GameParams getGameParams() {
@@ -114,10 +116,14 @@ public class WorldManager {
 	
 	boolean onTouchEvent(Activity parent, MotionEvent event) {
 		if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
-			if (G.state == STATE_COMPLETED)
-				parent.finish();
-			else
-				pause();
+			if (event.getY() < 50)
+				Vis.toggleFrameMode();
+			else {
+				if (G.state == STATE_COMPLETED)
+					parent.finish();
+				else
+					pause();
+			}
 			return true;
 		}
 		return false;
@@ -341,7 +347,7 @@ public class WorldManager {
 		
 		// 끌개 그리기
 		for (Attractor att: stage.attractors) {
-			att.draw(canvas);
+			att.draw(canvas, swirlBitmap);
 		}
 	
 		// 장애물 그리기
@@ -439,6 +445,7 @@ public class WorldManager {
 		
 		// 끌개 처리
 		for (Attractor att : stage.attractors) {
+			att.rotate(delta);
 			attractBall(ball, att);
 		}
 

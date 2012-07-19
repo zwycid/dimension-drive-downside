@@ -1,17 +1,26 @@
 package kr.ssidang.android.dimensiondrivedownside;
 
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 
 public class Attractor extends Unit {
 	public Vector2D pos;
 	public float influence;
 	public float power;
+	private float rotation;
+	
+	private Matrix mat = new Matrix();
 	
 	private static final Paint attrPaint;
+	private static final Paint imagePaint;
 	static {
 		attrPaint = new Paint();
 		attrPaint.setColor(0x30dda0dd);
+		
+		imagePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+		imagePaint.setColor(0x80ffffff);
 	}
 	
 	// µð¹ö±ë¿ë
@@ -26,7 +35,17 @@ public class Attractor extends Unit {
 		
 	}
 	
-	public void draw(Canvas canvas) {
-		canvas.drawCircle(pos.x, pos.y, influence, attrPaint);
+	public void rotate(float delta) {
+		rotation += 1f * delta;
+	}
+	
+	public void draw(Canvas canvas, Bitmap image) {
+		if (Vis.isFrameMode()) {
+			canvas.drawCircle(pos.x, pos.y, influence, attrPaint);
+		}
+		else {
+			GameUtil.tranformImage(mat, pos.x, pos.y, influence, rotation, image);
+			canvas.drawBitmap(image, mat, imagePaint);
+		}
 	}
 }

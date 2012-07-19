@@ -16,6 +16,7 @@ public class Vis {
 	
 	private static final int LEVELS = 3;
 	private static int visLevel;
+	private static boolean frame;
 	
 	// 디버깅용...........
 	static final Paint white;
@@ -53,23 +54,32 @@ public class Vis {
 		visLevel = (visLevel + 1) % LEVELS;
 	}
 	
-	public static void turnOff() {
-		visLevel = OFF;
+	public static void toggleFrameMode() {
+		frame = !frame;
+	}
+	
+	public static void setLevel(int level) {
+		visLevel = level;
+	}
+	
+	public static void setFrameMode(boolean mode) {
+		frame = mode;
 	}
 	
 	/**
 	 * Visualizer가 켜져 있는지 확인합니다.
 	 * 
 	 * @param level
-	 * 		0 = off
-	 * 		1 = simple
-	 * 		2 = verbose
 	 */
 	public static boolean isEnabled(int level) {
-		return (visLevel <= level);
+		return (visLevel >= level);
 	}
 	
 	public static boolean isEnabled() {
 		return isEnabled(SIMPLE);
+	}
+	
+	public static boolean isFrameMode() {
+		return frame;
 	}
 }

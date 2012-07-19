@@ -17,8 +17,8 @@ public class Ball extends Unit {
 	int hitpoint		= 100;
 	
 	
-	private Matrix mat		= new Matrix();
-	private Bitmap ballBitmap;
+	private Matrix mat = new Matrix();
+	private Bitmap image;
 	
 	private static final Paint ballPaint;
 	static {
@@ -31,13 +31,13 @@ public class Ball extends Unit {
 	Vector2D debug_dir = new Vector2D();
 	
 
-	public Ball(Bitmap ballBitmap, float radius) {
-		this.ballBitmap = ballBitmap;
+	public Ball(Bitmap image, float radius) {
+		this.image = image;
 		this.radius = radius;
 	}
 	
-	public Ball(Bitmap ballBitmap, float x, float y, float radius) {
-		this.ballBitmap = ballBitmap;
+	public Ball(Bitmap image, float x, float y, float radius) {
+		this.image = image;
 		this.pos = new Vector2D(x, y);
 		this.radius = radius;
 	}
@@ -51,18 +51,13 @@ public class Ball extends Unit {
 	}
 
 	public void draw(Canvas canvas) {
-		canvas.drawCircle(pos.x, pos.y, radius, ballPaint);
-		
-		// (1) 중점을 원점으로 맞추고
-		// (2) 원하는 각도로 회전시킨 뒤
-		// (3) 원하는 크기로 조절한 다음
-		// (4) 제 위치에 놓습니다.
-		float length = (ballBitmap.getWidth() + ballBitmap.getHeight()) / 2;
-		
-		mat.setRotate((float) Math.toDegrees(-rotation) - 90);
-		mat.preTranslate(-length / 2, -length / 2);
-		mat.postScale(radius * 2 / length, radius * 2 / length);
-		mat.postTranslate(pos.x, pos.y);
-		canvas.drawBitmap(ballBitmap, mat, ballPaint);
+		if (Vis.isFrameMode()) {
+			canvas.drawCircle(pos.x, pos.y, radius, ballPaint);
+		}
+		else {
+			GameUtil.tranformImage(mat, pos.x, pos.y, radius,
+					(float) Math.toDegrees(-rotation) - 90, image);
+			canvas.drawBitmap(image, mat, null);
+		}
 	}
 }
