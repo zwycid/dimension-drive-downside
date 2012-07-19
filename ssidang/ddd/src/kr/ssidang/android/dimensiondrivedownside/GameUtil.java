@@ -69,7 +69,7 @@ public class GameUtil {
 		mat.postTranslate(x, y);
 	}
 	
-	public static void tranformImage(Matrix mat, float x, float y,
+	public static void transformImage(Matrix mat, float x, float y,
 			float radius, float degrees, Bitmap image) {
 		float length = (image.getWidth() + image.getHeight()) / 2;
 		GameUtil.transform(mat, x, y, degrees, radius * 2 / length,

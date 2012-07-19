@@ -18,8 +18,6 @@ public class Ball extends Unit {
 	
 	
 	private Matrix mat = new Matrix();
-	private Bitmap image;
-	
 	private static final Paint ballPaint;
 	static {
 		ballPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -31,14 +29,8 @@ public class Ball extends Unit {
 	Vector2D debug_dir = new Vector2D();
 	
 
-	public Ball(Bitmap image, float radius) {
-		this.image = image;
-		this.radius = radius;
-	}
-	
-	public Ball(Bitmap image, float x, float y, float radius) {
-		this.image = image;
-		this.pos = new Vector2D(x, y);
+	public Ball(float x, float y, float radius) {
+		this.pos.set(x, y);
 		this.radius = radius;
 	}
 	
@@ -50,12 +42,12 @@ public class Ball extends Unit {
 		hitpoint = Math.max(hitpoint - amount, 0);
 	}
 
-	public void draw(Canvas canvas) {
+	public void draw(Canvas canvas, Bitmap image) {
 		if (Vis.isFrameMode()) {
 			canvas.drawCircle(pos.x, pos.y, radius, ballPaint);
 		}
 		else {
-			GameUtil.tranformImage(mat, pos.x, pos.y, radius,
+			GameUtil.transformImage(mat, pos.x, pos.y, radius,
 					(float) Math.toDegrees(-rotation) - 90, image);
 			canvas.drawBitmap(image, mat, null);
 		}

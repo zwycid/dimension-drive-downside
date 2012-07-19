@@ -43,7 +43,7 @@ public class Attractor extends Unit {
 			canvas.drawCircle(pos.x, pos.y, influence, attrPaint);
 		}
 		else {
-			GameUtil.tranformImage(mat, pos.x, pos.y, influence, rotation, image);
+			GameUtil.transformImage(mat, pos.x, pos.y, influence, rotation, image);
 			canvas.drawBitmap(image, mat, imagePaint);
 		}
 	}

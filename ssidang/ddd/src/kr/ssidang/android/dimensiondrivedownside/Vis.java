@@ -3,6 +3,7 @@ package kr.ssidang.android.dimensiondrivedownside;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Cap;
+import android.graphics.Paint.Style;
 
 /**
  * 주로 디버그 용도로 화면에 부가 데이터를 그려줍니다.
@@ -36,6 +37,7 @@ public class Vis {
 		
 		orange = new Paint();
 		orange.setColor(0xffff8030);
+		orange.setStyle(Style.STROKE);
 		orange.setStrokeWidth(5);
 		orange.setStrokeCap(Cap.ROUND);
 		

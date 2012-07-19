@@ -35,6 +35,7 @@ public class WorldManager {
 	// Stage data
 	private Stage stage;
 	private Ball ball;
+	private Marker marker;
 	private Particle[] particles;
 	private Bullet[] bullets;
 	private int score;
@@ -50,6 +51,7 @@ public class WorldManager {
 	private Bitmap ballBitmap;
 	private Bitmap swirlBitmap;
 	private Bitmap sentryBitmap;
+	private Bitmap markerBitmap;
 
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -90,6 +92,7 @@ public class WorldManager {
 		ballBitmap = BitmapFactory.decodeResource(res, R.drawable.basic_ball);
 		swirlBitmap = BitmapFactory.decodeResource(res, R.drawable.swirl);
 		sentryBitmap = BitmapFactory.decodeResource(res, R.drawable.sentry);
+		markerBitmap = BitmapFactory.decodeResource(res, R.drawable.marker);
 	}
 	
 	public GameParams getGameParams() {
@@ -177,7 +180,7 @@ public class WorldManager {
 	}
 
 	public void makeMockWorld() {
-		stage = Stage.fromData("[mapsize],800,800/[s],100,400/[f],750,750/[b],400,300,700,500/" +
+		stage = Stage.fromData("[mapsize],800,800/[s],100,400/[f],700,700/[b],400,300,700,500/" +
 								"[a],200,620/[c],256,93/[c],640,142/[c],380,621/[c],684,386/");
 	}
 	
@@ -365,7 +368,7 @@ public class WorldManager {
 		}
 		
 		// 공 그리기
-		ball.draw(canvas);
+		ball.draw(canvas, ballBitmap);
 		
 		if (Vis.isEnabled()) {
 			// 공 방향 표시
@@ -381,6 +384,14 @@ public class WorldManager {
 							ball.pos.y + att.debug_force.y * 100, Vis.orange);
 		}
 		
+		if (Vis.isEnabled(Vis.VERBOSE)) {
+			// 보이는 테두리 그리기
+			canvas.drawRect(ball.pos.x - G.screenWidth / 2,
+					ball.pos.y - G.screenHeight / 2,
+					ball.pos.x + G.screenWidth / 2,
+					ball.pos.y + G.screenHeight / 2, Vis.orange);
+		}
+		
 		// 총알 그리기
 		for (Bullet b : bullets) {
 			if (! b.isDead())
@@ -391,6 +402,9 @@ public class WorldManager {
 		for (Sentry sen : stage.sentries) {
 			sen.draw(canvas, sentryBitmap);
 		}
+		
+		// 골 방향 marker 그리기
+		marker.draw(canvas, markerBitmap);
 	}
 
 	private void onRenderCompleted(Canvas canvas) {
@@ -398,7 +412,7 @@ public class WorldManager {
 		
 		resetView(canvas);
 		canvas.drawColor(0xcc0909a0);
-		canvas.drawText("Win", G.screenWidth / 2 - 8,
+		canvas.drawText("Goal", G.screenWidth / 2 - 8,
 				G.screenHeight / 2 + 3, Vis.white);
 	}
 
@@ -421,7 +435,9 @@ public class WorldManager {
 			bullets[i] = new Bullet();
 		
 		// 공을 시작점에 둡니다.
-		ball = new Ball(ballBitmap, stage.start.pos.x, stage.start.pos.y, 20);
+		ball = new Ball(stage.start.pos.x, stage.start.pos.y, 20);
+		marker = new Marker(-G.screenWidth / 2, -G.screenHeight / 2,
+				G.screenWidth / 2, G.screenHeight / 2);
 		
 		// 시간을 초기화합니다.
 		G.timestamp = System.currentTimeMillis();
@@ -474,6 +490,9 @@ public class WorldManager {
 		
 		// 공의 새 위치를 확정합니다.
 		ball.pos.set(afterPos);
+		
+		// 골 방향을 알려줍니다.
+		marker.setDirection(ball.pos, stage.goal.pos);
 		
 		// sentry 처리
 		for (Sentry sen : stage.sentries) {

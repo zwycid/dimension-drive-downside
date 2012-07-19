@@ -16,11 +16,11 @@ public class Obstacle extends Unit {
 	static {
 		fillPaint = new Paint();
 		fillPaint.setStyle(Style.FILL);
-		fillPaint.setColor(0xffed1c24);
+		fillPaint.setColor(0xee8d2124);
 		
 		borderPaint = new Paint();
 		borderPaint.setStyle(Style.STROKE);
-		borderPaint.setColor(0xffd9111b);
+		borderPaint.setColor(0xff561416);
 		borderPaint.setStrokeWidth(3);
 	}
 	

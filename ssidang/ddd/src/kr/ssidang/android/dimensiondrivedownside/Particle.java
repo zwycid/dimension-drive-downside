@@ -95,7 +95,7 @@ public class Particle {
 	 * @return
 	 */
 	public boolean isInBound(float left, float top, float right, float bottom) {
-		return (left <= x && x <= right) && (top <= y && y <= bottom);
+		return Vector2D.inBounds(x, y, left, top, right, bottom);
 	}
 	
 	public void draw(Canvas canvas) {

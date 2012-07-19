@@ -107,7 +107,7 @@ public class Sentry extends Unit {
 			canvas.drawLine(center.x, center.y, front.x, front.y, borderPaint);
 		}
 		else {
-			GameUtil.tranformImage(mat, pos.x, pos.y, 20,
+			GameUtil.transformImage(mat, pos.x, pos.y, 20,
 					(float) Math.toDegrees(Math.atan2(dir.y, dir.x)) + 90, image);
 			canvas.drawBitmap(image, mat, null);
 		}

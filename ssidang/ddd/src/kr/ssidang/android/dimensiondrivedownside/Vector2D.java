@@ -391,5 +391,23 @@ public class Vector2D extends PointF {
 	public static float distance(PointF p, PointF q) {
 		return FloatMath.sqrt(distanceSq(p, q));
 	}
+	
+	/**
+	 * 사각 영역 안에 점이 들어있는지 확인합니다.
+	 * 
+	 * @param left
+	 * @param top
+	 * @param right
+	 * @param bottom
+	 * @return
+	 */
+	public static boolean inBounds(float x, float y, float left, float top,
+			float right, float bottom) {
+		return (x >= left && x <= right) && (y >= top && y <= bottom);
+	}
+	
+	public boolean inBounds(float left, float top, float right, float bottom) {
+		return inBounds(x, y, left, top, right, bottom);
+	}
 
 }
