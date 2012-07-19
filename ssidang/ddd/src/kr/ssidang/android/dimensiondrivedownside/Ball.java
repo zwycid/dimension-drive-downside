@@ -6,7 +6,7 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.RectF;
 
-public class BallObject extends WorldObject {
+public class Ball extends Unit {
 	public Vector2D pos = new Vector2D();
 	public Vector2D velo = new Vector2D();
 	public Vector2D acc = new Vector2D();
@@ -14,6 +14,7 @@ public class BallObject extends WorldObject {
 	// 공 모양과 재질
 	public float radius;
 	public float restitution;
+//	public int hitpoint;
 	
 	// 그리기 데이터
 	private Matrix drawMat;
@@ -21,13 +22,13 @@ public class BallObject extends WorldObject {
 	private Paint ballPaint;
 	private float scaleFactor;
 
-	public BallObject(Bitmap ballBitmap, float radius) {
+	public Ball(Bitmap ballBitmap, float radius) {
 		this.ballBitmap = ballBitmap;
 		this.radius = radius;
 		init();
 	}
 	
-	public BallObject(Bitmap ballBitmap, float x, float y, float radius) {
+	public Ball(Bitmap ballBitmap, float x, float y, float radius) {
 		this.ballBitmap = ballBitmap;
 		this.pos = new Vector2D(x, y);
 		this.radius = radius;

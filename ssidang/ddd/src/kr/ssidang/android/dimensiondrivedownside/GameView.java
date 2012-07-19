@@ -1,12 +1,11 @@
 package kr.ssidang.android.dimensiondrivedownside;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.util.AttributeSet;
-import android.util.FloatMath;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -14,23 +13,9 @@ public class GameView extends SurfaceView implements
 		SurfaceHolder.Callback,
 		RenderThread.Renderable {
 	
-	public static final float SCALE_UNIT = 160.f;
-	public static final float TIME_UNIT = 30.f;
-	
-	private float width;
-	private float height;
-	private float scaleFactor;
-	private long timestamp;
-	
 	private RenderThread renderer;
 	private WorldManager world;
 	private WorldManager.GameParams G;
-	
-	// 그리기 데이터
-	private int tick;
-	private Paint textPaint;
-	private Paint linePaint;
-	private Paint rectPaint;
 	
 	///////////////////////////////////////////////////////////////////////////
 	// 생성자
@@ -63,9 +48,18 @@ public class GameView extends SurfaceView implements
 		return G;
 	}
 	
-	private void resetView(Canvas canvas) {
-		canvas.setMatrix(null);
-		canvas.scale(scaleFactor, scaleFactor);
+	public void onTouchEvent(Activity parent, MotionEvent event) {
+		if (event.getActionMasked() == MotionEvent.ACTION_DOWN)
+			world.pause();
+	}
+	
+	public boolean onBackPressed(Activity parent) {
+		if (world.isPaused())
+			return false;
+		else {
+			world.pause(true);
+			return true;
+		}
 	}
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -84,11 +78,9 @@ public class GameView extends SurfaceView implements
 
 		// 좌표계를 맞춥니다.
 		int length = Math.min(width, height);
-		scaleFactor = length / SCALE_UNIT;
-		this.width = width / scaleFactor;
-		this.height = height / scaleFactor;
-		G.screenWidth = this.width;
-		G.screenHeight = this.height;
+		G.scaleFactor = length / WorldManager.SCALE_UNIT;
+		G.screenWidth = width / G.scaleFactor;
+		G.screenHeight = height / G.scaleFactor;
 
 		// 렌더링 시작.
 		renderer.start();
@@ -107,67 +99,26 @@ public class GameView extends SurfaceView implements
 	///////////////////////////////////////////////////////////////////////////
 
 	public void onRenderBegin() {
-		textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-		textPaint.setColor(Color.WHITE);
-		textPaint.setTextSize(8);
-		
-		linePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-		linePaint.setColor(Color.RED);
-		linePaint.setStrokeWidth(3);
-		
-		rectPaint = new Paint();
-		rectPaint.setColor(0xff108810);
-		
-		timestamp = System.currentTimeMillis();
+		G.timestamp = System.currentTimeMillis();
 	}
 
 	public void onRender(Canvas canvas) {
 		long now = System.currentTimeMillis();
-		G.delta = (now - timestamp) / TIME_UNIT;
-		
-		tick++;
-		// 배경 지우기
-		resetView(canvas);
-		canvas.drawColor(Color.BLACK);
+		G.delta = (now - G.timestamp) / WorldManager.TIME_UNIT;
+		G.tick++;
 		
 		// 아래 방향
-		float length = 50;
 		float sign = (G.pitch >= 0 ? -1.f : 1.f);
 		float rad = (float) Math.toRadians((-90 - G.roll) * sign);
-		float offsetX = FloatMath.cos(rad) * length;
-		float offsetY = FloatMath.sin(rad) * length;
-		
 		G.gravityDirection = (float) rad;
-		world.draw(canvas);
-		world.moveObjects(canvas, G.delta);
 		
-		if (G.debug_) {
-			// TODO Debug
-			resetView(canvas);
-			
-			float fps = 1000.f / (G.delta * TIME_UNIT);
-			GameUtil.drawTextMultiline(canvas,
-					"Tick: " + tick + " (fps: " + fps + ")"
-					+ "\nScreen = (" + width + ", " + height + ")"
-					+ "\nAzimuth = " + G.azimuth
-					+ "\nPitch = " + G.pitch
-					+ "\nRoll = " + G.roll
-					, 0, 0, textPaint);
-			
-			float centerX = width / 2;
-			float centerY = height / 2;
-			GameUtil.drawArrow(canvas, centerX, centerY,
-					centerX + offsetX, centerY - offsetY, linePaint);
-			
-		}
+		world.onRender(canvas);
+		world.onFrame(G.delta, canvas);
 		
-		timestamp = now;
+		G.timestamp = now;
 	}
 
 	public void onRenderEnd() {
-		textPaint = null;
-		linePaint = null;
-		rectPaint = null;
 	}
 
 }

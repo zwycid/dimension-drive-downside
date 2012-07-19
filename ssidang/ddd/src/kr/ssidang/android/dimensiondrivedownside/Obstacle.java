@@ -5,19 +5,19 @@ import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.RectF;
 
-public class ObstacleObject extends WorldObject {
+public class Obstacle extends Unit {
 	private RectF bounds;
 	
 	// 그리기 데이터
 	private Paint fillPaint;
 	private Paint borderPaint;
 	
-	public ObstacleObject() {
+	public Obstacle() {
 		this.setBounds(new RectF());
 		init();
 	}
 	
-	public ObstacleObject(float left, float top, float right, float bottom) {
+	public Obstacle(float left, float top, float right, float bottom) {
 		this.setBounds(new RectF(left, top, right, bottom));
 		init();
 	}
@@ -25,11 +25,11 @@ public class ObstacleObject extends WorldObject {
 	private void init() {
 		fillPaint = new Paint();
 		fillPaint.setStyle(Style.FILL);
-		fillPaint.setColor(0xff0e8b78);
+		fillPaint.setColor(0xffed1c24);
 		
 		borderPaint = new Paint();
 		borderPaint.setStyle(Style.STROKE);
-		borderPaint.setColor(0xff0e6074);
+		borderPaint.setColor(0xffd9111b);
 		borderPaint.setStrokeWidth(3);
 	}
 

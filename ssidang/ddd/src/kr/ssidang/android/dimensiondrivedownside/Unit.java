@@ -1,5 +1,5 @@
 package kr.ssidang.android.dimensiondrivedownside;
 
-public class WorldObject {
+public class Unit {
 	// placeholder
 }

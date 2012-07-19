@@ -8,6 +8,7 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.Window;
 import android.view.WindowManager.LayoutParams;
 
@@ -69,6 +70,18 @@ public class GameActivity extends Activity implements
 			gameView.getGameParams().debug_ = !gameView.getGameParams().debug_;
 		}
 		return super.onKeyDown(keyCode, event);
+	}
+	
+	@Override
+	public boolean onTouchEvent(MotionEvent event) {
+		gameView.onTouchEvent(this, event);
+		return super.onTouchEvent(event);
+	}
+
+	@Override
+	public void onBackPressed() {
+		if (! gameView.onBackPressed(this))
+			super.onBackPressed();
 	}
 
 	///////////////////////////////////////////////////////////////////////////

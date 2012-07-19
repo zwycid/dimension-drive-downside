@@ -4,6 +4,8 @@ import android.graphics.PointF;
 import android.util.FloatMath;
 
 public class Vector2D extends PointF {
+	public static final float SQRT_2 = 1.414213562f;
+	
 	public Vector2D() {
 	}
 	
@@ -163,12 +165,23 @@ public class Vector2D extends PointF {
 	}
 	
 	/**
-	 * 길이 제곱을 구합니다.
+	 * 유클리드 평면 상에서 원점과 거리의 제곱을 구합니다.
+	 * 
+	 * @param x
+	 * @param y
+	 * @return
+	 */
+	public static float lengthSq(float x, float y) {
+		return (x * x + y * y);
+	}
+	
+	/**
+	 * 벡터 길이 제곱을 구합니다.
 	 * 
 	 * @return		벡터 길이의 제곱
 	 */
 	public float lengthSq() {
-		return (x * x + y * y);
+		return lengthSq(x, y);
 	}
 	
 	/**
@@ -346,6 +359,28 @@ public class Vector2D extends PointF {
 	 */
 	public static float distance(PointF p0, PointF p1, PointF point) {
 		return FloatMath.sqrt(distanceSq(p0, p1, point));
+	}
+	
+	/**
+	 * 평면 상에서 두 점 사이의 거리 제곱을 구합니다.
+	 * 
+	 * @param p
+	 * @param q
+	 * @return
+	 */
+	public static float distanceSq(PointF p, PointF q) {
+		return lengthSq(q.x - p.x, q.y - p.y);
+	}
+	
+	/**
+	 * 평면 상에서 두 점 사이의 거리를 구합니다.
+	 * 
+	 * @param p
+	 * @param q
+	 * @return
+	 */
+	public static float distance(PointF p, PointF q) {
+		return FloatMath.sqrt(distanceSq(p, q));
 	}
 
 }

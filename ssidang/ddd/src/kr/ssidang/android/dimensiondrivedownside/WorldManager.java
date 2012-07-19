@@ -15,34 +15,48 @@ import android.graphics.RectF;
 import android.util.FloatMath;
 
 public class WorldManager {
+	public static final float SCALE_UNIT = 160.f;
+	public static final float TIME_UNIT = 30.f;
+	
 	private static final float AIR_FRICTION_COEFFICIENT = .1f;
 	private static final float GRAVITY_CONSTANT = 1.5f;
 	private static final float BORDER_THICK = 20;
 	private static final int MAX_PARTICLE = 15;
 	
-	// 세상 안에 들어있는 모든 객체들
-	private BallObject ball;
-	private List<ObstacleObject> obstacles;
-	private Particle[] particles;
+	private static final int STATE_READY = 0;
+	private static final int STATE_PAUSED = 1;
+	private static final int STATE_PLAYING = 2;
+	private static final int STATE_COMPLETED = 3;
+	private static final int STATE_DEAD = 4;
 	
-	// 세상 자체에 대한 정보
+	// Stage data
 	private float width;
 	private float height;
+	
+	private Portal startPoint;
+	private Portal goal;
+	private Ball ball;
+	private List<Obstacle> obstacles;
+	private Particle[] particles;
+	
+	private int score;
 	
 	// 시점(view)에 관련된 사항
 	private Vector2D lookAt;
 
 	private Random random;
 	private GameParams G;
-	private Paint borderPaint;
 	
 	// 게임 리소스.............
+	private Paint borderPaint;
 	private Bitmap ballBitmap;
 	
 	// 디버깅용...........
 	Canvas debugCanvas;
 	Paint debugBlue;
 	Paint debugOrange;
+	Paint debugText;
+	Paint debugRed;
 	
 	///////////////////////////////////////////////////////////////////////////
 	// GameData
@@ -50,8 +64,14 @@ public class WorldManager {
 	class GameParams {
 		boolean debug_ = true;
 		
+		int state = STATE_READY;
+		
 		float screenWidth;
 		float screenHeight;
+		float scaleFactor;
+		
+		int tick;
+		long timestamp;
 		
 		float delta;
 		float gravityDirection;
@@ -62,8 +82,7 @@ public class WorldManager {
 	}
 	
 	public WorldManager(Context context) {
-		this.obstacles = new ArrayList<ObstacleObject>();
-//		this.particles = new ArrayList<Particle>();
+		this.obstacles = new ArrayList<Obstacle>();
 		this.particles = new Particle[MAX_PARTICLE];
 		
 		this.random = new Random();
@@ -78,6 +97,10 @@ public class WorldManager {
 		ballBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.basic_ball);
 
 		// TODO 디버그 코드
+		debugText = new Paint(Paint.ANTI_ALIAS_FLAG);
+		debugText.setColor(Color.WHITE);
+		debugText.setTextSize(8);
+		
 		debugBlue = new Paint();
 		debugBlue.setColor(Color.BLUE);
 		debugBlue.setStrokeWidth(10);
@@ -85,15 +108,37 @@ public class WorldManager {
 		debugOrange = new Paint();
 		debugOrange.setColor(0xffff8030);
 		debugOrange.setStrokeWidth(10);
+		
+		debugRed = new Paint(Paint.ANTI_ALIAS_FLAG);
+		debugRed.setColor(Color.RED);
+		debugRed.setStrokeWidth(3);
 	}
 	
 	public GameParams getGameParams() {
 		return G;
 	}
+	
+	public void pause() {
+		if (G.state == STATE_PLAYING)
+			G.state = STATE_PAUSED;
+		else if (G.state == STATE_PAUSED)
+			G.state = STATE_PLAYING;
+	}
+	
+	public void pause(boolean set) {
+		if (set && G.state == STATE_PLAYING)
+			G.state = STATE_PAUSED;
+		else if (! set && G.state == STATE_PAUSED)
+			G.state = STATE_PLAYING;
+	}
+	
+	public boolean isPaused() {
+		return G.state == STATE_PAUSED;
+	}
 
 	public void makeMockWorld() {
-		makeRandomWorld();
-//		makeWorld1();
+//		makeRandomWorld();
+		makeWorld1();
 	}
 	
 	/**
@@ -111,11 +156,12 @@ public class WorldManager {
 			int width = 30 + r.nextInt(170);
 			int x = r.nextInt((int) this.width);
 			int y = r.nextInt((int) this.height);
-			obstacles.add(new ObstacleObject(x, y, x + width, y + (6000 / width)));
+			obstacles.add(new Obstacle(x, y, x + width, y + (6000 / width)));
 		}
 		
-		ball = new BallObject(ballBitmap,
-				r.nextInt((int) width), r.nextInt((int) height), 30);
+		ball = new Ball(ballBitmap, 0, 0, 20);
+		startPoint = new Portal(r.nextInt((int) width), r.nextInt((int) height), 20);
+		goal = new Portal(r.nextInt((int) width), r.nextInt((int) height), 20);
 	}
 	
 	private void makeWorld1() {
@@ -123,8 +169,15 @@ public class WorldManager {
 		height = 160 * 5;
 		
 		obstacles.clear();
-		obstacles.add(new ObstacleObject(400, 300, 700, 500));
-		ball = new BallObject(ballBitmap, 100, 400, 30);
+		obstacles.add(new Obstacle(400, 300, 700, 500));
+		ball = new Ball(ballBitmap, 0, 0, 30);
+		startPoint = new Portal(100, 400, 30);
+		goal = new Portal(750, 750, 40);
+	}
+	
+	private void resetView(Canvas canvas) {
+		canvas.setMatrix(null);
+		canvas.scale(G.scaleFactor, G.scaleFactor);
 	}
 	
 	/**
@@ -132,22 +185,59 @@ public class WorldManager {
 	 * 
 	 * @param canvas
 	 */
-	public void draw(Canvas canvas) {
+	public void onRender(Canvas canvas) {
 		debugCanvas = canvas;
+
+		switch (G.state) {
+		case STATE_READY:
+			onRenderReady();
+			break;
+		case STATE_PAUSED:
+			onRenderPaused(canvas);
+			break;
+		case STATE_PLAYING:
+			onRenderPlaying(canvas);
+			break;
+		case STATE_COMPLETED:
+			onRenderCompleted();
+			break;
+		case STATE_DEAD:
+			onRenderDead();
+			break;
+		}
+	}
+
+	private void onRenderReady() {
+		// 아무것도 안 함
+	}
+
+	private void onRenderPaused(Canvas canvas) {
+		// 게임 화면을 그려주고...
+		onRenderPlaying(canvas);
+		
+		// 메뉴를 그려줘야 하지만 임시적으로 해둔다
+		resetView(canvas);
+		canvas.drawColor(0xa0000000);
+		canvas.drawText("Paused", G.screenWidth / 2 - 13,
+				G.screenHeight / 2 + 3, debugText);
+	}
+
+	private void onRenderPlaying(Canvas canvas) {
+		// 배경 지우기
+		resetView(canvas);
+		canvas.drawColor(Color.BLACK);
 		
 		// 시점
 		lookAt.set(ball.pos.x - G.screenWidth / 2,
 				ball.pos.y - G.screenHeight / 2);
 		canvas.translate(-lookAt.x, -lookAt.y);
-//		if (G.debug_) {
-//			float s = 3.f / 10.001f;
-//			canvas.setMatrix(null);
-//			canvas.scale(s, s);
-//		}
-//		else {
-//			canvas.translate(-lookAt.x, -lookAt.y);
-//		}
-
+		
+		if (G.debug_) {
+			float s = 3.f / 10.001f;
+			canvas.setMatrix(null);
+			canvas.scale(s, s);
+		}
+	
 		float border = BORDER_THICK / 2;
 		canvas.drawRect(-border, -border, width + border, height + border,
 				borderPaint);
@@ -158,37 +248,103 @@ public class WorldManager {
 				p.draw(canvas);
 			}
 		}
-
-		for (ObstacleObject ob : obstacles) {
+		
+		// 시작점 / 골 그려주기
+		Paint portalPaint = new Paint();
+		portalPaint.setColor(0xfff9ae4a);
+		canvas.drawCircle(startPoint.pos.x, startPoint.pos.y, startPoint.radius, portalPaint);
+		portalPaint.setColor(0xff9afa5a);
+		canvas.drawCircle(goal.pos.x, goal.pos.y, goal.radius, portalPaint);
+	
+		for (Obstacle ob : obstacles) {
 			ob.draw(canvas);
 		}
 		ball.draw(canvas);
 	}
 
-	public void moveObjects(Canvas canvas, float delta) {
-		// 중력
+	private void onRenderCompleted() {
+		// TODO onRenderCompleted
+	}
+
+	private void onRenderDead() {
+		// TODO onRenderDead
+	}
+
+	/**
+	 * 물체들을 움직입니다.
+	 * 
+	 * @param delta
+	 * @param canvas
+	 */
+	public void onFrame(float delta, Canvas canvas) {
+		switch (G.state) {
+		case STATE_READY:
+			onFrameReady();
+			break;
+		case STATE_PAUSED:
+			onFramePaused();
+			break;
+		case STATE_PLAYING:
+			onFramePlaying(delta, canvas);
+			break;
+		case STATE_COMPLETED:
+			onFrameCompleted();
+			break;
+		case STATE_DEAD:
+			onFrameDead();
+			break;
+		}
+		
+		// TODO Debug
+		if (G.debug_) {
+			resetView(canvas);
+			
+			float fps = 1000.f / (G.delta * TIME_UNIT);
+			GameUtil.drawTextMultiline(canvas,
+					"Tick: " + G.tick + " (fps: " + fps + ")"
+					+ "\nScreen = (" + width + ", " + height + ")"
+					+ "\nAzimuth = " + G.azimuth
+					+ "\nPitch = " + G.pitch
+					+ "\nRoll = " + G.roll
+					, 0, 0, debugText);
+			
+			float centerX = width / 2;
+			float centerY = height / 2;
+			float offsetX = FloatMath.cos(G.gravityDirection) * 50;
+			float offsetY = FloatMath.sin(G.gravityDirection) * 50;
+			GameUtil.drawArrow(canvas, centerX, centerY,
+					centerX + offsetX, centerY - offsetY, debugRed);
+			
+		}
+	}
+
+	private void onFrameReady() {
+		ball.pos.set(startPoint.pos);
+		G.state = STATE_PLAYING;
+	}
+
+	private void onFramePaused() {
+		// 아무것도 안 함
+	}
+
+	private void onFramePlaying(float delta, Canvas canvas) {
+		// 중력 및 공기 저항
 		ball.acc.x = FloatMath.cos(G.gravityDirection) * GRAVITY_CONSTANT;
 		ball.acc.y = -FloatMath.sin(G.gravityDirection) * GRAVITY_CONSTANT;
-		
-		// TODO 공기 저항 대충 처리
-		float airFrictionCoeffi = AIR_FRICTION_COEFFICIENT;
-		ball.acc.add(ball.velo, -airFrictionCoeffi);
+		ball.acc.add(ball.velo, -AIR_FRICTION_COEFFICIENT);
 
-		// 공 속도 구하기
+		// 공 속도
 		ball.velo.add(ball.acc, delta);
 		
-		// 이번에 이동할 위치를 계산합니다.
+		// 이동할 위치를 계산합니다.
 		Vector2D beforePos = new Vector2D(ball.pos);
 		Vector2D afterPos = Vector2D.add(beforePos, ball.velo, delta);
 		
-		// 신나는 충돌처리
-		
-		// TODO 벽 반사 처리..........
+		// 벽 충돌 처리
 		checkCollisionWithBorder(beforePos, afterPos);
 		
-		
-		// TODO 장애물 반사 처리.........
-		for (ObstacleObject ob : obstacles) {
+		// 장애물 충돌 처리
+		for (Obstacle ob : obstacles) {
 			checkCollisionWithObstacle(ob, beforePos, afterPos);
 		}
 		
@@ -202,9 +358,23 @@ public class WorldManager {
 		// 공의 새 위치를 확정합니다.
 		ball.pos.set(afterPos);
 		
+		// 배경 파티클 처리
+		moveParticles();
+	}
+
+	private void onFrameCompleted() {
+		// TODO onFrameCompleted
+	}
+
+	private void onFrameDead() {
+		// TODO onFrameDead
+	}
+
+	private void moveParticles() {
 		// 방향을 표시하는 파티클을 처리합니다.
 		for (int i = 0; i < particles.length; ++i) {
 			if (particles[i] == null) {
+				// 공 근방에 아무 위치에나 만들기
 				float offsetX = random.nextFloat() * G.screenWidth - G.screenWidth / 2;
 				float offsetY = random.nextFloat() * G.screenHeight - G.screenHeight / 2;
 				float lifetime = random.nextFloat() * 45 + 15;
@@ -215,40 +385,69 @@ public class WorldManager {
 			if (p.isDead())
 				particles[i] = null;
 			else {
+				// 꼬리 추가
 				p.age(G.delta);
 				p.addTrail(ball.pos.x, ball.pos.y);
 			}
 		}
 	}
 
-	private void checkCollisionWithObstacle(ObstacleObject ob,
+	private void checkCollisionWithObstacle(Obstacle ob,
 			Vector2D beforePos, Vector2D afterPos) {
 		Vector2D edge1 = new Vector2D();
 		Vector2D edge2 = new Vector2D();
 		Vector2D normal = new Vector2D();
 		RectF bound = ob.getBounds();
 		
+		float radius = ball.radius;
+		
+		// 근사적으로 코너도 처리함
+//		
+//		// left
+//		edge1.set(bound.left - ball.radius, bound.top);
+//		edge2.set(bound.left - ball.radius, bound.bottom);
+//		normal.set(-1, 0);
+//		collisionBallWithEdge(beforePos, afterPos, edge1, edge2, ball.velo, normal);
+//
+//		// top
+//		edge1.set(bound.left, bound.top - ball.radius);
+//		edge2.set(bound.right, bound.top - ball.radius);
+//		normal.set(0, -1);
+//		collisionBallWithEdge(beforePos, afterPos, edge1, edge2, ball.velo, normal);
+//		
+//		// right
+//		edge1.set(bound.right + ball.radius, bound.top);
+//		edge2.set(bound.right + ball.radius, bound.bottom);
+//		normal.set(1, 0);
+//		collisionBallWithEdge(beforePos, afterPos, edge1, edge2, ball.velo, normal);
+//
+//		// bottom
+//		edge1.set(bound.left, bound.bottom + ball.radius);
+//		edge2.set(bound.right, bound.bottom + ball.radius);
+//		normal.set(0, 1);
+//		collisionBallWithEdge(beforePos, afterPos, edge1, edge2, ball.velo, normal);
+		
 		// left
-		edge1.set(bound.left - ball.radius, bound.top);
-		edge2.set(bound.left - ball.radius, bound.bottom);
+		edge1.set(bound.left - radius, bound.top - radius);
+		edge2.set(bound.left - radius, bound.bottom + radius);
 		normal.set(-1, 0);
 		collisionBallWithEdge(beforePos, afterPos, edge1, edge2, ball.velo, normal);
-
+		
 		// top
-		edge1.set(bound.left, bound.top - ball.radius);
-		edge2.set(bound.right, bound.top - ball.radius);
+		edge1.set(bound.left - radius, bound.top - radius);
+		edge2.set(bound.right + radius, bound.top - radius);
 		normal.set(0, -1);
 		collisionBallWithEdge(beforePos, afterPos, edge1, edge2, ball.velo, normal);
 		
 		// right
-		edge1.set(bound.right + ball.radius, bound.top);
-		edge2.set(bound.right + ball.radius, bound.bottom);
+		edge1.set(bound.right + radius, bound.top - radius);
+		edge2.set(bound.right + radius, bound.bottom + radius);
 		normal.set(1, 0);
 		collisionBallWithEdge(beforePos, afterPos, edge1, edge2, ball.velo, normal);
-
+		
 		// bottom
-		edge1.set(bound.left, bound.bottom + ball.radius);
-		edge2.set(bound.right, bound.bottom + ball.radius);
+		edge1.set(bound.left - radius, bound.bottom + radius);
+		edge2.set(bound.right + radius, bound.bottom + radius);
 		normal.set(0, 1);
 		collisionBallWithEdge(beforePos, afterPos, edge1, edge2, ball.velo, normal);
 	}
