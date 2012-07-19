@@ -4,20 +4,18 @@ import java.util.Random;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Paint.Cap;
 import android.graphics.Paint.Style;
 import android.util.FloatMath;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 
 public class WorldManager {
-	private static final int DEBUG_LEVEL = 3;
-	
 	private static final float SCALE_UNIT = 160.f;
 	private static final float TIME_UNIT = 30.f;
 	
@@ -50,19 +48,12 @@ public class WorldManager {
 	// 게임 리소스.............
 	private Paint borderPaint;
 	private Bitmap ballBitmap;
-	
-	// 디버깅용...........
-	Paint debug_text;
-	Paint debug_blue;
-	Paint debug_orange;
-	Paint debug_red;
-	Paint debug_green;
+
 	
 	///////////////////////////////////////////////////////////////////////////
 	// GameData
 	///////////////////////////////////////////////////////////////////////////
 	class GameParams {
-		int debug_;
 		int state = STATE_READY;
 		
 		float screenWidth;
@@ -92,34 +83,9 @@ public class WorldManager {
 		borderPaint.setColor(0xff596691);
 		borderPaint.setStrokeWidth(BORDER_THICK);
 		
-		ballBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.basic_ball);
-
-		{
-			// TODO 각종 디버그용 객체 초기화
-			debug_text = new Paint(Paint.ANTI_ALIAS_FLAG);
-			debug_text.setColor(Color.WHITE);
-			debug_text.setTextSize(8);
-			
-			debug_blue = new Paint();
-			debug_blue.setColor(Color.BLUE);
-			debug_blue.setStrokeWidth(7);
-			debug_blue.setStrokeCap(Cap.ROUND);
-			
-			debug_orange = new Paint();
-			debug_orange.setColor(0xffff8030);
-			debug_orange.setStrokeWidth(5);
-			debug_orange.setStrokeCap(Cap.ROUND);
-			
-			debug_red = new Paint(Paint.ANTI_ALIAS_FLAG);
-			debug_red.setColor(Color.RED);
-			debug_red.setStrokeWidth(3);
-			debug_red.setStrokeCap(Cap.ROUND);
-			
-			debug_green = new Paint(Paint.ANTI_ALIAS_FLAG);
-			debug_green.setColor(0x4030f030);
-			debug_green.setStrokeWidth(3);
-			debug_green.setStrokeCap(Cap.ROUND);
-		}
+		// 리소스 로드
+		Resources res = context.getResources();
+		ballBitmap = BitmapFactory.decodeResource(res, R.drawable.basic_ball);
 	}
 	
 	public GameParams getGameParams() {
@@ -159,7 +125,7 @@ public class WorldManager {
 	
 	boolean onKeyDown(Activity parent, int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_MENU) {
-			G.debug_ = (G.debug_ + 1) % DEBUG_LEVEL;
+			Vis.escalateLevel();
 			return true;
 		}
 		return false;
@@ -270,7 +236,7 @@ public class WorldManager {
 			break;
 		}
 		
-		if (G.debug_ > 0) {
+		if (Vis.isEnabled()) {
 			resetView(canvas);
 			
 			float fps = 1000.f / (G.delta * TIME_UNIT);
@@ -284,14 +250,14 @@ public class WorldManager {
 					+ "\nPos = (" + ball.pos.x + ", " + ball.pos.y + ")"
 					+ "\nScore = " + score
 					+ "\nHP = " + ball.hitpoint
-					, 0, 0, debug_text);
+					, 0, 0, Vis.white);
 			
 			float centerX = G.screenWidth / 2;
 			float centerY = G.screenHeight / 2;
 			float offsetX = FloatMath.cos(G.gravityDirection) * 50;
 			float offsetY = FloatMath.sin(G.gravityDirection) * 50;
 			GameUtil.drawArrow(canvas, centerX, centerY,
-					centerX + offsetX, centerY - offsetY, debug_red);
+					centerX + offsetX, centerY - offsetY, Vis.red);
 		}
 	}
 
@@ -334,7 +300,7 @@ public class WorldManager {
 		resetView(canvas);
 		canvas.drawColor(0xa0000000);
 		canvas.drawText("Paused", G.screenWidth / 2 - 13,
-				G.screenHeight / 2 + 3, debug_text);
+				G.screenHeight / 2 + 3, Vis.white);
 	}
 
 	private void onRenderPlaying(Canvas canvas) {
@@ -347,7 +313,7 @@ public class WorldManager {
 				ball.pos.y - G.screenHeight / 2);
 		canvas.translate(-lookAt.x, -lookAt.y);
 		
-		if (G.debug_ > 1) {
+		if (Vis.isEnabled(Vis.VERBOSE)) {
 			// 맵 전체 보기
 			float s = G.scaleRatio / stage.width * SCALE_UNIT * 0.99f;
 			canvas.setMatrix(null);
@@ -383,28 +349,28 @@ public class WorldManager {
 			ob.draw(canvas);
 		}
 		
-		if (G.debug_ > 0) {
+		if (Vis.isEnabled()) {
 			// sentry 시야 표시
 			for (Sentry sen : stage.sentries)
 				if (sen.debug_inSight)
-					canvas.drawCircle(sen.pos.x, sen.pos.y, sen.sight, debug_green);
+					canvas.drawCircle(sen.pos.x, sen.pos.y, sen.sight, Vis.green);
 		}
 		
 		// 공 그리기
 		ball.draw(canvas);
 		
-		if (G.debug_ > 0) {
+		if (Vis.isEnabled()) {
 			// 공 방향 표시
 			GameUtil.drawArrow(canvas, ball.debug_pos.x, ball.debug_pos.y,
 					ball.debug_pos.x + ball.debug_dir.x,
-					ball.debug_pos.y + ball.debug_dir.y, debug_blue);
+					ball.debug_pos.y + ball.debug_dir.y, Vis.blue);
 			
 			// 끌개 힘 표시
 			for (Attractor att : stage.attractors)
 				if (att.debug_inInfluence)
 					GameUtil.drawArrow(canvas, ball.pos.x, ball.pos.y,
 							ball.pos.x + att.debug_force.x * 100,
-							ball.pos.y + att.debug_force.y * 100, debug_orange);
+							ball.pos.y + att.debug_force.y * 100, Vis.orange);
 		}
 		
 		// 총알 그리기
@@ -425,7 +391,7 @@ public class WorldManager {
 		resetView(canvas);
 		canvas.drawColor(0xcc0909a0);
 		canvas.drawText("Win", G.screenWidth / 2 - 8,
-				G.screenHeight / 2 + 3, debug_text);
+				G.screenHeight / 2 + 3, Vis.white);
 	}
 
 	private void onRenderDead(Canvas canvas) {
@@ -434,7 +400,7 @@ public class WorldManager {
 		resetView(canvas);
 		canvas.drawColor(0xcca00909);
 		canvas.drawText("Dead", G.screenWidth / 2 - 8,
-				G.screenHeight / 2 + 3, debug_text);
+				G.screenHeight / 2 + 3, Vis.white);
 	}
 
 	private void onFrameReady() {
@@ -476,8 +442,9 @@ public class WorldManager {
 			attractBall(ball, att);
 		}
 
-		// 공 속도
+		// 공 속도 및 방향
 		ball.velo.add(ball.acc, delta);
+		ball.rotation = G.gravityDirection;
 		
 		// 이동할 위치를 계산합니다.
 		Vector2D beforePos = new Vector2D(ball.pos);

@@ -4,21 +4,20 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
-import android.graphics.RectF;
 
 public class Ball extends Unit {
-	public Vector2D pos = new Vector2D();
-	public Vector2D velo = new Vector2D();
-	public Vector2D acc = new Vector2D();
+	Vector2D pos = new Vector2D();
+	Vector2D velo = new Vector2D();
+	Vector2D acc = new Vector2D();
+
+	float rotation;
+	float radius;
+	float restitution	= .8f;
+	float mass			= 1.f;
+	int hitpoint		= 100;
 	
-	// 공 모양과 재질
-	public float radius;
-	public float restitution	= .8f;
-	public float mass			= 1.f;
-	public int hitpoint			= 100;
 	
-	// 그리기 데이터
-	private Matrix drawMat		= new Matrix();
+	private Matrix mat		= new Matrix();
 	private Bitmap ballBitmap;
 	
 	private static final Paint ballPaint;
@@ -52,11 +51,18 @@ public class Ball extends Unit {
 	}
 
 	public void draw(Canvas canvas) {
-//		float ballFactor = 2.f / ballBitmap.getWidth();
 		canvas.drawCircle(pos.x, pos.y, radius, ballPaint);
 		
-//		drawMat.setScale(radius * scaleFactor, radius * scaleFactor);
-//		drawMat.postTranslate(pos.x - radius, pos.y - radius);
-//		canvas.drawBitmap(ballBitmap, drawMat, ballPaint);
+		// (1) 중점을 원점으로 맞추고
+		// (2) 원하는 각도로 회전시킨 뒤
+		// (3) 원하는 크기로 조절한 다음
+		// (4) 제 위치에 놓습니다.
+		float length = (ballBitmap.getWidth() + ballBitmap.getHeight()) / 2;
+		
+		mat.setRotate((float) Math.toDegrees(-rotation) - 90);
+		mat.preTranslate(-length / 2, -length / 2);
+		mat.postScale(radius * 2 / length, radius * 2 / length);
+		mat.postTranslate(pos.x, pos.y);
+		canvas.drawBitmap(ballBitmap, mat, ballPaint);
 	}
 }
