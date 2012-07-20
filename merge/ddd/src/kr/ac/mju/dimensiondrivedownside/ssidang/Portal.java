@@ -1,4 +1,4 @@
-package kr.ssidang.android.dimensiondrivedownside;
+package kr.ac.mju.dimensiondrivedownside.ssidang;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;

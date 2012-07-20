@@ -57,7 +57,6 @@ public class MainActivity extends Activity {
 	@Override
 	public void onBackPressed() {
 		sManager.play(0); //TODO sound by jh
-		SoundManager sManager;
 		DialogBox();
 	}
 

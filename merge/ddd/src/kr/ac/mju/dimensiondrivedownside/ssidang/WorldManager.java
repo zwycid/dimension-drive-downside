@@ -1,7 +1,8 @@
-package kr.ssidang.android.dimensiondrivedownside;
+package kr.ac.mju.dimensiondrivedownside.ssidang;
 
 import java.util.Random;
 
+import kr.ac.mju.dimensiondrivedownside.R;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
