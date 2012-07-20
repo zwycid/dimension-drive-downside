@@ -165,3 +165,14 @@ activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",13427563993
 started,bundle,org.eclipse.jdt.debug,3.7.1.v20111006_r372,"org.eclipse.jdt.debug",1342756402290
 started,bundle,org.eclipse.jdt.debug.ui,3.6.1.v20111006_r372,"org.eclipse.jdt.debug.ui",1342756402370
 activated,editor,org.eclipse.jdt.ui,3.7.2.v20120109-1427,"org.eclipse.jdt.ui.CompilationUnitEditor",1342756402431
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1342757085839
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1342757088468
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1342757089367
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1342757498849
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1342757499647
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1342757680062
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1342757681201
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1342757682756
+closed,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1342757683007
+started,bundle,org.eclipse.compare,3.5.202.R37x_v20111109-0800,"org.eclipse.compare",1342757683457
+stopped,bundle,org.eclipse.jst.ws.axis.creation.ui,1.0.700.v201104070312,"org.eclipse.jst.ws.axis.creation.ui",1342757683885
