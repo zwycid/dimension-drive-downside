@@ -18,7 +18,7 @@ public class Splash extends Activity{
 				LayoutParams.FLAG_KEEP_SCREEN_ON);
 		
 		setContentView(R.layout.splash);
-		new Handler().postDelayed(new SplashHandler(), 300);
+		new Handler().postDelayed(new SplashHandler(), 2000);
 	}
 	
 	class SplashHandler implements Runnable{

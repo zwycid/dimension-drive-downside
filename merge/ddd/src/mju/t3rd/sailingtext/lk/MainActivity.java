@@ -4,6 +4,7 @@ import mju.t3rd.sailingtext.R;
 import mju.t3rd.sailingtext.lk.mainmenu.MainPage;
 import mju.t3rd.sailingtext.lk.option.OptionActivity;
 import mju.t3rd.sailingtext.lk.startgame.CoverFlowExample;
+import mju.t3rd.sailingtext.zeraf29.sound.SoundManager;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -24,6 +25,9 @@ public class MainActivity extends Activity {
 	private MainTextViewListener textViewListener;
 	private MainPage mainMenuPage;
 	private ViewFlipper viewFlipper;
+	
+	//TODO sound by jh
+	SoundManager sManager;
 
 	public MainTextViewListener getTextViewListener() {		return textViewListener;	}
 	public void setTextViewListener(MainTextViewListener textViewListener) {		this.textViewListener = textViewListener;	}
@@ -38,6 +42,11 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		
+		//TODO sound by jh
+		sManager = SoundManager.getInstance();
+		sManager.init(this);
+		sManager.addSound(0,R.raw.click);
 
 		setContentView(R.layout.activity_main);
 		setTextViewListener(new MainTextViewListener());
@@ -46,6 +55,7 @@ public class MainActivity extends Activity {
 
 	@Override
 	public void onBackPressed() {
+		sManager.play(0);
 		DialogBox();
 	}
 
@@ -88,6 +98,7 @@ public class MainActivity extends Activity {
 						"yes", new AlertDialog.OnClickListener() {
 
 							public void onClick(DialogInterface dialog, int which) {
+								sManager.play(0);
 								MainActivity.this.finish();
 								dialog.cancel();
 							}
@@ -95,6 +106,7 @@ public class MainActivity extends Activity {
 								"No" , new AlertDialog.OnClickListener() {
 
 									public void onClick(DialogInterface dialog, int which) {
+										sManager.play(0);
 										dialog.cancel();
 									}
 								});
@@ -109,6 +121,7 @@ public class MainActivity extends Activity {
 	private class MainTextViewListener implements View.OnClickListener {
 		Intent intent;
 		public void onClick(View clickedView) {
+			sManager.play(0);
 			if(clickedView.getId() == R.id.MainTextViewStartgame){
 				intent	= new Intent(MainActivity.this, CoverFlowExample.class);
 				startActivityForResult(intent, 1);

@@ -3,6 +3,7 @@ package mju.t3rd.sailingtext.lk.option;
 import mju.t3rd.sailingtext.R;
 import mju.t3rd.sailingtext.lk.option.credit.Credit;
 import mju.t3rd.sailingtext.lk.option.tutorial.Tutorial;
+import mju.t3rd.sailingtext.zeraf29.sound.SoundManager;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,10 +18,19 @@ public class OptionActivity extends Activity {
 	public static final int BLANK	= 0;
 	public static final int TEXT	= 1;
 	
+	private SoundManager sManager;
+	
 	private ButtonListener buttonListener;
 	private OptionPage optionPage;
 	
 	
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+		sManager.play(0);
+		super.onBackPressed();
+	}
+
 	public ButtonListener getButtonListener() {
 		return buttonListener;
 	}
@@ -42,6 +52,12 @@ public class OptionActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		
+		//TODO sound by jh
+		sManager = SoundManager.getInstance();
+		sManager.init(this);
+		sManager.addSound(0,R.raw.click);
+		
 		setContentView(R.layout.activity_option);
 		setButtonListener(new ButtonListener());
 		setOptionPage(new OptionPage(this));
@@ -51,6 +67,7 @@ public class OptionActivity extends Activity {
 
 		public void onClick(View clickedView) {
 			Intent intent;
+			sManager.play(0);
 			// TODO Auto-generated method stub
 			if(clickedView.getId() == R.id.OptionCredits){
 				intent	= new Intent(OptionActivity.this, Credit.class);

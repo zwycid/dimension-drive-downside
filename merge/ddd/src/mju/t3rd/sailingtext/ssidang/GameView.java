@@ -39,9 +39,11 @@ public class GameView extends SurfaceView implements
 	private void init(Context context) {
 		getHolder().addCallback(this);
 		
+		GameActivity activity = (GameActivity) context;
+		
 		// TODO 여기서 스테이지 넘어온 거 받든가 해야 함
 		world = new WorldManager(context);
-		world.makeMockWorld();
+		world.makeMockWorld(activity.stageNumber);
 	}
 	
 	public void onPause() {

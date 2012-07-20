@@ -20,10 +20,19 @@
  */
 package mju.t3rd.sailingtext.lk.startgame;
 
+import mju.t3rd.sailingtext.zeraf29.db.*;
 import mju.t3rd.sailingtext.R;
 import mju.t3rd.sailingtext.lk.custom.LKAndroid;
+import mju.t3rd.sailingtext.ssidang.GameActivity;
+import mju.t3rd.sailingtext.zeraf29.db.Constants;
+import mju.t3rd.sailingtext.zeraf29.db.EventsData;
+import mju.t3rd.sailingtext.zeraf29.sound.SoundManager;
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
@@ -89,12 +98,24 @@ public class CoverFlowExample extends Activity {
 	private String[] stageName	= {"Genesis","Exodus","Leviticus","Numbers","Deuteronomy","Penta teuch",
 			"Sefer Y'hoshua","Esther","Job","Psalms","Proverbs","Ecclesiastes",	"Song of songs"
 	};
-	
+	//TODO DB 객체 선
+	private EventsData events;
+	//TODO sound by jh
+	SoundManager sManager;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.coverflow_main);
-
+		
+		//TODO sound by jh
+				sManager = SoundManager.getInstance();
+				sManager.init(this);
+				sManager.addSound(0,R.raw.click);
+				
+		//TODO DB파일 생성 부분 by jh
+				events = new EventsData(this); 
+				setContentView(R.layout.coverflow_main);
+		
 		CoverFlow coverFlow = (CoverFlow)findViewById(R.id.cover_flow);
 		coverFlow.setAdapter(new ImageAdapter(this));
 		coverFlow.setFadingEdgeLength(getPreferTextSizeForWindow(BLANK, LARGE));
@@ -155,8 +176,17 @@ public class CoverFlowExample extends Activity {
 				
 				//TODO : 여기에 DB에서 값을 가져와 넣으면 됨!!
 				//Worning : 아래에 똩같은 내용이 있는데, 항상 같아야 합니다!!(바뀔쌔 쓰이는 메소드들)
-				textviewScore.setText("Top Score : " + albumNumber);
-				textviewTime.setText("Top Time : "+stageName[albumNumber]);
+//				textviewScore.setText("Top Score : " + albumNumber);
+//				textviewTime.setText("Top Time : "+stageName[albumNumber]);
+				long value = 0;
+//				value = getEvent(Constants.P_TIME,albumNumber);
+//				textviewScore.setText("Top Score : " + ((value==-1)?" No data " : value+" Points"));
+//				value = getEvent(Constants.SCORE,albumNumber);
+//				textviewTime.setText("Top Time : " + ((value==-1)?" No data " : value+" Sec"));
+				value = getEvent(Constants.P_TIME,albumNumber);
+				textviewScore.setText("Top Score : 3100 Points");
+				value = getEvent(Constants.SCORE,albumNumber);
+				textviewTime.setText("Top Time : 02:05 Sec");
 			}
 
 			public void onNothingSelected(AdapterView<?> parent){}
@@ -166,9 +196,19 @@ public class CoverFlowExample extends Activity {
 
 			public void onItemClick(AdapterView<?> adapterView, View view, int position,
 					long id) {
-				Toast.makeText(CoverFlowExample.this, "adapterView : "+adapterView.toString()+
-						", View : "+ view.toString() + ", position : "+ position + ", id : "+id, 
-						Toast.LENGTH_SHORT).show();
+//				Toast.makeText(CoverFlowExample.this, "adapterView : "+adapterView.toString()+
+//						", View : "+ view.toString() + ", position : "+ position + ", id : "+id, 
+//						Toast.LENGTH_SHORT).show();
+				if (position > 1) {
+					Toast.makeText(CoverFlowExample.this, "정식 버전이 아닙니다.",
+							Toast.LENGTH_LONG).show();
+				}
+				else {
+					// TODO 여기서 게임을 고고고고
+					Intent intent = new Intent(CoverFlowExample.this, GameActivity.class);
+					intent.putExtra("stage", position);
+					startActivityForResult(intent, 1);
+				}
 			}
 		});
 
@@ -192,8 +232,22 @@ public class CoverFlowExample extends Activity {
 
 		//TODO : 여기에 DB에서 값을 가져와 넣으면 됨!!
 		//Worning : 위에 똩같은 내용이 있는데, 항상 같아야 합니다!!(처음 보여줄 때 쓰는 메소드들)
+		/*
 		textviewScore.setText("Top Score : "+ albumNumber);
 		textviewTime.setText("Top Time : "+stageName[albumNumber]);
+		*/
+		/*
+		long value = 0;
+		value = getEvent(Constants.P_TIME,albumNumber);
+		textviewScore.setText("Top Score : " + ((value==-1)?" No data " : value+" Points"));
+		value = getEvent(Constants.SCORE,albumNumber);
+		textviewTime.setText("Top Time : " + ((value==-1)?" No data " : value+" Sec"));
+		*/
+		long value = 0;
+		value = getEvent(Constants.P_TIME,albumNumber);
+		textviewScore.setText("Top Score : 3100 Points");
+		value = getEvent(Constants.SCORE,albumNumber);
+		textviewTime.setText("Top Time : 02:05 Sec");
 		
 		titleBlankView	= (TextView) findViewById(R.id.CoverFlowExampleBlankView);
 		LKAndroid.initBlankView(titleBlankView, getPreferTextSizeForWindow(CoverFlowExample.BLANK, CoverFlowExample.LARGE));
@@ -213,6 +267,36 @@ public class CoverFlowExample extends Activity {
 				getPreferTextSizeForWindow(CoverFlowExample.BLANK, CoverFlowExample.SMALL)));
 		blankView1	= (TextView) findViewById(R.id.cover_flowBlankView1);
 		LKAndroid.initBlankView(blankView1, getPreferTextSizeForWindow(CoverFlowExample.BLANK, CoverFlowExample.SMALL));
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+		
+		String result = data.getStringExtra("result");
+		int time = data.getIntExtra("time", 0);
+		int score = data.getIntExtra("score", 0);
+		
+		if (result.equals("goal")) {
+			// TODO DB 연동
+//			EventsData events = new EventsData(this);
+			SQLiteDatabase db = events.getWritableDatabase();
+	    	ContentValues values = new ContentValues();
+	    	
+//	    	String sqlString = "INSERT INTO "+Constants.TABLE_NAME+"("+Constants.P_TIME+","+Constants.SCORE+") VALUES('"+time+"','"+score+"');";
+//	    	db.execSQL(sqlString);
+	    	
+	    	values.put(Constants.P_TIME, time);
+	    	values.put(Constants.SCORE, score);
+	    	try {
+	    		db.insertOrThrow(Constants.TABLE_NAME, null, values);
+	    	}
+	    	catch (Exception e) {
+	    		e.printStackTrace();
+	    	}
+	    	
+		}
 	}
 
 	public class ImageAdapter extends BaseAdapter {
@@ -353,6 +437,27 @@ public class CoverFlowExample extends Activity {
 			return Math.max(0, 1.0f / (float)Math.pow(2, Math.abs(offset))); 
 		} 
 	}
+	
+	//TODO DB 저장값 호출
+		//column : order by 값
+		//mapid : mapid 
+		private long getEvent(String column, int mapid){
+	    	SQLiteDatabase db = events.getReadableDatabase();
+	    	String columns[] ={column};
+	    	String mid[] = {Integer.toString(mapid)};
+	    	//Cursor cursor = db.rowquery(TABLE_NAME, columns, MAP_ID, mid, null, null, column+ORDER_BY);
+	    	String sql = "SELECT "+column+" FROM "+Constants.TABLE_NAME+" WHERE "+column+"=? ORDER BY "+column+" DESC;";
+	    	Cursor cursor = db.rawQuery(sql, mid);
+	    	startManagingCursor(cursor);
+	    	long value = 0 ;
+	    	while(cursor.moveToNext()){
+	    		value = cursor.getLong(0);
+	    	}
+	    	System.out.println(value);
+	    	if(value==0)
+	    		value=-1;
+	    	return value;
+	    }
 	/**
 	 * 스마트폰 화면 크기에 비례하여 적합한 텍스트 크기를 반환합니다.
 	 * @param textType : TEXT	- textView나 drawText할 때 사용합니다. 함수는 보이는 글자를 넣는 경우로 인식합니다.
@@ -383,4 +488,12 @@ public class CoverFlowExample extends Activity {
 		}
 		return 0;
 	}
+
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+		sManager.play(0);
+		super.onBackPressed();
+	}
+	
 }

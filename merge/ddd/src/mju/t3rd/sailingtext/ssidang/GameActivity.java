@@ -1,7 +1,9 @@
 package mju.t3rd.sailingtext.ssidang;
 
 import mju.t3rd.sailingtext.R;
+import mju.t3rd.sailingtext.zeraf29.sound.SoundManager;
 import android.app.Activity;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -19,6 +21,9 @@ public class GameActivity extends Activity implements
 	private Sensor orientSensor;
 	
 	private GameView gameView;
+	
+	public int stageNumber;
+	private SoundManager sManager;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Activity
@@ -32,6 +37,20 @@ public class GameActivity extends Activity implements
 		// 화면 안 꺼짐 설정
 		getWindow().setFlags(LayoutParams.FLAG_KEEP_SCREEN_ON,
 				LayoutParams.FLAG_KEEP_SCREEN_ON);
+		
+		// 몇번째 스테이지를 읽나요?
+		Intent intent = getIntent();
+		stageNumber = intent.getIntExtra("stage", -1);
+		
+		sManager = SoundManager.getInstance();
+		sManager.init(this);
+		sManager.addSound(0, R.raw.effect1);
+		sManager.addSound(1, R.raw.effect2);
+		sManager.addSound(2, R.raw.effect3);
+		sManager.addSound(3, R.raw.hit1);
+		sManager.addSound(4, R.raw.hit2);
+		sManager.addSound(5, R.raw.finale);
+		sManager.addSound(6, R.raw.start2);
 
 		setContentView(R.layout.game_layout);
 		gameView = (GameView) findViewById(R.id.gameView);

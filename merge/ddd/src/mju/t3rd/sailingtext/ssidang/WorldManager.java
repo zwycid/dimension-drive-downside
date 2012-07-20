@@ -3,8 +3,10 @@ package mju.t3rd.sailingtext.ssidang;
 import java.util.Random;
 
 import mju.t3rd.sailingtext.R;
+import mju.t3rd.sailingtext.zeraf29.sound.SoundManager;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -23,7 +25,7 @@ public class WorldManager {
 	private static final float TIME_UNIT = 30.f;
 	
 	private static final float AIR_FRICTION_COEFFICIENT = .1f;
-	private static final float GRAVITY_CONSTANT = .5f;
+	private static final float GRAVITY_CONSTANT = .7f;
 	
 	private static final float BORDER_THICK = 20;
 	private static final int MAX_PARTICLE = 30;
@@ -141,8 +143,10 @@ public class WorldManager {
 			if (event.getY() < 50)
 				Vis.toggleFrameMode();
 			else {
-				if (G.state == STATE_COMPLETED)
-					parent.finish();
+				if (G.state == STATE_COMPLETED) {
+//					parent.finish();
+					finishGame(parent, "goal", (int) G.playTime, score);
+				}
 				else
 					pause();
 			}
@@ -161,16 +165,30 @@ public class WorldManager {
 	
 	void onBackPressed(Activity parent) {
 		if (G.state == STATE_COMPLETED) {
-			parent.finish();
+//			parent.finish();
+			finishGame(parent, "goal", (int) G.playTime, score);
 		}
 		else if (G.state == STATE_DEAD) {
-			parent.finish();
+//			parent.finish();
+			finishGame(parent, "dead", (int) G.playTime, score);
 		}
-		else if (isPaused())
-			parent.finish();
+		else if (isPaused()) {
+//			parent.finish();
+			finishGame(parent, "quit", (int) G.playTime, score);
+		}
 		else {
 			pause(true);
 		}
+	}
+	
+	public void finishGame(Activity parent, String result, int time, int score) {
+		Intent intent = new Intent();
+		intent.putExtra("result", result);
+		intent.putExtra("time", time);
+		intent.putExtra("score", score);
+
+		parent.setResult(Activity.RESULT_OK, intent);
+		parent.finish();
 	}
 	
 	public void pause() {
@@ -196,10 +214,15 @@ public class WorldManager {
 		return G.state == STATE_PAUSED;
 	}
 
-	public void makeMockWorld() {
+	public void makeMockWorld(int stageNumber) {
 //		stage = Stage.fromData("[mapsize],800,800/[s],100,400/[f],700,700/[b],400,300,700,500/" +
 //								"[a],200,620/[c],256,93/[c],640,142/[c],380,621/[c],684,386/");
-		stage = Stage.fromData("[mapsize],600,1200/[b],69,76,114,290/[b],184,80,229,283/[b],106,163,199,200/" +
+		if (stageNumber == 0)
+			stage = Stage.fromData("[mapsize],720,1200/[s],334,7/[f],331,1184/[b],158,988,144,697/[b],358,416,497,602/[b],91,264,164,433/[b],564,153,589,322/[b],322,181,249,262/[b],491,936,533,977/[b],345,679,461,711/[b],315,968,326,1010/[b],617,1097,662,1129/[a],414,813/[a],94,565/[a],428,321/[a],634,559/[a],168,140/[c],475,1077.5/[c],230,1090/[c],264,916/[c],596,870/[c],38,766/[c],526,63/[i],354,80/[i],352,106/[i],354,155.5/[i],354,209.5/[i],359,283/[i],349.5,334/[i],343,357/[i],357,252/[i],305,349.5/[i],277.5,347/[i],249,350/[i],228.5,355/[i],216,358/[i],201,375.5/[i],205.5,429.5/[i],208,481/[i],218,523/[i],223,550/[i],217,575/[i],218,610/[i],225.5,665/[i],230.5,713/[i],233.5,751.5/[i],240,805/[i],262.5,650.5/[i],373,643.5/[i],509.5,644.5/[i],576,648/[i],638.5,657.5/[i],436,641/[i],466,634/[i],402,639/[i],312,643/[i],339.5,643.5/[i],538,647/[i],607,652/[i],665,661/[i],676,700/[i],674.5,745.5/[i],681.5,811.5/[i],683,864/[i],680,929/[i],675,780/[i],681,839/[i],677,893/[i],680,956/[i],684,1009.5/[i],689,1040/[i],680,982/[i],696,1073/[i],700,1098.5/[i],695.5,1131/[i],687.5,1156/[i],673,1179.5/[i],613,1186/[i],513.5,1172.5/[i],444,1166/[i],352,1145/[i],396,1140/[i],471,1164/[i],568.5,1178/[i],192.5,666.5/[i],151.5,662/[i],101.5,672/[i],82,682.5/[i],83,778/[i],86.5,836/[i],88.5,862/[i],83,804/[i],82,724/[i],78,747/[i],91,900/[i],89.5,927/[i],87.5,975.5/[i],90,1001/[i],93,1028.5/[i],93.5,1053.5/[i],90,1091.5/[i],92.5,1119/[i],96,1138/[i],124.5,1163/[i],152,1165/[i],202.5,1163.5/[i],261.5,1170/[i],275,1173/[i],291,1161/");
+		else if (stageNumber == 1)
+			stage = Stage.fromData("[mapsize],780,1300/[s],20,819/[f],762,211/[b],212,1203,250,1168/[b],354,1070,407,1010/[b],446,937,457,899/[b],138,713,202,677/[b],358,582,421,546/[b],509,496,580,449/[b],216,179,275,235/[b],299,257,335,321/[b],361,352,407,414/[b],483,189,539,221/[b],646,351,647,355/[b],574,886,593,921/[b],634,1041,647,1091/[b],683,1202,693,1241/[b],293,814,271,840/[b],223,888,180,923/[b],153,939,55,1004/[b],417,694,525,687/[b],632,701,660,721/[b],744,770,742,785/[b],134,368,153,429/[b],162,61,269,66/[b],447,90,452,89/[a],448,1224.5/[a],219.5,918.5/[a],464,1068/[a],455,806.5/[a],202,752/[a],314,645/[a],145,255.5/[a],414,247/[a],615,347/[a],689,1089/[a],570,1162/[c],637,973/[c],499,1027/[c],87,1174/[c],632,576/[c],234,535/[c],66.5,539/[c],83,67/[c],559.5,37.5/[c],699.5,73.5/[c],680,199/[i],110.5,829/[i],233.5,827/[i],319,767.5/[i],393,704.5/[i],465,635/[i],533.5,653.5/[i],589,797.5/[i],565.5,839.5/[i],577,735/[i],684,653/[i],493,505/[i],628,491/[i],319,472/[i],143,601.5/[i],160,453/[i],37,470/[i],62.5,605.5/[i],63,720/[i],239,428.5/[i],51.5,312/[i],58.5,187.5/[i],145.5,121.5/[i],286,112.5/[i],429,122.5/[i],542.5,127.5/[i],591.5,133/[i],602.5,198.5/[i],599.5,269/[i],670.5,303/[i],712,316/[i],509,309/[i],589,286/[i],651.5,266/[i],634.5,154/[i],675,132/[i],704,138/[i],706,252.5/[i],503,75/[i],412.5,51/[i],347.5,71.5/[i],348,146.5/[i],419.5,152/[i],526.5,116/[i],607,84/[i],485,389.5/[i],628.5,416.5/[i],695.5,439.5/[i],741,486/[i],705,948/[i],677,843/[i],688.5,773/[i],721,677/[i],732,640/[i],680,520.5/[i],739,565.5/[i],722,385/[i],561,407/[i],482,425/[i],430.5,469/[i],430,519/[i],535.5,573.5/[i],596.5,635/[i],598,681.5/[i],118,1251/[i],322.5,1242/[i],370,1190/[i],282,1092/[i],114,1083/[i],45,1094/[i],71,1217/[i],84,1249/[i],227.5,1284.5/[i],172.5,1203.5/[i],142.5,1139/[i],181,1065/[i],234.5,1025.5/[i],267.5,1062/[i],279,1119.5/[i],326.5,1148/[i],384,1131/[i],444.5,1136/[i],520.5,1192.5/[i],568,1247/[i],599,1224.5/[i],621.5,1160.5/[i],705,1156.5/[i],737,1191.5/[i],697.5,1272/[i],676,1290/[i],590,1283/[i],494,1279.5/[i],425,1278/[i],362,1278.5/[i],327.5,1279.5/[i],298,1277/[i],232,1248.5/[i],185.5,1254/[i],174,1266/[i],56,1262/[i],34,1184.5/[i],55.5,1144/[i],116.5,1113.5/[i],234.5,1115.5/[i],305,1184.5/[i],416.5,1160.5/[i],514,1113/[i],566,1078/[i],587,1051/[i],553.5,989.5/[i],487.5,939.5/[i],438.5,963.5/[i],377.5,973/[i],316,940/[i],309,901/[i],375.5,874.5/[i],453,875.5/[i],506.5,892.5/[i],635,914.5/[i],742,897/[i],765,974.5/[i],755.5,1051.5/[i],757.5,1107.5/[i],705,1046/[i],703,995.5/[i],613,1013/[i],578,1114/[i],488,1164/[i],451,1195/[i],516,1227.5/");
+		else
+			stage = Stage.fromData("[mapsize],600,1200/[b],69,76,114,290/[b],184,80,229,283/[b],106,163,199,200/" +
 					"[b],101,245,219,283/[b],299,78,329,282/[b],323,156,385,178/[b],378,83,415,283/[b],136,365,385,391/" +
 					"[b],354,376,378,521/[b],233,458,271,553/[b],136,541,410,571/[b],125,638,360,662/[b],188,655,214,747/" +
 					"[b],269,657,313,741/[b],140,730,353,757/[b],399,623,423,808/[b],418,695,498,721/[f],79,1116/" +
@@ -451,6 +474,7 @@ public class WorldManager {
 		G.playTime = 0;
 		G.baseTime = G.timestamp;
 		
+		SoundManager.getInstance().play(6);
 		G.state = STATE_PLAYING;
 	}
 
@@ -486,6 +510,7 @@ public class WorldManager {
 			if (! coin.isEaten() && coin.isHit(ball)) {
 				score += Coin.COIN_SCORE;
 				coin.eat();
+				SoundManager.getInstance().play(0);
 			}
 		}
 
@@ -497,13 +522,17 @@ public class WorldManager {
 		Vector2D beforePos = new Vector2D(ball.pos);
 		Vector2D afterPos = Vector2D.add(beforePos, ball.velo, delta);
 		
+		boolean f = false;
+
 		// 벽 충돌 처리
-		collisionBallWithBorder(ball, beforePos, afterPos);
+		f = f || collisionBallWithBorder(ball, beforePos, afterPos);
 		
 		// 장애물 충돌 처리
 		for (Obstacle ob : stage.obstacles) {
-			collisionBallWithObstacle(ball, ob, beforePos, afterPos);
+			f = f || collisionBallWithObstacle(ball, ob, beforePos, afterPos);
 		}
+		if (f)
+			SoundManager.getInstance().play(4);
 		
 		// 공 방향 계산
 		ball.debug_pos.set(beforePos);
@@ -532,6 +561,7 @@ public class WorldManager {
 		stage.goal.rotate(delta);
 		if (stage.goal.isOverlapped(ball) < -stage.goal.radius * .7f) {
 			G.state = STATE_COMPLETED;
+			SoundManager.getInstance().play(5);
 		}
 	}
 
@@ -627,6 +657,7 @@ public class WorldManager {
 				// 총알이 공에 맞았으면 총알 없애고 공 아프게.
 				if (b.isHit(ball)) {
 					// TODO Sound: 맞는소리
+					SoundManager.getInstance().play(3);
 					ball.giveDamage(1);
 					b.kill();
 				}
@@ -640,7 +671,9 @@ public class WorldManager {
 		float r = Vector2D.distance(ball.pos, sen.pos);
 		if (r < sen.sight) {
 			sen.trace(ball, r);
-			sen.tryShootTarget(bullets, ball.pos);
+			if (sen.tryShootTarget(bullets, ball.pos))
+				// TODO 히히히 발싸!
+				SoundManager.getInstance().play(1);
 		}
 
 		sen.debug_inSight = (r < sen.sight);
@@ -661,7 +694,7 @@ public class WorldManager {
 		att.debug_inInfluence = (r < att.influence);
 	}
 
-	private void collisionBallWithObstacle(Ball ball, Obstacle ob,
+	private boolean collisionBallWithObstacle(Ball ball, Obstacle ob,
 			Vector2D beforePos, Vector2D afterPos) {
 		Vector2D edge1 = new Vector2D();
 		Vector2D edge2 = new Vector2D();
@@ -670,33 +703,36 @@ public class WorldManager {
 		float radius = ball.radius;
 		
 		// 근사적으로 코너도 처리함
+		boolean f = false;
 		
 		// left
 		edge1.set(ob.left - radius, ob.top - radius);
 		edge2.set(ob.left - radius, ob.bottom + radius);
 		normal.set(-1, 0);
-		collisionBallWithEdge(ball, beforePos, afterPos, edge1, edge2, ball.velo, normal);
+		f = f || collisionBallWithEdge(ball, beforePos, afterPos, edge1, edge2, ball.velo, normal);
 		
 		// top
 		edge1.set(ob.left - radius, ob.top - radius);
 		edge2.set(ob.right + radius, ob.top - radius);
 		normal.set(0, -1);
-		collisionBallWithEdge(ball, beforePos, afterPos, edge1, edge2, ball.velo, normal);
+		f = f || collisionBallWithEdge(ball, beforePos, afterPos, edge1, edge2, ball.velo, normal);
 		
 		// right
 		edge1.set(ob.right + radius, ob.top - radius);
 		edge2.set(ob.right + radius, ob.bottom + radius);
 		normal.set(1, 0);
-		collisionBallWithEdge(ball, beforePos, afterPos, edge1, edge2, ball.velo, normal);
+		f = f || collisionBallWithEdge(ball, beforePos, afterPos, edge1, edge2, ball.velo, normal);
 		
 		// bottom
 		edge1.set(ob.left - radius, ob.bottom + radius);
 		edge2.set(ob.right + radius, ob.bottom + radius);
 		normal.set(0, 1);
-		collisionBallWithEdge(ball, beforePos, afterPos, edge1, edge2, ball.velo, normal);
+		f = f || collisionBallWithEdge(ball, beforePos, afterPos, edge1, edge2, ball.velo, normal);
+		
+		return f;
 	}
 
-	private void collisionBallWithBorder(Ball ball, Vector2D beforePos, Vector2D afterPos) {
+	private boolean collisionBallWithBorder(Ball ball, Vector2D beforePos, Vector2D afterPos) {
 		Vector2D edge1 = new Vector2D();
 		Vector2D edge2 = new Vector2D();
 		Vector2D normal = new Vector2D();
@@ -704,32 +740,36 @@ public class WorldManager {
 		float width = stage.width;
 		float height = stage.height;
 		
+		boolean f = false;
+		
 		// left
 		edge1.set(ball.radius, 0);
 		edge2.set(ball.radius, height);
 		normal.set(1, 0);
-		collisionBallWithEdge(ball, beforePos, afterPos, edge1, edge2, ball.velo, normal);
+		f = f || collisionBallWithEdge(ball, beforePos, afterPos, edge1, edge2, ball.velo, normal);
 
 		// top
 		edge1.set(0, ball.radius);
 		edge2.set(width, ball.radius);
 		normal.set(0, 1);
-		collisionBallWithEdge(ball, beforePos, afterPos, edge1, edge2, ball.velo, normal);
+		f = f || collisionBallWithEdge(ball, beforePos, afterPos, edge1, edge2, ball.velo, normal);
 		
 		// right
 		edge1.set(width - ball.radius, 0);
 		edge2.set(width - ball.radius, height + 10);
 		normal.set(-1, 0);
-		collisionBallWithEdge(ball, beforePos, afterPos, edge1, edge2, ball.velo, normal);
+		f = f || collisionBallWithEdge(ball, beforePos, afterPos, edge1, edge2, ball.velo, normal);
 		
 		// bottom
 		edge1.set(0, height - ball.radius);
 		edge2.set(width + 10, height - ball.radius);
 		normal.set(0, -1);
-		collisionBallWithEdge(ball, beforePos, afterPos, edge1, edge2, ball.velo, normal);
+		f = f || collisionBallWithEdge(ball, beforePos, afterPos, edge1, edge2, ball.velo, normal);
+		
+		return f;
 	}
 
-	private void collisionBallWithEdge(Ball ball, Vector2D beforePos,
+	private boolean collisionBallWithEdge(Ball ball, Vector2D beforePos,
 			Vector2D afterPos, Vector2D edgeStart, Vector2D edgeStop,
 			Vector2D velocity, Vector2D normal) {
 		float coeffi = ball.restitution;
@@ -757,6 +797,8 @@ public class WorldManager {
 			
 			// 위치를 적용합니다.
 			afterPos.add(interPt);
+			return true;
 		}
+		return false;
 	}
 }
