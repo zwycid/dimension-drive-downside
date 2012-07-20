@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_gravity="center"
+    android:background="#000000"
+    android:orientation="vertical" >
+
+    <mju.t3rd.sailingtext.lk.BackgroundSurfaceView
+        android:id="@+id/BackgroundSurfaceView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <RelativeLayout
+        android:id="@+id/CoverFlowExampleRelativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#00000000"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/CoverFlowExampleBlankView"
+            style="@style/blankView"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:id="@+id/cover_flowTitleView"
+            style="@style/TitleText"
+            android:layout_below="@+id/CoverFlowExampleBlankView"
+            android:layout_centerHorizontal="true"
+            android:text="@string/Startgame" />
+
+        <TextView
+            android:id="@+id/CoverFlowExampleBlankView1"
+            style="@style/blankView"
+            android:layout_below="@+id/cover_flowTitleView"
+            android:layout_centerHorizontal="true" />
+
+        <mju.t3rd.sailingtext.lk.startgame.CoverFlow
+            android:id="@+id/cover_flow"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/CoverFlowExampleBlankView1"
+            android:layout_gravity="center">
+        </mju.t3rd.sailingtext.lk.startgame.CoverFlow>
+    </RelativeLayout>
+
+    <ViewStub
+        android:id="@+id/album_hidden"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:inflatedId="@+id/album_shown"
+        android:layout="@layout/album_text" >
+    </ViewStub>
+<!--	<TextView  -->
+<!--		android:id="@+id/album_test"-->
+<!--	    android:layout_width="fill_parent" -->
+<!--	    android:layout_height="wrap_content" -->
+<!--	    android:text="album_artist"-->
+<!--	    />-->
+
+</FrameLayout>

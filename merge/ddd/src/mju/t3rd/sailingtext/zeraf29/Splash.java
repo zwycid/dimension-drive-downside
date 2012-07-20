@@ -1,7 +1,7 @@
 package mju.t3rd.sailingtext.zeraf29;
 
 import mju.t3rd.sailingtext.R;
-import mju.t3rd.sailingtext.ssidang.GameActivity;
+import mju.t3rd.sailingtext.lk.MainActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,11 +23,8 @@ public class Splash extends Activity{
 	
 	class SplashHandler implements Runnable{
 		public void run(){
-//			startActivity(
-//					new Intent(getApplication(),MainActivity.class));
-//				Splash.this.finish();
-			Toast.makeText(Splash.this, "PM님이 메뉴 파일을 안 주세요!", Toast.LENGTH_LONG).show();
-			startActivity(new Intent(getApplication(), GameActivity.class));
+			Toast.makeText(Splash.this, "SailingText!", Toast.LENGTH_SHORT).show();
+			startActivity(new Intent(getApplication(), MainActivity.class));
 			finish();
 		}
 		
