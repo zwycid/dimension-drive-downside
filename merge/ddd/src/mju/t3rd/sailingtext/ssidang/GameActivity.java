@@ -1,6 +1,6 @@
-package kr.ac.mju.dimensiondrivedownside;
+package mju.t3rd.sailingtext.ssidang;
 
-import kr.ac.mju.dimensiondrivedownside.ssidang.GameView;
+import mju.t3rd.sailingtext.R;
 import android.app.Activity;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
-import android.view.Window;
 import android.view.WindowManager.LayoutParams;
 
 public class GameActivity extends Activity implements
@@ -29,11 +28,10 @@ public class GameActivity extends Activity implements
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		// 제목 없애고 전체 화면으로, 화면 안 꺼지도록
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		getWindow().setFlags(
-			LayoutParams.FLAG_FULLSCREEN | LayoutParams.FLAG_KEEP_SCREEN_ON,
-			LayoutParams.FLAG_FULLSCREEN | LayoutParams.FLAG_KEEP_SCREEN_ON);
+		// NoTitle, Fullscreen은 manifest에서 지정
+		// 화면 안 꺼짐 설정
+		getWindow().setFlags(LayoutParams.FLAG_KEEP_SCREEN_ON,
+				LayoutParams.FLAG_KEEP_SCREEN_ON);
 
 		setContentView(R.layout.game_layout);
 		gameView = (GameView) findViewById(R.id.gameView);

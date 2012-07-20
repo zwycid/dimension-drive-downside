@@ -1,4 +1,4 @@
-package kr.ac.mju.dimensiondrivedownside.ssidang;
+package mju.t3rd.sailingtext.ssidang;
 
 import android.graphics.PointF;
 import android.util.FloatMath;
@@ -197,6 +197,19 @@ public class Vector2D extends PointF {
 		float dirL = direction.length();
 		x = direction.x * length / dirL;
 		y = direction.y * length / dirL;
+		return this;
+	}
+	
+	/**
+	 * 벡터를 각도와 길이로 지정합니다.
+	 * 
+	 * @param radians
+	 * @param length
+	 * @return
+	 */
+	public Vector2D fromDirection(float radians, float length) {
+		x = FloatMath.cos(radians) * length;
+		y = FloatMath.sin(radians) * length;
 		return this;
 	}
 	

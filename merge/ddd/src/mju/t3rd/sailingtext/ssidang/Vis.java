@@ -1,4 +1,4 @@
-package kr.ac.mju.dimensiondrivedownside.ssidang;
+package mju.t3rd.sailingtext.ssidang;
 
 import android.graphics.Color;
 import android.graphics.Paint;

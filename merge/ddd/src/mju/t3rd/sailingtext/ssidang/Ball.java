@@ -1,4 +1,4 @@
-package kr.ac.mju.dimensiondrivedownside.ssidang;
+package mju.t3rd.sailingtext.ssidang;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -14,7 +14,8 @@ public class Ball extends Unit {
 	float radius;
 	float restitution	= .8f;
 	float mass			= 1.f;
-	int hitpoint		= 100;
+	int maxHitpoint		= 100;
+	int hitpoint;
 	
 	
 	private Matrix mat = new Matrix();
@@ -32,6 +33,7 @@ public class Ball extends Unit {
 	public Ball(float x, float y, float radius) {
 		this.pos.set(x, y);
 		this.radius = radius;
+		this.hitpoint = maxHitpoint;
 	}
 	
 	public boolean isDead() {

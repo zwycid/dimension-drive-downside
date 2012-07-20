@@ -1,8 +1,8 @@
-package kr.ac.mju.dimensiondrivedownside.ssidang;
+package mju.t3rd.sailingtext.ssidang;
 
 import java.util.Random;
 
-import kr.ac.mju.dimensiondrivedownside.R;
+import mju.t3rd.sailingtext.R;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
@@ -11,7 +11,9 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Paint.Cap;
 import android.graphics.Paint.Style;
+import android.graphics.Path;
 import android.util.FloatMath;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -49,6 +51,8 @@ public class WorldManager {
 	
 	// 게임 리소스.............
 	private Paint borderPaint;
+	private Paint textPaint;
+	private Paint barPaint;
 	private Bitmap ballBitmap;
 	private Bitmap swirlBitmap;
 	private Bitmap sentryBitmap;
@@ -89,6 +93,14 @@ public class WorldManager {
 		borderPaint.setStyle(Style.STROKE);
 		borderPaint.setColor(0xff596691);
 		borderPaint.setStrokeWidth(BORDER_THICK);
+		
+		textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+		textPaint.setColor(0x60ffffff);
+		textPaint.setTextSize(12);
+		
+		barPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+		barPaint.setStrokeWidth(5);
+		barPaint.setStrokeCap(Cap.ROUND);
 		
 		// 리소스 로드
 		Resources res = context.getResources();
@@ -397,6 +409,9 @@ public class WorldManager {
 		
 		// 골 방향 marker 그리기
 		marker.draw(canvas, markerBitmap);
+		
+		// 게임 시간, 점수 표시
+		drawStatus(canvas);
 	}
 
 	private void onRenderCompleted(Canvas canvas) {
@@ -534,6 +549,45 @@ public class WorldManager {
 		G.delta = Math.min((now - G.timestamp) / TIME_UNIT, TIME_UNIT * 500);
 		G.timestamp = now;
 		G.tick++;
+	}
+
+	private void drawStatus(Canvas canvas) {
+		String text = new StringBuilder(32)
+			.append(String.format("%02d", (int) G.playTime / 60000))
+			.append(":")
+			.append(String.format("%02d", (int) G.playTime / 1000 % 60))
+			.append(" / ")
+			.append(score)
+			.toString();
+
+		// 하하하핳!
+		Vector2D dir = new Vector2D().fromDirection(
+				(float) (G.gravityDirection + Math.PI / 2),
+				20);
+		Vector2D side = new Vector2D().fromDirection(
+				(float) (G.gravityDirection), 25);
+		dir.y = -dir.y;	// 좌표 보정
+		side.y = -side.y;
+		
+		float x1 = ball.pos.x;
+		float y1 = ball.pos.y;
+		float x2 = ball.pos.x;
+		float y2 = ball.pos.y;
+		
+		barPaint.setColor(0x80ff3000);
+		canvas.drawLine(x1 - dir.x + side.x, y1 - dir.y + side.y,
+				x2 + dir.x + side.x, y2 + dir.y + side.y, barPaint);
+		barPaint.setColor(0x5000ff30);
+		dir.setLength(20.f * ball.hitpoint / ball.maxHitpoint);
+		canvas.drawLine(x1 - dir.x + side.x, y1 - dir.y + side.y,
+				x2 + dir.x + side.x, y2 + dir.y + side.y, barPaint);
+		
+		Path path = new Path();
+		dir.setLength(textPaint.measureText(text) / 2);
+		side.scale(1.7f);
+		path.moveTo(x1 - dir.x + side.x, y1 - dir.y + side.y);
+		path.lineTo(x2 + dir.x + side.x, y2 + dir.y + side.y);
+		canvas.drawTextOnPath(text, path, 0, 0, textPaint);
 	}
 
 	private void moveParticles(Vector2D beforePos, Vector2D afterPos) {
