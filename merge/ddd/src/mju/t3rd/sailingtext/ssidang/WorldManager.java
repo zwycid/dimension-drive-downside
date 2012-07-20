@@ -1,8 +1,8 @@
-package kr.ac.mju.dimensiondrivedownside.ssidang;
+package mju.t3rd.sailingtext.ssidang;
 
 import java.util.Random;
 
-import kr.ac.mju.dimensiondrivedownside.R;
+import mju.t3rd.sailingtext.R;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
@@ -12,6 +12,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
+import android.graphics.Path;
 import android.util.FloatMath;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -397,6 +398,9 @@ public class WorldManager {
 		
 		// 골 방향 marker 그리기
 		marker.draw(canvas, markerBitmap);
+		
+		// 게임 시간, 점수 표시
+		drawStatus(canvas);
 	}
 
 	private void onRenderCompleted(Canvas canvas) {
@@ -534,6 +538,23 @@ public class WorldManager {
 		G.delta = Math.min((now - G.timestamp) / TIME_UNIT, TIME_UNIT * 500);
 		G.timestamp = now;
 		G.tick++;
+	}
+
+	private void drawStatus(Canvas canvas) {
+		String text = new StringBuilder(32)
+			.append(String.format("%02d", (int) G.playTime / 60000))
+			.append(":")
+			.append(String.format("%02d", (int) G.playTime / 1000 % 60))
+			.append(" / ")
+			.append(score)
+			.toString();
+		
+		Vector2D dir = new Vector2D().fromDirection(G.gravityDirection, 20);
+		
+		Path path = new Path();
+		path.moveTo(ball.pos.x, ball.pos.y);
+		path.lineTo(ball.pos.x + dir.x, ball.pos.y - dir.y);
+		canvas.drawTextOnPath(text, path, 0, 0, Vis.white);
 	}
 
 	private void moveParticles(Vector2D beforePos, Vector2D afterPos) {

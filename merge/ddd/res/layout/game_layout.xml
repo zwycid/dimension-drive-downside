@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <kr.ac.mju.dimensiondrivedownside.ssidang.GameView
+    <mju.t3rd.sailingtext.ssidang.GameView
         android:id="@+id/gameView"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"

@@ -1,4 +1,4 @@
-package kr.ac.mju.dimensiondrivedownside.ssidang;
+package mju.t3rd.sailingtext.ssidang;
 
 import android.app.Activity;
 import android.content.Context;
