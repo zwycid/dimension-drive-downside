@@ -140,3 +140,39 @@ java.specification.vendor,sysinfo,,,"Oracle Corporation",1342755151670
 java.specification.version,sysinfo,,,"1.7",1342755151670
 java.vendor,sysinfo,,,"Oracle Corporation",1342755151670
 java.version,sysinfo,,,"1.7.0_05",1342755151670
+java.vm.info,sysinfo,,,"mixed mode",1342755151670
+java.vm.name,sysinfo,,,"Java HotSpot(TM) 64-Bit Server VM",1342755151670
+java.vm.specification.name,sysinfo,,,"Java Virtual Machine Specification",1342755151670
+java.vm.specification.vendor,sysinfo,,,"Oracle Corporation",1342755151670
+java.vm.specification.version,sysinfo,,,"1.7",1342755151670
+java.vm.vendor,sysinfo,,,"Oracle Corporation",1342755151670
+java.vm.version,sysinfo,,,"23.1-b03",1342755151670
+opened,view,org.eclipse.ui.ide,3.7.0.v20110928-1505,"org.eclipse.ui.views.ProblemView",1342755154160
+started,bundle,org.eclipse.jst.common.project.facet.core,1.4.200.v201103170302,"org.eclipse.jst.common.project.facet.core",1342755154628
+started,bundle,org.eclipse.jst.ws.jaxrs.core,1.0.301.v201108240656,"org.eclipse.jst.ws.jaxrs.core",1342755154644
+started,bundle,org.eclipse.jpt.common.core,1.0.2.v201111103010,"org.eclipse.jpt.common.core",1342755154644
+started,bundle,org.eclipse.jpt.jpa.core,3.0.2.v201201243020,"org.eclipse.jpt.jpa.core",1342755154660
+started,bundle,org.eclipse.wst.sse.core,1.1.602.v201112071516,"org.eclipse.wst.sse.core",1342755154691
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1342755155190
+started,bundle,com.android.ide.eclipse.traceview,20.0.0.v201206242043-391819,"com.android.ide.eclipse.traceview",1342755155346
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1342756368147
+activated,view,com.android.ide.eclipse.ddms,20.0.0.v201206242043-391819,"com.android.ide.eclipse.ddms.views.LogCatView",1342756369407
+started,bundle,org.eclipse.debug.ui,3.7.102.v20111129-1423_r372,"org.eclipse.debug.ui",1342756371902
+started,bundle,org.eclipse.wst.xsl.debug.ui,1.0.200.v201101281837,"org.eclipse.wst.xsl.debug.ui",1342756372106
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1342756377642
+opened,view,org.eclipse.ui.console,3.5.100.v20111007_r372,"org.eclipse.ui.console.ConsoleView",1342756379183
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1342756399377
+started,bundle,org.eclipse.jdt.debug,3.7.1.v20111006_r372,"org.eclipse.jdt.debug",1342756402290
+started,bundle,org.eclipse.jdt.debug.ui,3.6.1.v20111006_r372,"org.eclipse.jdt.debug.ui",1342756402370
+activated,editor,org.eclipse.jdt.ui,3.7.2.v20120109-1427,"org.eclipse.jdt.ui.CompilationUnitEditor",1342756402431
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1342757085839
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1342757088468
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1342757089367
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1342757498849
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1342757499647
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1342757680062
+deactivated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1342757681201
+activated,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1342757682756
+closed,workbench,org.eclipse.ui.workbench,3.7.1.v20120104-1859,"",1342757683007
+started,bundle,org.eclipse.compare,3.5.202.R37x_v20111109-0800,"org.eclipse.compare",1342757683457
+stopped,bundle,org.eclipse.jst.ws.axis.creation.ui,1.0.700.v201104070312,"org.eclipse.jst.ws.axis.creation.ui",1342757683885
