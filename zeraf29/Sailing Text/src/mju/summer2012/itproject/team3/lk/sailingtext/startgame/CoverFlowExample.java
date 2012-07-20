@@ -20,11 +20,11 @@
  */
 package mju.summer2012.itproject.team3.lk.sailingtext.startgame;
 
-import static mju.summer2012.itproject.team3.Constants.*;
+import static mju.summer2012.itproject.team3.db.Constants.*;
 
 import java.util.Calendar;
 
-import mju.summer2012.itproject.team3.EventsData;
+import mju.summer2012.itproject.team3.db.EventsData;
 import mju.summer2012.itproject.team3.lk.sailingtext.R;
 import mju.summer2012.itproject.team3.lk.sailingtext.lkcustom.LKAndroid;
 import mju.summer2012.itproject.team3.sound.SoundManager;
