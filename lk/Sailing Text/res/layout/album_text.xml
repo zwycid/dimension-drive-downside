@@ -38,6 +38,15 @@
         android:layout_alignParentLeft="true" />
 
     <TextView
+        android:id="@+id/album_Size"
+        style="@style/PlainText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/cover_flowBlankView1"
+        android:layout_alignParentLeft="true"
+        android:text="" />
+    
+    <TextView
         android:id="@+id/album_Score"
         style="@style/PlainText"
         android:layout_width="wrap_content"
@@ -51,7 +60,7 @@
         style="@style/PlainText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/cover_flowBlankView1"
+        android:layout_above="@+id/album_Size"
         android:layout_alignParentLeft="true"
         android:text="@string/topTime" />
 

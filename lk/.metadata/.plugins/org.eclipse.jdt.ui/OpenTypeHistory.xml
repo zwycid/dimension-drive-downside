@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <typeInfoHistroy>
-<typeInfo handle="=Sailing Text/C:\/Users\/leesuk_kim\/android-sdks\/platforms\/android-10\/android.jar&lt;android.app(Activity.class[Activity" modifiers="33" timestamp="1340603863938"/>
-<typeInfo handle="=Sailing Text/src&lt;mju.summer2012.itproject.team3.lk.sailingtext.option{OptionAitivity.java[OptionAitivity" modifiers="1" timestamp="1342654022878"/>
+<typeInfo handle="=Sailing Text/src&lt;mju.t3rd.sailingtext.lk.startgame{CoverFlowExample.java[CoverFlowExample" modifiers="1" timestamp="1342750323962"/>
+<typeInfo handle="=Sailing Text/src&lt;mju.t3rd.sailingtext.lk.option.credit{Credit.java[Credit" modifiers="1" timestamp="1342750058450"/>
+<typeInfo handle="=Sailing Text/src&lt;mju.t3rd.sailingtext.lk{MainActivity.java[MainActivity" modifiers="1" timestamp="1342750026351"/>
+<typeInfo handle="=Sailing Text/src&lt;mju.t3rd.sailingtext.lk.option{OptionAitivity.java[OptionAitivity" modifiers="1" timestamp="1342750040278"/>
+<typeInfo handle="=Sailing Text/src&lt;mju.t3rd.sailingtext.lk.option.tutorial{Tutorial.java[Tutorial" modifiers="1" timestamp="1342750137310"/>
 </typeInfoHistroy>

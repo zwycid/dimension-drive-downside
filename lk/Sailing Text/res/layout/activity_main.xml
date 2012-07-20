@@ -6,12 +6,12 @@
     android:background="#000000"
     android:orientation="vertical" >
 
-    <mju.summer2012.itproject.team3.lk.sailingtext.BackgroundSurfaceView
+        <mju.t3rd.sailingtext.lk.BackgroundSurfaceView
         android:id="@+id/BackgroundSurfaceView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/MainLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -20,34 +20,51 @@
 
         <TextView
             android:id="@+id/MainBlankView"
-            style="@style/blankView" />
+            style="@style/blankView"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
 
         <TextView
             android:id="@+id/MainTextViewTitle"
             style="@style/TitleText"
+            android:layout_below="@+id/MainBlankView"
+            android:layout_centerHorizontal="true"
             android:text="@string/gameTitle" />
 
         <TextView
             android:id="@+id/MainBlankView0"
-            style="@style/blankView" />
+            style="@style/blankView"
+            android:layout_below="@+id/MainTextViewTitle"
+            android:layout_centerHorizontal="true" />
 
         <TextView
             android:id="@+id/MainTextViewStartgame"
             style="@style/ButtonText"
+            android:layout_below="@+id/MainBlankView0"
+            android:layout_centerHorizontal="true"
             android:text="@string/Startgame" />
 
         <TextView
             android:id="@+id/MainBlankView1"
-            style="@style/blankView" />
-        
+            style="@style/blankView"
+            android:layout_below="@+id/MainTextViewStartgame"
+            android:layout_centerHorizontal="true" />
+
         <TextView
             android:id="@+id/MainTextViewOption"
             style="@style/ButtonText"
+            android:layout_below="@+id/MainBlankView1"
+            android:layout_centerHorizontal="true"
             android:text="@string/Option" />
 
         <TextView
-            android:id="@+id/MainBlankView2"
-            style="@style/blankView" />
-    </LinearLayout>
+            android:id="@+id/MainTextViewVersion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/PlainText"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:text="@string/version" />
+    </RelativeLayout>
 
 </FrameLayout>

@@ -55,3 +55,31 @@
 1342643983056	Rename local variable 'text_speed_x'
 1342650031133	Rename local variable 'seedHxa'
 1342650582470	Delete element
+1342706483683	Delete element
+1342713535192	Delete element
+1342717781012	Rename type 'creditView'
+1342738834104	Delete elements
+1342738840188	Delete element
+1342738846662	Delete element
+1342739834061	Delete elements
+1342739837595	Delete elements
+1342739840141	Delete elements
+1342739843005	Delete elements
+1342739854005	Delete element
+1342739857154	Delete element
+1342739859024	Delete element
+1342739862180	Delete element
+1342739878777	Delete element
+1342745214001	Delete elements
+1342746902738	Delete element
+1342748095102	Rename field 'mContext'
+1342749072738	Rename package 'mju.summer2012.itproject.team3.lk.sailingtext'
+1342749105515	Rename package 'mju.summer2012.itproject.team3.lk.sailingtext'
+1342749133242	Rename package 'mju.summer2012.itproject.team3.lk.sailingtext.lkcustom'
+1342749139727	Rename package 'mju.summer2012.itproject.team3.lk.sailingtext.mainmenu'
+1342749145056	Rename package 'mju.summer2012.itproject.team3.lk.sailingtext.option'
+1342749152754	Rename package 'mju.summer2012.itproject.team3.lk.sailingtext.option.tutorial'
+1342749158914	Rename package 'mju.summer2012.itproject.team3.lk.sailingtext.option.credit'
+1342749165564	Rename package 'mju.summer2012.itproject.team3.lk.sailingtext.startgame'
+1342749603300	Delete element
+1342750009647	Rename package 'mju.t3rd.sailingtext.lk.sailingtext'

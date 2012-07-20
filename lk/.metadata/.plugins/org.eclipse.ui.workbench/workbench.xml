@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="39" version="2.0">
+<workbench progressCount="38" version="2.0">
 <workbenchAdvisor/>
-<window height="768" maximized="true" width="962" x="62" y="0">
+<window height="768" maximized="true" width="962" x="64" y="0">
 <fastViewData fastViewLocation="1024">
 <orientation position="512" view="org.eclipse.ui.views.ProblemView"/>
 </fastViewData>
@@ -31,7 +31,7 @@
 <coolItem id="org.eclipse.jdt.ui.PropertiesFileEditor" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="org.eclipse.ui.DefaultTextEditor" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="org.eclipse.jdt.ui.CompilationUnitEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
-<coolItem id="com.android.ide.eclipse.editors.CommonXmlEditor" itemType="typePlaceholder" x="-1" y="-1"/>
+<coolItem id="com.android.ide.eclipse.editors.CommonXmlEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="group.help" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.help" itemType="typeToolBarContribution" x="-1" y="-1"/>
 </coolbarLayout>
@@ -49,21 +49,19 @@
 </folder>
 </info>
 </editorArea>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MainPage.java" partName="MainPage.java" path="D:/itproject/dimension-drive-downside/lk/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/mainmenu/MainPage.java" title="MainPage.java" tooltip="Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/mainmenu/MainPage.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/mainmenu/MainPage.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2624" selectionTopPixel="570"/>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="CoverFlowExample.java" partName="CoverFlowExample.java" path="D:/itproject/dimension-drive-downside/lk/Sailing Text/src/mju/t3rd/sailingtext/lk/startgame/CoverFlowExample.java" title="CoverFlowExample.java" tooltip="Sailing Text/src/mju/t3rd/sailingtext/lk/startgame/CoverFlowExample.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Sailing Text/src/mju/t3rd/sailingtext/lk/startgame/CoverFlowExample.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="991" selectionTopPixel="0"/>
 </editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="CoverFlowExample.java" partName="CoverFlowExample.java" path="D:/itproject/dimension-drive-downside/lk/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/startgame/CoverFlowExample.java" title="CoverFlowExample.java" tooltip="Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/startgame/CoverFlowExample.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/startgame/CoverFlowExample.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="9562" selectionTopPixel="4207"/>
+<editor id="com.android.ide.eclipse.editors.CommonXmlEditor" name="coverflow_main.xml" partName="coverflow_main.xml" path="D:/itproject/dimension-drive-downside/lk/Sailing Text/res/layout/coverflow_main.xml" title="coverflow_main.xml" tooltip="Sailing Text/res/layout/coverflow_main.xml" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Sailing Text/res/layout/coverflow_main.xml"/>
 </editor>
-<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="OptionPage.java" partName="OptionPage.java" path="D:/itproject/dimension-drive-downside/lk/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/option/OptionPage.java" title="OptionPage.java" tooltip="Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/option/OptionPage.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/option/OptionPage.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2786" selectionTopPixel="2174"/>
+<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="CoverFlow.java" partName="CoverFlow.java" path="D:/itproject/dimension-drive-downside/lk/Sailing Text/src/mju/t3rd/sailingtext/lk/startgame/CoverFlow.java" title="CoverFlow.java" tooltip="Sailing Text/src/mju/t3rd/sailingtext/lk/startgame/CoverFlow.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Sailing Text/src/mju/t3rd/sailingtext/lk/startgame/CoverFlow.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2683" selectionTopPixel="912"/>
 </editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MainActivity.java" partName="MainActivity.java" path="D:/itproject/dimension-drive-downside/lk/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/MainActivity.java" title="MainActivity.java" tooltip="Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/MainActivity.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/MainActivity.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="744" selectionTopPixel="912"/>
+<editor id="com.android.ide.eclipse.editors.CommonXmlEditor" name="activity_tutorial.xml" partName="activity_tutorial.xml" path="D:/itproject/dimension-drive-downside/lk/Sailing Text/res/layout/activity_tutorial.xml" title="activity_tutorial.xml" tooltip="Sailing Text/res/layout/activity_tutorial.xml" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Sailing Text/res/layout/activity_tutorial.xml"/>
 </editor>
 </editors>
 <views>
@@ -105,8 +103,8 @@
 <view id="org.eclipse.ui.views.ProblemView" partName="Problems">
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
 <expanded>
-<category IMemento.internal.id="Warnings (10 items)"/>
-<category IMemento.internal.id="Warnings"/>
+<category IMemento.internal.id="Errors"/>
+<category IMemento.internal.id="Warnings (12 items)"/>
 </expanded>
 <columnWidths org.eclipse.ui.ide.locationField="90" org.eclipse.ui.ide.markerType="90" org.eclipse.ui.ide.pathField="120" org.eclipse.ui.ide.resourceField="90" org.eclipse.ui.ide.severityAndDescriptionField="300"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.severityAndDescriptionField"/>
@@ -398,7 +396,7 @@
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
 </folder>
 </info>
-<info part="org.eclipse.ui.editorss" ratio="0.18760064" ratioLeft="233" ratioRight="1009" relationship="2" relative="left"/>
+<info part="org.eclipse.ui.editorss" ratio="0.23417722" ratioLeft="296" ratioRight="968" relationship="2" relative="left"/>
 <info folder="true" part="bottom" ratio="0.75151515" ratioLeft="496" ratioRight="164" relationship="4" relative="org.eclipse.ui.editorss">
 <folder appearance="2" expanded="2">
 <page content="org.eclipse.ui.views.ProblemView" label="LabelNotFound"/>
@@ -530,146 +528,139 @@
 <workingSets/>
 <navigationHistory>
 <editors>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/MainActivity.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/mainmenu/MainPage.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/option/OptionAitivity.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/option/OptionPage.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/startgame/CoverFlowExample.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" path="/Sailing Text/res/layout/activity_main.xml"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" path="/Sailing Text/res/layout/activity_option.xml"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/MainActivity.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" path="/Sailing Text/res/layout/coverflow_main.xml"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Sailing Text/src/mju/t3rd/sailingtext/lk/startgame/CoverFlowExample.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.manifest.ManifestEditor" path="/Sailing Text/AndroidManifest.xml"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" path="/Sailing Text/res/layout/album_text.xml"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Sailing Text/src/mju/t3rd/sailingtext/lk/startgame/CoverFlow.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" path="/CoverFlowTest.Gallery.Ver0.8/res/layout/main.xml"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Sailing Text/gen/mju/t3rd/sailingtext/lk/R.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Sailing Text/gen/mju/t3rd/sailingtext/lk/sailingtext/BuildConfig.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Sailing Text/gen/mju/t3rd/sailingtext/lk/sailingtext/R.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Sailing Text/gen/mju/t3rd/sailingtext/lk/BuildConfig.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" path="/Sailing Text/res/layout/activity_tutorial.xml"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Sailing Text/src/mju/t3rd/sailingtext/lk/option/tutorial/Tutorial.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Sailing Text/src/mju/t3rd/sailingtext/lk/option/OptionPage.java"/>
 </editors>
-<item historyLabel="activity_main.xml" index="5"/>
-<item historyLabel="activity_option.xml" index="6"/>
-<item historyLabel="activity_main.xml" index="5"/>
-<item historyLabel="activity_option.xml" index="6"/>
-<item historyLabel="OptionPage.java" index="3">
-<position info="not_deleted" x="4113" y="0"/>
+<item historyLabel="CoverFlow.java" index="4">
+<position info="not_deleted" x="2467" y="0"/>
 </item>
-<item historyLabel="OptionAitivity.java" index="2">
-<position info="not_deleted" x="1118" y="0"/>
+<item historyLabel="Sailing Text Manifest" index="2"/>
+<item historyLabel="CoverFlow.java" index="4">
+<position info="not_deleted" x="2721" y="0"/>
 </item>
-<item historyLabel="OptionPage.java" index="3">
-<position info="not_deleted" x="4113" y="0"/>
+<item historyLabel="CoverFlowExample.java" index="1">
+<position info="not_deleted" x="3623" y="65"/>
 </item>
-<item historyLabel="OptionAitivity.java" index="2">
-<position info="not_deleted" x="1285" y="0"/>
+<item historyLabel="coverflow_main.xml" index="0"/>
+<item historyLabel="CoverFlowExample.java" index="1">
+<position info="not_deleted" x="3896" y="0"/>
 </item>
-<item historyLabel="OptionPage.java" index="3">
-<position info="not_deleted" x="4113" y="0"/>
+<item historyLabel="CoverFlow.java" index="4">
+<position info="not_deleted" x="1514" y="0"/>
 </item>
-<item historyLabel="OptionPage.java" index="3">
-<position info="not_deleted" x="2711" y="0"/>
+<item historyLabel="album_text.xml" index="3"/>
+<item historyLabel="CoverFlow.java" index="4">
+<position info="not_deleted" x="6061" y="0"/>
 </item>
-<item historyLabel="OptionPage.java" index="3">
-<position info="not_deleted" x="2728" y="0"/>
+<item historyLabel="album_text.xml" index="3"/>
+<item historyLabel="CoverFlow.java" index="4">
+<position info="not_deleted" x="5881" y="0"/>
 </item>
-<item historyLabel="MainActivity.java" index="0">
-<position info="not_deleted" x="4217" y="38"/>
+<item historyLabel="coverflow_main.xml" index="0"/>
+<item historyLabel="CoverFlowExample.java" index="1">
+<position info="not_deleted" x="7440" y="6"/>
 </item>
-<item historyLabel="MainActivity.java" index="0">
-<position info="not_deleted" x="3876" y="0"/>
+<item historyLabel="coverflow_main.xml" index="0"/>
+<item historyLabel="CoverFlowExample.java" index="1">
+<position info="not_deleted" x="7440" y="6"/>
 </item>
-<item historyLabel="OptionAitivity.java" index="2">
-<position info="not_deleted" x="1302" y="0"/>
+<item historyLabel="main.xml" index="5"/>
+<item historyLabel="coverflow_main.xml" index="0"/>
+<item historyLabel="CoverFlowExample.java" index="1">
+<position info="not_deleted" x="6223" y="0"/>
 </item>
-<item historyLabel="MainActivity.java" index="0">
-<position info="not_deleted" x="3876" y="0"/>
+<item historyLabel="main.xml" index="5"/>
+<item historyLabel="CoverFlowExample.java" index="1">
+<position info="not_deleted" x="6223" y="0"/>
 </item>
-<item historyLabel="OptionAitivity.java" index="2">
-<position info="not_deleted" x="1302" y="0"/>
+<item historyLabel="CoverFlow.java" index="4">
+<position info="not_deleted" x="5881" y="0"/>
 </item>
-<item historyLabel="OptionPage.java" index="3">
-<position info="not_deleted" x="2728" y="0"/>
+<item historyLabel="CoverFlowExample.java" index="1">
+<position info="not_deleted" x="3627" y="0"/>
 </item>
-<item historyLabel="OptionAitivity.java" index="2">
-<position info="not_deleted" x="1074" y="0"/>
+<item historyLabel="CoverFlow.java" index="4">
+<position info="not_deleted" x="1207" y="9"/>
 </item>
-<item historyLabel="MainActivity.java" index="0">
-<position info="not_deleted" x="3982" y="0"/>
+<item historyLabel="album_text.xml" index="3"/>
+<item historyLabel="CoverFlow.java" index="4">
+<position info="not_deleted" x="1207" y="9"/>
 </item>
-<item historyLabel="MainPage.java" index="1">
-<position info="not_deleted" x="594" y="0"/>
+<item historyLabel="CoverFlowExample.java" index="1">
+<position info="not_deleted" x="3627" y="0"/>
 </item>
-<item historyLabel="OptionAitivity.java" index="2">
-<position info="not_deleted" x="1074" y="0"/>
+<item historyLabel="R.java" index="6">
+<position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="MainPage.java" index="1">
-<position info="not_deleted" x="594" y="0"/>
+<item historyLabel="BuildConfig.java" index="7">
+<position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="OptionPage.java" index="3">
-<position info="not_deleted" x="2728" y="0"/>
+<item historyLabel="R.java" index="8">
+<position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="MainPage.java" index="1">
-<position info="not_deleted" x="594" y="0"/>
+<item historyLabel="R.java" index="6">
+<position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="OptionPage.java" index="3">
-<position info="not_deleted" x="2728" y="0"/>
+<item historyLabel="BuildConfig.java" index="9">
+<position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="OptionPage.java" index="3">
-<position info="not_deleted" x="6095" y="0"/>
+<item historyLabel="BuildConfig.java" index="7">
+<position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="OptionAitivity.java" index="2">
-<position info="not_deleted" x="1059" y="0"/>
+<item historyLabel="Sailing Text Manifest" index="2"/>
+<item historyLabel="R.java" index="6">
+<position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="MainPage.java" index="1">
-<position info="not_deleted" x="594" y="0"/>
+<item historyLabel="BuildConfig.java" index="9">
+<position info="not_deleted" x="165" y="0"/>
 </item>
-<item historyLabel="OptionPage.java" index="3">
-<position info="not_deleted" x="2662" y="0"/>
+<item historyLabel="R.java" index="6">
+<position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="MainPage.java" index="1">
-<position info="not_deleted" x="594" y="0"/>
+<item historyLabel="CoverFlowExample.java" index="1">
+<position info="not_deleted" x="991" y="0"/>
 </item>
-<item historyLabel="activity_main.xml" index="5"/>
-<item historyLabel="activity_option.xml" index="6"/>
-<item historyLabel="activity_main.xml" index="5"/>
-<item historyLabel="MainPage.java" index="1">
-<position info="not_deleted" x="621" y="0"/>
+<item historyLabel="activity_tutorial.xml" index="10"/>
+<item historyLabel="coverflow_main.xml" index="0"/>
+<item historyLabel="CoverFlowExample.java" index="1">
+<position info="not_deleted" x="991" y="0"/>
 </item>
-<item historyLabel="OptionPage.java" index="3">
-<position info="not_deleted" x="704" y="0"/>
+<item historyLabel="activity_tutorial.xml" index="10"/>
+<item historyLabel="CoverFlow.java" index="4">
+<position info="not_deleted" x="2682" y="0"/>
 </item>
-<item historyLabel="MainPage.java" index="1">
-<position info="not_deleted" x="621" y="0"/>
+<item historyLabel="Tutorial.java" index="11">
+<position info="not_deleted" x="1170" y="0"/>
 </item>
-<item historyLabel="activity_main.xml" index="5"/>
-<item historyLabel="MainPage.java" index="1">
-<position info="not_deleted" x="621" y="0"/>
+<item historyLabel="OptionPage.java" index="12">
+<position/>
 </item>
-<item historyLabel="activity_option.xml" index="6"/>
-<item historyLabel="MainPage.java" index="1">
-<position info="not_deleted" x="2312" y="0"/>
+<item historyLabel="Tutorial.java" index="11">
+<position info="not_deleted" x="1170" y="0"/>
 </item>
-<item historyLabel="OptionPage.java" index="3">
-<position info="not_deleted" x="5976" y="0"/>
+<item historyLabel="OptionPage.java" index="12">
+<position info="not_deleted" x="2475" y="0"/>
 </item>
-<item historyLabel="MainPage.java" index="1">
-<position info="not_deleted" x="2312" y="0"/>
+<item historyLabel="Tutorial.java" index="11">
+<position info="not_deleted" x="1170" y="0"/>
 </item>
-<item historyLabel="OptionPage.java" index="3">
-<position info="not_deleted" x="3817" y="0"/>
+<item historyLabel="CoverFlow.java" index="4">
+<position info="not_deleted" x="2683" y="0"/>
 </item>
-<item historyLabel="MainPage.java" index="1">
-<position info="not_deleted" x="2500" y="0"/>
-</item>
-<item historyLabel="CoverFlowExample.java" index="4">
-<position info="not_deleted" x="9562" y="0"/>
-</item>
-<item historyLabel="MainPage.java" index="1">
-<position info="not_deleted" x="2624" y="0"/>
-</item>
-<item historyLabel="MainActivity.java" index="7">
-<position info="not_deleted" x="744" y="0"/>
-</item>
-<item historyLabel="MainPage.java" index="1">
-<position info="not_deleted" x="2624" y="0"/>
-</item>
-<item historyLabel="MainActivity.java" index="7">
-<position info="not_deleted" x="744" y="0"/>
-</item>
-<item active="true" historyLabel="OptionPage.java" index="3">
-<position info="not_deleted" x="3817" y="0"/>
+<item historyLabel="activity_tutorial.xml" index="10"/>
+<item active="true" historyLabel="CoverFlow.java" index="4">
+<position info="not_deleted" x="2683" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -693,54 +684,55 @@
 <trimItem IMemento.internal.id="org.eclise.ui.internal.FastViewBar"/>
 <trimItem IMemento.internal.id="org.eclipse.jface.action.StatusLineManager"/>
 <trimItem IMemento.internal.id="org.eclipse.ui.internal.progress.ProgressRegion"/>
+<trimItem IMemento.internal.id="org.eclipse.ui.internal.ViewStack@436a2a52"/>
 </trimArea>
 </trimLayout>
 </window>
 <mruList>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MainActivity.java" tooltip="Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/MainActivity.java">
-<persistable path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/MainActivity.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="OptionPage.java" tooltip="Sailing Text/src/mju/t3rd/sailingtext/lk/option/OptionPage.java">
+<persistable path="/Sailing Text/src/mju/t3rd/sailingtext/lk/option/OptionPage.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="activity_option.xml" tooltip="Sailing Text/res/layout/activity_option.xml">
-<persistable path="/Sailing Text/res/layout/activity_option.xml"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Tutorial.java" tooltip="Sailing Text/src/mju/t3rd/sailingtext/lk/option/tutorial/Tutorial.java">
+<persistable path="/Sailing Text/src/mju/t3rd/sailingtext/lk/option/tutorial/Tutorial.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="activity_main.xml" tooltip="Sailing Text/res/layout/activity_main.xml">
-<persistable path="/Sailing Text/res/layout/activity_main.xml"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="OptionPage.java" tooltip="Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/option/OptionPage.java">
-<persistable path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/option/OptionPage.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="activity_tutorial.xml" tooltip="Sailing Text/res/layout/activity_tutorial.xml">
+<persistable path="/Sailing Text/res/layout/activity_tutorial.xml"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.manifest.ManifestEditor" name="AndroidManifest.xml" tooltip="Sailing Text/AndroidManifest.xml">
 <persistable path="/Sailing Text/AndroidManifest.xml"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="CoverFlowExample.java" tooltip="Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/startgame/CoverFlowExample.java">
-<persistable path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/startgame/CoverFlowExample.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="BuildConfig.java" tooltip="Sailing Text/gen/mju/t3rd/sailingtext/lk/BuildConfig.java">
+<persistable path="/Sailing Text/gen/mju/t3rd/sailingtext/lk/BuildConfig.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MainPage.java" tooltip="Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/mainmenu/MainPage.java">
-<persistable path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/mainmenu/MainPage.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="R.java" tooltip="Sailing Text/gen/mju/t3rd/sailingtext/lk/sailingtext/R.java">
+<persistable path="/Sailing Text/gen/mju/t3rd/sailingtext/lk/sailingtext/R.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="OptionAitivity.java" tooltip="Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/option/OptionAitivity.java">
-<persistable path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/option/OptionAitivity.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="BuildConfig.java" tooltip="Sailing Text/gen/mju/t3rd/sailingtext/lk/sailingtext/BuildConfig.java">
+<persistable path="/Sailing Text/gen/mju/t3rd/sailingtext/lk/sailingtext/BuildConfig.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="strings.xml" tooltip="Sailing Text/res/values/strings.xml">
-<persistable path="/Sailing Text/res/values/strings.xml"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="R.java" tooltip="Sailing Text/gen/mju/t3rd/sailingtext/lk/R.java">
+<persistable path="/Sailing Text/gen/mju/t3rd/sailingtext/lk/R.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="LKAndroid.java" tooltip="Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/lkcustom/LKAndroid.java">
-<persistable path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/lkcustom/LKAndroid.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="album_text.xml" tooltip="Sailing Text/res/layout/album_text.xml">
+<persistable path="/Sailing Text/res/layout/album_text.xml"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.systemExternalEditor" name="mt0.png" tooltip="Sailing Text/res/drawable/mt0.png">
-<persistable path="/Sailing Text/res/drawable/mt0.png"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="main.xml" tooltip="CoverFlowTest.Gallery.Ver0.8/res/layout/main.xml">
+<persistable path="/CoverFlowTest.Gallery.Ver0.8/res/layout/main.xml"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="BackgroundSurfaceView.java" tooltip="Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/BackgroundSurfaceView.java">
-<persistable path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/BackgroundSurfaceView.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="CoverFlow.java" tooltip="Sailing Text/src/mju/t3rd/sailingtext/lk/startgame/CoverFlow.java">
+<persistable path="/Sailing Text/src/mju/t3rd/sailingtext/lk/startgame/CoverFlow.java"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="coverflow_main.xml" tooltip="Sailing Text/res/layout/coverflow_main.xml">
 <persistable path="/Sailing Text/res/layout/coverflow_main.xml"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="coverflow_main.out.xml" tooltip="Sailing Text/res/layout/coverflow_main.out.xml">
-<persistable path="/Sailing Text/res/layout/coverflow_main.out.xml"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="CoverFlowExample.java" tooltip="Sailing Text/src/mju/t3rd/sailingtext/lk/startgame/CoverFlowExample.java">
+<persistable path="/Sailing Text/src/mju/t3rd/sailingtext/lk/startgame/CoverFlowExample.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="CoverFlow.java" tooltip="Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/startgame/CoverFlow.java">
-<persistable path="/Sailing Text/src/mju/summer2012/itproject/team3/lk/sailingtext/startgame/CoverFlow.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ListAdapter.java" tooltip="Sailing Text/src/mju/t3rd/sailingtext/lk/option/tutorial/ListAdapter.java">
+<persistable path="/Sailing Text/src/mju/t3rd/sailingtext/lk/option/tutorial/ListAdapter.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Credit.java" tooltip="Sailing Text/src/mju/t3rd/sailingtext/lk/option/credit/Credit.java">
+<persistable path="/Sailing Text/src/mju/t3rd/sailingtext/lk/option/credit/Credit.java"/>
 </file>
 </mruList>
 </workbench>

@@ -2,7 +2,7 @@
 
     <string name="app_name">Sailing Text</string>
     <string name="menu_settings">Settings</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main">Sailing Text</string>
     <string name="gameTitle">Sailing Text</string>
     <string name="Startgame">Start Game</string>
     <string name="Ranking">Ranking</string>
@@ -19,5 +19,7 @@
 	<string name="Story">Story</string>
 	<string name="Credit">Credit</string>
 	<string name="Sound">Sound</string>
+	<string name="version">ver.</string>
 	<string name="Tutorial">Tutorial</string>
+	<string name="sailing_text_launcher">sailing_text_icon.png</string>
 </resources>
