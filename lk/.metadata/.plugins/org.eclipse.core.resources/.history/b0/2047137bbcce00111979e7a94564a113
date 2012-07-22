@@ -1,0 +1,65 @@
+package mju.summer2012.itproject.team3.lk.sailingtext.mainmenu;
+
+import mju.summer2012.itproject.team3.lk.sailingtext.MainActivity;
+import mju.summer2012.itproject.team3.lk.sailingtext.R;
+import mju.summer2012.itproject.team3.lk.sailingtext.lkcustom.LKAndroid;
+import android.content.Context;
+import android.util.AttributeSet;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.ViewFlipper;
+
+public class MainLinearLayout extends LinearLayout {
+	private MainActivity mainActivity;
+	private TextView textViewTitle;
+	private TextView textViewBlankTitle;
+	private TextView[] textViewArray;
+	private TextView[] blankViewArray;
+	
+	private static final String[] textviewID	= {"MainTextViewStartgame","MainTextViewRanking","MainTextViewOption"};
+	private static final String blankViewID= "MainBlankView";
+	private static final int MAINMENU_BLANKVIEW_COUNT	= 3;
+	
+	public MainLinearLayout(Context context, AttributeSet attrs) {
+		super(context, attrs);
+		
+	}
+	public MainLinearLayout(Context context) {
+		super(context);
+		initiateMainmenuPage();
+	}
+
+	public MainActivity getMainActivity() {		return mainActivity;	}
+	public void setMainActivity(MainActivity mainActivity) {		this.mainActivity = mainActivity;	}
+	
+	public void initiateMainmenuPage(){
+		LayoutInflater.from(getContext()).inflate(R.layout.rankingrelaticelayout, (ViewGroup) this.findViewById(this.getId()));
+
+		textViewTitle		= (TextView) this.findViewById(R.id.MainTextViewTitle);
+		textViewBlankTitle	= (TextView) this.findViewById(R.id.MainBlankView);
+
+		LKAndroid.initTextViewShadow(textViewTitle, this.getPreferTextSizeForWindow(MainActivity.TEXT, MainActivity.LARGE));
+		textViewTitle.setTextSize(this.getPreferTextSizeForWindow(MainActivity.TEXT, MainActivity.LARGE));
+		LKAndroid.initBlankView(textViewBlankTitle, this.getPreferTextSizeForWindow(MainActivity.BLANK, MainActivity.LARGE));
+
+		textViewArray	= new TextView[textviewID.length];
+		blankViewArray	= new TextView[MAINMENU_BLANKVIEW_COUNT];
+
+		for(int i = 0 ; i < textviewID.length ; i++){
+			textViewArray[i]	= (TextView) this.findViewById(LKAndroid.getID("id", textviewID[i]));
+			textViewArray[i].setTextSize(this.getPreferTextSizeForWindow(MainActivity.TEXT, MainActivity.SMALL));
+			LKAndroid.initTextViewShadow(textViewArray[i], this.getPreferTextSizeForWindow(MainActivity.TEXT, MainActivity.SMALL));
+			textViewArray[i].setOnClickListener(this.getTextViewListener());
+		}
+
+		for(int j = 0 ; j < MAINMENU_BLANKVIEW_COUNT ; j++){
+			blankViewArray[j]	= (TextView) this.findViewById(LKAndroid.getID("id", blankViewID+j));
+			LKAndroid.initBlankView(blankViewArray[j], this.getPreferTextSizeForWindow(MainActivity.TEXT, MainActivity.SMALL));
+		}
+	}
+
+}

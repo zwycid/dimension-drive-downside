@@ -1,0 +1,49 @@
+package lk.summer.project;
+
+import android.content.Context;
+import android.util.AttributeSet;
+import android.widget.TextView;
+
+public class GlowingTextView extends TextView {
+	public static final int SMALL	= 25;
+	public static final int LARGE	= 17;
+	
+	private int windowHeight;
+	
+	public GlowingTextView(Context context, AttributeSet attrs, int defStyle) {
+		super(context, attrs, defStyle);
+		initTextView();
+	}
+
+	public GlowingTextView(Context context, AttributeSet attrs) {
+		super(context, attrs);
+		initTextView();
+	}
+
+	public GlowingTextView(Context context) {
+		super(context);
+		initTextView();
+	}
+	
+	public void initTextView(){
+	}
+
+	public void setWindowHeight(int windowHeight){		this.windowHeight	= windowHeight;	}
+	public int getWindowHeight() {		return windowHeight;	}
+
+	public void initTextView(int textType){
+		switch (textType) {
+		case LARGE : 
+			break;
+		default : 
+			break;
+		}
+	}
+	
+	private void initLargeText(){
+		this.setTextSize(this.getWindowHeight() / 17);
+	}
+	private void initSmallText(){
+		
+	}
+}

@@ -1,0 +1,88 @@
+package lk.summer.project;
+
+import lk.summer.project.gameuidesign.R;
+import android.content.Context;
+import android.util.AttributeSet;
+import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
+
+public class MainmenuView extends View {
+
+	private static final int LARGE	= 15;
+	private static final int SMALL	= 25;
+	private static final String[] mainText		= 
+			{"Start Game","Ranking","Option"};
+	private static final String[] textviewID	= 
+			{"textViewStartgame","textViewRanking","textViewOption"};
+	
+	private ListenerForButton listenerForButton;
+	private int windowWidth;
+	private MainActivity mainActivity;
+	
+	private TextView tvTitle;
+	private TextView[] textViewArray;
+	
+	public MainActivity getMainActivity() {		return mainActivity;	}
+	public void setMainActivity(MainActivity mainActivity) {		this.mainActivity = mainActivity;	}
+	public int getWindowWidth() {		return windowWidth;	}
+	public void setWindowWidth(int windowWidth) {this.windowWidth = windowWidth;	}
+	public ListenerForButton getListenerForButton() {		return listenerForButton;	}
+	public void setListenerForButton(ListenerForButton listenerForButton) {		this.listenerForButton = listenerForButton;	}
+	public TextView getTvTitle() {		return tvTitle;	}
+	public void setTvTitle(TextView tvTitle) {		this.tvTitle = tvTitle;	}
+	public TextView[] getTextViewArray() {		return textViewArray;	}
+	public void setTextViewArray(TextView[] textViewArray) {		this.textViewArray = textViewArray;	}
+	public String[] getMainText() {		return mainText;	}
+	public String[] getTextviewID() {		return textviewID;	}
+
+	public MainmenuView(Context context, AttributeSet attrs, int defStyle) {
+		super(context, attrs, defStyle);
+		Log.i("wtf", "1st constructor");
+	}
+
+	public MainmenuView(Context context, AttributeSet attrs) {
+		super(context, attrs);
+		Log.i("wtf", "2nd constructor");
+	}
+
+	public MainmenuView(Context context) {
+		super(context);
+		Log.i("wtf", "3rd constructor");
+	}
+	
+	public void initiateTextButton(){
+		setListenerForButton(new ListenerForButton());
+		textViewArray	= new TextView[mainText.length];
+		Log.i("wtf", "initbutton");
+		
+		setTvTitle((TextView) this.findViewById(R.id.textViewTitle));
+		getTvTitle().setTextSize(getWindowWidth()/LARGE);
+		
+		getTvTitle().setText("sailing text");
+		
+		for(int i = 0 ; i < mainText.length ; i++){
+			try {
+				textViewArray[i]	= (TextView) this.findViewById(R.id.class.getField(textviewID[i]).getInt(textviewID[i]));
+				textViewArray[i].setText(mainText[i]);
+				textViewArray[i].setTextSize(getWindowWidth() / SMALL);
+				textViewArray[i].setOnClickListener(listenerForButton);
+			} catch (IllegalArgumentException e) {				e.printStackTrace();
+			} catch (SecurityException e) {				e.printStackTrace();
+			} catch (IllegalAccessException e) {				e.printStackTrace();
+			} catch (NoSuchFieldException e) {				e.printStackTrace();
+			}
+		}
+	}
+	
+	private class ListenerForButton implements OnClickListener{
+
+		public void onClick(View clickedView) {
+			// TODO Auto-generated method stub
+			if(clickedView.getId() == R.id.textViewStartgame){
+			}else if(clickedView.getId() == R.id.textViewRanking){
+			}else if(clickedView.getId() == R.id.textViewOption){
+			}
+		}
+	}
+}

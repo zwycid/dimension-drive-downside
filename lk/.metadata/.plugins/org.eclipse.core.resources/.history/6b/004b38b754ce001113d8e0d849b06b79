@@ -1,0 +1,62 @@
+package lk.summer.project.mainmenu;
+
+import lk.summer.project.gameuidesign.R;
+import android.content.Context;
+import android.util.AttributeSet;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.ViewFlipper;
+
+public class MainMenuLinearLayout extends LinearLayout {
+	private TextView textViewTitleRanking;
+	private TextView textViewButtonSwap;
+	private TextView textViewButtonReset;
+	private TextView RankingBlankView0;
+	private TextView RankingBlankView1;
+	private TextView RankingBlankView4;
+	private TextView RankingBlankView5;
+	private Spinner spinnerStage;
+	private ViewFlipper viewFlipperForListView;
+	private ListView listViewTotalRanking;
+	private ListView listViewStageRanking;
+
+	public TextView getTextViewTitleRanking() {		return textViewTitleRanking;	}
+	public void setTextViewTitleRanking(TextView textViewTitleRanking) {		this.textViewTitleRanking = textViewTitleRanking;	}
+	public TextView getTextViewButtonSwap() {		return textViewButtonSwap;	}	
+	public void setTextViewButtonSwap(TextView textViewButtonSwap) {		this.textViewButtonSwap = textViewButtonSwap;	}
+	public TextView getTextViewButtonReset() {		return textViewButtonReset;	}
+	public void setTextViewButtonReset(TextView textViewButtonReset) {		this.textViewButtonReset = textViewButtonReset;	}
+	public Spinner getSpinnerStage() {		return spinnerStage;	}
+	public void setSpinnerStage(Spinner spinnerStage) {		this.spinnerStage = spinnerStage;	}
+	public ViewFlipper getViewFlipperForListView() {		return viewFlipperForListView;	}
+	public void setViewFlipperForListView(ViewFlipper viewFlipperForListView) {		this.viewFlipperForListView = viewFlipperForListView;	}
+	public ListView getListViewTotalRanking() {		return listViewTotalRanking;	}
+	public void setListViewTotalRanking(ListView listViewTotalRanking) {		this.listViewTotalRanking = listViewTotalRanking;	}
+	public ListView getListViewStageRanking() {		return listViewStageRanking;	}
+	public void setListViewStageRanking(ListView listViewStageRanking) {		this.listViewStageRanking = listViewStageRanking;	}
+	public TextView getRankingBlankView0() {		return RankingBlankView0;	}
+	public void setRankingBlankView0(TextView rankingBlankView0) {		RankingBlankView0 = rankingBlankView0;	}
+	public TextView getRankingBlankView1() {		return RankingBlankView1;	}
+	public void setRankingBlankView1(TextView rankingBlankView1) {		RankingBlankView1 = rankingBlankView1;	}
+	public TextView getRankingBlankView4() {		return RankingBlankView4;	}
+	public void setRankingBlankView4(TextView rankingBlankView4) {		RankingBlankView4 = rankingBlankView4;	}
+	public TextView getRankingBlankView5() {		return RankingBlankView5;	}
+	public void setRankingBlankView5(TextView rankingBlankView5) {		RankingBlankView5 = rankingBlankView5;	}
+	
+	public MainMenuLinearLayout(Context context, AttributeSet attrs) {		super(context, attrs);	}
+	public MainMenuLinearLayout(Context context) {		super(context);	}
+
+	public void initMainMenu(){
+		setTextViewButtonReset((TextView) this.findViewById(R.id.textViewButtonReset));
+		setTextViewButtonSwap((TextView) this.findViewById(R.id.textViewButtonSwap));
+		setTextViewTitleRanking((TextView) this.findViewById(R.id.textViewButtonRanking));
+		
+		setSpinnerStage((Spinner) this.findViewById(R.id.spinnerStage));
+		setViewFlipperForListView((ViewFlipper) this.findViewById(R.id.viewFlipperForListView));
+		setListViewTotalRanking((ListView) this.findViewById(R.id.listViewTotalRanking));
+		setListViewStageRanking((ListView) this.findViewById(R.id.listViewStageRanking));
+		
+	}
+}

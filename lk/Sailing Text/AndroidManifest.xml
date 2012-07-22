@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="mju.summer2012.itproject.team3.lk.sailingtext"
+    package="mju.t3rd.sailingtext.lk"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -8,19 +8,28 @@
         android:targetSdkVersion="15" />
 
     <application
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/sailing_text"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="mju.summer2012.itproject.team3.lk.sailingtext.MainActivity"
-            android:label="@string/title_activity_main" >
+            android:name="mju.t3rd.sailingtext.lk.MainActivity"
+            android:label="@string/title_activity_main" 
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".startgame.CoverFlowExample"></activity>
+        <activity android:name="mju.t3rd.sailingtext.lk.startgame.CoverFlowExample"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name="mju.t3rd.sailingtext.lk.option.credit.Credit"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name="mju.t3rd.sailingtext.lk.option.OptionAitivity"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name="mju.t3rd.sailingtext.lk.option.tutorial.Tutorial"
+            android:screenOrientation="portrait"></activity>
+
     </application>
 
 </manifest>

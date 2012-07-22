@@ -1,0 +1,13 @@
+창세기	Genesis
+탈출기	Exodus
+레위기	Leviticus
+민수기	Numbers
+신명기	Deuteronomy
+오경	Penta teuch
+여호수아기	Sefer Y'hoshua
+에스테르기	Esther
+욥기	Job
+시편	Psalms
+잠언	Proverbs
+집회서	Ecclesiastes
+아가	Song of songs

@@ -1,0 +1,51 @@
+package lk.summer.project;
+
+import android.content.Context;
+import android.util.AttributeSet;
+import android.widget.TextView;
+
+public class GlowingTextView extends TextView {
+	public static enum TEXT_TYPE {small, large};
+	private TEXT_TYPE textType;
+	private float textSize;
+	private int textColor;
+	private int textShadowSize;
+	private int textShadowRadious;
+	private int textShadowDx;
+	private int textShadowDy;
+	
+	public TEXT_TYPE getTextType() {		return textType;	}
+	public void setTextType(TEXT_TYPE textType) {		this.textType = textType;	}
+	public float getTextSize() {		return textSize;	}
+	public void setTextSize(float textSize) {		this.textSize = textSize;	}
+	public int getTextColor() {		return textColor;	}
+	public void setTextColor(int textColor) {		this.textColor = textColor;	}
+	public int getTextShadowSize() {		return textShadowSize;	}
+	public void setTextShadowSize(int textShadowSize) {		this.textShadowSize = textShadowSize;	}
+	public int getTextShadowRadious() {		return textShadowRadious;	}
+	public void setTextShadowRadious(int textShadowRadious) {		this.textShadowRadious = textShadowRadious;	}
+	public int getTextShadowDx() {		return textShadowDx;	}
+	public void setTextShadowDx(int textShadowDx) {		this.textShadowDx = textShadowDx;	}
+	public int getTextShadowDy() {		return textShadowDy;	}
+	public void setTextShadowDy(int textShadowDy) {		this.textShadowDy = textShadowDy;	}
+
+	public GlowingTextView(Context context, AttributeSet attrs, int defStyle) {
+		super(context, attrs, defStyle);
+		initTextView();
+	}
+
+	public GlowingTextView(Context context, AttributeSet attrs) {
+		super(context, attrs);
+		initTextView();
+	}
+
+	public GlowingTextView(Context context) {
+		super(context);
+		initTextView();
+	}
+	
+	public void initTextView(){
+		textType	= TEXT_TYPE.small;
+	}
+
+}

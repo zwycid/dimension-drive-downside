@@ -1,0 +1,95 @@
+﻿
+
+<!doctype html>
+<html>
+  <head>
+    <script src='raphael-min.js'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js'></script>
+    <script>
+      $(function () {
+    var
+        elId = 'canvas',
+        width = 500,
+        height = 500;
+    
+    // 'canvas' 아이디를 가진 엘리먼트 하위에 페이퍼를 생성한다.
+    var paper = Raphael(elId, width, height);
+    // 생성된 svg 엘리먼트의 위치를 콘솔에서 확인해본다.
+
+    var x = 100, y = 100, radius = 20; 
+    paper.circle(x, y, radius);
+
+     var x = 50, y = 50, width = 100, height = 30;
+    block = paper.rect(x, y, width, height);
+
+    block.animate({
+        '0%': { 'fill': 'blue' },
+        '30%': { 'fill': 'red' },
+        '100%': { 'fill': 'orange' }
+    }, 2000);
+
+    block.attr({
+        'fill': 'yellow', // 채우기
+        'stroke': 'green', // 선 색깔
+        'stroke-width': 5 // 선 두께
+    });
+
+    var tstr = 't50,120';
+    block.transform(tstr);
+    
+    var cendX;
+    var cendY;
+     // 엘리먼트를 드래그해 확인한다.
+    var        
+        // dx,dy = 드래그가 시작된 지점으로부터의 거리
+        // x,y = 마우스 포지션
+        onmoveHandler = function (dx, dy, x, y, event) {
+            
+            
+            //this.translate(dx - movedX, dy - movedY);
+            //movedX = dx; movedY = dy;
+            // 이 코드엔 버그가 좀 있지만, 이런 식으로 드래깅을 구현할 수 있다.
+        },
+        
+        // x,y = 마우스 포지션
+        onstartHandler = function (x, y, event) {
+            cendX = event.pageX;
+            cendY = event.pageY;
+
+            alert(cendX+":"+cendY);
+            paper.circle(cendX,cendY,5);
+
+        },
+        
+        onendHandler = function (event) {
+            fcendX = event.pageX;
+            fcendY = event.pageY;
+
+            alert(fcendX+":"+fcendY);
+            width = (fcendX - cendX);
+            
+            height= (fcendY - cendY);
+            pathString = "M"+cendX+","+cendY+" h"+width+" v"+height+" h"+(-width)+" Z";
+            alert(pathString);
+            paper.path(pathString);
+        },
+        
+        movedX = 0, movedY = 0;
+        
+    // 파라미터로는 onmove, onstart, onend 핸들러가 순서대로 들어간다.
+    //paper.drag(onmoveHandler, onstartHandler, onendHandler);
+    eve.on
+});
+      function getRandomColor(){
+        return "black";
+      }
+    </script>
+  </head>
+
+  <body>
+    <div id="canvas">
+    </div>
+
+  </body>
+</html>
+

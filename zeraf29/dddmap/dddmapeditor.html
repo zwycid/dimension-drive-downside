@@ -26,7 +26,7 @@
 
         
         });
-        var tString="[mapsize],800,600//";
+        var tString="[mapsize],800,600/";
         var figure = 0;
 
         function clickRect() {
@@ -55,7 +55,7 @@
             }
         }
 
-        //타입에 따라서 마우스를 땐순간 그려준다.
+        
         function onUp(event) {
 
             cendX = event.pageX - 110;
@@ -68,6 +68,7 @@
                 case 2: DrawCircle(2); break;
                 case 3: DrawCircle(3); break;
                 case 4: DrawCircle(4); break;
+                case 5: DrawCircle(5); break;
             }
             mflag = false;
         }
@@ -85,7 +86,7 @@
             c1_context.fillStyle = "Red";
             c1_context.fill();
             c1_context.stroke();
-            tString += "[b],"+cbeginX+","+cbeginY+","+cendX+","+cendY+"//";
+            tString += "[b],"+cbeginX+","+cbeginY+","+cendX+","+cendY+"/";
         }
         function DrawCircle(circletype) {
             var c1 = document.getElementById("c");
@@ -102,7 +103,7 @@
                     tString += "[s]";
                     break;
                 case 2:
-                    circlecolor = "Yellow"
+                    circlecolor = "Red"
                     tString += "[f]";
                     break;
                 case 3:
@@ -113,21 +114,30 @@
                     circlecolor = "Black"
                     tString += "[c]";
                     break;
+                case 5:
+                    circlecolor = "Yellow"
+                    tString += "[i]";
+                    break;
             }
-            tString += ","+centerX+","+centerY+"//";
+            tString += ","+centerX+","+centerY+"/";
             c1_context.fillStyle = circlecolor;
             c1_context.fill();
             c1_context.stroke();
         }
         function changeMapSize(){
             tString = "";
-            tString = "[mapsize],"+$("#canvas_width").val()+","+$("#canvas_height").val()+"//";
+            tString = "[mapsize],"+$("#canvas_width").val()+","+$("#canvas_height").val()+"/";
             $("#tStringDiv").html("");
             var c1 = document.getElementById("c");
             c1.setAttribute("width",$("#canvas_width").val());
             c1.setAttribute("height",$("#canvas_width").val());
             //$("#c").width($("#canvas_width").val());
             //$("#c").height($("#canvas_height").val());
+
+            /* firefox 13에서 이거 안 해주면 캔버스 영역 실제로 안 늘어남. */
+            $('#c')[0].width = $("#canvas_width").val();
+            $('#c')[0].height = $("#canvas_height").val();
+
             $("#pan").width($("#canvas_width").val());
             $("#pan").height($("#canvas_height").val());
         }
@@ -136,7 +146,26 @@
             var fileObj=fso.CreateTextFile("/mapxy.txt",true);
             fileObj.WriteLine(tString);
             fileObj.Close();
-        }
+        }/*
+        function redo(){
+            var splitArr = tString.split("//");
+            for(i=0;i<splitArr.length-1;i++){
+                secArr = splitArr.split(",");
+                switch(secArr[0]){
+                    case "[s]":
+
+                    break;
+                    case "[f]":
+                    break;
+                    case "[a]":
+                    break;
+                    case "[c]":
+                    break;
+                    case "[b]":
+                    break;
+                }
+            }
+        }*/
     </script>
 </head>
 <body>
@@ -152,6 +181,8 @@
     <input type="button" value="F-point" onclick="clickCircle(2)"/>
     <input type="button" value="Attractor" onclick="clickCircle(3)"/>
     <input type="button" value="Crack" onclick="clickCircle(4)"/>
+	<input type="button" value="Coin" onclick="clickCircle(5)"/>
+    <input type="button" value="뒤로" onclick="redo();"/>
     <input type="button" value="출력" onclick="document.getElementById('tStringDiv').innerHTML=tString;"/>
     <input type="button" value="저장" onclick="saveFile();"/>
     </center>

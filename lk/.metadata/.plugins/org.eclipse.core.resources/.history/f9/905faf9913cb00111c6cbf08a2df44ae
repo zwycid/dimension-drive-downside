@@ -1,0 +1,51 @@
+    <TextView
+        android:id="@+id/textViewButtonSwap"
+        style="@style/ButtonText"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:text="@string/Ranking" />
+
+    <TextView
+        android:id="@+id/textViewButtonReset"
+        style="@style/ButtonText"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text="@string/reset" />    <TextView
+        android:id="@+id/textViewButtonSwap"
+        style="@style/ButtonText"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:text="@string/Ranking" />
+
+    <TextView
+        android:id="@+id/textViewButtonReset"
+        style="@style/ButtonText"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text="@string/reset" />    <TextView
+        android:id="@+id/textViewButtonSwap"
+        style="@style/ButtonText"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:text="@string/Ranking" />
+
+    <TextView
+        android:id="@+id/textViewButtonReset"
+        style="@style/ButtonText"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text="@string/reset" /><resources>
+
+    <string name="app_name">ITProject-gameUIDesign</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">gameUIDesign</string>
+    <string name="gameTitle">Sailing Text</string>
+    <string name="Startgame">Start Game</string>
+    <string name="Ranking">Ranking</string>
+    <string name="Option">Option</string>
+    <string name="TotalRanking">Total Ranking</string>
+    <string name="StageRanking">Stage Ranking</string>
+    <string name="reset">RESET</string>
+    <string name="STAGE">STAGE</string>
+
+</resources>

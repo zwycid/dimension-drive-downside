@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/RankingblankViewRanking0"
+        style="@style/RankingblankView"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/textViewTitleRanking"
+        style="@style/TitleText"
+        android:layout_below="@+id/RankingblankViewRanking0"
+        android:layout_centerHorizontal="true"
+        android:text="@string/Ranking" />
+
+    <TextView
+        android:id="@+id/RankingblankViewRanking1"
+        style="@style/RankingblankView"
+        android:layout_alignLeft="@+id/textViewTitleRanking"
+        android:layout_below="@+id/textViewTitleRanking" />
+
+    <Spinner
+        android:id="@+id/spinnerStage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/RankingblankViewRanking1"
+        android:prompt="@string/STAGE" />
+
+    <TextView
+        android:id="@+id/textViewButtonSwap"
+        style="@style/ButtonText"
+        android:layout_above="@+id/RankingblankView5"
+        android:layout_alignParentLeft="true" />
+
+    <TextView
+        android:id="@+id/textViewButtonReset"
+        style="@style/ButtonText"
+        android:layout_above="@+id/RankingblankView4"
+        android:layout_alignParentRight="true"
+        android:text="@string/reset" />
+
+    <ViewFlipper
+        android:id="@+id/viewFlipperForListView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/spinnerStage"
+        android:layout_centerHorizontal="true" >
+
+        <ListView
+            android:id="@+id/listViewTotalRanking"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+        </ListView>
+
+        <ListView
+            android:id="@+id/listViewStageRanking"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+        </ListView>
+    </ViewFlipper>
+
+    <TextView
+        android:id="@+id/RankingblankView4"
+        style="@style/RankingblankView"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text="@string/blank" />
+
+    <TextView
+        android:id="@+id/RankingblankView5"
+        style="@style/RankingblankView"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:text="@string/blank" />
+
+</RelativeLayout>

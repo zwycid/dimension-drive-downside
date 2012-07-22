@@ -1,0 +1,7 @@
+package com.hanback.testdb;
+
+import android.view.View;
+
+public class StageScoreView extends View {
+
+}

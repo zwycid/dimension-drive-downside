@@ -1,0 +1,21 @@
+package com.hanback.testdb;
+
+import android.content.Context;
+import android.util.AttributeSet;
+import android.view.SurfaceView;
+
+public class TotalScoreSurfaceView extends SurfaceView {
+
+	public TotalScoreSurfaceView(Context context, AttributeSet attrs, int defStyle) {
+		super(context, attrs, defStyle);
+	}
+
+	public TotalScoreSurfaceView(Context context, AttributeSet attrs) {
+		super(context, attrs);
+	}
+
+	public TotalScoreSurfaceView(Context context) {
+		super(context);
+	}
+
+}
