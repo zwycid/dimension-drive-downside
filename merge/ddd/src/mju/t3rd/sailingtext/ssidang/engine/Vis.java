@@ -1,4 +1,4 @@
-package mju.t3rd.sailingtext.ssidang;
+package mju.t3rd.sailingtext.ssidang.engine;
 
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -20,11 +20,11 @@ public class Vis {
 	private static boolean frame;
 	
 	// µð¹ö±ë¿ë...........
-	static final Paint white;
-	static final Paint blue;
-	static final Paint orange;
-	static final Paint red;
-	static final Paint green;
+	public static final Paint white;
+	public static final Paint blue;
+	public static final Paint orange;
+	public static final Paint red;
+	public static final Paint green;
 	static {
 		white = new Paint(Paint.ANTI_ALIAS_FLAG);
 		white.setColor(Color.WHITE);

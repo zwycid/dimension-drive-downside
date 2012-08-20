@@ -1,13 +1,11 @@
-package mju.t3rd.sailingtext.ssidang;
+package mju.t3rd.sailingtext.ssidang.engine;
 
 import android.graphics.Canvas;
 import android.view.SurfaceHolder;
 
 public class RenderThread extends Thread {
 	public interface Renderable {
-		void onRenderBegin();
 		void onRender(Canvas canvas);
-		void onRenderEnd();
 	}
 	
 	private boolean running;
@@ -54,7 +52,6 @@ public class RenderThread extends Thread {
 	 */
 	@Override
 	public void run() {
-		renderer.onRenderBegin();
 		while (running) {
 			Canvas canvas;
 			// canvas가 null 나올 때가 있으므로 처리함
@@ -67,7 +64,6 @@ public class RenderThread extends Thread {
 				}
 			}
 		}
-		renderer.onRenderEnd();
 	}
 
 	@Override

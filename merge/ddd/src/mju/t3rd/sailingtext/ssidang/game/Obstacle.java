@@ -1,15 +1,15 @@
-package mju.t3rd.sailingtext.ssidang;
+package mju.t3rd.sailingtext.ssidang.game;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 
 public class Obstacle extends Unit {
-	float left;
-	float top;
-	float right;
-	float bottom;
-	boolean visible = true;
+	public float left;
+	public float top;
+	public float right;
+	public float bottom;
+	public boolean visible = true;
 	
 	private static final Paint fillPaint;
 	private static final Paint borderPaint;

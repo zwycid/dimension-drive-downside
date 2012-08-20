@@ -1,4 +1,4 @@
-package mju.t3rd.sailingtext.ssidang;
+package mju.t3rd.sailingtext.ssidang.engine;
 
 import java.util.StringTokenizer;
 

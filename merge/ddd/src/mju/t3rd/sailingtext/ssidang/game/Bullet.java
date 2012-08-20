@@ -1,5 +1,6 @@
-package mju.t3rd.sailingtext.ssidang;
+package mju.t3rd.sailingtext.ssidang.game;
 
+import mju.t3rd.sailingtext.ssidang.engine.Vector2D;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Cap;

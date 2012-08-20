@@ -1,5 +1,7 @@
 package mju.t3rd.sailingtext.ssidang;
 
+import mju.t3rd.sailingtext.ssidang.engine.RenderThread;
+import mju.t3rd.sailingtext.ssidang.scene.Game;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -15,7 +17,7 @@ public class GameView extends SurfaceView implements
 		RenderThread.Renderable {
 	
 	private RenderThread renderer;
-	private WorldManager world;
+	private Game world;
 	
 	///////////////////////////////////////////////////////////////////////////
 	// 생성자
@@ -42,7 +44,7 @@ public class GameView extends SurfaceView implements
 		GameActivity activity = (GameActivity) context;
 		
 		// TODO 여기서 스테이지 넘어온 거 받든가 해야 함
-		world = new WorldManager(context);
+		world = new Game(context.getResources());
 		world.makeMockWorld(activity.stageNumber);
 	}
 	
@@ -99,15 +101,9 @@ public class GameView extends SurfaceView implements
 	// RenderThread
 	///////////////////////////////////////////////////////////////////////////
 
-	public void onRenderBegin() {
-	}
-
 	public void onRender(Canvas canvas) {
 		world.onFrame();
 		world.onRender(canvas);
-	}
-
-	public void onRenderEnd() {
 	}
 
 }

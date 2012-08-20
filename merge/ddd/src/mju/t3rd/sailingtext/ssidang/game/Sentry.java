@@ -1,5 +1,8 @@
-package mju.t3rd.sailingtext.ssidang;
+package mju.t3rd.sailingtext.ssidang.game;
 
+import mju.t3rd.sailingtext.ssidang.engine.GameUtil;
+import mju.t3rd.sailingtext.ssidang.engine.Vector2D;
+import mju.t3rd.sailingtext.ssidang.engine.Vis;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
@@ -34,7 +37,7 @@ public class Sentry extends Unit {
 	}
 	
 	// µð¹ö±ë¿ë
-	boolean debug_inSight = false;
+	public boolean debug_inSight = false;
 
 	
 	public Sentry(float x, float y, float sight) {
