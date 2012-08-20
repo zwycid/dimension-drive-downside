@@ -122,33 +122,37 @@ public class BackgroundSurfaceView extends SurfaceView implements SurfaceHolder.
 			text_pt[i]	= new Point(text_position_x[i], -1 * textHeightArray[i]);
 		}
 
-		Bitmap background	= BitmapFactory.decodeResource(getResources(),LKAndroid.getID("drawable", "blackimage"));
-		Rect rectangleForBGI	= new Rect(0, 0, getWidth(), getHeight());
-
-		while(thread != null){
-			//double buffering
-			//allocate canvas of holder to variable canvas
-			canvas	= holder.lockCanvas();
-			if (canvas != null) {
-				canvas.drawBitmap(background, null, rectangleForBGI, null);
+		try {
+			Bitmap background	= BitmapFactory.decodeResource(getResources(),LKAndroid.getID("drawable", "blackimage"));
+			Rect rectangleForBGI	= new Rect(0, 0, getWidth(), getHeight());
 	
-				for(int i = 0 ; i < textImageArray.length ; i++)
-					canvas.drawBitmap(textImageArray[i], text_pt[i].x, text_pt[i].y, paint);
+			while(thread != null){
+				//double buffering
+				//allocate canvas of holder to variable canvas
+				canvas	= holder.lockCanvas();
+				if (canvas != null) {
+					canvas.drawBitmap(background, null, rectangleForBGI, null);
+		
+					for(int i = 0 ; i < textImageArray.length ; i++)
+						canvas.drawBitmap(textImageArray[i], text_pt[i].x, text_pt[i].y, paint);
+		
+					//완료된 화변 canvas를 현재 화면(holder)에 할당
+					holder.unlockCanvasAndPost(canvas);
+				}
 	
-				//완료된 화변 canvas를 현재 화면(holder)에 할당
-				holder.unlockCanvasAndPost(canvas);
+				colorCode	= LKColor.setColorGradiantly(colorCode);
+				
+				for(int i = 0 ; i != textImageArray.length ; i++){
+					if(text_pt[i].y > this.getHeight())
+						text_pt[i].y	= -1 * textHeightArray[i];
+					text_pt[i].y	+= text_speed_y[i];
+					//텍스트마다 색상값을 중감시킵니다.
+					//변화된 텍스트 값을 paint에 저장합니다.
+					paint.setColorFilter(new LightingColorFilter(colorCode, 0));
+				}
 			}
-
-			colorCode	= LKColor.setColorGradiantly(colorCode);
-			
-			for(int i = 0 ; i != textImageArray.length ; i++){
-				if(text_pt[i].y > this.getHeight())
-					text_pt[i].y	= -1 * textHeightArray[i];
-				text_pt[i].y	+= text_speed_y[i];
-				//텍스트마다 색상값을 중감시킵니다.
-				//변화된 텍스트 값을 paint에 저장합니다.
-				paint.setColorFilter(new LightingColorFilter(colorCode, 0));
-			}
+		}
+		catch (OutOfMemoryError e) {
 		}
 	}
 

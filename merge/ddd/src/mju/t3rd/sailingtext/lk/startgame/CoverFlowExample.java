@@ -125,11 +125,15 @@ public class CoverFlowExample extends Activity {
 		mSelectedPosition = 0;
 		int albumNumber = mSelectedPosition + 1;
 
-		// set to show shadow images (we call it as reflected images)
-		// shadow image를 설정합니다(우린 이걸 반사된 이미지들이라 부르지요)
-		// this method doesn't work originally (maybe need to modify)
-		//이 메소드는 원래대로라면 작동하지 않습니다.(수정이 필요할수도)
-		coverImageAdapter.createReflectedImages(); // original method
+		try {
+			// set to show shadow images (we call it as reflected images)
+			// shadow image를 설정합니다(우린 이걸 반사된 이미지들이라 부르지요)
+			// this method doesn't work originally (maybe need to modify)
+			//이 메소드는 원래대로라면 작동하지 않습니다.(수정이 필요할수도)
+			coverImageAdapter.createReflectedImages(); // original method
+		}
+		catch (OutOfMemoryError e) {
+		}
 		coverFlow.setAdapter(coverImageAdapter);
 
 		// Sets the spacing between items(images) in a Gallery
