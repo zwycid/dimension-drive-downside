@@ -13,11 +13,13 @@
         <activity
             android:name=".ssidang.GameActivity"
             android:label="@string/app_name" android:screenOrientation="portrait">
-        </activity>
-        <activity android:name=".zeraf29.Splash" android:label="@string/app_name" android:screenOrientation="portrait"><intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter></activity>
+            </intent-filter>
+        </activity>
+        <activity android:name=".zeraf29.Splash" android:label="@string/app_name" android:screenOrientation="portrait">
+        </activity>
         <activity android:name=".lk.MainActivity" android:screenOrientation="portrait" android:icon="@drawable/sailing_text" android:label="@string/title_activity_main"></activity>
         <activity android:name=".lk.option.OptionActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".lk.option.credit.Credit" android:screenOrientation="portrait"></activity>

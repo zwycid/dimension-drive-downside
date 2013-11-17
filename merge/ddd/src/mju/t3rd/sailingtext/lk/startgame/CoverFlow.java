@@ -21,7 +21,6 @@
 package mju.t3rd.sailingtext.lk.startgame;
 
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Camera;
 import android.graphics.Matrix;
@@ -31,7 +30,6 @@ import android.view.animation.Transformation;
 import android.widget.Gallery;
 import android.widget.ImageView;
 
-@SuppressLint({ "NewApi", "NewApi" })
 public class CoverFlow extends Gallery {
 
 	/**

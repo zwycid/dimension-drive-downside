@@ -1,7 +1,0 @@
-package lk.summer.project;
-
-public class LKThreadFallingText implements Runnable {
-
-	public void run() {
-	}
-}

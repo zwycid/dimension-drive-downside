@@ -20,7 +20,6 @@
  */
 package mju.t3rd.sailingtext.lk.startgame;
 
-import mju.t3rd.sailingtext.zeraf29.db.*;
 import mju.t3rd.sailingtext.R;
 import mju.t3rd.sailingtext.lk.custom.LKAndroid;
 import mju.t3rd.sailingtext.ssidang.GameActivity;

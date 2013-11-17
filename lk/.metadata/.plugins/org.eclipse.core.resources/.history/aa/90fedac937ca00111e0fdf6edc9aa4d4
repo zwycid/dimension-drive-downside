@@ -1,7 +1,0 @@
-package com.hanback.testdb;
-
-import android.app.Activity;
-
-public class TotalScoreActivity extends Activity {
-
-}

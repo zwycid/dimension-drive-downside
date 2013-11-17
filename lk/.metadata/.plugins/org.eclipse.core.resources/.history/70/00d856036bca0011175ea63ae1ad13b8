@@ -1,7 +1,0 @@
-package lk.summer.project;
-
-import android.widget.TextView;
-
-public class GlowingTextView extends TextView {
-
-}

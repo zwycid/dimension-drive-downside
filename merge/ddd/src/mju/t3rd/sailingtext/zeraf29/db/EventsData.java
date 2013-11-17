@@ -1,6 +1,5 @@
 package mju.t3rd.sailingtext.zeraf29.db;
 
-import static android.provider.BaseColumns._ID;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;

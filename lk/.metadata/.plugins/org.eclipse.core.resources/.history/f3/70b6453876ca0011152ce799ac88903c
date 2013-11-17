@@ -1,7 +1,0 @@
-package lk.summer.project;
-
-import android.widget.LinearLayout;
-
-public class MainLinearLayout extends LinearLayout {
-
-}

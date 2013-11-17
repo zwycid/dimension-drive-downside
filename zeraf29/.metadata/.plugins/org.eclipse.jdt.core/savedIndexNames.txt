@@ -1,5 +1,0 @@
-INDEX VERSION 1.126+D:\itproject\dimension-drive-downside\zeraf29\.metadata\.plugins\org.eclipse.jdt.core
-2573306658.index
-861681303.index
-3917695602.index
-1889977063.index
